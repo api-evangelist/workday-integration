@@ -1,0 +1,211 @@
+openapi: 3.1.0
+info:
+  title: Workday Compensation Review API
+  description: >-
+    API for managing compensation review processes including merit increases,
+    bonus allocations, and equity grants. Supports compensation review cycle
+    configuration and approval workflows.
+  version: v1
+  contact:
+    name: Workday API Support
+    email: api-support@workday.com
+    url: https://community.workday.com
+  license:
+    name: Proprietary
+    url: https://www.workday.com/en-us/legal/site-terms.html
+servers:
+  - url: https://{baseUrl}/ccx/api/compensationReview/v1/{tenant}
+    description: Workday Compensation Review REST API server
+    variables:
+      baseUrl:
+        default: wd2-impl-services1.workday.com
+      tenant:
+        default: tenant
+security:
+  - OAuth2:
+      - r:compensationReview
+      - w:compensationReview
+paths:
+  /compensationReviewEvents:
+    get:
+      operationId: getCompensationReviewEvents
+      summary: Retrieve compensation review events
+      description: >-
+        Returns a collection of compensation review events including merit,
+        bonus, and equity review cycles.
+      tags:
+        - Compensation Reviews
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response with compensation review events
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewEventsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /compensationReviewEvents/{ID}:
+    get:
+      operationId: getCompensationReviewEventById
+      summary: Retrieve a specific compensation review event
+      description: >-
+        Returns the specified compensation review event with participants and status.
+      tags:
+        - Compensation Reviews
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      responses:
+        '200':
+          description: Successful response with the review event
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewEvent'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /compensationReviewEvents/{ID}/awards:
+    get:
+      operationId: getCompensationReviewAwards
+      summary: Retrieve awards for a compensation review
+      description: >-
+        Returns the merit, bonus, and equity awards for participants in
+        the specified compensation review event.
+      tags:
+        - Compensation Reviews
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response with review awards
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AwardsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{baseUrl}/authorize
+          tokenUrl: https://{baseUrl}/oauth2/{tenant}/token
+          scopes:
+            r:compensationReview: Read compensation review data
+            w:compensationReview: Write compensation review data
+  parameters:
+    ID:
+      name: ID
+      in: path
+      required: true
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 20
+        maximum: 100
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+    ResourceReference:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        href:
+          type: string
+          format: uri
+    ReviewEvent:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        reviewType:
+          type: string
+        effectiveDate:
+          type: string
+          format: date
+        status:
+          type: string
+    ReviewEventsResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReviewEvent'
+    AwardsResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              worker:
+                $ref: '#/components/schemas/ResourceReference'
+              awardType:
+                type: string
+              amount:
+                type: number
+              currency:
+                $ref: '#/components/schemas/ResourceReference'
+              percentage:
+                type: number

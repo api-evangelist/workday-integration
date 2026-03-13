@@ -1,0 +1,160 @@
+openapi: 3.1.0
+info:
+  title: Workday Notification API
+  description: >-
+    API for managing notifications and alerts within Workday. Supports programmatic delivery of system notifications, task reminders, and event alerts to users.
+  version: v1
+  contact:
+    name: Workday API Support
+    email: api-support@workday.com
+    url: https://community.workday.com
+  license:
+    name: Proprietary
+    url: https://www.workday.com/en-us/legal/site-terms.html
+servers:
+  - url: https://{baseUrl}/ccx/api/notification/v1/{tenant}
+    description: Workday Workday Notification API server
+    variables:
+      baseUrl:
+        default: wd2-impl-services1.workday.com
+      tenant:
+        default: tenant
+security:
+  - OAuth2:
+      - r:notification
+paths:
+  /notifications:
+    get:
+      operationId: getNotifications
+      summary: Retrieve a collection of notifications
+      description: >-
+        Returns a collection of notifications from the Workday Notification API.
+      tags:
+        - Notifications
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/search'
+      responses:
+        '200':
+          description: Successful response with notifications
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /notifications/{ID}:
+    get:
+      operationId: getNotificationById
+      summary: Retrieve a specific Notification
+      description: >-
+        Returns the specified Notification instance with its details.
+      tags:
+        - Notifications
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      responses:
+        '200':
+          description: Successful response with the Notification
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInstance'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{baseUrl}/authorize
+          tokenUrl: https://{baseUrl}/oauth2/{tenant}/token
+          scopes:
+            r:notification: Read Notifications data
+  parameters:
+    ID:
+      name: ID
+      in: path
+      required: true
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 20
+        maximum: 100
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+    search:
+      name: search
+      in: query
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+    ResourceReference:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        href:
+          type: string
+          format: uri
+    ResourceInstance:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        href:
+          type: string
+          format: uri
+    CollectionResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceInstance'

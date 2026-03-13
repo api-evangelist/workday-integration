@@ -1,0 +1,199 @@
+openapi: 3.1.0
+info:
+  title: Workday Cash Management API
+  description: >-
+    API for managing cash positions, bank account transactions, and treasury
+    operations. Supports bank statement processing and cash flow management.
+  version: v1
+  contact:
+    name: Workday API Support
+    email: api-support@workday.com
+    url: https://community.workday.com
+  license:
+    name: Proprietary
+    url: https://www.workday.com/en-us/legal/site-terms.html
+servers:
+  - url: https://{baseUrl}/ccx/api/cashManagement/v1/{tenant}
+    description: Workday Cash Management REST API server
+    variables:
+      baseUrl:
+        default: wd2-impl-services1.workday.com
+      tenant:
+        default: tenant
+security:
+  - OAuth2:
+      - r:cashManagement
+paths:
+  /bankAccounts:
+    get:
+      operationId: getBankAccounts
+      summary: Retrieve bank accounts
+      description: >-
+        Returns a collection of bank accounts configured in the tenant.
+      tags:
+        - Bank Accounts
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response with bank accounts
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /bankAccounts/{ID}:
+    get:
+      operationId: getBankAccountById
+      summary: Retrieve a specific bank account
+      description: >-
+        Returns the specified bank account with its details and balances.
+      tags:
+        - Bank Accounts
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      responses:
+        '200':
+          description: Successful response with the bank account
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInstance'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /bankStatements:
+    get:
+      operationId: getBankStatements
+      summary: Retrieve bank statements
+      description: >-
+        Returns a collection of bank statement records.
+      tags:
+        - Bank Statements
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response with bank statements
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /cashPositions:
+    get:
+      operationId: getCashPositions
+      summary: Retrieve cash positions
+      description: >-
+        Returns a collection of cash positions across bank accounts.
+      tags:
+        - Cash Positions
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response with cash positions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+components:
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{baseUrl}/authorize
+          tokenUrl: https://{baseUrl}/oauth2/{tenant}/token
+          scopes:
+            r:cashManagement: Read cash management data
+  parameters:
+    ID:
+      name: ID
+      in: path
+      required: true
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 20
+        maximum: 100
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+    ResourceReference:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        href:
+          type: string
+          format: uri
+    ResourceInstance:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        href:
+          type: string
+          format: uri
+    CollectionResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceInstance'

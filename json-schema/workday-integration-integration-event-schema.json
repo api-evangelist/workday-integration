@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.workday.com/integrationEvent",
+  "title": "Integration Event",
+  "description": "Represents an integration event record within the Workday Integrations system, tracking the execution status and details of integration runs.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique Workday identifier for the integration event"
+    },
+    "descriptor": {
+      "type": "string",
+      "description": "The display name of the integration event"
+    },
+    "integrationSystem": {
+      "$ref": "#/$defs/ResourceReference",
+      "description": "The integration system that was executed"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["Completed", "Failed", "In_Progress", "Cancelled"],
+      "description": "The execution status of the integration"
+    },
+    "startDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the integration started"
+    },
+    "endDateTime": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "The date and time the integration completed"
+    },
+    "recordsProcessed": {
+      "type": "integer",
+      "description": "The number of records successfully processed"
+    },
+    "recordsFailed": {
+      "type": "integer",
+      "description": "The number of records that failed processing"
+    },
+    "initiatedBy": {
+      "$ref": "#/$defs/ResourceReference",
+      "description": "The user or system that initiated the integration"
+    }
+  },
+  "required": ["id", "integrationSystem", "status"],
+  "$defs": {
+    "ResourceReference": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "descriptor": {
+          "type": "string"
+        },
+        "href": {
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "required": ["id"]
+    }
+  }
+}

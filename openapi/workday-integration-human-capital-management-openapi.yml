@@ -1,0 +1,853 @@
+openapi: 3.1.0
+info:
+  title: Workday Human Capital Management API
+  description: >-
+    API for managing employee data, recruiting, talent management, and workforce
+    planning within Workday's HCM suite. Provides REST-based web services for
+    reading and writing HR data including worker records, organizational
+    structures, and staffing transactions.
+  version: v1
+  contact:
+    name: Workday API Support
+    email: api-support@workday.com
+    url: https://community.workday.com
+  license:
+    name: Proprietary
+    url: https://www.workday.com/en-us/legal/site-terms.html
+servers:
+  - url: https://{baseUrl}/ccx/api/v1/{tenant}
+    description: Workday REST API server
+    variables:
+      baseUrl:
+        default: wd2-impl-services1.workday.com
+        description: The Workday data center hostname
+      tenant:
+        default: tenant
+        description: The Workday tenant name
+security:
+  - OAuth2:
+      - r:workers
+      - w:workers
+paths:
+  /workers:
+    get:
+      operationId: getWorkers
+      summary: Retrieve a collection of workers
+      description: >-
+        Returns a collection of workers and current staffing information. Supports
+        pagination, search, and filtering by various criteria.
+      tags:
+        - Workers
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/search'
+      responses:
+        '200':
+          description: Successful response with a collection of workers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkersResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /workers/{ID}:
+    get:
+      operationId: getWorkerById
+      summary: Retrieve a single worker instance
+      description: >-
+        Returns the specified worker including personal data, employment
+        information, and organizational assignments.
+      tags:
+        - Workers
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      responses:
+        '200':
+          description: Successful response with the worker instance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Worker'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /workers/{ID}/organizations:
+    get:
+      operationId: getWorkerOrganizations
+      summary: Retrieve organizations for a worker
+      description: >-
+        Returns the organizational memberships for the specified worker,
+        including supervisory organizations and cost centers.
+      tags:
+        - Workers
+        - Organizations
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response with worker organizations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /workers/{ID}/reports:
+    get:
+      operationId: getWorkerDirectReports
+      summary: Retrieve direct reports for a worker
+      description: >-
+        Returns the direct reports for the specified worker within their
+        supervisory organization hierarchy.
+      tags:
+        - Workers
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response with direct reports
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkersResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /workers/{ID}/history:
+    get:
+      operationId: getWorkerHistory
+      summary: Retrieve history items for a worker
+      description: >-
+        Returns the job history and staffing event history for the specified worker.
+      tags:
+        - Workers
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response with worker history
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HistoryResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /workers/{ID}/businessTitleChanges:
+    get:
+      operationId: getWorkerBusinessTitleChanges
+      summary: Retrieve business title changes for a worker
+      description: >-
+        Returns the history of business title changes for the specified worker.
+      tags:
+        - Workers
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response with business title changes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BusinessTitleChangesResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    post:
+      operationId: createBusinessTitleChange
+      summary: Create a business title change
+      description: >-
+        Initiates a business title change for the specified worker.
+      tags:
+        - Workers
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BusinessTitleChangeRequest'
+      responses:
+        '201':
+          description: Business title change created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BusinessTitleChange'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /workers/{ID}/jobChanges:
+    post:
+      operationId: createJobChange
+      summary: Create a job change for a worker
+      description: >-
+        Initiates a job change event for the specified worker, such as a
+        promotion, transfer, or reassignment.
+      tags:
+        - Workers
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobChangeRequest'
+      responses:
+        '201':
+          description: Job change created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobChange'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /workers/{ID}/supervisoryOrganizations:
+    get:
+      operationId: getWorkerSupervisoryOrganizations
+      summary: Retrieve supervisory organizations managed by a worker
+      description: >-
+        Returns the supervisory organizations managed by the specified worker.
+      tags:
+        - Workers
+        - Organizations
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response with supervisory organizations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupervisoryOrganizationsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /workers/{ID}/paySlips:
+    get:
+      operationId: getWorkerPaySlips
+      summary: Retrieve pay slips for a worker
+      description: >-
+        Returns the pay slips for the specified worker.
+      tags:
+        - Workers
+        - Payroll
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response with pay slips
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaySlipsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /supervisoryOrganizations:
+    get:
+      operationId: getSupervisoryOrganizations
+      summary: Retrieve all supervisory organizations
+      description: >-
+        Returns a collection of supervisory organizations within the tenant.
+      tags:
+        - Organizations
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/search'
+      responses:
+        '200':
+          description: Successful response with supervisory organizations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupervisoryOrganizationsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /supervisoryOrganizations/{ID}:
+    get:
+      operationId: getSupervisoryOrganizationById
+      summary: Retrieve a specific supervisory organization
+      description: >-
+        Returns the specified supervisory organization including its members and hierarchy.
+      tags:
+        - Organizations
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      responses:
+        '200':
+          description: Successful response with the supervisory organization
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupervisoryOrganization'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /supervisoryOrganizations/{ID}/workers:
+    get:
+      operationId: getSupervisoryOrganizationWorkers
+      summary: Retrieve workers in a supervisory organization
+      description: >-
+        Returns the workers assigned to the specified supervisory organization.
+      tags:
+        - Organizations
+        - Workers
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response with workers in the organization
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkersResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /organizations:
+    get:
+      operationId: getOrganizations
+      summary: Retrieve all organizations
+      description: >-
+        Returns a collection of organizations including company, cost center,
+        and region organizations.
+      tags:
+        - Organizations
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/search'
+      responses:
+        '200':
+          description: Successful response with organizations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /organizations/{ID}:
+    get:
+      operationId: getOrganizationById
+      summary: Retrieve a specific organization
+      description: >-
+        Returns the specified organization instance.
+      tags:
+        - Organizations
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      responses:
+        '200':
+          description: Successful response with the organization
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /organizationTypes:
+    get:
+      operationId: getOrganizationTypes
+      summary: Retrieve organization types
+      description: >-
+        Returns all available organization types in the tenant.
+      tags:
+        - Organizations
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response with organization types
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationTypesResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /jobChangeReasons:
+    get:
+      operationId: getJobChangeReasons
+      summary: Retrieve job change reasons
+      description: >-
+        Returns the available job change reasons for staffing transactions.
+      tags:
+        - Reference Data
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response with job change reasons
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobChangeReasonsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /currencies:
+    get:
+      operationId: getCurrencies
+      summary: Retrieve currencies
+      description: >-
+        Returns the available currencies configured in the tenant.
+      tags:
+        - Reference Data
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response with currencies
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CurrenciesResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /auditLogs:
+    get:
+      operationId: getAuditLogs
+      summary: Retrieve audit logs
+      description: >-
+        Returns audit log entries for tracking data changes and system events.
+      tags:
+        - Audit
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response with audit logs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuditLogsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+components:
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{baseUrl}/authorize
+          tokenUrl: https://{baseUrl}/oauth2/{tenant}/token
+          refreshUrl: https://{baseUrl}/oauth2/{tenant}/token
+          scopes:
+            r:workers: Read worker data
+            w:workers: Write worker data
+  parameters:
+    ID:
+      name: ID
+      in: path
+      required: true
+      description: The Workday ID of the resource
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      description: The maximum number of objects in a single response (default 20, maximum 100)
+      schema:
+        type: integer
+        default: 20
+        maximum: 100
+    offset:
+      name: offset
+      in: query
+      description: The zero-based index of the first object in a response collection
+      schema:
+        type: integer
+        default: 0
+    search:
+      name: search
+      in: query
+      description: Search string used to filter results
+      schema:
+        type: string
+  responses:
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: The error code
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              error:
+                type: string
+              field:
+                type: string
+              message:
+                type: string
+    WorkersResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of results
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkerSummary'
+    WorkerSummary:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The Workday ID of the worker
+        descriptor:
+          type: string
+          description: The display name of the worker
+        href:
+          type: string
+          format: uri
+          description: The API resource URL
+    Worker:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The Workday ID of the worker
+        descriptor:
+          type: string
+          description: The display name of the worker
+        workerID:
+          type: string
+          description: The employee or contingent worker ID
+        businessTitle:
+          type: string
+          description: The current business title
+        primaryWorkEmail:
+          type: string
+          format: email
+          description: The primary work email address
+        primaryWorkPhone:
+          type: string
+          description: The primary work phone number
+        supervisoryOrganization:
+          $ref: '#/components/schemas/ResourceReference'
+        managementLevel:
+          $ref: '#/components/schemas/ResourceReference'
+        location:
+          $ref: '#/components/schemas/ResourceReference'
+        hireDate:
+          type: string
+          format: date
+          description: The date the worker was hired
+        workerType:
+          $ref: '#/components/schemas/ResourceReference'
+    ResourceReference:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The Workday ID
+        descriptor:
+          type: string
+          description: The display name
+        href:
+          type: string
+          format: uri
+          description: The API resource URL
+    SupervisoryOrganization:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        name:
+          type: string
+        manager:
+          $ref: '#/components/schemas/ResourceReference'
+        superior:
+          $ref: '#/components/schemas/ResourceReference'
+        staffingModel:
+          type: string
+    SupervisoryOrganizationsResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/SupervisoryOrganization'
+    Organization:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        organizationType:
+          $ref: '#/components/schemas/ResourceReference'
+        isActive:
+          type: boolean
+    OrganizationsResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Organization'
+    OrganizationTypesResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceReference'
+    HistoryResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              descriptor:
+                type: string
+              effectiveDate:
+                type: string
+                format: date
+              eventType:
+                $ref: '#/components/schemas/ResourceReference'
+    BusinessTitleChange:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        proposedBusinessTitle:
+          type: string
+        effectiveDate:
+          type: string
+          format: date
+    BusinessTitleChangesResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/BusinessTitleChange'
+    BusinessTitleChangeRequest:
+      type: object
+      required:
+        - proposedBusinessTitle
+        - effectiveDate
+      properties:
+        proposedBusinessTitle:
+          type: string
+          description: The new business title
+        effectiveDate:
+          type: string
+          format: date
+          description: The effective date of the change
+    JobChangeRequest:
+      type: object
+      required:
+        - effectiveDate
+      properties:
+        effectiveDate:
+          type: string
+          format: date
+        reason:
+          $ref: '#/components/schemas/ResourceReference'
+        proposedPosition:
+          $ref: '#/components/schemas/ResourceReference'
+    JobChange:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        effectiveDate:
+          type: string
+          format: date
+    PaySlipsResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              descriptor:
+                type: string
+              payPeriodStartDate:
+                type: string
+                format: date
+              payPeriodEndDate:
+                type: string
+                format: date
+              grossPay:
+                type: number
+              netPay:
+                type: number
+    JobChangeReasonsResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceReference'
+    CurrenciesResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              descriptor:
+                type: string
+              currencyCode:
+                type: string
+    AuditLogsResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              descriptor:
+                type: string
+              timestamp:
+                type: string
+                format: date-time
+              action:
+                type: string
+              target:
+                $ref: '#/components/schemas/ResourceReference'

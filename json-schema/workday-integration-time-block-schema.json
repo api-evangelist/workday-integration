@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.workday.com/timeBlock",
+  "title": "Time Block",
+  "description": "Represents a time block recording worked hours for a worker within the Workday Time Tracking system.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique Workday identifier for the time block"
+    },
+    "descriptor": {
+      "type": "string",
+      "description": "The display name of the time block"
+    },
+    "worker": {
+      "$ref": "#/$defs/ResourceReference",
+      "description": "The worker who recorded the time"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "The date of the time block"
+    },
+    "startTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The start time of the time block"
+    },
+    "endTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The end time of the time block"
+    },
+    "totalHours": {
+      "type": "number",
+      "description": "The total hours recorded in the time block"
+    },
+    "timeCode": {
+      "$ref": "#/$defs/ResourceReference",
+      "description": "The time code classification (Regular, Overtime, etc.)"
+    },
+    "timeZone": {
+      "type": "string",
+      "description": "The time zone for the time block"
+    },
+    "comment": {
+      "type": "string",
+      "description": "Optional comment for the time block"
+    }
+  },
+  "required": ["id", "worker", "date"],
+  "$defs": {
+    "ResourceReference": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "descriptor": {
+          "type": "string"
+        },
+        "href": {
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "required": ["id"]
+    }
+  }
+}

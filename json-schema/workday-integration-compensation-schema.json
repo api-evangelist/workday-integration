@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.workday.com/compensation",
+  "title": "Compensation",
+  "description": "Represents compensation data for a worker within the Workday system, including base pay, bonuses, and equity.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique Workday identifier for the compensation record"
+    },
+    "descriptor": {
+      "type": "string",
+      "description": "The display name of the compensation record"
+    },
+    "worker": {
+      "$ref": "#/$defs/ResourceReference",
+      "description": "The worker this compensation is associated with"
+    },
+    "compensationPlan": {
+      "$ref": "#/$defs/ResourceReference",
+      "description": "The compensation plan"
+    },
+    "amount": {
+      "type": "number",
+      "description": "The compensation amount"
+    },
+    "currency": {
+      "$ref": "#/$defs/ResourceReference",
+      "description": "The currency of the compensation"
+    },
+    "frequency": {
+      "$ref": "#/$defs/ResourceReference",
+      "description": "The payment frequency (Annual, Monthly, Hourly)"
+    },
+    "effectiveDate": {
+      "type": "string",
+      "format": "date",
+      "description": "The date the compensation became effective"
+    },
+    "payGrade": {
+      "$ref": "#/$defs/ResourceReference",
+      "description": "The pay grade associated with the compensation"
+    },
+    "payStep": {
+      "$ref": "#/$defs/ResourceReference",
+      "description": "The pay step within the pay grade"
+    },
+    "totalBasePay": {
+      "type": "number",
+      "description": "The total base pay amount"
+    },
+    "totalSalaryAndAllowances": {
+      "type": "number",
+      "description": "The total salary including all allowances"
+    }
+  },
+  "required": ["id"],
+  "$defs": {
+    "ResourceReference": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "descriptor": {
+          "type": "string"
+        },
+        "href": {
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "required": ["id"]
+    }
+  }
+}

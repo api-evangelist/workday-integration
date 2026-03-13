@@ -1,0 +1,368 @@
+openapi: 3.1.0
+info:
+  title: Workday Financial Management API
+  description: >-
+    API for financial accounting, expense management, revenue management, and
+    financial reporting. Enables programmatic access to general ledger, accounts
+    payable, accounts receivable, and budgeting functions.
+  version: v1
+  contact:
+    name: Workday API Support
+    email: api-support@workday.com
+    url: https://community.workday.com
+  license:
+    name: Proprietary
+    url: https://www.workday.com/en-us/legal/site-terms.html
+servers:
+  - url: https://{baseUrl}/ccx/api/v1/{tenant}
+    description: Workday REST API server
+    variables:
+      baseUrl:
+        default: wd2-impl-services1.workday.com
+        description: The Workday data center hostname
+      tenant:
+        default: tenant
+        description: The Workday tenant name
+security:
+  - OAuth2:
+      - r:financials
+      - w:financials
+paths:
+  /customers:
+    get:
+      operationId: getCustomers
+      summary: Retrieve a collection of customers
+      description: >-
+        Returns a collection of customer records used in accounts receivable
+        and revenue management.
+      tags:
+        - Customers
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/search'
+      responses:
+        '200':
+          description: Successful response with a collection of customers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomersResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /customers/{ID}:
+    get:
+      operationId: getCustomerById
+      summary: Retrieve a specific customer
+      description: >-
+        Returns the specified customer instance including contact information
+        and account details.
+      tags:
+        - Customers
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      responses:
+        '200':
+          description: Successful response with the customer instance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /customers/{ID}/activities:
+    get:
+      operationId: getCustomerActivities
+      summary: Retrieve activities for a customer
+      description: >-
+        Returns the activity records associated with the specified customer.
+      tags:
+        - Customers
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response with customer activities
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActivitiesResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /suppliers:
+    get:
+      operationId: getSuppliers
+      summary: Retrieve a collection of suppliers
+      description: >-
+        Returns a collection of supplier records used in accounts payable
+        and procurement operations.
+      tags:
+        - Suppliers
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/search'
+      responses:
+        '200':
+          description: Successful response with a collection of suppliers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuppliersResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /suppliers/{ID}:
+    get:
+      operationId: getSupplierById
+      summary: Retrieve a specific supplier
+      description: >-
+        Returns the specified supplier instance including contact information
+        and payment terms.
+      tags:
+        - Suppliers
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      responses:
+        '200':
+          description: Successful response with the supplier instance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Supplier'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /validateWorktags:
+    post:
+      operationId: validateWorktags
+      summary: Validate worktags for financial transactions
+      description: >-
+        Validates a set of worktags for use in financial transactions, ensuring
+        they are compatible and active.
+      tags:
+        - Worktags
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorktagValidationRequest'
+      responses:
+        '200':
+          description: Validation result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorktagValidationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+components:
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{baseUrl}/authorize
+          tokenUrl: https://{baseUrl}/oauth2/{tenant}/token
+          refreshUrl: https://{baseUrl}/oauth2/{tenant}/token
+          scopes:
+            r:financials: Read financial data
+            w:financials: Write financial data
+  parameters:
+    ID:
+      name: ID
+      in: path
+      required: true
+      description: The Workday ID of the resource
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      description: The maximum number of objects in a single response (default 20, maximum 100)
+      schema:
+        type: integer
+        default: 20
+        maximum: 100
+    offset:
+      name: offset
+      in: query
+      description: The zero-based index of the first object in a response collection
+      schema:
+        type: integer
+        default: 0
+    search:
+      name: search
+      in: query
+      description: Search string used to filter results
+      schema:
+        type: string
+  responses:
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              error:
+                type: string
+              field:
+                type: string
+              message:
+                type: string
+    ResourceReference:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        href:
+          type: string
+          format: uri
+    Customer:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        customerName:
+          type: string
+        customerCategory:
+          $ref: '#/components/schemas/ResourceReference'
+        status:
+          type: string
+        paymentTerms:
+          $ref: '#/components/schemas/ResourceReference'
+        currency:
+          $ref: '#/components/schemas/ResourceReference'
+    CustomersResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Customer'
+    Supplier:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        supplierName:
+          type: string
+        supplierCategory:
+          $ref: '#/components/schemas/ResourceReference'
+        status:
+          type: string
+        paymentTerms:
+          $ref: '#/components/schemas/ResourceReference'
+        currency:
+          $ref: '#/components/schemas/ResourceReference'
+    SuppliersResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Supplier'
+    ActivitiesResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              descriptor:
+                type: string
+              activityDate:
+                type: string
+                format: date
+              activityType:
+                $ref: '#/components/schemas/ResourceReference'
+    WorktagValidationRequest:
+      type: object
+      properties:
+        worktags:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceReference'
+    WorktagValidationResponse:
+      type: object
+      properties:
+        valid:
+          type: boolean
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+              worktag:
+                $ref: '#/components/schemas/ResourceReference'

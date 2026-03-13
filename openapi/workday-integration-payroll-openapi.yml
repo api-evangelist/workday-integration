@@ -1,0 +1,592 @@
+openapi: 3.1.0
+info:
+  title: Workday Payroll API
+  description: >-
+    API for payroll processing, tax management, and compensation. Supports
+    payroll calculations, pay component configurations, tax rate lookups, and
+    payroll detail retrieval across multiple country-specific payroll modules.
+  version: v2
+  contact:
+    name: Workday API Support
+    email: api-support@workday.com
+    url: https://community.workday.com
+  license:
+    name: Proprietary
+    url: https://www.workday.com/en-us/legal/site-terms.html
+servers:
+  - url: https://{baseUrl}/ccx/api/payroll/v2/{tenant}
+    description: Workday Payroll REST API server
+    variables:
+      baseUrl:
+        default: wd2-impl-services1.workday.com
+        description: The Workday data center hostname
+      tenant:
+        default: tenant
+        description: The Workday tenant name
+security:
+  - OAuth2:
+      - r:payroll
+      - w:payroll
+paths:
+  /payGroups:
+    get:
+      operationId: getPayGroups
+      summary: Retrieve a collection of pay groups
+      description: >-
+        Returns a collection of pay groups configured in the tenant, which define
+        payroll processing schedules and parameters.
+      tags:
+        - Pay Groups
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response with pay groups
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayGroupsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /payGroups/{ID}:
+    get:
+      operationId: getPayGroupById
+      summary: Retrieve a specific pay group
+      description: >-
+        Returns the specified pay group including its configuration and schedule.
+      tags:
+        - Pay Groups
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      responses:
+        '200':
+          description: Successful response with the pay group
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayGroup'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /payGroupDetails:
+    get:
+      operationId: getPayGroupDetails
+      summary: Retrieve pay group details
+      description: >-
+        Returns detailed pay group information including pay period dates
+        and processing status.
+      tags:
+        - Pay Groups
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response with pay group details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayGroupDetailsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /payGroupDetails/{ID}:
+    get:
+      operationId: getPayGroupDetailById
+      summary: Retrieve specific pay group detail
+      description: >-
+        Returns the pay group detail for the specified ID.
+      tags:
+        - Pay Groups
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      responses:
+        '200':
+          description: Successful response with pay group detail
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayGroupDetail'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /jobs/{ID}/payGroup:
+    get:
+      operationId: getPayGroupForJob
+      summary: Retrieve the pay group for a job
+      description: >-
+        Returns the pay group assignment for the specified job.
+      tags:
+        - Jobs
+        - Pay Groups
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      responses:
+        '200':
+          description: Successful response with the job pay group
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayGroup'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /payrollInputs:
+    get:
+      operationId: getPayrollInputs
+      summary: Retrieve payroll inputs
+      description: >-
+        Returns a collection of payroll input entries for processing.
+      tags:
+        - Payroll Inputs
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response with payroll inputs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayrollInputsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    post:
+      operationId: createPayrollInput
+      summary: Create a payroll input
+      description: >-
+        Creates a new payroll input entry for an upcoming payroll run.
+      tags:
+        - Payroll Inputs
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayrollInputRequest'
+      responses:
+        '201':
+          description: Payroll input created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayrollInput'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /payrollInputs/{ID}:
+    get:
+      operationId: getPayrollInputById
+      summary: Retrieve a specific payroll input
+      description: >-
+        Returns the specified payroll input entry.
+      tags:
+        - Payroll Inputs
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      responses:
+        '200':
+          description: Successful response with the payroll input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayrollInput'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updatePayrollInput
+      summary: Update a payroll input
+      description: >-
+        Updates an existing payroll input entry.
+      tags:
+        - Payroll Inputs
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayrollInputRequest'
+      responses:
+        '200':
+          description: Payroll input updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayrollInput'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deletePayrollInput
+      summary: Delete a payroll input
+      description: >-
+        Deletes the specified payroll input entry.
+      tags:
+        - Payroll Inputs
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      responses:
+        '204':
+          description: Payroll input deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /companySUIRates:
+    get:
+      operationId: getCompanySUIRates
+      summary: Retrieve company SUI rates
+      description: >-
+        Returns company state unemployment insurance rates.
+      tags:
+        - Tax Rates
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response with SUI rates
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SUIRatesResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    post:
+      operationId: createCompanySUIRate
+      summary: Create a company SUI rate
+      description: >-
+        Creates a new state unemployment insurance rate entry.
+      tags:
+        - Tax Rates
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SUIRateRequest'
+      responses:
+        '201':
+          description: SUI rate created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SUIRate'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /values/payrollInputsGroup/payComponents:
+    get:
+      operationId: getPayComponents
+      summary: Retrieve pay components
+      description: >-
+        Returns the available pay components that can be used in payroll inputs.
+      tags:
+        - Reference Data
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response with pay components
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReferenceValuesResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /values/runCategories:
+    get:
+      operationId: getRunCategories
+      summary: Retrieve run categories
+      description: >-
+        Returns the available payroll run categories.
+      tags:
+        - Reference Data
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response with run categories
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReferenceValuesResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+components:
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{baseUrl}/authorize
+          tokenUrl: https://{baseUrl}/oauth2/{tenant}/token
+          refreshUrl: https://{baseUrl}/oauth2/{tenant}/token
+          scopes:
+            r:payroll: Read payroll data
+            w:payroll: Write payroll data
+  parameters:
+    ID:
+      name: ID
+      in: path
+      required: true
+      description: The Workday ID of the resource
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      description: The maximum number of objects in a single response (default 20, maximum 100)
+      schema:
+        type: integer
+        default: 20
+        maximum: 100
+    offset:
+      name: offset
+      in: query
+      description: The zero-based index of the first object in a response collection
+      schema:
+        type: integer
+        default: 0
+  responses:
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              error:
+                type: string
+              field:
+                type: string
+              message:
+                type: string
+    ResourceReference:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        href:
+          type: string
+          format: uri
+    PayGroup:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        payGroupName:
+          type: string
+        frequency:
+          $ref: '#/components/schemas/ResourceReference'
+        country:
+          $ref: '#/components/schemas/ResourceReference'
+    PayGroupsResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PayGroup'
+    PayGroupDetail:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        payGroup:
+          $ref: '#/components/schemas/ResourceReference'
+        payPeriodStartDate:
+          type: string
+          format: date
+        payPeriodEndDate:
+          type: string
+          format: date
+        paymentDate:
+          type: string
+          format: date
+        status:
+          type: string
+    PayGroupDetailsResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PayGroupDetail'
+    PayrollInput:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        worker:
+          $ref: '#/components/schemas/ResourceReference'
+        payComponent:
+          $ref: '#/components/schemas/ResourceReference'
+        amount:
+          type: number
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+    PayrollInputsResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PayrollInput'
+    PayrollInputRequest:
+      type: object
+      required:
+        - worker
+        - payComponent
+      properties:
+        worker:
+          $ref: '#/components/schemas/ResourceReference'
+        payComponent:
+          $ref: '#/components/schemas/ResourceReference'
+        amount:
+          type: number
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+    SUIRate:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        company:
+          $ref: '#/components/schemas/ResourceReference'
+        state:
+          $ref: '#/components/schemas/ResourceReference'
+        rate:
+          type: number
+        effectiveDate:
+          type: string
+          format: date
+    SUIRatesResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/SUIRate'
+    SUIRateRequest:
+      type: object
+      required:
+        - company
+        - state
+        - rate
+        - effectiveDate
+      properties:
+        company:
+          $ref: '#/components/schemas/ResourceReference'
+        state:
+          $ref: '#/components/schemas/ResourceReference'
+        rate:
+          type: number
+        effectiveDate:
+          type: string
+          format: date
+    ReferenceValuesResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceReference'

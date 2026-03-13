@@ -1,0 +1,160 @@
+openapi: 3.1.0
+info:
+  title: Workday Payroll Interface API
+  description: >-
+    API for interfacing with third-party payroll systems. Enables extraction and transmission of payroll data between Workday and external payroll processors.
+  version: v1
+  contact:
+    name: Workday API Support
+    email: api-support@workday.com
+    url: https://community.workday.com
+  license:
+    name: Proprietary
+    url: https://www.workday.com/en-us/legal/site-terms.html
+servers:
+  - url: https://{baseUrl}/ccx/api/payrollInterface/v1/{tenant}
+    description: Workday Workday Payroll Interface API server
+    variables:
+      baseUrl:
+        default: wd2-impl-services1.workday.com
+      tenant:
+        default: tenant
+security:
+  - OAuth2:
+      - r:payrollInterface
+paths:
+  /payrollExports:
+    get:
+      operationId: getPayrollExports
+      summary: Retrieve a collection of payrollExports
+      description: >-
+        Returns a collection of payrollExports from the Workday Payroll Interface API.
+      tags:
+        - Payroll Interface
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/search'
+      responses:
+        '200':
+          description: Successful response with payrollExports
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /payrollExports/{ID}:
+    get:
+      operationId: getPayrollExportById
+      summary: Retrieve a specific PayrollExport
+      description: >-
+        Returns the specified PayrollExport instance with its details.
+      tags:
+        - Payroll Interface
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      responses:
+        '200':
+          description: Successful response with the PayrollExport
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInstance'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{baseUrl}/authorize
+          tokenUrl: https://{baseUrl}/oauth2/{tenant}/token
+          scopes:
+            r:payrollInterface: Read Payroll Interface data
+  parameters:
+    ID:
+      name: ID
+      in: path
+      required: true
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 20
+        maximum: 100
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+    search:
+      name: search
+      in: query
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+    ResourceReference:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        href:
+          type: string
+          format: uri
+    ResourceInstance:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        href:
+          type: string
+          format: uri
+    CollectionResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceInstance'

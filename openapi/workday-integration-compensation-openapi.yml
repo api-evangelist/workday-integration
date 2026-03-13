@@ -1,0 +1,464 @@
+openapi: 3.1.0
+info:
+  title: Workday Compensation API
+  description: >-
+    API for managing employee compensation data including salary structures, pay
+    grades, and compensation plans. Provides endpoints for scorecard results and
+    one-time payment requests.
+  version: v1
+  contact:
+    name: Workday API Support
+    email: api-support@workday.com
+    url: https://community.workday.com
+  license:
+    name: Proprietary
+    url: https://www.workday.com/en-us/legal/site-terms.html
+servers:
+  - url: https://{baseUrl}/ccx/api/compensation/v1/{tenant}
+    description: Workday Compensation REST API server
+    variables:
+      baseUrl:
+        default: wd2-impl-services1.workday.com
+      tenant:
+        default: tenant
+security:
+  - OAuth2:
+      - r:compensation
+      - w:compensation
+paths:
+  /scorecardResults:
+    get:
+      operationId: getScorecardResults
+      summary: Retrieve scorecard results
+      description: >-
+        Returns a collection of compensation scorecard results with
+        pagination support.
+      tags:
+        - Scorecards
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response with scorecard results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScorecardResultsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    post:
+      operationId: createScorecardResult
+      summary: Create a new scorecard result
+      description: >-
+        Creates a new compensation scorecard result.
+      tags:
+        - Scorecards
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScorecardResultRequest'
+      responses:
+        '201':
+          description: Scorecard result created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScorecardResult'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /scorecardResults/{ID}:
+    get:
+      operationId: getScorecardResultById
+      summary: Retrieve a specific scorecard result
+      description: >-
+        Returns the specified scorecard result with scores and details.
+      tags:
+        - Scorecards
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      responses:
+        '200':
+          description: Successful response with the scorecard result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScorecardResult'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteScorecardResult
+      summary: Delete a scorecard result
+      description: >-
+        Removes the specified scorecard result.
+      tags:
+        - Scorecards
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      responses:
+        '204':
+          description: Scorecard result deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /scorecards:
+    get:
+      operationId: getCompensationScorecards
+      summary: Retrieve compensation scorecards
+      description: >-
+        Returns compensation scorecards filtered by effective date.
+      tags:
+        - Scorecards
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - name: effectiveDate
+          in: query
+          description: Filter by effective date
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: Successful response with compensation scorecards
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScorecardsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    post:
+      operationId: createCompensationScorecard
+      summary: Create a compensation scorecard
+      description: >-
+        Creates a new compensation scorecard definition.
+      tags:
+        - Scorecards
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScorecardRequest'
+      responses:
+        '201':
+          description: Scorecard created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Scorecard'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /scorecards/{ID}:
+    get:
+      operationId: getCompensationScorecardById
+      summary: Retrieve a specific compensation scorecard
+      description: >-
+        Returns the specified compensation scorecard with its configuration.
+      tags:
+        - Scorecards
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      responses:
+        '200':
+          description: Successful response with the scorecard
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Scorecard'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateCompensationScorecard
+      summary: Update a compensation scorecard
+      description: >-
+        Modifies the specified compensation scorecard.
+      tags:
+        - Scorecards
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScorecardRequest'
+      responses:
+        '200':
+          description: Scorecard updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Scorecard'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteCompensationScorecard
+      summary: Delete a compensation scorecard
+      description: >-
+        Removes the specified compensation scorecard.
+      tags:
+        - Scorecards
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      responses:
+        '204':
+          description: Scorecard deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /workers/{ID}/requestOneTimePayment:
+    post:
+      operationId: requestOneTimePayment
+      summary: Create a one-time payment request
+      description: >-
+        Creates a one-time payment request for the specified worker, such as
+        a bonus or award, and initiates the approval business process.
+      tags:
+        - Payments
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OneTimePaymentRequest'
+      responses:
+        '201':
+          description: One-time payment request created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OneTimePayment'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+components:
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{baseUrl}/authorize
+          tokenUrl: https://{baseUrl}/oauth2/{tenant}/token
+          scopes:
+            r:compensation: Read compensation data
+            w:compensation: Write compensation data
+  parameters:
+    ID:
+      name: ID
+      in: path
+      required: true
+      description: The Workday ID of the resource
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of objects in a single response (default 20, maximum 100)
+      schema:
+        type: integer
+        default: 20
+        maximum: 100
+    offset:
+      name: offset
+      in: query
+      description: Zero-based index of the first object in a response collection
+      schema:
+        type: integer
+        default: 0
+  responses:
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              error:
+                type: string
+              message:
+                type: string
+    ResourceReference:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        href:
+          type: string
+          format: uri
+    ScorecardResult:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        scorecard:
+          $ref: '#/components/schemas/ResourceReference'
+        worker:
+          $ref: '#/components/schemas/ResourceReference'
+        overallScore:
+          type: number
+        effectiveDate:
+          type: string
+          format: date
+    ScorecardResultsResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScorecardResult'
+    ScorecardResultRequest:
+      type: object
+      required:
+        - scorecard
+        - worker
+      properties:
+        scorecard:
+          $ref: '#/components/schemas/ResourceReference'
+        worker:
+          $ref: '#/components/schemas/ResourceReference'
+        overallScore:
+          type: number
+    Scorecard:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        name:
+          type: string
+        effectiveDate:
+          type: string
+          format: date
+        isActive:
+          type: boolean
+    ScorecardsResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Scorecard'
+    ScorecardRequest:
+      type: object
+      required:
+        - name
+        - effectiveDate
+      properties:
+        name:
+          type: string
+        effectiveDate:
+          type: string
+          format: date
+    OneTimePayment:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        worker:
+          $ref: '#/components/schemas/ResourceReference'
+        amount:
+          type: number
+        currency:
+          $ref: '#/components/schemas/ResourceReference'
+        payComponent:
+          $ref: '#/components/schemas/ResourceReference'
+        effectiveDate:
+          type: string
+          format: date
+    OneTimePaymentRequest:
+      type: object
+      required:
+        - amount
+        - payComponent
+        - effectiveDate
+      properties:
+        amount:
+          type: number
+        currency:
+          $ref: '#/components/schemas/ResourceReference'
+        payComponent:
+          $ref: '#/components/schemas/ResourceReference'
+        effectiveDate:
+          type: string
+          format: date
+        reason:
+          type: string

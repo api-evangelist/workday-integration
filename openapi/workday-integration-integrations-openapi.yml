@@ -1,0 +1,316 @@
+openapi: 3.1.0
+info:
+  title: Workday Integrations API
+  description: >-
+    REST API for building custom integrations with Workday services. Provides
+    endpoints for programmatic access to integration events, launch parameters,
+    and reference data used across Workday modules.
+  version: v1
+  contact:
+    name: Workday API Support
+    email: api-support@workday.com
+    url: https://community.workday.com
+  license:
+    name: Proprietary
+    url: https://www.workday.com/en-us/legal/site-terms.html
+servers:
+  - url: https://{baseUrl}/ccx/api/v1/{tenant}
+    description: Workday REST API server
+    variables:
+      baseUrl:
+        default: wd2-impl-services1.workday.com
+        description: The Workday data center hostname
+      tenant:
+        default: tenant
+        description: The Workday tenant name
+security:
+  - OAuth2:
+      - r:integrations
+      - w:integrations
+paths:
+  /integrationEvents:
+    get:
+      operationId: getIntegrationEvents
+      summary: Retrieve integration events
+      description: >-
+        Returns a collection of integration event records showing the status
+        and details of integration runs.
+      tags:
+        - Integration Events
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response with integration events
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntegrationEventsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /integrationEvents/{ID}:
+    get:
+      operationId: getIntegrationEventById
+      summary: Retrieve a specific integration event
+      description: >-
+        Returns the specified integration event including run status, start time,
+        end time, and any error messages.
+      tags:
+        - Integration Events
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      responses:
+        '200':
+          description: Successful response with the integration event
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntegrationEvent'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /integrationSystems:
+    get:
+      operationId: getIntegrationSystems
+      summary: Retrieve integration systems
+      description: >-
+        Returns a collection of configured integration systems in the tenant.
+      tags:
+        - Integration Systems
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/search'
+      responses:
+        '200':
+          description: Successful response with integration systems
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntegrationSystemsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /integrationSystems/{ID}:
+    get:
+      operationId: getIntegrationSystemById
+      summary: Retrieve a specific integration system
+      description: >-
+        Returns the specified integration system with its configuration details.
+      tags:
+        - Integration Systems
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      responses:
+        '200':
+          description: Successful response with the integration system
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntegrationSystem'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /integrationSystems/{ID}/launch:
+    post:
+      operationId: launchIntegration
+      summary: Launch an integration system
+      description: >-
+        Triggers execution of the specified integration system.
+      tags:
+        - Integration Systems
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IntegrationLaunchRequest'
+      responses:
+        '201':
+          description: Integration launched successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntegrationEvent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+components:
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{baseUrl}/authorize
+          tokenUrl: https://{baseUrl}/oauth2/{tenant}/token
+          refreshUrl: https://{baseUrl}/oauth2/{tenant}/token
+          scopes:
+            r:integrations: Read integration data
+            w:integrations: Write integration data
+  parameters:
+    ID:
+      name: ID
+      in: path
+      required: true
+      description: The Workday ID of the resource
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      description: The maximum number of objects in a single response (default 20, maximum 100)
+      schema:
+        type: integer
+        default: 20
+        maximum: 100
+    offset:
+      name: offset
+      in: query
+      description: The zero-based index of the first object in a response collection
+      schema:
+        type: integer
+        default: 0
+    search:
+      name: search
+      in: query
+      description: Search string used to filter results
+      schema:
+        type: string
+  responses:
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              error:
+                type: string
+              field:
+                type: string
+              message:
+                type: string
+    ResourceReference:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        href:
+          type: string
+          format: uri
+    IntegrationEvent:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        integrationSystem:
+          $ref: '#/components/schemas/ResourceReference'
+        status:
+          type: string
+          enum:
+            - Completed
+            - Failed
+            - In_Progress
+            - Cancelled
+        startDateTime:
+          type: string
+          format: date-time
+        endDateTime:
+          type: string
+          format: date-time
+        recordsProcessed:
+          type: integer
+        recordsFailed:
+          type: integer
+    IntegrationEventsResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/IntegrationEvent'
+    IntegrationSystem:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        integrationSystemName:
+          type: string
+        template:
+          $ref: '#/components/schemas/ResourceReference'
+        isActive:
+          type: boolean
+        lastRunDateTime:
+          type: string
+          format: date-time
+    IntegrationSystemsResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/IntegrationSystem'
+    IntegrationLaunchRequest:
+      type: object
+      properties:
+        launchParameters:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              value:
+                type: string

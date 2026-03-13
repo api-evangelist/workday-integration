@@ -1,0 +1,530 @@
+openapi: 3.1.0
+info:
+  title: Workday Prism Analytics API
+  description: >-
+    REST API for working with Workday Prism Analytics tables, data change tasks,
+    and datasets. Enables programmatic creation of Prism Analytics tables and
+    datasets and modification of data within them.
+  version: v3
+  contact:
+    name: Workday API Support
+    email: api-support@workday.com
+    url: https://community.workday.com
+  license:
+    name: Proprietary
+    url: https://www.workday.com/en-us/legal/site-terms.html
+servers:
+  - url: https://{baseUrl}/ccx/api/prismAnalytics/v3/{tenant}
+    description: Workday Prism Analytics REST API server
+    variables:
+      baseUrl:
+        default: wd2-impl-services1.workday.com
+      tenant:
+        default: tenant
+security:
+  - OAuth2:
+      - r:prismAnalytics
+      - w:prismAnalytics
+paths:
+  /tables:
+    get:
+      operationId: getTables
+      summary: Retrieve Prism Analytics tables
+      description: >-
+        Returns a collection of Prism Analytics tables in the tenant.
+      tags:
+        - Tables
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/search'
+      responses:
+        '200':
+          description: Successful response with tables
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TablesResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    post:
+      operationId: createTable
+      summary: Create a Prism Analytics table
+      description: >-
+        Creates a new Prism Analytics table with the specified schema.
+      tags:
+        - Tables
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TableRequest'
+      responses:
+        '201':
+          description: Table created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Table'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /tables/{ID}:
+    get:
+      operationId: getTableById
+      summary: Retrieve a specific Prism Analytics table
+      description: >-
+        Returns the specified Prism Analytics table with its schema definition.
+      tags:
+        - Tables
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      responses:
+        '200':
+          description: Successful response with the table
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Table'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateTable
+      summary: Update a Prism Analytics table
+      description: >-
+        Updates the specified Prism Analytics table schema.
+      tags:
+        - Tables
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TableRequest'
+      responses:
+        '200':
+          description: Table updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Table'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteTable
+      summary: Delete a Prism Analytics table
+      description: >-
+        Deletes the specified Prism Analytics table and its data.
+      tags:
+        - Tables
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      responses:
+        '204':
+          description: Table deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /dataChangeTasks:
+    get:
+      operationId: getDataChangeTasks
+      summary: Retrieve data change tasks
+      description: >-
+        Returns a collection of data change tasks for Prism Analytics tables.
+      tags:
+        - Data Change Tasks
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response with data change tasks
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataChangeTasksResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    post:
+      operationId: createDataChangeTask
+      summary: Create a data change task
+      description: >-
+        Creates a new data change task to load data into a Prism Analytics table.
+      tags:
+        - Data Change Tasks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataChangeTaskRequest'
+      responses:
+        '201':
+          description: Data change task created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataChangeTask'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /dataChangeTasks/{ID}:
+    get:
+      operationId: getDataChangeTaskById
+      summary: Retrieve a specific data change task
+      description: >-
+        Returns the specified data change task with its status and details.
+      tags:
+        - Data Change Tasks
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      responses:
+        '200':
+          description: Successful response with the data change task
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataChangeTask'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /fileContainers:
+    post:
+      operationId: createFileContainer
+      summary: Create a file container for data upload
+      description: >-
+        Creates a file container for uploading data files to be processed
+        by a data change task.
+      tags:
+        - File Containers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FileContainerRequest'
+      responses:
+        '201':
+          description: File container created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileContainer'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /fileContainers/{ID}:
+    get:
+      operationId: getFileContainerById
+      summary: Retrieve a specific file container
+      description: >-
+        Returns the specified file container with its upload status.
+      tags:
+        - File Containers
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      responses:
+        '200':
+          description: Successful response with the file container
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileContainer'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /wql:
+    post:
+      operationId: executeWQL
+      summary: Execute a WQL query
+      description: >-
+        Executes a Workday Query Language (WQL) query against Prism Analytics
+        data and returns the results.
+      tags:
+        - WQL
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WQLRequest'
+      responses:
+        '200':
+          description: Successful WQL query response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WQLResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+components:
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{baseUrl}/authorize
+          tokenUrl: https://{baseUrl}/oauth2/{tenant}/token
+          scopes:
+            r:prismAnalytics: Read Prism Analytics data
+            w:prismAnalytics: Write Prism Analytics data
+  parameters:
+    ID:
+      name: ID
+      in: path
+      required: true
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 20
+        maximum: 100
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+    search:
+      name: search
+      in: query
+      schema:
+        type: string
+  responses:
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+    ResourceReference:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        href:
+          type: string
+          format: uri
+    Table:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        displayName:
+          type: string
+        enableForAnalysis:
+          type: boolean
+        fields:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              description:
+                type: string
+              ordinal:
+                type: integer
+              type:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  descriptor:
+                    type: string
+              parseFormat:
+                type: string
+              precision:
+                type: integer
+              scale:
+                type: integer
+    TablesResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Table'
+    TableRequest:
+      type: object
+      required:
+        - displayName
+        - fields
+      properties:
+        displayName:
+          type: string
+        enableForAnalysis:
+          type: boolean
+        fields:
+          type: array
+          items:
+            type: object
+            required:
+              - name
+              - type
+            properties:
+              name:
+                type: string
+              description:
+                type: string
+              ordinal:
+                type: integer
+              type:
+                $ref: '#/components/schemas/ResourceReference'
+    DataChangeTask:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        targetTable:
+          $ref: '#/components/schemas/ResourceReference'
+        status:
+          type: string
+          enum:
+            - Processing
+            - Completed
+            - Failed
+        operation:
+          type: string
+          enum:
+            - TruncateAndInsert
+            - Insert
+            - Update
+            - Upsert
+            - Delete
+        createdDateTime:
+          type: string
+          format: date-time
+    DataChangeTasksResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataChangeTask'
+    DataChangeTaskRequest:
+      type: object
+      required:
+        - targetTable
+        - operation
+      properties:
+        targetTable:
+          $ref: '#/components/schemas/ResourceReference'
+        operation:
+          type: string
+          enum:
+            - TruncateAndInsert
+            - Insert
+            - Update
+            - Upsert
+            - Delete
+        fileContainer:
+          $ref: '#/components/schemas/ResourceReference'
+    FileContainer:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        status:
+          type: string
+    FileContainerRequest:
+      type: object
+      properties:
+        name:
+          type: string
+    WQLRequest:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The WQL query string to execute
+    WQLResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            type: object
+            additionalProperties: true

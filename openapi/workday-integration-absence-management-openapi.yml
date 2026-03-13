@@ -1,0 +1,462 @@
+openapi: 3.1.0
+info:
+  title: Workday Absence Management API
+  description: >-
+    API for managing employee leave requests, absence types, and time-off
+    balances. Retrieves eligible absence types for employees and supports
+    validation of leave category selections.
+  version: v1
+  contact:
+    name: Workday API Support
+    email: api-support@workday.com
+    url: https://community.workday.com
+  license:
+    name: Proprietary
+    url: https://www.workday.com/en-us/legal/site-terms.html
+servers:
+  - url: https://{baseUrl}/ccx/api/absenceManagement/v1/{tenant}
+    description: Workday Absence Management REST API server
+    variables:
+      baseUrl:
+        default: wd2-impl-services1.workday.com
+        description: The Workday data center hostname
+      tenant:
+        default: tenant
+        description: The Workday tenant name
+security:
+  - OAuth2:
+      - r:absenceManagement
+      - w:absenceManagement
+paths:
+  /workers/{ID}/eligibleAbsenceTypes:
+    get:
+      operationId: getWorkerEligibleAbsenceTypes
+      summary: Retrieve eligible absence types for a worker
+      description: >-
+        Returns a collection of eligible absence types for the specified worker,
+        based on their benefits enrollment and absence plan configuration.
+      tags:
+        - Absence Types
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response with eligible absence types
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AbsenceTypesResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /workers/{ID}/requestTimeOff:
+    post:
+      operationId: requestTimeOff
+      summary: Create a time off request for a worker
+      description: >-
+        Creates a time off request for the specified worker ID and initiates
+        the approval business process.
+      tags:
+        - Time Off
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TimeOffRequest'
+      responses:
+        '201':
+          description: Time off request created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeOffEntry'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /workers/{ID}/validTimeOffDates:
+    get:
+      operationId: getValidTimeOffDates
+      summary: Retrieve valid time off dates for a worker
+      description: >-
+        Returns the valid dates on which the specified worker can request
+        time off, based on their schedule and existing requests.
+      tags:
+        - Time Off
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - name: startDate
+          in: query
+          description: Start date for the range of valid dates
+          schema:
+            type: string
+            format: date
+        - name: endDate
+          in: query
+          description: End date for the range of valid dates
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: Successful response with valid time off dates
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidDatesResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /workers/{ID}/leavesOfAbsence:
+    get:
+      operationId: getWorkerLeavesOfAbsence
+      summary: Retrieve leaves of absence for a worker
+      description: >-
+        Returns the leaves of absence records for the specified worker.
+      tags:
+        - Leave of Absence
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response with leaves of absence
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LeavesOfAbsenceResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /workers/{ID}/leavesOfAbsence/{subresourceID}:
+    get:
+      operationId: getWorkerLeaveOfAbsenceById
+      summary: Retrieve a specific leave of absence for a worker
+      description: >-
+        Returns the specified leave of absence record for the worker.
+      tags:
+        - Leave of Absence
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - name: subresourceID
+          in: path
+          required: true
+          description: The Workday ID of the leave of absence
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response with the leave of absence
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LeaveOfAbsence'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /balances/{ID}:
+    get:
+      operationId: getAbsenceBalance
+      summary: Retrieve an absence plan balance
+      description: >-
+        Returns the specified balance of all absence plan and leave of absence types.
+      tags:
+        - Balances
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      responses:
+        '200':
+          description: Successful response with the absence balance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AbsenceBalance'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /values/leave/status:
+    get:
+      operationId: getLeaveStatusValues
+      summary: Retrieve leave status values
+      description: >-
+        Returns the available leave of absence status values.
+      tags:
+        - Reference Data
+      responses:
+        '200':
+          description: Successful response with leave status values
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReferenceValuesResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /values/timeOff/status:
+    get:
+      operationId: getTimeOffStatusValues
+      summary: Retrieve time off status values
+      description: >-
+        Returns the available time off request status values including Approved,
+        Submitted, Not Submitted, and Sent Back.
+      tags:
+        - Reference Data
+      responses:
+        '200':
+          description: Successful response with time off status values
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReferenceValuesResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+components:
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{baseUrl}/authorize
+          tokenUrl: https://{baseUrl}/oauth2/{tenant}/token
+          refreshUrl: https://{baseUrl}/oauth2/{tenant}/token
+          scopes:
+            r:absenceManagement: Read absence data
+            w:absenceManagement: Write absence data
+  parameters:
+    ID:
+      name: ID
+      in: path
+      required: true
+      description: The Workday ID of the resource
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      description: The maximum number of objects in a single response (default 20, maximum 100)
+      schema:
+        type: integer
+        default: 20
+        maximum: 100
+    offset:
+      name: offset
+      in: query
+      description: The zero-based index of the first object in a response collection
+      schema:
+        type: integer
+        default: 0
+  responses:
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              error:
+                type: string
+              field:
+                type: string
+              message:
+                type: string
+    ResourceReference:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        href:
+          type: string
+          format: uri
+    AbsenceTypesResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              descriptor:
+                type: string
+              absenceTypeCategory:
+                $ref: '#/components/schemas/ResourceReference'
+              unit:
+                type: string
+                enum:
+                  - Hours
+                  - Days
+    TimeOffEntry:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        worker:
+          $ref: '#/components/schemas/ResourceReference'
+        absenceType:
+          $ref: '#/components/schemas/ResourceReference'
+        date:
+          type: string
+          format: date
+        quantity:
+          type: number
+        unit:
+          type: string
+        status:
+          type: string
+    TimeOffRequest:
+      type: object
+      required:
+        - absenceType
+        - days
+      properties:
+        absenceType:
+          $ref: '#/components/schemas/ResourceReference'
+        days:
+          type: array
+          items:
+            type: object
+            required:
+              - date
+              - quantity
+            properties:
+              date:
+                type: string
+                format: date
+              quantity:
+                type: number
+              comment:
+                type: string
+    ValidDatesResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+                format: date
+              isValid:
+                type: boolean
+    LeaveOfAbsence:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        worker:
+          $ref: '#/components/schemas/ResourceReference'
+        leaveType:
+          $ref: '#/components/schemas/ResourceReference'
+        startDate:
+          type: string
+          format: date
+        estimatedEndDate:
+          type: string
+          format: date
+        actualEndDate:
+          type: string
+          format: date
+        status:
+          type: string
+    LeavesOfAbsenceResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/LeaveOfAbsence'
+    AbsenceBalance:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        worker:
+          $ref: '#/components/schemas/ResourceReference'
+        absencePlan:
+          $ref: '#/components/schemas/ResourceReference'
+        balance:
+          type: number
+        unit:
+          type: string
+        asOfDate:
+          type: string
+          format: date
+    ReferenceValuesResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceReference'
