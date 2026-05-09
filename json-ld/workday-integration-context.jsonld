@@ -1,0 +1,276 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "wd": "https://www.workday.com/ns/api/",
+    "schema": "https://schema.org/",
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "org": "http://www.w3.org/ns/org#",
+    "vcard": "http://www.w3.org/2006/vcard/ns#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "hr": "http://www.w3.org/ns/person#",
+    "cred": "https://www.w3.org/2018/credentials#",
+
+    "Worker": {
+      "@id": "schema:Person",
+      "@context": {
+        "id": "@id",
+        "descriptor": "schema:name",
+        "workerID": "schema:identifier",
+        "businessTitle": "schema:jobTitle",
+        "primaryWorkEmail": "schema:email",
+        "primaryWorkPhone": "schema:telephone",
+        "hireDate": {
+          "@id": "schema:startDate",
+          "@type": "xsd:date"
+        },
+        "terminationDate": {
+          "@id": "schema:endDate",
+          "@type": "xsd:date"
+        },
+        "location": "schema:workLocation",
+        "supervisoryOrganization": "schema:worksFor",
+        "managementLevel": "wd:managementLevel",
+        "workerType": "wd:workerType",
+        "position": "wd:position",
+        "jobProfile": "wd:jobProfile",
+        "isActive": "wd:isActive",
+        "photo": "schema:image"
+      }
+    },
+
+    "Organization": {
+      "@id": "org:Organization",
+      "@context": {
+        "id": "@id",
+        "descriptor": "schema:name",
+        "organizationType": "org:classification",
+        "organizationCode": "schema:identifier",
+        "isActive": "wd:isActive",
+        "manager": "org:headOf",
+        "superior": "org:subOrganizationOf",
+        "staffingModel": "wd:staffingModel",
+        "effectiveDate": {
+          "@id": "schema:startDate",
+          "@type": "xsd:date"
+        }
+      }
+    },
+
+    "SupervisoryOrganization": {
+      "@id": "org:OrganizationalUnit",
+      "@context": {
+        "id": "@id",
+        "descriptor": "schema:name",
+        "name": "schema:legalName",
+        "manager": "org:headOf",
+        "superior": "org:subOrganizationOf",
+        "staffingModel": "wd:staffingModel"
+      }
+    },
+
+    "Position": {
+      "@id": "schema:Role",
+      "@context": {
+        "id": "@id",
+        "descriptor": "schema:name",
+        "positionID": "schema:identifier",
+        "jobProfile": "wd:jobProfile",
+        "supervisoryOrganization": "schema:worksFor",
+        "location": "schema:workLocation",
+        "isFilled": "wd:isFilled",
+        "worker": "wd:worker",
+        "timeType": "wd:timeType",
+        "workerType": "wd:workerType"
+      }
+    },
+
+    "JobProfile": {
+      "@id": "schema:Occupation",
+      "@context": {
+        "id": "@id",
+        "descriptor": "schema:name",
+        "jobProfileName": "schema:name",
+        "jobFamily": "schema:occupationalCategory",
+        "managementLevel": "wd:managementLevel",
+        "jobCategory": "schema:occupationalCategory",
+        "isActive": "wd:isActive",
+        "summary": "schema:description"
+      }
+    },
+
+    "Compensation": {
+      "@id": "wd:Compensation",
+      "@context": {
+        "id": "@id",
+        "descriptor": "schema:name",
+        "worker": "schema:about",
+        "amount": "schema:price",
+        "currency": "schema:priceCurrency",
+        "frequency": "wd:payFrequency",
+        "effectiveDate": {
+          "@id": "schema:startDate",
+          "@type": "xsd:date"
+        },
+        "payGrade": "wd:payGrade",
+        "totalBasePay": "schema:baseSalary"
+      }
+    },
+
+    "Absence": {
+      "@id": "wd:Absence",
+      "@context": {
+        "id": "@id",
+        "descriptor": "schema:name",
+        "worker": "schema:about",
+        "absenceType": "wd:absenceType",
+        "startDate": {
+          "@id": "schema:startDate",
+          "@type": "xsd:date"
+        },
+        "endDate": {
+          "@id": "schema:endDate",
+          "@type": "xsd:date"
+        },
+        "quantity": "schema:duration",
+        "unit": "schema:unitCode",
+        "status": "wd:status"
+      }
+    },
+
+    "TimeBlock": {
+      "@id": "wd:TimeBlock",
+      "@context": {
+        "id": "@id",
+        "descriptor": "schema:name",
+        "worker": "schema:about",
+        "date": {
+          "@id": "schema:startDate",
+          "@type": "xsd:date"
+        },
+        "startTime": {
+          "@id": "schema:startTime",
+          "@type": "xsd:dateTime"
+        },
+        "endTime": {
+          "@id": "schema:endTime",
+          "@type": "xsd:dateTime"
+        },
+        "totalHours": "schema:duration",
+        "timeCode": "wd:timeCode"
+      }
+    },
+
+    "BenefitPlan": {
+      "@id": "wd:BenefitPlan",
+      "@context": {
+        "id": "@id",
+        "descriptor": "schema:name",
+        "planType": "wd:planType",
+        "coverageBeginDate": {
+          "@id": "schema:startDate",
+          "@type": "xsd:date"
+        },
+        "coverageEndDate": {
+          "@id": "schema:endDate",
+          "@type": "xsd:date"
+        },
+        "coverageLevel": "wd:coverageLevel",
+        "employeeCost": "schema:price",
+        "employerCost": "wd:employerCost"
+      }
+    },
+
+    "PayrollInput": {
+      "@id": "wd:PayrollInput",
+      "@context": {
+        "id": "@id",
+        "descriptor": "schema:name",
+        "worker": "schema:about",
+        "payComponent": "wd:payComponent",
+        "amount": "schema:price",
+        "currency": "schema:priceCurrency",
+        "startDate": {
+          "@id": "schema:startDate",
+          "@type": "xsd:date"
+        },
+        "endDate": {
+          "@id": "schema:endDate",
+          "@type": "xsd:date"
+        }
+      }
+    },
+
+    "JobPosting": {
+      "@id": "schema:JobPosting",
+      "@context": {
+        "id": "@id",
+        "descriptor": "schema:name",
+        "title": "schema:title",
+        "postingDate": {
+          "@id": "schema:datePosted",
+          "@type": "xsd:date"
+        },
+        "closingDate": {
+          "@id": "schema:validThrough",
+          "@type": "xsd:date"
+        },
+        "status": "wd:status",
+        "location": "schema:jobLocation",
+        "jobDescription": "schema:description",
+        "hiringManager": "schema:hiringOrganization"
+      }
+    },
+
+    "IntegrationEvent": {
+      "@id": "wd:IntegrationEvent",
+      "@context": {
+        "id": "@id",
+        "descriptor": "schema:name",
+        "integrationSystem": "wd:integrationSystem",
+        "status": "wd:status",
+        "startDateTime": {
+          "@id": "schema:startDate",
+          "@type": "xsd:dateTime"
+        },
+        "endDateTime": {
+          "@id": "schema:endDate",
+          "@type": "xsd:dateTime"
+        },
+        "recordsProcessed": "wd:recordsProcessed",
+        "recordsFailed": "wd:recordsFailed"
+      }
+    },
+
+    "Student": {
+      "@id": "schema:Person",
+      "@context": {
+        "id": "@id",
+        "descriptor": "schema:name",
+        "studentID": "schema:identifier",
+        "academicProgram": "wd:academicProgram",
+        "academicLevel": "wd:academicLevel",
+        "enrollmentStatus": "wd:enrollmentStatus",
+        "admissionDate": {
+          "@id": "schema:startDate",
+          "@type": "xsd:date"
+        },
+        "expectedGraduationDate": {
+          "@id": "schema:endDate",
+          "@type": "xsd:date"
+        },
+        "gpa": "wd:gpa",
+        "totalCreditsEarned": "wd:totalCreditsEarned"
+      }
+    },
+
+    "ResourceReference": {
+      "@id": "schema:Thing",
+      "@context": {
+        "id": "@id",
+        "descriptor": "schema:name",
+        "href": "schema:url"
+      }
+    }
+  }
+}

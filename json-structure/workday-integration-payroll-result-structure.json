@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Workday Payroll Result Structure",
+  "description": "Structural definition of a Workday payroll calculation result record",
+  "type": "object",
+  "structure": {
+    "id": {
+      "type": "string",
+      "description": "Unique payroll result identifier (GUID)"
+    },
+    "descriptor": {
+      "type": "string",
+      "description": "Human-readable payroll run identifier",
+      "example": "US Payroll - May 2026"
+    },
+    "href": {
+      "type": "string",
+      "format": "uri",
+      "description": "Canonical URL for the payroll result resource"
+    },
+    "payPeriod": {
+      "type": "object",
+      "description": "Pay period date range",
+      "fields": {
+        "startDate": "string (ISO 8601 date)",
+        "endDate": "string (ISO 8601 date)",
+        "descriptor": "string"
+      }
+    },
+    "payGroup": {
+      "type": "object",
+      "description": "Pay group that was processed",
+      "fields": {
+        "id": "string",
+        "descriptor": "string"
+      }
+    },
+    "status": {
+      "type": "object",
+      "description": "Processing status",
+      "fields": {
+        "id": "pending | processing | complete | error",
+        "descriptor": "string"
+      }
+    },
+    "grossPay": {
+      "type": "object",
+      "description": "Total gross pay for the period",
+      "fields": {
+        "amount": "number",
+        "currency": "string (ISO 4217)"
+      }
+    },
+    "netPay": {
+      "type": "object",
+      "description": "Total net pay after deductions",
+      "fields": {
+        "amount": "number",
+        "currency": "string (ISO 4217)"
+      }
+    },
+    "totalDeductions": {
+      "type": "object",
+      "description": "Total deductions applied",
+      "fields": {
+        "amount": "number",
+        "currency": "string (ISO 4217)"
+      }
+    },
+    "workerCount": {
+      "type": "integer",
+      "description": "Number of workers included in this payroll run"
+    },
+    "processedDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date the payroll was processed"
+    }
+  },
+  "listResponse": {
+    "total": "integer",
+    "data": "array of payroll result objects"
+  }
+}

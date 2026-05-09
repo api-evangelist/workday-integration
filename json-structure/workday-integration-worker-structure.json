@@ -1,0 +1,75 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Workday Worker Structure",
+  "description": "Structural definition of a Workday worker (employee or contingent worker) record",
+  "type": "object",
+  "structure": {
+    "id": {
+      "type": "string",
+      "description": "Unique worker identifier (GUID)",
+      "example": "3aa5550b7fe348b98d7b5741ba4a5023"
+    },
+    "descriptor": {
+      "type": "string",
+      "description": "Human-readable worker name",
+      "example": "John Smith"
+    },
+    "href": {
+      "type": "string",
+      "format": "uri",
+      "description": "Canonical URL for the worker resource"
+    },
+    "workerType": {
+      "type": "object",
+      "description": "Classification of the worker",
+      "fields": {
+        "id": "string",
+        "descriptor": "Employee | Contingent Worker"
+      }
+    },
+    "workerStatus": {
+      "type": "object",
+      "description": "Current employment status",
+      "fields": {
+        "id": "active | inactive | leave",
+        "descriptor": "string"
+      }
+    },
+    "primaryJob": {
+      "type": "object",
+      "description": "Primary job assignment",
+      "fields": {
+        "jobTitle": "string",
+        "department": "object (id, descriptor)",
+        "location": "object (id, descriptor)",
+        "manager": "object (id, descriptor)",
+        "hireDate": "string (ISO 8601 date)",
+        "endEmploymentDate": "string (ISO 8601 date, optional)"
+      }
+    },
+    "personalData": {
+      "type": "object",
+      "description": "Personal information (access controlled)",
+      "fields": {
+        "legalName": "object (firstName, lastName, prefix)",
+        "preferredName": "string",
+        "dateOfBirth": "string (ISO 8601 date)",
+        "gender": "object (id, descriptor)",
+        "nationality": "object (id, descriptor)"
+      }
+    },
+    "contactInformation": {
+      "type": "object",
+      "description": "Contact details",
+      "fields": {
+        "workEmail": "string (email)",
+        "workPhone": "string",
+        "homeAddress": "object (addressLine1, city, state, postalCode, country)"
+      }
+    }
+  },
+  "listResponse": {
+    "total": "integer",
+    "data": "array of worker objects"
+  }
+}

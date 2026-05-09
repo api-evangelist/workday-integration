@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.workday.com/jobProfile",
+  "title": "Job Profile",
+  "description": "Represents a job profile definition within the Workday system, defining the qualifications, responsibilities, and classification for positions.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique Workday identifier for the job profile"
+    },
+    "descriptor": {
+      "type": "string",
+      "description": "The display name of the job profile"
+    },
+    "jobProfileName": {
+      "type": "string",
+      "description": "The name of the job profile"
+    },
+    "jobFamily": {
+      "$ref": "#/$defs/ResourceReference",
+      "description": "The job family this profile belongs to"
+    },
+    "managementLevel": {
+      "$ref": "#/$defs/ResourceReference",
+      "description": "The management level classification"
+    },
+    "jobCategory": {
+      "$ref": "#/$defs/ResourceReference",
+      "description": "The job category classification"
+    },
+    "isActive": {
+      "type": "boolean",
+      "description": "Whether the job profile is currently active"
+    },
+    "isCriticalJob": {
+      "type": "boolean",
+      "description": "Whether this is classified as a critical job"
+    },
+    "summary": {
+      "type": "string",
+      "description": "A summary description of the job profile"
+    },
+    "effectiveDate": {
+      "type": "string",
+      "format": "date",
+      "description": "The effective date of the job profile"
+    }
+  },
+  "required": ["id", "descriptor"],
+  "$defs": {
+    "ResourceReference": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "descriptor": {
+          "type": "string"
+        },
+        "href": {
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "required": ["id"]
+    }
+  }
+}

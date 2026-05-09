@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.workday.com/benefitPlan",
+  "title": "Benefit Plan",
+  "description": "Represents a benefit plan enrollment for a worker within the Workday Benefits Administration system.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique Workday identifier for the benefit plan enrollment"
+    },
+    "descriptor": {
+      "type": "string",
+      "description": "The display name of the benefit plan"
+    },
+    "planType": {
+      "$ref": "#/$defs/ResourceReference",
+      "description": "The type of benefit plan (Medical, Dental, Vision, Life, etc.)"
+    },
+    "coverageBeginDate": {
+      "type": "string",
+      "format": "date",
+      "description": "The date coverage begins"
+    },
+    "coverageEndDate": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "The date coverage ends"
+    },
+    "coverageLevel": {
+      "type": "string",
+      "description": "The coverage level (Employee Only, Employee + Spouse, Family, etc.)"
+    },
+    "employeeCost": {
+      "type": "number",
+      "description": "The employee contribution cost per period"
+    },
+    "employerCost": {
+      "type": "number",
+      "description": "The employer contribution cost per period"
+    },
+    "dependents": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ResourceReference"
+      },
+      "description": "Dependents covered under this plan"
+    }
+  },
+  "required": ["id"],
+  "$defs": {
+    "ResourceReference": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "descriptor": {
+          "type": "string"
+        },
+        "href": {
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "required": ["id"]
+    }
+  }
+}

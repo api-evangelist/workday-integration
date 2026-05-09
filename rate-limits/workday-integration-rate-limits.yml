@@ -1,0 +1,38 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Workday Integration
+providerId: workday-integration
+created: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
+tags:
+  - Integration
+  - iPaaS
+  - Rate Limiting
+description: Workday Integration Cloud enforces tenant-level concurrency, transaction, and runtime limits on Cloud Connect, Studio, and EIB integrations. Workday does not publish numeric Integration Cloud rate limits on its public marketing site; specifics live in Workday Community / Customer Center documentation behind authentication.
+sources:
+  - https://www.workday.com/en-us/enterprise-resource-planning.html
+notes: No public per-second or per-minute limits documented. Scaffold tier numbers have been removed.
+responseCodes: {}
+limits:
+  - name: Integration Concurrency (per tenant)
+    scope: tenant
+    metric: concurrent_integrations
+    limit: governed by Workday tenant entitlement; not publicly documented
+    notes: Workday Integration Cloud enforces a maximum number of concurrent integration runs per tenant; the exact value is published in Workday Community for authenticated customers.
+  - name: Web Service Throughput (per tenant)
+    scope: tenant
+    metric: varies
+    limit: governed by the parent Workday tenant; not publicly documented
+    notes: REST and SOAP web service calls share the tenant's API capacity envelope.
+policies:
+  - name: Tenant Inheritance
+    description: Integrations inherit the underlying Workday tenant's API quotas; concurrency, scheduling, and retry behavior follow tenant policies.
+  - name: Customer Center Documentation
+    description: Numeric thresholds for integration concurrency, Studio runtime, and EIB sizing are published to authenticated Workday customers in Workday Community.
+  - name: Studio Failure Handling
+    description: Workday Studio integrations should implement idempotent retries and use Studio's built-in error-routing nodes; failed integrations are surfaced through tenant-level integration event reports.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

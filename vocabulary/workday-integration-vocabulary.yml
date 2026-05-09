@@ -1,0 +1,309 @@
+vocabulary:
+  name: "Workday Integration Vocabulary"
+  description: "Comprehensive vocabulary of terms, concepts, and domain definitions for Workday integration APIs covering the full suite of Workday enterprise capabilities."
+  version: "1.0.0"
+  created: "2026-05-03"
+  modified: "2026-05-03"
+  tags:
+    - Workday
+    - Integration
+    - Enterprise
+    - HR
+    - Finance
+
+  domains:
+
+    - name: Human Capital Management
+      description: "Core worker and organization management capabilities"
+      terms:
+        - term: Worker
+          definition: "An individual employed by or engaged with an organization, including employees and contingent workers."
+          synonyms: ["Employee", "Staff Member", "Team Member"]
+          related: ["Worker Type", "Primary Job", "Employment Status"]
+
+        - term: Worker Type
+          definition: "Classification of how a worker is engaged with the organization (e.g., Employee, Contingent Worker)."
+          related: ["Worker", "Employment Agreement"]
+
+        - term: Organization
+          definition: "A formal grouping of workers within Workday such as a department, cost center, region, or legal entity."
+          synonyms: ["Department", "Business Unit", "Cost Center"]
+          related: ["Supervisory Organization", "Company", "Cost Center"]
+
+        - term: Supervisory Organization
+          definition: "A hierarchical organizational structure in Workday used to manage reporting relationships."
+          related: ["Organization", "Manager"]
+
+        - term: Position
+          definition: "A job slot within an organization that can be filled by a worker. Positions define job requirements and compensation structure."
+          related: ["Job Profile", "Worker", "Organization"]
+
+        - term: Staffing Model
+          definition: "The method used to manage workers in an organization: Position Management, Job Management, or Headcount Management."
+          related: ["Position", "Job Profile"]
+
+        - term: Hire Date
+          definition: "The date on which a worker begins their employment or engagement with the organization."
+          related: ["Worker", "Onboarding", "Employment Status"]
+
+        - term: Termination
+          definition: "The end of a worker's employment or engagement with the organization."
+          related: ["Worker", "Offboarding", "Employment Status"]
+
+    - name: Recruiting
+      description: "Talent acquisition and candidate management terms"
+      terms:
+        - term: Job Requisition
+          definition: "A formal request to fill a position within the organization, containing job requirements and approval workflow."
+          synonyms: ["Req", "Open Requisition"]
+          related: ["Job Posting", "Position", "Candidate"]
+
+        - term: Job Posting
+          definition: "A published announcement of an open position, derived from a job requisition, distributed to job boards and career sites."
+          related: ["Job Requisition", "Candidate", "Application"]
+
+        - term: Candidate
+          definition: "An individual who has applied for or is being considered for a position within the organization."
+          related: ["Job Requisition", "Application", "Interview"]
+
+        - term: Candidate Pipeline
+          definition: "The collection of candidates at various stages of the recruiting process for a given job requisition."
+          related: ["Candidate", "Job Requisition", "Hiring Stage"]
+
+        - term: Hiring Stage
+          definition: "A defined step in the recruiting workflow such as Phone Screen, Interview, Offer, or Background Check."
+          related: ["Candidate", "Job Requisition"]
+
+        - term: Offer
+          definition: "A formal proposal of employment extended to a candidate, including compensation and start date details."
+          related: ["Candidate", "Job Requisition", "Compensation"]
+
+    - name: Payroll
+      description: "Payroll processing and compensation payment terms"
+      terms:
+        - term: Pay Group
+          definition: "A grouping of workers who share the same pay frequency, pay period, and payroll processing rules."
+          related: ["Pay Period", "Payroll Run", "Worker"]
+
+        - term: Pay Period
+          definition: "A defined time interval (e.g., weekly, bi-weekly, semi-monthly, monthly) for which payroll is calculated and paid."
+          related: ["Pay Group", "Payroll Run"]
+
+        - term: Payroll Run
+          definition: "The execution of payroll calculations for a pay group within a pay period."
+          synonyms: ["Payroll Calculation", "Payroll Processing"]
+          related: ["Pay Group", "Pay Period", "Payroll Result"]
+
+        - term: Pay Component
+          definition: "An individual element of a worker's pay, such as base salary, overtime, bonus, or deduction."
+          synonyms: ["Earning", "Deduction"]
+          related: ["Compensation", "Payroll Run"]
+
+        - term: Gross Pay
+          definition: "Total compensation earned by a worker before taxes and deductions."
+          related: ["Net Pay", "Pay Component", "Deduction"]
+
+        - term: Net Pay
+          definition: "Total compensation paid to a worker after all taxes and deductions have been applied."
+          related: ["Gross Pay", "Deduction", "Tax Withholding"]
+
+        - term: Tax Withholding
+          definition: "Amounts withheld from worker pay to satisfy tax obligations at federal, state, and local levels."
+          related: ["Deduction", "Gross Pay", "Net Pay"]
+
+    - name: Time and Absence
+      description: "Time tracking, scheduling, and absence management terms"
+      terms:
+        - term: Time Entry
+          definition: "A record of hours worked by a worker for a specific date and time block, associated with a cost center or project."
+          related: ["Time Block", "Worker", "Pay Period"]
+
+        - term: Time Block
+          definition: "A continuous period of work recorded in a time entry with a start and end time."
+          related: ["Time Entry", "Work Schedule"]
+
+        - term: Work Schedule
+          definition: "The defined pattern of working hours assigned to a worker, including shift hours and days of the week."
+          related: ["Time Entry", "Worker", "Scheduling"]
+
+        - term: Leave Request
+          definition: "A formal request by a worker to take time off from work under a specific leave type."
+          synonyms: ["Time Off Request", "Absence Request"]
+          related: ["Leave Balance", "Leave Type", "Absence"]
+
+        - term: Leave Balance
+          definition: "The accumulated amount of leave a worker is entitled to take under a specific leave plan."
+          related: ["Leave Request", "Leave Type"]
+
+        - term: Leave Type
+          definition: "A category of leave such as vacation, sick leave, parental leave, or bereavement."
+          related: ["Leave Request", "Leave Balance"]
+
+    - name: Benefits
+      description: "Employee benefits administration terms"
+      terms:
+        - term: Benefit Plan
+          definition: "A specific benefit offering available to eligible employees such as medical, dental, vision, or retirement plans."
+          related: ["Benefits Enrollment", "Coverage Election", "Benefits Eligibility"]
+
+        - term: Benefits Enrollment
+          definition: "The process by which an employee selects and enrolls in benefit plans during an open enrollment period or qualifying life event."
+          related: ["Benefit Plan", "Coverage Election", "Qualifying Life Event"]
+
+        - term: Coverage Election
+          definition: "A specific choice made by an employee during benefits enrollment, selecting a plan and coverage tier."
+          related: ["Benefit Plan", "Benefits Enrollment"]
+
+        - term: Open Enrollment
+          definition: "An annual period during which employees may change their benefit plan elections."
+          related: ["Benefits Enrollment", "Benefit Plan"]
+
+        - term: Qualifying Life Event
+          definition: "A change in personal circumstances (e.g., marriage, birth, adoption) that allows an employee to make mid-year benefit changes."
+          related: ["Benefits Enrollment", "Benefit Plan"]
+
+        - term: Dependent
+          definition: "A family member (spouse, child) enrolled in a worker's benefit coverage."
+          related: ["Benefits Enrollment", "Coverage Election"]
+
+    - name: Compensation
+      description: "Compensation management and total rewards terms"
+      terms:
+        - term: Compensation Plan
+          definition: "A framework that defines how workers are compensated, including base pay, merit increases, and incentive programs."
+          related: ["Compensation Grade", "Pay Range", "Worker"]
+
+        - term: Compensation Grade
+          definition: "A defined pay band or salary range associated with a job level or job profile."
+          synonyms: ["Pay Grade", "Salary Band"]
+          related: ["Compensation Plan", "Pay Range", "Job Profile"]
+
+        - term: Pay Range
+          definition: "The minimum, midpoint, and maximum salary defined for a compensation grade."
+          related: ["Compensation Grade", "Compensation Plan"]
+
+        - term: Compensation Review
+          definition: "A periodic process to evaluate and adjust worker compensation, often aligned with performance reviews."
+          related: ["Compensation Plan", "Performance Review", "Merit Increase"]
+
+        - term: Merit Increase
+          definition: "A pay raise granted based on an employee's performance rating."
+          related: ["Compensation Review", "Performance Review"]
+
+        - term: Total Rewards
+          definition: "The complete value of compensation and benefits provided to a worker, including base pay, bonuses, benefits, and equity."
+          related: ["Compensation Plan", "Benefit Plan", "Incentive"]
+
+    - name: Performance
+      description: "Performance management and talent development terms"
+      terms:
+        - term: Performance Review
+          definition: "A formal evaluation of an employee's performance against defined goals and competencies."
+          synonyms: ["Performance Appraisal", "Annual Review"]
+          related: ["Goal", "Rating", "Development Plan"]
+
+        - term: Goal
+          definition: "A measurable objective set for an employee to accomplish within a defined time period."
+          synonyms: ["Objective", "OKR"]
+          related: ["Performance Review", "Worker"]
+
+        - term: Rating
+          definition: "A score or classification assigned to an employee's performance on a defined scale."
+          related: ["Performance Review", "Talent Assessment"]
+
+        - term: Competency
+          definition: "A skill, behavior, or attribute evaluated as part of performance management."
+          related: ["Performance Review", "Job Profile"]
+
+        - term: Development Plan
+          definition: "A structured plan outlining an employee's learning and growth objectives."
+          related: ["Performance Review", "Learning", "Goal"]
+
+        - term: Succession Plan
+          definition: "A plan identifying potential successors for key roles within the organization."
+          related: ["Talent Profile", "Position", "Worker"]
+
+    - name: Learning
+      description: "Learning management and employee development terms"
+      terms:
+        - term: Course
+          definition: "A structured learning program available to workers through Workday Learning."
+          synonyms: ["Training Program", "Learning Module"]
+          related: ["Enrollment", "Learning Campaign", "Learner"]
+
+        - term: Enrollment
+          definition: "A worker's registration for a specific course or learning program."
+          related: ["Course", "Completion", "Worker"]
+
+        - term: Learning Campaign
+          definition: "A targeted delivery of learning content to a defined group of workers."
+          related: ["Course", "Worker", "Enrollment"]
+
+        - term: Completion
+          definition: "The status indicating a worker has finished a required course or learning program."
+          related: ["Enrollment", "Course"]
+
+    - name: Financial Management
+      description: "General ledger and financial transaction terms"
+      terms:
+        - term: Ledger Account
+          definition: "An account in the chart of accounts used to categorize and track financial transactions."
+          synonyms: ["GL Account", "Account Code"]
+          related: ["Journal Entry", "Cost Center", "Financial Period"]
+
+        - term: Journal Entry
+          definition: "A financial transaction recorded in the general ledger consisting of debit and credit lines."
+          related: ["Ledger Account", "Financial Period", "Worktag"]
+
+        - term: Cost Center
+          definition: "An organizational unit used to track and allocate costs in financial reporting."
+          related: ["Ledger Account", "Organization", "Budget"]
+
+        - term: Worktag
+          definition: "A Workday-specific financial dimension used to categorize transactions, such as cost center, project, or program."
+          related: ["Journal Entry", "Cost Center", "Financial Report"]
+
+        - term: Financial Period
+          definition: "An accounting period (month, quarter, year) used to organize financial transactions."
+          related: ["Journal Entry", "Financial Report"]
+
+        - term: Budget
+          definition: "A financial plan allocating resources to organizational units for a defined period."
+          related: ["Cost Center", "Financial Period", "Ledger Account"]
+
+    - name: Analytics and Integration
+      description: "Data integration, reporting, and analytics terms"
+      terms:
+        - term: Prism Analytics
+          definition: "Workday's advanced analytics platform that supports loading external data and building augmented analytics reports."
+          related: ["Dataset", "Bucket", "Report"]
+
+        - term: Dataset
+          definition: "A collection of structured data within Prism Analytics, either sourced from Workday or loaded externally."
+          related: ["Prism Analytics", "Bucket", "Schema"]
+
+        - term: Bucket
+          definition: "A temporary staging area in Prism Analytics used to upload external data before it is committed to a dataset."
+          related: ["Dataset", "Prism Analytics"]
+
+        - term: RaaS
+          definition: "Report-as-a-Service — a Workday feature that exposes custom and standard reports as web service endpoints."
+          synonyms: ["Report as a Service"]
+          related: ["Custom Report", "Integration"]
+
+        - term: Integration System
+          definition: "A configured connection in Workday that enables data exchange with external systems."
+          related: ["Integration", "Connector", "EIB"]
+
+        - term: EIB
+          definition: "Enterprise Interface Builder — a Workday tool for building simple data import and export integrations."
+          synonyms: ["Enterprise Interface Builder"]
+          related: ["Integration System", "Data Load"]
+
+        - term: Tenant
+          definition: "An isolated Workday environment instance belonging to a specific customer organization."
+          related: ["Authentication", "Multi-tenancy"]
+
+        - term: Authentication
+          definition: "The process of verifying identity for API access, using OAuth 2.0 bearer tokens in Workday."
+          related: ["Bearer Token", "OAuth 2.0", "API Access"]

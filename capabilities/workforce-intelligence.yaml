@@ -1,0 +1,212 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Workday Workforce Intelligence Workflow"
+  description: "Workforce analytics and reporting workflow combining Prism Analytics data loading, RaaS reporting, HCM data, and workforce planning for enterprise decision-making in Workday."
+  tags:
+    - Workday
+    - Integration
+    - Analytics
+    - Reporting
+    - Workforce Planning
+    - Prism Analytics
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      WORKDAY_INTEGRATION_ACCESS_TOKEN: WORKDAY_INTEGRATION_ACCESS_TOKEN
+      WORKDAY_TENANT: WORKDAY_TENANT
+
+capability:
+  consumes:
+    - type: http
+      namespace: prism
+      baseUri: https://wd2-impl-services1.workday.com/ccx/service/{tenant}
+      description: "Workday Prism Analytics API"
+      authentication:
+        type: bearer
+        token: "{{WORKDAY_INTEGRATION_ACCESS_TOKEN}}"
+      resources:
+        - name: datasets
+          path: /datasets
+          operations:
+            - name: list-datasets
+              method: GET
+              description: "List datasets"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-dataset
+              method: GET
+              description: "Get a dataset"
+              inputParameters:
+                - name: datasetId
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: buckets
+          path: /buckets
+          operations:
+            - name: create-bucket
+              method: POST
+              description: "Create upload bucket"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+    - type: http
+      namespace: hcm
+      baseUri: https://wd2-impl-services1.workday.com/ccx/service/{tenant}
+      description: "Workday HCM API"
+      authentication:
+        type: bearer
+        token: "{{WORKDAY_INTEGRATION_ACCESS_TOKEN}}"
+      resources:
+        - name: workers
+          path: /workers
+          operations:
+            - name: list-workers
+              method: GET
+              description: "List workers"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: organizations
+          path: /organizations
+          operations:
+            - name: list-organizations
+              method: GET
+              description: "List organizations"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+    - type: http
+      namespace: workforce-planning
+      baseUri: https://wd2-impl-services1.workday.com/ccx/service/{tenant}
+      description: "Workday Workforce Planning API"
+      authentication:
+        type: bearer
+        token: "{{WORKDAY_INTEGRATION_ACCESS_TOKEN}}"
+      resources:
+        - name: workforce-plans
+          path: /workforcePlans
+          operations:
+            - name: list-workforce-plans
+              method: GET
+              description: "List workforce plans"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: headcount-scenarios
+          path: /headcountScenarios
+          operations:
+            - name: list-headcount-scenarios
+              method: GET
+              description: "List headcount scenarios"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8084
+      namespace: workforce-intelligence-rest-api
+      resources:
+        - path: /v1/datasets
+          name: datasets
+          operations:
+            - method: GET
+              name: list-datasets
+              call: "prism.list-datasets"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9094
+      namespace: workforce-intelligence-mcp
+      transport: http
+      tools:
+        - name: list-datasets
+          description: "List Prism Analytics datasets"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "prism.list-datasets"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-dataset
+          description: "Get a Prism Analytics dataset"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "prism.get-dataset"
+          with:
+            datasetId: "tools.datasetId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-bucket
+          description: "Create a data upload bucket for Prism Analytics"
+          hints:
+            readOnly: false
+            openWorld: false
+          call: "prism.create-bucket"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-workers
+          description: "List workforce data from HCM"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "hcm.list-workers"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-organizations
+          description: "List organizational units"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "hcm.list-organizations"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-workforce-plans
+          description: "List workforce planning scenarios"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "workforce-planning.list-workforce-plans"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-headcount-scenarios
+          description: "List headcount planning scenarios"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "workforce-planning.list-headcount-scenarios"
+          outputParameters:
+            - type: object
+              mapping: "$."

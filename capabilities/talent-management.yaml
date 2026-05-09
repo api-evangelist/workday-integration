@@ -1,0 +1,221 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Workday Talent Management Workflow"
+  description: "Integrated talent management workflow combining performance reviews, goal setting, learning and development, succession planning, and talent assessments in Workday."
+  tags:
+    - Workday
+    - Integration
+    - Talent
+    - Performance
+    - Learning
+    - Succession
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      WORKDAY_INTEGRATION_ACCESS_TOKEN: WORKDAY_INTEGRATION_ACCESS_TOKEN
+      WORKDAY_TENANT: WORKDAY_TENANT
+
+capability:
+  consumes:
+    - type: http
+      namespace: performance
+      baseUri: https://wd2-impl-services1.workday.com/ccx/service/{tenant}
+      description: "Workday Performance Management API"
+      authentication:
+        type: bearer
+        token: "{{WORKDAY_INTEGRATION_ACCESS_TOKEN}}"
+      resources:
+        - name: performance-reviews
+          path: /performanceReviews
+          operations:
+            - name: list-performance-reviews
+              method: GET
+              description: "List performance reviews"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-performance-review
+              method: GET
+              description: "Get a performance review"
+              inputParameters:
+                - name: reviewId
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: goals
+          path: /goals
+          operations:
+            - name: list-goals
+              method: GET
+              description: "List goals"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+    - type: http
+      namespace: learning
+      baseUri: https://wd2-impl-services1.workday.com/ccx/service/{tenant}
+      description: "Workday Learning API"
+      authentication:
+        type: bearer
+        token: "{{WORKDAY_INTEGRATION_ACCESS_TOKEN}}"
+      resources:
+        - name: courses
+          path: /courses
+          operations:
+            - name: list-courses
+              method: GET
+              description: "List courses"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: enrollments
+          path: /learningEnrollments
+          operations:
+            - name: list-enrollments
+              method: GET
+              description: "List enrollments"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+    - type: http
+      namespace: talent
+      baseUri: https://wd2-impl-services1.workday.com/ccx/service/{tenant}
+      description: "Workday Talent API"
+      authentication:
+        type: bearer
+        token: "{{WORKDAY_INTEGRATION_ACCESS_TOKEN}}"
+      resources:
+        - name: talent-profiles
+          path: /talentProfiles
+          operations:
+            - name: list-talent-profiles
+              method: GET
+              description: "List talent profiles"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: succession-plans
+          path: /successionPlans
+          operations:
+            - name: list-succession-plans
+              method: GET
+              description: "List succession plans"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8081
+      namespace: talent-management-rest-api
+      resources:
+        - path: /v1/performance-reviews
+          name: performance-reviews
+          operations:
+            - method: GET
+              name: list-performance-reviews
+              call: "performance.list-performance-reviews"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/courses
+          name: courses
+          operations:
+            - method: GET
+              name: list-courses
+              call: "learning.list-courses"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9091
+      namespace: talent-management-mcp
+      transport: http
+      tools:
+        - name: list-performance-reviews
+          description: "List employee performance reviews"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "performance.list-performance-reviews"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-performance-review
+          description: "Get details of a performance review"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "performance.get-performance-review"
+          with:
+            reviewId: "tools.reviewId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-goals
+          description: "List employee goals"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "performance.list-goals"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-courses
+          description: "List available learning courses"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "learning.list-courses"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-enrollments
+          description: "List learning enrollments"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "learning.list-enrollments"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-talent-profiles
+          description: "List employee talent profiles"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "talent.list-talent-profiles"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-succession-plans
+          description: "List succession plans"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "talent.list-succession-plans"
+          outputParameters:
+            - type: object
+              mapping: "$."

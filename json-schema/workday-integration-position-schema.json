@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.workday.com/position",
+  "title": "Position",
+  "description": "Represents a staffing position within the Workday system, defining a role within an organization that can be filled by a worker.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique Workday identifier for the position"
+    },
+    "descriptor": {
+      "type": "string",
+      "description": "The display name of the position"
+    },
+    "positionID": {
+      "type": "string",
+      "description": "The position reference ID"
+    },
+    "jobProfile": {
+      "$ref": "#/$defs/ResourceReference",
+      "description": "The job profile associated with this position"
+    },
+    "supervisoryOrganization": {
+      "$ref": "#/$defs/ResourceReference",
+      "description": "The supervisory organization this position belongs to"
+    },
+    "location": {
+      "$ref": "#/$defs/ResourceReference",
+      "description": "The work location of the position"
+    },
+    "isFilled": {
+      "type": "boolean",
+      "description": "Whether the position is currently filled by a worker"
+    },
+    "worker": {
+      "$ref": "#/$defs/ResourceReference",
+      "description": "The worker currently filling this position"
+    },
+    "availableDate": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "The date the position becomes available"
+    },
+    "earliestHireDate": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "The earliest date a hire can be made for this position"
+    },
+    "timeType": {
+      "$ref": "#/$defs/ResourceReference",
+      "description": "The time type (Full Time, Part Time) for the position"
+    },
+    "workerType": {
+      "$ref": "#/$defs/ResourceReference",
+      "description": "The worker type (Employee, Contingent Worker) for the position"
+    }
+  },
+  "required": ["id", "descriptor"],
+  "$defs": {
+    "ResourceReference": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "descriptor": {
+          "type": "string"
+        },
+        "href": {
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "required": ["id"]
+    }
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.workday.com/organization",
+  "title": "Organization",
+  "description": "Represents an organizational unit within the Workday system, including supervisory organizations, cost centers, companies, and regions.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique Workday identifier for the organization"
+    },
+    "descriptor": {
+      "type": "string",
+      "description": "The display name of the organization"
+    },
+    "organizationType": {
+      "$ref": "#/$defs/ResourceReference",
+      "description": "The type of organization (Supervisory, Cost Center, Company, etc.)"
+    },
+    "organizationCode": {
+      "type": "string",
+      "description": "The unique code for the organization"
+    },
+    "isActive": {
+      "type": "boolean",
+      "description": "Whether the organization is currently active"
+    },
+    "manager": {
+      "$ref": "#/$defs/ResourceReference",
+      "description": "The manager of the organization"
+    },
+    "superior": {
+      "$ref": "#/$defs/ResourceReference",
+      "description": "The parent organization in the hierarchy"
+    },
+    "staffingModel": {
+      "type": "string",
+      "description": "The staffing model used by the organization (Position Management or Job Management)"
+    },
+    "effectiveDate": {
+      "type": "string",
+      "format": "date",
+      "description": "The date the organization configuration became effective"
+    }
+  },
+  "required": ["id", "descriptor"],
+  "$defs": {
+    "ResourceReference": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "descriptor": {
+          "type": "string"
+        },
+        "href": {
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "required": ["id"]
+    }
+  }
+}

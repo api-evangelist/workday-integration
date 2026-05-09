@@ -1,0 +1,249 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Workday Hire-to-Retire Workflow"
+  description: "End-to-end employee lifecycle workflow combining HCM, recruiting, onboarding, benefits, time tracking, compensation, and offboarding capabilities in Workday."
+  tags:
+    - Workday
+    - Integration
+    - HCM
+    - Recruiting
+    - Benefits
+    - Hire-to-Retire
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      WORKDAY_INTEGRATION_ACCESS_TOKEN: WORKDAY_INTEGRATION_ACCESS_TOKEN
+      WORKDAY_TENANT: WORKDAY_TENANT
+
+capability:
+  consumes:
+    - type: http
+      namespace: hcm
+      baseUri: https://wd2-impl-services1.workday.com/ccx/service/{tenant}
+      description: "Workday HCM API"
+      authentication:
+        type: bearer
+        token: "{{WORKDAY_INTEGRATION_ACCESS_TOKEN}}"
+      resources:
+        - name: workers
+          path: /workers
+          operations:
+            - name: list-workers
+              method: GET
+              description: "List workers"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-worker
+              method: GET
+              description: "Get worker details"
+              inputParameters:
+                - name: workerId
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: organizations
+          path: /organizations
+          operations:
+            - name: list-organizations
+              method: GET
+              description: "List organizations"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+    - type: http
+      namespace: recruiting
+      baseUri: https://wd2-impl-services1.workday.com/ccx/service/{tenant}
+      description: "Workday Recruiting API"
+      authentication:
+        type: bearer
+        token: "{{WORKDAY_INTEGRATION_ACCESS_TOKEN}}"
+      resources:
+        - name: job-requisitions
+          path: /jobRequisitions
+          operations:
+            - name: list-job-requisitions
+              method: GET
+              description: "List job requisitions"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: candidates
+          path: /candidates
+          operations:
+            - name: list-candidates
+              method: GET
+              description: "List candidates"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+    - type: http
+      namespace: benefits
+      baseUri: https://wd2-impl-services1.workday.com/ccx/service/{tenant}
+      description: "Workday Benefits API"
+      authentication:
+        type: bearer
+        token: "{{WORKDAY_INTEGRATION_ACCESS_TOKEN}}"
+      resources:
+        - name: benefit-plans
+          path: /benefitPlans
+          operations:
+            - name: list-benefit-plans
+              method: GET
+              description: "List benefit plans"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: benefit-enrollments
+          path: /benefitEnrollments
+          operations:
+            - name: list-benefit-enrollments
+              method: GET
+              description: "List benefit enrollments"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+    - type: http
+      namespace: compensation
+      baseUri: https://wd2-impl-services1.workday.com/ccx/service/{tenant}
+      description: "Workday Compensation API"
+      authentication:
+        type: bearer
+        token: "{{WORKDAY_INTEGRATION_ACCESS_TOKEN}}"
+      resources:
+        - name: compensation-plans
+          path: /compensationPlans
+          operations:
+            - name: list-compensation-plans
+              method: GET
+              description: "List compensation plans"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: hire-to-retire-rest-api
+      resources:
+        - path: /v1/workers
+          name: workers
+          operations:
+            - method: GET
+              name: list-workers
+              call: "hcm.list-workers"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/job-requisitions
+          name: job-requisitions
+          operations:
+            - method: GET
+              name: list-job-requisitions
+              call: "recruiting.list-job-requisitions"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: hire-to-retire-mcp
+      transport: http
+      tools:
+        - name: list-workers
+          description: "List all Workday workers"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "hcm.list-workers"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-worker
+          description: "Get details for a specific worker"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "hcm.get-worker"
+          with:
+            workerId: "tools.workerId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-organizations
+          description: "List organizational units"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "hcm.list-organizations"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-job-requisitions
+          description: "List open job requisitions"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "recruiting.list-job-requisitions"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-candidates
+          description: "List recruiting candidates"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "recruiting.list-candidates"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-benefit-plans
+          description: "List available employee benefit plans"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "benefits.list-benefit-plans"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-benefit-enrollments
+          description: "List employee benefit enrollments"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "benefits.list-benefit-enrollments"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-compensation-plans
+          description: "List compensation plans"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "compensation.list-compensation-plans"
+          outputParameters:
+            - type: object
+              mapping: "$."

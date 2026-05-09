@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.workday.com/payrollInput",
+  "title": "Payroll Input",
+  "description": "Represents a payroll input entry in the Workday Payroll system, used for additional pay components, deductions, or adjustments to be processed in a payroll run.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique Workday identifier for the payroll input"
+    },
+    "descriptor": {
+      "type": "string",
+      "description": "The display name of the payroll input"
+    },
+    "worker": {
+      "$ref": "#/$defs/ResourceReference",
+      "description": "The worker this payroll input applies to"
+    },
+    "payComponent": {
+      "$ref": "#/$defs/ResourceReference",
+      "description": "The pay component (earnings, deduction, or contribution type)"
+    },
+    "amount": {
+      "type": "number",
+      "description": "The monetary amount for the payroll input"
+    },
+    "currency": {
+      "$ref": "#/$defs/ResourceReference",
+      "description": "The currency of the amount"
+    },
+    "startDate": {
+      "type": "string",
+      "format": "date",
+      "description": "The start date for the payroll input"
+    },
+    "endDate": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "The end date for the payroll input"
+    },
+    "payGroup": {
+      "$ref": "#/$defs/ResourceReference",
+      "description": "The pay group for processing"
+    },
+    "position": {
+      "$ref": "#/$defs/ResourceReference",
+      "description": "The position associated with the payroll input"
+    },
+    "worktags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ResourceReference"
+      },
+      "description": "Worktags for financial categorization"
+    }
+  },
+  "required": ["id", "worker", "payComponent"],
+  "$defs": {
+    "ResourceReference": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "descriptor": {
+          "type": "string"
+        },
+        "href": {
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "required": ["id"]
+    }
+  }
+}

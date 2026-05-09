@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.workday.com/student",
+  "title": "Student",
+  "description": "Represents a student record within the Workday Student system, including enrollment, academic program, and demographic information.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique Workday identifier for the student"
+    },
+    "descriptor": {
+      "type": "string",
+      "description": "The display name of the student"
+    },
+    "studentID": {
+      "type": "string",
+      "description": "The student identification number"
+    },
+    "academicProgram": {
+      "$ref": "#/$defs/ResourceReference",
+      "description": "The academic program the student is enrolled in"
+    },
+    "academicLevel": {
+      "$ref": "#/$defs/ResourceReference",
+      "description": "The academic level (Undergraduate, Graduate, etc.)"
+    },
+    "enrollmentStatus": {
+      "type": "string",
+      "description": "The current enrollment status"
+    },
+    "admissionDate": {
+      "type": "string",
+      "format": "date",
+      "description": "The date the student was admitted"
+    },
+    "expectedGraduationDate": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "The expected graduation date"
+    },
+    "gpa": {
+      "type": "number",
+      "description": "The cumulative grade point average"
+    },
+    "totalCreditsEarned": {
+      "type": "number",
+      "description": "The total academic credits earned"
+    }
+  },
+  "required": ["id", "descriptor"],
+  "$defs": {
+    "ResourceReference": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "descriptor": {
+          "type": "string"
+        },
+        "href": {
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "required": ["id"]
+    }
+  }
+}

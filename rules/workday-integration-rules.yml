@@ -1,0 +1,109 @@
+extends: spectral:oas
+rules:
+
+  workday-integration-operation-id-required:
+    description: All operations must have an operationId.
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: operationId
+      function: truthy
+
+  workday-integration-summary-required:
+    description: All operations must have a summary.
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: summary
+      function: truthy
+
+  workday-integration-summary-title-case:
+    description: Operation summaries must use Title Case.
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete].summary"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z]"
+
+  workday-integration-tags-required:
+    description: All operations must have at least one tag.
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: tags
+      function: truthy
+
+  workday-integration-description-required:
+    description: All operations must have a description.
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: description
+      function: truthy
+
+  workday-integration-bearer-auth:
+    description: Bearer authentication must be defined.
+    severity: error
+    given: "$.components.securitySchemes"
+    then:
+      function: truthy
+
+  workday-integration-tenant-in-url:
+    description: Server URLs must include tenant variable for multi-tenancy.
+    severity: warn
+    given: "$.servers[*].url"
+    then:
+      function: pattern
+      functionOptions:
+        match: "\\{tenant\\}"
+
+  workday-integration-pagination-support:
+    description: Collection GET endpoints should support limit parameter.
+    severity: warn
+    given: "$.paths[*].get.parameters[*][?(@.name == 'limit')]"
+    then:
+      field: schema.type
+      function: pattern
+      functionOptions:
+        match: "integer"
+
+  workday-integration-response-schema:
+    description: Success responses must define a content schema.
+    severity: warn
+    given: "$.paths[*][get,post].responses['200','201'].content.application/json.schema"
+    then:
+      function: truthy
+
+  workday-integration-path-kebab-case:
+    description: Path segments must use kebab-case or camelCase for Workday conventions.
+    severity: hint
+    given: "$.paths[*]~"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^(/[a-zA-Z0-9{}-]+)+$"
+
+  workday-integration-info-contact:
+    description: API info must include contact details.
+    severity: warn
+    given: "$.info"
+    then:
+      field: contact
+      function: truthy
+
+  workday-integration-external-docs:
+    description: API info should include external documentation link.
+    severity: hint
+    given: "$"
+    then:
+      field: externalDocs
+      function: truthy
+
+  workday-integration-date-format:
+    description: Date fields should specify date or date-time format.
+    severity: warn
+    given: "$.components.schemas[*].properties[?(@property.match(/[Dd]ate$|[Oo]n$|[Aa]t$/))]"
+    then:
+      field: format
+      function: truthy

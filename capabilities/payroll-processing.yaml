@@ -1,0 +1,182 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Workday Payroll Processing Workflow"
+  description: "End-to-end payroll processing workflow combining payroll calculations, time tracking, absence management, compensation, and tax management across US, Australia, Canada, France, and UK payroll modules."
+  tags:
+    - Workday
+    - Integration
+    - Payroll
+    - Time Tracking
+    - Compensation
+    - Tax
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      WORKDAY_INTEGRATION_ACCESS_TOKEN: WORKDAY_INTEGRATION_ACCESS_TOKEN
+      WORKDAY_TENANT: WORKDAY_TENANT
+
+capability:
+  consumes:
+    - type: http
+      namespace: payroll
+      baseUri: https://wd2-impl-services1.workday.com/ccx/service/{tenant}
+      description: "Workday Payroll API"
+      authentication:
+        type: bearer
+        token: "{{WORKDAY_INTEGRATION_ACCESS_TOKEN}}"
+      resources:
+        - name: pay-groups
+          path: /payGroups
+          operations:
+            - name: list-pay-groups
+              method: GET
+              description: "List pay groups"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: payroll-results
+          path: /payrollResults
+          operations:
+            - name: list-payroll-results
+              method: GET
+              description: "List payroll results"
+              inputParameters:
+                - name: period
+                  in: query
+                  type: string
+                  required: false
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: pay-components
+          path: /payComponents
+          operations:
+            - name: list-pay-components
+              method: GET
+              description: "List pay components"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+    - type: http
+      namespace: time-tracking
+      baseUri: https://wd2-impl-services1.workday.com/ccx/service/{tenant}
+      description: "Workday Time Tracking API"
+      authentication:
+        type: bearer
+        token: "{{WORKDAY_INTEGRATION_ACCESS_TOKEN}}"
+      resources:
+        - name: time-entries
+          path: /timeEntries
+          operations:
+            - name: list-time-entries
+              method: GET
+              description: "List time entries"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+    - type: http
+      namespace: absence
+      baseUri: https://wd2-impl-services1.workday.com/ccx/service/{tenant}
+      description: "Workday Absence Management API"
+      authentication:
+        type: bearer
+        token: "{{WORKDAY_INTEGRATION_ACCESS_TOKEN}}"
+      resources:
+        - name: leave-requests
+          path: /leaveRequests
+          operations:
+            - name: list-leave-requests
+              method: GET
+              description: "List leave requests"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8082
+      namespace: payroll-processing-rest-api
+      resources:
+        - path: /v1/pay-groups
+          name: pay-groups
+          operations:
+            - method: GET
+              name: list-pay-groups
+              call: "payroll.list-pay-groups"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/payroll-results
+          name: payroll-results
+          operations:
+            - method: GET
+              name: list-payroll-results
+              call: "payroll.list-payroll-results"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9092
+      namespace: payroll-processing-mcp
+      transport: http
+      tools:
+        - name: list-pay-groups
+          description: "List payroll pay groups"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "payroll.list-pay-groups"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-payroll-results
+          description: "List payroll calculation results"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "payroll.list-payroll-results"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-pay-components
+          description: "List pay components"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "payroll.list-pay-components"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-time-entries
+          description: "List worker time entries for payroll processing"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "time-tracking.list-time-entries"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-leave-requests
+          description: "List employee leave requests affecting payroll"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "absence.list-leave-requests"
+          outputParameters:
+            - type: object
+              mapping: "$."

@@ -1,0 +1,42 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Workday Integration
+providerId: workday-integration
+created: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
+tags:
+  - Enterprise
+  - ERP
+  - Integration
+  - iPaaS
+description: Workday Integration (Workday Integration Cloud, Workday Studio, Cloud Connect, EIBs) is licensed as part of an enterprise Workday tenant subscription. Workday does not publish Integration Cloud pricing on its public site; access is bundled with or added to the parent subscription via Workday sales.
+sources:
+  - https://www.workday.com/en-us/enterprise-resource-planning.html
+notes: No public price list or per-integration rate. Scaffold Free / Pro / Enterprise tiers have been collapsed.
+plans:
+  - id: workday-integration-contact-sales
+    name: Contact Sales
+    type: enterprise
+    description: Workday Integration Cloud, Workday Studio runtime, Cloud Connect packaged integrations, and EIB usage are licensed under the Workday tenant subscription. Pricing is negotiated with Workday sales as part of the master agreement.
+    entries:
+      - label: Integration Cloud Subscription
+        name: integration_cloud_subscription
+        type: subscription
+        metric: varies
+        limit: -1
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: contact sales
+        userMultiplied: false
+    elements:
+      - name: Workday Integration Cloud
+      - name: Workday Studio Runtime
+      - name: Cloud Connect Packaged Integrations
+      - name: Enterprise Interface Builder (EIB)
+      - name: Bundled with Workday Tenant
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

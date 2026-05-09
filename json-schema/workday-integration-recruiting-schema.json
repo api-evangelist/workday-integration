@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.workday.com/jobPosting",
+  "title": "Job Posting",
+  "description": "Represents a job posting within the Workday Recruiting system, including the position details, requirements, and posting status.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique Workday identifier for the job posting"
+    },
+    "descriptor": {
+      "type": "string",
+      "description": "The display name of the job posting"
+    },
+    "title": {
+      "type": "string",
+      "description": "The title of the job posting"
+    },
+    "postingDate": {
+      "type": "string",
+      "format": "date",
+      "description": "The date the job was posted"
+    },
+    "closingDate": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "The date the posting closes"
+    },
+    "status": {
+      "type": "string",
+      "description": "The current status of the job posting"
+    },
+    "location": {
+      "$ref": "#/$defs/ResourceReference",
+      "description": "The location of the job"
+    },
+    "jobRequisition": {
+      "$ref": "#/$defs/ResourceReference",
+      "description": "The associated job requisition"
+    },
+    "jobProfile": {
+      "$ref": "#/$defs/ResourceReference",
+      "description": "The job profile for this posting"
+    },
+    "hiringManager": {
+      "$ref": "#/$defs/ResourceReference",
+      "description": "The hiring manager for this position"
+    },
+    "jobDescription": {
+      "type": "string",
+      "description": "The full job description"
+    },
+    "isInternal": {
+      "type": "boolean",
+      "description": "Whether this is an internal-only posting"
+    }
+  },
+  "required": ["id", "title"],
+  "$defs": {
+    "ResourceReference": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "descriptor": {
+          "type": "string"
+        },
+        "href": {
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "required": ["id"]
+    }
+  }
+}
