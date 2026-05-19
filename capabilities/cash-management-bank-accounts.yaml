@@ -1,0 +1,103 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Integration Workday Cash Management API — Bank Accounts
+  description: 'Workday Integration Workday Cash Management API — Bank Accounts. 2 operations. Lead operation: Workday Integration
+    Retrieve bank accounts. Self-contained Naftiko capability covering one Workday Integration business surface.'
+  tags:
+  - Workday Integration
+  - Bank Accounts
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_INTEGRATION_API_KEY: WORKDAY_INTEGRATION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cash-management-bank-accounts
+    baseUri: https://{baseUrl}/ccx/api/cashManagement/v1/{tenant}
+    description: Workday Integration Workday Cash Management API — Bank Accounts business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: bankAccounts
+      path: /bankAccounts
+      operations:
+      - name: getbankaccounts
+        method: GET
+        description: Workday Integration Retrieve bank accounts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: bankAccounts-ID
+      path: /bankAccounts/{ID}
+      operations:
+      - name: getbankaccountbyid
+        method: GET
+        description: Workday Integration Retrieve a specific bank account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_INTEGRATION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: cash-management-bank-accounts-rest
+    port: 8080
+    description: REST adapter for Workday Integration Workday Cash Management API — Bank Accounts. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/bankaccounts
+      name: bankaccounts
+      description: REST surface for bankAccounts.
+      operations:
+      - method: GET
+        name: getbankaccounts
+        description: Workday Integration Retrieve bank accounts
+        call: cash-management-bank-accounts.getbankaccounts
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/bankaccounts/{id}
+      name: bankaccounts-id
+      description: REST surface for bankAccounts-ID.
+      operations:
+      - method: GET
+        name: getbankaccountbyid
+        description: Workday Integration Retrieve a specific bank account
+        call: cash-management-bank-accounts.getbankaccountbyid
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cash-management-bank-accounts-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Integration Workday Cash Management API — Bank Accounts. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: workday-integration-retrieve-bank-accounts
+      description: Workday Integration Retrieve bank accounts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cash-management-bank-accounts.getbankaccounts
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-integration-retrieve-specific-bank
+      description: Workday Integration Retrieve a specific bank account
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cash-management-bank-accounts.getbankaccountbyid
+      outputParameters:
+      - type: object
+        mapping: $.

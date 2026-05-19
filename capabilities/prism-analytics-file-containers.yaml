@@ -1,0 +1,113 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Integration Workday Prism Analytics API — File Containers
+  description: 'Workday Integration Workday Prism Analytics API — File Containers. 2 operations. Lead operation: Workday Integration
+    Create a file container for data upload. Self-contained Naftiko capability covering one Workday Integration business surface.'
+  tags:
+  - Workday Integration
+  - File Containers
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_INTEGRATION_API_KEY: WORKDAY_INTEGRATION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: prism-analytics-file-containers
+    baseUri: https://{baseUrl}/ccx/api/prismAnalytics/v3/{tenant}
+    description: Workday Integration Workday Prism Analytics API — File Containers business capability. Self-contained, no
+      shared references.
+    resources:
+    - name: fileContainers
+      path: /fileContainers
+      operations:
+      - name: createfilecontainer
+        method: POST
+        description: Workday Integration Create a file container for data upload
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: fileContainers-ID
+      path: /fileContainers/{ID}
+      operations:
+      - name: getfilecontainerbyid
+        method: GET
+        description: Workday Integration Retrieve a specific file container
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_INTEGRATION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: prism-analytics-file-containers-rest
+    port: 8080
+    description: REST adapter for Workday Integration Workday Prism Analytics API — File Containers. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/filecontainers
+      name: filecontainers
+      description: REST surface for fileContainers.
+      operations:
+      - method: POST
+        name: createfilecontainer
+        description: Workday Integration Create a file container for data upload
+        call: prism-analytics-file-containers.createfilecontainer
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/filecontainers/{id}
+      name: filecontainers-id
+      description: REST surface for fileContainers-ID.
+      operations:
+      - method: GET
+        name: getfilecontainerbyid
+        description: Workday Integration Retrieve a specific file container
+        call: prism-analytics-file-containers.getfilecontainerbyid
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: prism-analytics-file-containers-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Integration Workday Prism Analytics API — File Containers. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: workday-integration-create-file-container
+      description: Workday Integration Create a file container for data upload
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: prism-analytics-file-containers.createfilecontainer
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-integration-retrieve-specific-file
+      description: Workday Integration Retrieve a specific file container
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: prism-analytics-file-containers.getfilecontainerbyid
+      outputParameters:
+      - type: object
+        mapping: $.

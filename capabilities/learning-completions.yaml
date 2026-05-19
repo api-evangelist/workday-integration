@@ -1,0 +1,71 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Integration Workday Learning API — Completions
+  description: 'Workday Integration Workday Learning API — Completions. 1 operations. Lead operation: Workday Integration
+    Retrieve learning completions for a worker. Self-contained Naftiko capability covering one Workday Integration business
+    surface.'
+  tags:
+  - Workday Integration
+  - Completions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_INTEGRATION_API_KEY: WORKDAY_INTEGRATION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: learning-completions
+    baseUri: https://{baseUrl}/ccx/api/learning/v1/{tenant}
+    description: Workday Integration Workday Learning API — Completions business capability. Self-contained, no shared references.
+    resources:
+    - name: workers-ID-learningCompletions
+      path: /workers/{ID}/learningCompletions
+      operations:
+      - name: getworkerlearningcompletions
+        method: GET
+        description: Workday Integration Retrieve learning completions for a worker
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_INTEGRATION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: learning-completions-rest
+    port: 8080
+    description: REST adapter for Workday Integration Workday Learning API — Completions. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/workers/{id}/learningcompletions
+      name: workers-id-learningcompletions
+      description: REST surface for workers-ID-learningCompletions.
+      operations:
+      - method: GET
+        name: getworkerlearningcompletions
+        description: Workday Integration Retrieve learning completions for a worker
+        call: learning-completions.getworkerlearningcompletions
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: learning-completions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Integration Workday Learning API — Completions. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: workday-integration-retrieve-learning-completions
+      description: Workday Integration Retrieve learning completions for a worker
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: learning-completions.getworkerlearningcompletions
+      outputParameters:
+      - type: object
+        mapping: $.

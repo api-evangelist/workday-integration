@@ -1,0 +1,103 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Integration Workday Revenue Management API — Contracts
+  description: 'Workday Integration Workday Revenue Management API — Contracts. 2 operations. Lead operation: Workday Integration
+    Retrieve revenue contracts. Self-contained Naftiko capability covering one Workday Integration business surface.'
+  tags:
+  - Workday Integration
+  - Contracts
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_INTEGRATION_API_KEY: WORKDAY_INTEGRATION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: revenue-management-contracts
+    baseUri: https://{baseUrl}/ccx/api/revenueManagement/v1/{tenant}
+    description: Workday Integration Workday Revenue Management API — Contracts business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: contracts
+      path: /contracts
+      operations:
+      - name: getcontracts
+        method: GET
+        description: Workday Integration Retrieve revenue contracts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: contracts-ID
+      path: /contracts/{ID}
+      operations:
+      - name: getcontractbyid
+        method: GET
+        description: Workday Integration Retrieve a specific revenue contract
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_INTEGRATION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: revenue-management-contracts-rest
+    port: 8080
+    description: REST adapter for Workday Integration Workday Revenue Management API — Contracts. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/contracts
+      name: contracts
+      description: REST surface for contracts.
+      operations:
+      - method: GET
+        name: getcontracts
+        description: Workday Integration Retrieve revenue contracts
+        call: revenue-management-contracts.getcontracts
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/contracts/{id}
+      name: contracts-id
+      description: REST surface for contracts-ID.
+      operations:
+      - method: GET
+        name: getcontractbyid
+        description: Workday Integration Retrieve a specific revenue contract
+        call: revenue-management-contracts.getcontractbyid
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: revenue-management-contracts-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Integration Workday Revenue Management API — Contracts. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: workday-integration-retrieve-revenue-contracts
+      description: Workday Integration Retrieve revenue contracts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: revenue-management-contracts.getcontracts
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-integration-retrieve-specific-revenue
+      description: Workday Integration Retrieve a specific revenue contract
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: revenue-management-contracts.getcontractbyid
+      outputParameters:
+      - type: object
+        mapping: $.

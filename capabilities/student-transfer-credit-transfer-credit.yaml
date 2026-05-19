@@ -1,0 +1,104 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Integration Workday Student Transfer Credit API — Transfer Credit
+  description: 'Workday Integration Workday Student Transfer Credit API — Transfer Credit. 2 operations. Lead operation: Workday
+    Integration Retrieve a collection of transferCredits. Self-contained Naftiko capability covering one Workday Integration
+    business surface.'
+  tags:
+  - Workday Integration
+  - Transfer Credit
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_INTEGRATION_API_KEY: WORKDAY_INTEGRATION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: student-transfer-credit-transfer-credit
+    baseUri: https://{baseUrl}/ccx/api/studentTransferCredit/v1/{tenant}
+    description: Workday Integration Workday Student Transfer Credit API — Transfer Credit business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: transferCredits
+      path: /transferCredits
+      operations:
+      - name: gettransfercredits
+        method: GET
+        description: Workday Integration Retrieve a collection of transferCredits
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: transferCredits-ID
+      path: /transferCredits/{ID}
+      operations:
+      - name: gettransfercreditbyid
+        method: GET
+        description: Workday Integration Retrieve a specific TransferCredit
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_INTEGRATION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: student-transfer-credit-transfer-credit-rest
+    port: 8080
+    description: REST adapter for Workday Integration Workday Student Transfer Credit API — Transfer Credit. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/transfercredits
+      name: transfercredits
+      description: REST surface for transferCredits.
+      operations:
+      - method: GET
+        name: gettransfercredits
+        description: Workday Integration Retrieve a collection of transferCredits
+        call: student-transfer-credit-transfer-credit.gettransfercredits
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/transfercredits/{id}
+      name: transfercredits-id
+      description: REST surface for transferCredits-ID.
+      operations:
+      - method: GET
+        name: gettransfercreditbyid
+        description: Workday Integration Retrieve a specific TransferCredit
+        call: student-transfer-credit-transfer-credit.gettransfercreditbyid
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: student-transfer-credit-transfer-credit-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Integration Workday Student Transfer Credit API — Transfer Credit. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: workday-integration-retrieve-collection-transfercredits
+      description: Workday Integration Retrieve a collection of transferCredits
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: student-transfer-credit-transfer-credit.gettransfercredits
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-integration-retrieve-specific-transfercredit
+      description: Workday Integration Retrieve a specific TransferCredit
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: student-transfer-credit-transfer-credit.gettransfercreditbyid
+      outputParameters:
+      - type: object
+        mapping: $.

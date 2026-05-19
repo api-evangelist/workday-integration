@@ -1,0 +1,138 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Integration Workday Prism Analytics API — Data Change Tasks
+  description: 'Workday Integration Workday Prism Analytics API — Data Change Tasks. 3 operations. Lead operation: Workday
+    Integration Retrieve data change tasks. Self-contained Naftiko capability covering one Workday Integration business surface.'
+  tags:
+  - Workday Integration
+  - Data Change Tasks
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_INTEGRATION_API_KEY: WORKDAY_INTEGRATION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: prism-analytics-data-change-tasks
+    baseUri: https://{baseUrl}/ccx/api/prismAnalytics/v3/{tenant}
+    description: Workday Integration Workday Prism Analytics API — Data Change Tasks business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: dataChangeTasks
+      path: /dataChangeTasks
+      operations:
+      - name: getdatachangetasks
+        method: GET
+        description: Workday Integration Retrieve data change tasks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createdatachangetask
+        method: POST
+        description: Workday Integration Create a data change task
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: dataChangeTasks-ID
+      path: /dataChangeTasks/{ID}
+      operations:
+      - name: getdatachangetaskbyid
+        method: GET
+        description: Workday Integration Retrieve a specific data change task
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_INTEGRATION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: prism-analytics-data-change-tasks-rest
+    port: 8080
+    description: REST adapter for Workday Integration Workday Prism Analytics API — Data Change Tasks. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/datachangetasks
+      name: datachangetasks
+      description: REST surface for dataChangeTasks.
+      operations:
+      - method: GET
+        name: getdatachangetasks
+        description: Workday Integration Retrieve data change tasks
+        call: prism-analytics-data-change-tasks.getdatachangetasks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createdatachangetask
+        description: Workday Integration Create a data change task
+        call: prism-analytics-data-change-tasks.createdatachangetask
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/datachangetasks/{id}
+      name: datachangetasks-id
+      description: REST surface for dataChangeTasks-ID.
+      operations:
+      - method: GET
+        name: getdatachangetaskbyid
+        description: Workday Integration Retrieve a specific data change task
+        call: prism-analytics-data-change-tasks.getdatachangetaskbyid
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: prism-analytics-data-change-tasks-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Integration Workday Prism Analytics API — Data Change Tasks. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: workday-integration-retrieve-data-change
+      description: Workday Integration Retrieve data change tasks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: prism-analytics-data-change-tasks.getdatachangetasks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-integration-create-data-change
+      description: Workday Integration Create a data change task
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: prism-analytics-data-change-tasks.createdatachangetask
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-integration-retrieve-specific-data
+      description: Workday Integration Retrieve a specific data change task
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: prism-analytics-data-change-tasks.getdatachangetaskbyid
+      outputParameters:
+      - type: object
+        mapping: $.

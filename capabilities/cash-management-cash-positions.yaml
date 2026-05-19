@@ -1,0 +1,71 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Integration Workday Cash Management API — Cash Positions
+  description: 'Workday Integration Workday Cash Management API — Cash Positions. 1 operations. Lead operation: Workday Integration
+    Retrieve cash positions. Self-contained Naftiko capability covering one Workday Integration business surface.'
+  tags:
+  - Workday Integration
+  - Cash Positions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_INTEGRATION_API_KEY: WORKDAY_INTEGRATION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cash-management-cash-positions
+    baseUri: https://{baseUrl}/ccx/api/cashManagement/v1/{tenant}
+    description: Workday Integration Workday Cash Management API — Cash Positions business capability. Self-contained, no
+      shared references.
+    resources:
+    - name: cashPositions
+      path: /cashPositions
+      operations:
+      - name: getcashpositions
+        method: GET
+        description: Workday Integration Retrieve cash positions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_INTEGRATION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: cash-management-cash-positions-rest
+    port: 8080
+    description: REST adapter for Workday Integration Workday Cash Management API — Cash Positions. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/cashpositions
+      name: cashpositions
+      description: REST surface for cashPositions.
+      operations:
+      - method: GET
+        name: getcashpositions
+        description: Workday Integration Retrieve cash positions
+        call: cash-management-cash-positions.getcashpositions
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cash-management-cash-positions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Integration Workday Cash Management API — Cash Positions. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: workday-integration-retrieve-cash-positions
+      description: Workday Integration Retrieve cash positions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cash-management-cash-positions.getcashpositions
+      outputParameters:
+      - type: object
+        mapping: $.

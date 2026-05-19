@@ -1,0 +1,197 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Integration Workday Payroll API — Payroll Inputs
+  description: 'Workday Integration Workday Payroll API — Payroll Inputs. 5 operations. Lead operation: Workday Integration
+    Retrieve payroll inputs. Self-contained Naftiko capability covering one Workday Integration business surface.'
+  tags:
+  - Workday Integration
+  - Payroll Inputs
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_INTEGRATION_API_KEY: WORKDAY_INTEGRATION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: payroll-payroll-inputs
+    baseUri: https://{baseUrl}/ccx/api/payroll/v2/{tenant}
+    description: Workday Integration Workday Payroll API — Payroll Inputs business capability. Self-contained, no shared references.
+    resources:
+    - name: payrollInputs
+      path: /payrollInputs
+      operations:
+      - name: getpayrollinputs
+        method: GET
+        description: Workday Integration Retrieve payroll inputs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createpayrollinput
+        method: POST
+        description: Workday Integration Create a payroll input
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: payrollInputs-ID
+      path: /payrollInputs/{ID}
+      operations:
+      - name: getpayrollinputbyid
+        method: GET
+        description: Workday Integration Retrieve a specific payroll input
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatepayrollinput
+        method: PATCH
+        description: Workday Integration Update a payroll input
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletepayrollinput
+        method: DELETE
+        description: Workday Integration Delete a payroll input
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_INTEGRATION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: payroll-payroll-inputs-rest
+    port: 8080
+    description: REST adapter for Workday Integration Workday Payroll API — Payroll Inputs. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/payrollinputs
+      name: payrollinputs
+      description: REST surface for payrollInputs.
+      operations:
+      - method: GET
+        name: getpayrollinputs
+        description: Workday Integration Retrieve payroll inputs
+        call: payroll-payroll-inputs.getpayrollinputs
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createpayrollinput
+        description: Workday Integration Create a payroll input
+        call: payroll-payroll-inputs.createpayrollinput
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/payrollinputs/{id}
+      name: payrollinputs-id
+      description: REST surface for payrollInputs-ID.
+      operations:
+      - method: GET
+        name: getpayrollinputbyid
+        description: Workday Integration Retrieve a specific payroll input
+        call: payroll-payroll-inputs.getpayrollinputbyid
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updatepayrollinput
+        description: Workday Integration Update a payroll input
+        call: payroll-payroll-inputs.updatepayrollinput
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletepayrollinput
+        description: Workday Integration Delete a payroll input
+        call: payroll-payroll-inputs.deletepayrollinput
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: payroll-payroll-inputs-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Integration Workday Payroll API — Payroll Inputs. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: workday-integration-retrieve-payroll-inputs
+      description: Workday Integration Retrieve payroll inputs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: payroll-payroll-inputs.getpayrollinputs
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-integration-create-payroll-input
+      description: Workday Integration Create a payroll input
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: payroll-payroll-inputs.createpayrollinput
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-integration-retrieve-specific-payroll
+      description: Workday Integration Retrieve a specific payroll input
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: payroll-payroll-inputs.getpayrollinputbyid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-integration-update-payroll-input
+      description: Workday Integration Update a payroll input
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: payroll-payroll-inputs.updatepayrollinput
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-integration-delete-payroll-input
+      description: Workday Integration Delete a payroll input
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: payroll-payroll-inputs.deletepayrollinput
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,103 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Integration Workday Financial Aid API — Financial Aid
+  description: 'Workday Integration Workday Financial Aid API — Financial Aid. 2 operations. Lead operation: Workday Integration
+    Retrieve a collection of awards. Self-contained Naftiko capability covering one Workday Integration business surface.'
+  tags:
+  - Workday Integration
+  - Financial Aid
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_INTEGRATION_API_KEY: WORKDAY_INTEGRATION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: financial-aid-financial-aid
+    baseUri: https://{baseUrl}/ccx/api/financialAid/v1/{tenant}
+    description: Workday Integration Workday Financial Aid API — Financial Aid business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: awards
+      path: /awards
+      operations:
+      - name: getawards
+        method: GET
+        description: Workday Integration Retrieve a collection of awards
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: awards-ID
+      path: /awards/{ID}
+      operations:
+      - name: getawardbyid
+        method: GET
+        description: Workday Integration Retrieve a specific Award
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_INTEGRATION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: financial-aid-financial-aid-rest
+    port: 8080
+    description: REST adapter for Workday Integration Workday Financial Aid API — Financial Aid. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/awards
+      name: awards
+      description: REST surface for awards.
+      operations:
+      - method: GET
+        name: getawards
+        description: Workday Integration Retrieve a collection of awards
+        call: financial-aid-financial-aid.getawards
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/awards/{id}
+      name: awards-id
+      description: REST surface for awards-ID.
+      operations:
+      - method: GET
+        name: getawardbyid
+        description: Workday Integration Retrieve a specific Award
+        call: financial-aid-financial-aid.getawardbyid
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: financial-aid-financial-aid-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Integration Workday Financial Aid API — Financial Aid. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: workday-integration-retrieve-collection-awards
+      description: Workday Integration Retrieve a collection of awards
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: financial-aid-financial-aid.getawards
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-integration-retrieve-specific-award
+      description: Workday Integration Retrieve a specific Award
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: financial-aid-financial-aid.getawardbyid
+      outputParameters:
+      - type: object
+        mapping: $.

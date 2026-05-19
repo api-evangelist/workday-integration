@@ -1,0 +1,102 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Integration Workday Org Studio API — Org Studio
+  description: 'Workday Integration Workday Org Studio API — Org Studio. 2 operations. Lead operation: Workday Integration
+    Retrieve a collection of orgDesigns. Self-contained Naftiko capability covering one Workday Integration business surface.'
+  tags:
+  - Workday Integration
+  - Org Studio
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_INTEGRATION_API_KEY: WORKDAY_INTEGRATION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: org-studio-org-studio
+    baseUri: https://{baseUrl}/ccx/api/orgStudio/v1/{tenant}
+    description: Workday Integration Workday Org Studio API — Org Studio business capability. Self-contained, no shared references.
+    resources:
+    - name: orgDesigns
+      path: /orgDesigns
+      operations:
+      - name: getorgdesigns
+        method: GET
+        description: Workday Integration Retrieve a collection of orgDesigns
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: orgDesigns-ID
+      path: /orgDesigns/{ID}
+      operations:
+      - name: getorgdesignbyid
+        method: GET
+        description: Workday Integration Retrieve a specific OrgDesign
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_INTEGRATION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: org-studio-org-studio-rest
+    port: 8080
+    description: REST adapter for Workday Integration Workday Org Studio API — Org Studio. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/orgdesigns
+      name: orgdesigns
+      description: REST surface for orgDesigns.
+      operations:
+      - method: GET
+        name: getorgdesigns
+        description: Workday Integration Retrieve a collection of orgDesigns
+        call: org-studio-org-studio.getorgdesigns
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/orgdesigns/{id}
+      name: orgdesigns-id
+      description: REST surface for orgDesigns-ID.
+      operations:
+      - method: GET
+        name: getorgdesignbyid
+        description: Workday Integration Retrieve a specific OrgDesign
+        call: org-studio-org-studio.getorgdesignbyid
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: org-studio-org-studio-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Integration Workday Org Studio API — Org Studio. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: workday-integration-retrieve-collection-orgdesigns
+      description: Workday Integration Retrieve a collection of orgDesigns
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: org-studio-org-studio.getorgdesigns
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-integration-retrieve-specific-orgdesign
+      description: Workday Integration Retrieve a specific OrgDesign
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: org-studio-org-studio.getorgdesignbyid
+      outputParameters:
+      - type: object
+        mapping: $.

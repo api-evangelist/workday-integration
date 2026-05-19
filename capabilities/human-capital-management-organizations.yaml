@@ -1,0 +1,295 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Integration Workday Human Capital Management API — Organizations
+  description: 'Workday Integration Workday Human Capital Management API — Organizations. 8 operations. Lead operation: Workday
+    Integration Retrieve organization types. Self-contained Naftiko capability covering one Workday Integration business surface.'
+  tags:
+  - Workday Integration
+  - Organizations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_INTEGRATION_API_KEY: WORKDAY_INTEGRATION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: human-capital-management-organizations
+    baseUri: https://{baseUrl}/ccx/api/v1/{tenant}
+    description: Workday Integration Workday Human Capital Management API — Organizations business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: organizationTypes
+      path: /organizationTypes
+      operations:
+      - name: getorganizationtypes
+        method: GET
+        description: Workday Integration Retrieve organization types
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: organizations
+      path: /organizations
+      operations:
+      - name: getorganizations
+        method: GET
+        description: Workday Integration Retrieve all organizations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: organizations-ID
+      path: /organizations/{ID}
+      operations:
+      - name: getorganizationbyid
+        method: GET
+        description: Workday Integration Retrieve a specific organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: supervisoryOrganizations
+      path: /supervisoryOrganizations
+      operations:
+      - name: getsupervisoryorganizations
+        method: GET
+        description: Workday Integration Retrieve all supervisory organizations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: supervisoryOrganizations-ID
+      path: /supervisoryOrganizations/{ID}
+      operations:
+      - name: getsupervisoryorganizationbyid
+        method: GET
+        description: Workday Integration Retrieve a specific supervisory organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: supervisoryOrganizations-ID-workers
+      path: /supervisoryOrganizations/{ID}/workers
+      operations:
+      - name: getsupervisoryorganizationworkers
+        method: GET
+        description: Workday Integration Retrieve workers in a supervisory organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: workers-ID-organizations
+      path: /workers/{ID}/organizations
+      operations:
+      - name: getworkerorganizations
+        method: GET
+        description: Workday Integration Retrieve organizations for a worker
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: workers-ID-supervisoryOrganizations
+      path: /workers/{ID}/supervisoryOrganizations
+      operations:
+      - name: getworkersupervisoryorganizations
+        method: GET
+        description: Workday Integration Retrieve supervisory organizations managed by a worker
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_INTEGRATION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: human-capital-management-organizations-rest
+    port: 8080
+    description: REST adapter for Workday Integration Workday Human Capital Management API — Organizations. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/organizationtypes
+      name: organizationtypes
+      description: REST surface for organizationTypes.
+      operations:
+      - method: GET
+        name: getorganizationtypes
+        description: Workday Integration Retrieve organization types
+        call: human-capital-management-organizations.getorganizationtypes
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations
+      name: organizations
+      description: REST surface for organizations.
+      operations:
+      - method: GET
+        name: getorganizations
+        description: Workday Integration Retrieve all organizations
+        call: human-capital-management-organizations.getorganizations
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{id}
+      name: organizations-id
+      description: REST surface for organizations-ID.
+      operations:
+      - method: GET
+        name: getorganizationbyid
+        description: Workday Integration Retrieve a specific organization
+        call: human-capital-management-organizations.getorganizationbyid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/supervisoryorganizations
+      name: supervisoryorganizations
+      description: REST surface for supervisoryOrganizations.
+      operations:
+      - method: GET
+        name: getsupervisoryorganizations
+        description: Workday Integration Retrieve all supervisory organizations
+        call: human-capital-management-organizations.getsupervisoryorganizations
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/supervisoryorganizations/{id}
+      name: supervisoryorganizations-id
+      description: REST surface for supervisoryOrganizations-ID.
+      operations:
+      - method: GET
+        name: getsupervisoryorganizationbyid
+        description: Workday Integration Retrieve a specific supervisory organization
+        call: human-capital-management-organizations.getsupervisoryorganizationbyid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/supervisoryorganizations/{id}/workers
+      name: supervisoryorganizations-id-workers
+      description: REST surface for supervisoryOrganizations-ID-workers.
+      operations:
+      - method: GET
+        name: getsupervisoryorganizationworkers
+        description: Workday Integration Retrieve workers in a supervisory organization
+        call: human-capital-management-organizations.getsupervisoryorganizationworkers
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workers/{id}/organizations
+      name: workers-id-organizations
+      description: REST surface for workers-ID-organizations.
+      operations:
+      - method: GET
+        name: getworkerorganizations
+        description: Workday Integration Retrieve organizations for a worker
+        call: human-capital-management-organizations.getworkerorganizations
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workers/{id}/supervisoryorganizations
+      name: workers-id-supervisoryorganizations
+      description: REST surface for workers-ID-supervisoryOrganizations.
+      operations:
+      - method: GET
+        name: getworkersupervisoryorganizations
+        description: Workday Integration Retrieve supervisory organizations managed by a worker
+        call: human-capital-management-organizations.getworkersupervisoryorganizations
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: human-capital-management-organizations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Integration Workday Human Capital Management API — Organizations. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: workday-integration-retrieve-organization-types
+      description: Workday Integration Retrieve organization types
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: human-capital-management-organizations.getorganizationtypes
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-integration-retrieve-all-organizations
+      description: Workday Integration Retrieve all organizations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: human-capital-management-organizations.getorganizations
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-integration-retrieve-specific-organization
+      description: Workday Integration Retrieve a specific organization
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: human-capital-management-organizations.getorganizationbyid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-integration-retrieve-all-supervisory
+      description: Workday Integration Retrieve all supervisory organizations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: human-capital-management-organizations.getsupervisoryorganizations
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-integration-retrieve-specific-supervisory
+      description: Workday Integration Retrieve a specific supervisory organization
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: human-capital-management-organizations.getsupervisoryorganizationbyid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-integration-retrieve-workers-supervisory
+      description: Workday Integration Retrieve workers in a supervisory organization
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: human-capital-management-organizations.getsupervisoryorganizationworkers
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-integration-retrieve-organizations-worker
+      description: Workday Integration Retrieve organizations for a worker
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: human-capital-management-organizations.getworkerorganizations
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-integration-retrieve-supervisory-organizations
+      description: Workday Integration Retrieve supervisory organizations managed by a worker
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: human-capital-management-organizations.getworkersupervisoryorganizations
+      outputParameters:
+      - type: object
+        mapping: $.

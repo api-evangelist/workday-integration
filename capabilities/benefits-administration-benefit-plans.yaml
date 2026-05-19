@@ -1,0 +1,72 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Integration Workday Benefits Administration API — Benefit Plans
+  description: 'Workday Integration Workday Benefits Administration API — Benefit Plans. 1 operations. Lead operation: Workday
+    Integration Retrieve benefit plans for a worker. Self-contained Naftiko capability covering one Workday Integration business
+    surface.'
+  tags:
+  - Workday Integration
+  - Benefit Plans
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_INTEGRATION_API_KEY: WORKDAY_INTEGRATION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: benefits-administration-benefit-plans
+    baseUri: https://{baseUrl}/ccx/api/benefits/v1/{tenant}
+    description: Workday Integration Workday Benefits Administration API — Benefit Plans business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: workers-ID-benefitPlans
+      path: /workers/{ID}/benefitPlans
+      operations:
+      - name: getworkerbenefitplans
+        method: GET
+        description: Workday Integration Retrieve benefit plans for a worker
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_INTEGRATION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: benefits-administration-benefit-plans-rest
+    port: 8080
+    description: REST adapter for Workday Integration Workday Benefits Administration API — Benefit Plans. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/workers/{id}/benefitplans
+      name: workers-id-benefitplans
+      description: REST surface for workers-ID-benefitPlans.
+      operations:
+      - method: GET
+        name: getworkerbenefitplans
+        description: Workday Integration Retrieve benefit plans for a worker
+        call: benefits-administration-benefit-plans.getworkerbenefitplans
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: benefits-administration-benefit-plans-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Integration Workday Benefits Administration API — Benefit Plans. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: workday-integration-retrieve-benefit-plans
+      description: Workday Integration Retrieve benefit plans for a worker
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: benefits-administration-benefit-plans.getworkerbenefitplans
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,102 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Integration Workday Recruiting API — Interviews
+  description: 'Workday Integration Workday Recruiting API — Interviews. 2 operations. Lead operation: Workday Integration
+    Retrieve a collection of interviews. Self-contained Naftiko capability covering one Workday Integration business surface.'
+  tags:
+  - Workday Integration
+  - Interviews
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_INTEGRATION_API_KEY: WORKDAY_INTEGRATION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: recruiting-interviews
+    baseUri: https://{baseUrl}/ccx/api/recruiting/v1/{tenant}
+    description: Workday Integration Workday Recruiting API — Interviews business capability. Self-contained, no shared references.
+    resources:
+    - name: interviews
+      path: /interviews
+      operations:
+      - name: getinterviews
+        method: GET
+        description: Workday Integration Retrieve a collection of interviews
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: interviews-ID-feedback
+      path: /interviews/{ID}/feedback
+      operations:
+      - name: getinterviewfeedback
+        method: GET
+        description: Workday Integration Retrieve feedback for an interview
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_INTEGRATION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: recruiting-interviews-rest
+    port: 8080
+    description: REST adapter for Workday Integration Workday Recruiting API — Interviews. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/interviews
+      name: interviews
+      description: REST surface for interviews.
+      operations:
+      - method: GET
+        name: getinterviews
+        description: Workday Integration Retrieve a collection of interviews
+        call: recruiting-interviews.getinterviews
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/interviews/{id}/feedback
+      name: interviews-id-feedback
+      description: REST surface for interviews-ID-feedback.
+      operations:
+      - method: GET
+        name: getinterviewfeedback
+        description: Workday Integration Retrieve feedback for an interview
+        call: recruiting-interviews.getinterviewfeedback
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: recruiting-interviews-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Integration Workday Recruiting API — Interviews. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: workday-integration-retrieve-collection-interviews
+      description: Workday Integration Retrieve a collection of interviews
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: recruiting-interviews.getinterviews
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-integration-retrieve-feedback-interview
+      description: Workday Integration Retrieve feedback for an interview
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: recruiting-interviews.getinterviewfeedback
+      outputParameters:
+      - type: object
+        mapping: $.

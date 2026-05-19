@@ -1,0 +1,82 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Integration Workday Financial Management API — Worktags
+  description: 'Workday Integration Workday Financial Management API — Worktags. 1 operations. Lead operation: Workday Integration
+    Validate worktags for financial transactions. Self-contained Naftiko capability covering one Workday Integration business
+    surface.'
+  tags:
+  - Workday Integration
+  - Worktags
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_INTEGRATION_API_KEY: WORKDAY_INTEGRATION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: financial-management-worktags
+    baseUri: https://{baseUrl}/ccx/api/v1/{tenant}
+    description: Workday Integration Workday Financial Management API — Worktags business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: validateWorktags
+      path: /validateWorktags
+      operations:
+      - name: validateworktags
+        method: POST
+        description: Workday Integration Validate worktags for financial transactions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_INTEGRATION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: financial-management-worktags-rest
+    port: 8080
+    description: REST adapter for Workday Integration Workday Financial Management API — Worktags. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/validateworktags
+      name: validateworktags
+      description: REST surface for validateWorktags.
+      operations:
+      - method: POST
+        name: validateworktags
+        description: Workday Integration Validate worktags for financial transactions
+        call: financial-management-worktags.validateworktags
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: financial-management-worktags-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Integration Workday Financial Management API — Worktags. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: workday-integration-validate-worktags-financial
+      description: Workday Integration Validate worktags for financial transactions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: financial-management-worktags.validateworktags
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

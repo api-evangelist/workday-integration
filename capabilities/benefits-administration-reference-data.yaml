@@ -1,0 +1,71 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Integration Workday Benefits Administration API — Reference Data
+  description: 'Workday Integration Workday Benefits Administration API — Reference Data. 1 operations. Lead operation: Workday
+    Integration Retrieve benefit plan types. Self-contained Naftiko capability covering one Workday Integration business surface.'
+  tags:
+  - Workday Integration
+  - Reference Data
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_INTEGRATION_API_KEY: WORKDAY_INTEGRATION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: benefits-administration-reference-data
+    baseUri: https://{baseUrl}/ccx/api/benefits/v1/{tenant}
+    description: Workday Integration Workday Benefits Administration API — Reference Data business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: benefitPlanTypes
+      path: /benefitPlanTypes
+      operations:
+      - name: getbenefitplantypes
+        method: GET
+        description: Workday Integration Retrieve benefit plan types
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_INTEGRATION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: benefits-administration-reference-data-rest
+    port: 8080
+    description: REST adapter for Workday Integration Workday Benefits Administration API — Reference Data. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/benefitplantypes
+      name: benefitplantypes
+      description: REST surface for benefitPlanTypes.
+      operations:
+      - method: GET
+        name: getbenefitplantypes
+        description: Workday Integration Retrieve benefit plan types
+        call: benefits-administration-reference-data.getbenefitplantypes
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: benefits-administration-reference-data-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Integration Workday Benefits Administration API — Reference Data. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: workday-integration-retrieve-benefit-plan
+      description: Workday Integration Retrieve benefit plan types
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: benefits-administration-reference-data.getbenefitplantypes
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,104 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Integration Workday Payroll Interface API — Payroll Interface
+  description: 'Workday Integration Workday Payroll Interface API — Payroll Interface. 2 operations. Lead operation: Workday
+    Integration Retrieve a collection of payrollExports. Self-contained Naftiko capability covering one Workday Integration
+    business surface.'
+  tags:
+  - Workday Integration
+  - Payroll Interface
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_INTEGRATION_API_KEY: WORKDAY_INTEGRATION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: payroll-interface-payroll-interface
+    baseUri: https://{baseUrl}/ccx/api/payrollInterface/v1/{tenant}
+    description: Workday Integration Workday Payroll Interface API — Payroll Interface business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: payrollExports
+      path: /payrollExports
+      operations:
+      - name: getpayrollexports
+        method: GET
+        description: Workday Integration Retrieve a collection of payrollExports
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: payrollExports-ID
+      path: /payrollExports/{ID}
+      operations:
+      - name: getpayrollexportbyid
+        method: GET
+        description: Workday Integration Retrieve a specific PayrollExport
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_INTEGRATION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: payroll-interface-payroll-interface-rest
+    port: 8080
+    description: REST adapter for Workday Integration Workday Payroll Interface API — Payroll Interface. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/payrollexports
+      name: payrollexports
+      description: REST surface for payrollExports.
+      operations:
+      - method: GET
+        name: getpayrollexports
+        description: Workday Integration Retrieve a collection of payrollExports
+        call: payroll-interface-payroll-interface.getpayrollexports
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/payrollexports/{id}
+      name: payrollexports-id
+      description: REST surface for payrollExports-ID.
+      operations:
+      - method: GET
+        name: getpayrollexportbyid
+        description: Workday Integration Retrieve a specific PayrollExport
+        call: payroll-interface-payroll-interface.getpayrollexportbyid
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: payroll-interface-payroll-interface-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Integration Workday Payroll Interface API — Payroll Interface. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: workday-integration-retrieve-collection-payrollexports
+      description: Workday Integration Retrieve a collection of payrollExports
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: payroll-interface-payroll-interface.getpayrollexports
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-integration-retrieve-specific-payrollexport
+      description: Workday Integration Retrieve a specific PayrollExport
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: payroll-interface-payroll-interface.getpayrollexportbyid
+      outputParameters:
+      - type: object
+        mapping: $.

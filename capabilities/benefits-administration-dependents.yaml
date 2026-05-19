@@ -1,0 +1,72 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Integration Workday Benefits Administration API — Dependents
+  description: 'Workday Integration Workday Benefits Administration API — Dependents. 1 operations. Lead operation: Workday
+    Integration Retrieve dependents for a worker. Self-contained Naftiko capability covering one Workday Integration business
+    surface.'
+  tags:
+  - Workday Integration
+  - Dependents
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_INTEGRATION_API_KEY: WORKDAY_INTEGRATION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: benefits-administration-dependents
+    baseUri: https://{baseUrl}/ccx/api/benefits/v1/{tenant}
+    description: Workday Integration Workday Benefits Administration API — Dependents business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: workers-ID-dependents
+      path: /workers/{ID}/dependents
+      operations:
+      - name: getworkerdependents
+        method: GET
+        description: Workday Integration Retrieve dependents for a worker
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_INTEGRATION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: benefits-administration-dependents-rest
+    port: 8080
+    description: REST adapter for Workday Integration Workday Benefits Administration API — Dependents. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/workers/{id}/dependents
+      name: workers-id-dependents
+      description: REST surface for workers-ID-dependents.
+      operations:
+      - method: GET
+        name: getworkerdependents
+        description: Workday Integration Retrieve dependents for a worker
+        call: benefits-administration-dependents.getworkerdependents
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: benefits-administration-dependents-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Integration Workday Benefits Administration API — Dependents. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: workday-integration-retrieve-dependents-worker
+      description: Workday Integration Retrieve dependents for a worker
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: benefits-administration-dependents.getworkerdependents
+      outputParameters:
+      - type: object
+        mapping: $.

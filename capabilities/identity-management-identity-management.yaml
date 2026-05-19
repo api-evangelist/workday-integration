@@ -1,0 +1,104 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Integration Workday Identity Management API — Identity Management
+  description: 'Workday Integration Workday Identity Management API — Identity Management. 2 operations. Lead operation: Workday
+    Integration Retrieve a collection of accounts. Self-contained Naftiko capability covering one Workday Integration business
+    surface.'
+  tags:
+  - Workday Integration
+  - Identity Management
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_INTEGRATION_API_KEY: WORKDAY_INTEGRATION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: identity-management-identity-management
+    baseUri: https://{baseUrl}/ccx/api/identityManagement/v1/{tenant}
+    description: Workday Integration Workday Identity Management API — Identity Management business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: accounts
+      path: /accounts
+      operations:
+      - name: getaccounts
+        method: GET
+        description: Workday Integration Retrieve a collection of accounts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: accounts-ID
+      path: /accounts/{ID}
+      operations:
+      - name: getaccountbyid
+        method: GET
+        description: Workday Integration Retrieve a specific Account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_INTEGRATION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: identity-management-identity-management-rest
+    port: 8080
+    description: REST adapter for Workday Integration Workday Identity Management API — Identity Management. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/accounts
+      name: accounts
+      description: REST surface for accounts.
+      operations:
+      - method: GET
+        name: getaccounts
+        description: Workday Integration Retrieve a collection of accounts
+        call: identity-management-identity-management.getaccounts
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/accounts/{id}
+      name: accounts-id
+      description: REST surface for accounts-ID.
+      operations:
+      - method: GET
+        name: getaccountbyid
+        description: Workday Integration Retrieve a specific Account
+        call: identity-management-identity-management.getaccountbyid
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: identity-management-identity-management-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Integration Workday Identity Management API — Identity Management. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: workday-integration-retrieve-collection-accounts
+      description: Workday Integration Retrieve a collection of accounts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: identity-management-identity-management.getaccounts
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-integration-retrieve-specific-account
+      description: Workday Integration Retrieve a specific Account
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: identity-management-identity-management.getaccountbyid
+      outputParameters:
+      - type: object
+        mapping: $.

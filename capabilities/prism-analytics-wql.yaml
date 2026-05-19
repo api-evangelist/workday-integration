@@ -1,0 +1,80 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Integration Workday Prism Analytics API — WQL
+  description: 'Workday Integration Workday Prism Analytics API — WQL. 1 operations. Lead operation: Workday Integration Execute
+    a WQL query. Self-contained Naftiko capability covering one Workday Integration business surface.'
+  tags:
+  - Workday Integration
+  - WQL
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_INTEGRATION_API_KEY: WORKDAY_INTEGRATION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: prism-analytics-wql
+    baseUri: https://{baseUrl}/ccx/api/prismAnalytics/v3/{tenant}
+    description: Workday Integration Workday Prism Analytics API — WQL business capability. Self-contained, no shared references.
+    resources:
+    - name: wql
+      path: /wql
+      operations:
+      - name: executewql
+        method: POST
+        description: Workday Integration Execute a WQL query
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_INTEGRATION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: prism-analytics-wql-rest
+    port: 8080
+    description: REST adapter for Workday Integration Workday Prism Analytics API — WQL. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/wql
+      name: wql
+      description: REST surface for wql.
+      operations:
+      - method: POST
+        name: executewql
+        description: Workday Integration Execute a WQL query
+        call: prism-analytics-wql.executewql
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: prism-analytics-wql-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Integration Workday Prism Analytics API — WQL. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: workday-integration-execute-wql-query
+      description: Workday Integration Execute a WQL query
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: prism-analytics-wql.executewql
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

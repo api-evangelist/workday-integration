@@ -1,0 +1,103 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Integration Workday Notification API — Notifications
+  description: 'Workday Integration Workday Notification API — Notifications. 2 operations. Lead operation: Workday Integration
+    Retrieve a collection of notifications. Self-contained Naftiko capability covering one Workday Integration business surface.'
+  tags:
+  - Workday Integration
+  - Notifications
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_INTEGRATION_API_KEY: WORKDAY_INTEGRATION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: notification-notifications
+    baseUri: https://{baseUrl}/ccx/api/notification/v1/{tenant}
+    description: Workday Integration Workday Notification API — Notifications business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: notifications
+      path: /notifications
+      operations:
+      - name: getnotifications
+        method: GET
+        description: Workday Integration Retrieve a collection of notifications
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: notifications-ID
+      path: /notifications/{ID}
+      operations:
+      - name: getnotificationbyid
+        method: GET
+        description: Workday Integration Retrieve a specific Notification
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_INTEGRATION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: notification-notifications-rest
+    port: 8080
+    description: REST adapter for Workday Integration Workday Notification API — Notifications. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/notifications
+      name: notifications
+      description: REST surface for notifications.
+      operations:
+      - method: GET
+        name: getnotifications
+        description: Workday Integration Retrieve a collection of notifications
+        call: notification-notifications.getnotifications
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/notifications/{id}
+      name: notifications-id
+      description: REST surface for notifications-ID.
+      operations:
+      - method: GET
+        name: getnotificationbyid
+        description: Workday Integration Retrieve a specific Notification
+        call: notification-notifications.getnotificationbyid
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: notification-notifications-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Integration Workday Notification API — Notifications. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: workday-integration-retrieve-collection-notifications
+      description: Workday Integration Retrieve a collection of notifications
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: notification-notifications.getnotifications
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-integration-retrieve-specific-notification
+      description: Workday Integration Retrieve a specific Notification
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: notification-notifications.getnotificationbyid
+      outputParameters:
+      - type: object
+        mapping: $.

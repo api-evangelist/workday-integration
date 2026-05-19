@@ -1,0 +1,102 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Integration Workday Payroll API — Reference Data
+  description: 'Workday Integration Workday Payroll API — Reference Data. 2 operations. Lead operation: Workday Integration
+    Retrieve pay components. Self-contained Naftiko capability covering one Workday Integration business surface.'
+  tags:
+  - Workday Integration
+  - Reference Data
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_INTEGRATION_API_KEY: WORKDAY_INTEGRATION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: payroll-reference-data
+    baseUri: https://{baseUrl}/ccx/api/payroll/v2/{tenant}
+    description: Workday Integration Workday Payroll API — Reference Data business capability. Self-contained, no shared references.
+    resources:
+    - name: values-payrollInputsGroup-payComponents
+      path: /values/payrollInputsGroup/payComponents
+      operations:
+      - name: getpaycomponents
+        method: GET
+        description: Workday Integration Retrieve pay components
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: values-runCategories
+      path: /values/runCategories
+      operations:
+      - name: getruncategories
+        method: GET
+        description: Workday Integration Retrieve run categories
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_INTEGRATION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: payroll-reference-data-rest
+    port: 8080
+    description: REST adapter for Workday Integration Workday Payroll API — Reference Data. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/values/payrollinputsgroup/paycomponents
+      name: values-payrollinputsgroup-paycomponents
+      description: REST surface for values-payrollInputsGroup-payComponents.
+      operations:
+      - method: GET
+        name: getpaycomponents
+        description: Workday Integration Retrieve pay components
+        call: payroll-reference-data.getpaycomponents
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/values/runcategories
+      name: values-runcategories
+      description: REST surface for values-runCategories.
+      operations:
+      - method: GET
+        name: getruncategories
+        description: Workday Integration Retrieve run categories
+        call: payroll-reference-data.getruncategories
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: payroll-reference-data-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Integration Workday Payroll API — Reference Data. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: workday-integration-retrieve-pay-components
+      description: Workday Integration Retrieve pay components
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: payroll-reference-data.getpaycomponents
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-integration-retrieve-run-categories
+      description: Workday Integration Retrieve run categories
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: payroll-reference-data.getruncategories
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,102 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Integration Workday Staffing API — Workers
+  description: 'Workday Integration Workday Staffing API — Workers. 2 operations. Lead operation: Workday Integration Retrieve
+    workers and staffing information. Self-contained Naftiko capability covering one Workday Integration business surface.'
+  tags:
+  - Workday Integration
+  - Workers
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_INTEGRATION_API_KEY: WORKDAY_INTEGRATION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: staffing-workers
+    baseUri: https://{baseUrl}/ccx/api/staffing/v1/{tenant}
+    description: Workday Integration Workday Staffing API — Workers business capability. Self-contained, no shared references.
+    resources:
+    - name: workers
+      path: /workers
+      operations:
+      - name: getworkers
+        method: GET
+        description: Workday Integration Retrieve workers and staffing information
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: workers-ID
+      path: /workers/{ID}
+      operations:
+      - name: getworkerbyid
+        method: GET
+        description: Workday Integration Retrieve a specific worker
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_INTEGRATION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: staffing-workers-rest
+    port: 8080
+    description: REST adapter for Workday Integration Workday Staffing API — Workers. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/workers
+      name: workers
+      description: REST surface for workers.
+      operations:
+      - method: GET
+        name: getworkers
+        description: Workday Integration Retrieve workers and staffing information
+        call: staffing-workers.getworkers
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workers/{id}
+      name: workers-id
+      description: REST surface for workers-ID.
+      operations:
+      - method: GET
+        name: getworkerbyid
+        description: Workday Integration Retrieve a specific worker
+        call: staffing-workers.getworkerbyid
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: staffing-workers-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Integration Workday Staffing API — Workers. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: workday-integration-retrieve-workers-and
+      description: Workday Integration Retrieve workers and staffing information
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: staffing-workers.getworkers
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-integration-retrieve-specific-worker
+      description: Workday Integration Retrieve a specific worker
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: staffing-workers.getworkerbyid
+      outputParameters:
+      - type: object
+        mapping: $.

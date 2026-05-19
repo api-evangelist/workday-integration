@@ -1,0 +1,136 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Integration Workday Compensation Review API — Compensation Reviews
+  description: 'Workday Integration Workday Compensation Review API — Compensation Reviews. 3 operations. Lead operation:
+    Workday Integration Retrieve compensation review events. Self-contained Naftiko capability covering one Workday Integration
+    business surface.'
+  tags:
+  - Workday Integration
+  - Compensation Reviews
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_INTEGRATION_API_KEY: WORKDAY_INTEGRATION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: compensation-review-compensation-reviews
+    baseUri: https://{baseUrl}/ccx/api/compensationReview/v1/{tenant}
+    description: Workday Integration Workday Compensation Review API — Compensation Reviews business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: compensationReviewEvents
+      path: /compensationReviewEvents
+      operations:
+      - name: getcompensationreviewevents
+        method: GET
+        description: Workday Integration Retrieve compensation review events
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: compensationReviewEvents-ID
+      path: /compensationReviewEvents/{ID}
+      operations:
+      - name: getcompensationrevieweventbyid
+        method: GET
+        description: Workday Integration Retrieve a specific compensation review event
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: compensationReviewEvents-ID-awards
+      path: /compensationReviewEvents/{ID}/awards
+      operations:
+      - name: getcompensationreviewawards
+        method: GET
+        description: Workday Integration Retrieve awards for a compensation review
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_INTEGRATION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: compensation-review-compensation-reviews-rest
+    port: 8080
+    description: REST adapter for Workday Integration Workday Compensation Review API — Compensation Reviews. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/compensationreviewevents
+      name: compensationreviewevents
+      description: REST surface for compensationReviewEvents.
+      operations:
+      - method: GET
+        name: getcompensationreviewevents
+        description: Workday Integration Retrieve compensation review events
+        call: compensation-review-compensation-reviews.getcompensationreviewevents
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/compensationreviewevents/{id}
+      name: compensationreviewevents-id
+      description: REST surface for compensationReviewEvents-ID.
+      operations:
+      - method: GET
+        name: getcompensationrevieweventbyid
+        description: Workday Integration Retrieve a specific compensation review event
+        call: compensation-review-compensation-reviews.getcompensationrevieweventbyid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/compensationreviewevents/{id}/awards
+      name: compensationreviewevents-id-awards
+      description: REST surface for compensationReviewEvents-ID-awards.
+      operations:
+      - method: GET
+        name: getcompensationreviewawards
+        description: Workday Integration Retrieve awards for a compensation review
+        call: compensation-review-compensation-reviews.getcompensationreviewawards
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: compensation-review-compensation-reviews-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Integration Workday Compensation Review API — Compensation Reviews. One tool per
+      consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: workday-integration-retrieve-compensation-review
+      description: Workday Integration Retrieve compensation review events
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: compensation-review-compensation-reviews.getcompensationreviewevents
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-integration-retrieve-specific-compensation
+      description: Workday Integration Retrieve a specific compensation review event
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: compensation-review-compensation-reviews.getcompensationrevieweventbyid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-integration-retrieve-awards-compensation
+      description: Workday Integration Retrieve awards for a compensation review
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: compensation-review-compensation-reviews.getcompensationreviewawards
+      outputParameters:
+      - type: object
+        mapping: $.

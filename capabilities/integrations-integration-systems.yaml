@@ -1,0 +1,146 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Integration Workday Integrations API — Integration Systems
+  description: 'Workday Integration Workday Integrations API — Integration Systems. 3 operations. Lead operation: Workday
+    Integration Retrieve integration systems. Self-contained Naftiko capability covering one Workday Integration business
+    surface.'
+  tags:
+  - Workday Integration
+  - Integration Systems
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_INTEGRATION_API_KEY: WORKDAY_INTEGRATION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: integrations-integration-systems
+    baseUri: https://{baseUrl}/ccx/api/v1/{tenant}
+    description: Workday Integration Workday Integrations API — Integration Systems business capability. Self-contained, no
+      shared references.
+    resources:
+    - name: integrationSystems
+      path: /integrationSystems
+      operations:
+      - name: getintegrationsystems
+        method: GET
+        description: Workday Integration Retrieve integration systems
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: integrationSystems-ID
+      path: /integrationSystems/{ID}
+      operations:
+      - name: getintegrationsystembyid
+        method: GET
+        description: Workday Integration Retrieve a specific integration system
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: integrationSystems-ID-launch
+      path: /integrationSystems/{ID}/launch
+      operations:
+      - name: launchintegration
+        method: POST
+        description: Workday Integration Launch an integration system
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_INTEGRATION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: integrations-integration-systems-rest
+    port: 8080
+    description: REST adapter for Workday Integration Workday Integrations API — Integration Systems. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/integrationsystems
+      name: integrationsystems
+      description: REST surface for integrationSystems.
+      operations:
+      - method: GET
+        name: getintegrationsystems
+        description: Workday Integration Retrieve integration systems
+        call: integrations-integration-systems.getintegrationsystems
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/integrationsystems/{id}
+      name: integrationsystems-id
+      description: REST surface for integrationSystems-ID.
+      operations:
+      - method: GET
+        name: getintegrationsystembyid
+        description: Workday Integration Retrieve a specific integration system
+        call: integrations-integration-systems.getintegrationsystembyid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/integrationsystems/{id}/launch
+      name: integrationsystems-id-launch
+      description: REST surface for integrationSystems-ID-launch.
+      operations:
+      - method: POST
+        name: launchintegration
+        description: Workday Integration Launch an integration system
+        call: integrations-integration-systems.launchintegration
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: integrations-integration-systems-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Integration Workday Integrations API — Integration Systems. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: workday-integration-retrieve-integration-systems
+      description: Workday Integration Retrieve integration systems
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: integrations-integration-systems.getintegrationsystems
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-integration-retrieve-specific-integration
+      description: Workday Integration Retrieve a specific integration system
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: integrations-integration-systems.getintegrationsystembyid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-integration-launch-integration-system
+      description: Workday Integration Launch an integration system
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: integrations-integration-systems.launchintegration
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

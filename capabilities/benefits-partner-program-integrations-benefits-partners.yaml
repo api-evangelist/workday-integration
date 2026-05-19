@@ -1,0 +1,104 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Integration Workday Benefits Partner Program Integrations API — Benefits Partners
+  description: 'Workday Integration Workday Benefits Partner Program Integrations API — Benefits Partners. 2 operations. Lead
+    operation: Workday Integration Retrieve a collection of carrierConnections. Self-contained Naftiko capability covering
+    one Workday Integration business surface.'
+  tags:
+  - Workday Integration
+  - Benefits Partners
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_INTEGRATION_API_KEY: WORKDAY_INTEGRATION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: benefits-partner-program-integrations-benefits-partners
+    baseUri: https://{baseUrl}/ccx/api/benefitsPartnerProgram/v1/{tenant}
+    description: Workday Integration Workday Benefits Partner Program Integrations API — Benefits Partners business capability.
+      Self-contained, no shared references.
+    resources:
+    - name: carrierConnections
+      path: /carrierConnections
+      operations:
+      - name: getcarrierconnections
+        method: GET
+        description: Workday Integration Retrieve a collection of carrierConnections
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: carrierConnections-ID
+      path: /carrierConnections/{ID}
+      operations:
+      - name: getcarrierconnectionbyid
+        method: GET
+        description: Workday Integration Retrieve a specific CarrierConnection
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_INTEGRATION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: benefits-partner-program-integrations-benefits-partners-rest
+    port: 8080
+    description: REST adapter for Workday Integration Workday Benefits Partner Program Integrations API — Benefits Partners.
+      One Spectral-compliant resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/carrierconnections
+      name: carrierconnections
+      description: REST surface for carrierConnections.
+      operations:
+      - method: GET
+        name: getcarrierconnections
+        description: Workday Integration Retrieve a collection of carrierConnections
+        call: benefits-partner-program-integrations-benefits-partners.getcarrierconnections
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/carrierconnections/{id}
+      name: carrierconnections-id
+      description: REST surface for carrierConnections-ID.
+      operations:
+      - method: GET
+        name: getcarrierconnectionbyid
+        description: Workday Integration Retrieve a specific CarrierConnection
+        call: benefits-partner-program-integrations-benefits-partners.getcarrierconnectionbyid
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: benefits-partner-program-integrations-benefits-partners-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Integration Workday Benefits Partner Program Integrations API — Benefits Partners.
+      One tool per consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: workday-integration-retrieve-collection-carrierconnections
+      description: Workday Integration Retrieve a collection of carrierConnections
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: benefits-partner-program-integrations-benefits-partners.getcarrierconnections
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-integration-retrieve-specific-carrierconnection
+      description: Workday Integration Retrieve a specific CarrierConnection
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: benefits-partner-program-integrations-benefits-partners.getcarrierconnectionbyid
+      outputParameters:
+      - type: object
+        mapping: $.

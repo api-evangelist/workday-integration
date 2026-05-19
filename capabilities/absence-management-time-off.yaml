@@ -1,0 +1,128 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Integration Workday Absence Management API — Time Off
+  description: 'Workday Integration Workday Absence Management API — Time Off. 2 operations. Lead operation: Workday Integration
+    Create a time off request for a worker. Self-contained Naftiko capability covering one Workday Integration business surface.'
+  tags:
+  - Workday Integration
+  - Time Off
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_INTEGRATION_API_KEY: WORKDAY_INTEGRATION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: absence-management-time-off
+    baseUri: https://{baseUrl}/ccx/api/absenceManagement/v1/{tenant}
+    description: Workday Integration Workday Absence Management API — Time Off business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: workers-ID-requestTimeOff
+      path: /workers/{ID}/requestTimeOff
+      operations:
+      - name: requesttimeoff
+        method: POST
+        description: Workday Integration Create a time off request for a worker
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: workers-ID-validTimeOffDates
+      path: /workers/{ID}/validTimeOffDates
+      operations:
+      - name: getvalidtimeoffdates
+        method: GET
+        description: Workday Integration Retrieve valid time off dates for a worker
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: startDate
+          in: query
+          type: string
+          description: Start date for the range of valid dates
+        - name: endDate
+          in: query
+          type: string
+          description: End date for the range of valid dates
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_INTEGRATION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: absence-management-time-off-rest
+    port: 8080
+    description: REST adapter for Workday Integration Workday Absence Management API — Time Off. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/workers/{id}/requesttimeoff
+      name: workers-id-requesttimeoff
+      description: REST surface for workers-ID-requestTimeOff.
+      operations:
+      - method: POST
+        name: requesttimeoff
+        description: Workday Integration Create a time off request for a worker
+        call: absence-management-time-off.requesttimeoff
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workers/{id}/validtimeoffdates
+      name: workers-id-validtimeoffdates
+      description: REST surface for workers-ID-validTimeOffDates.
+      operations:
+      - method: GET
+        name: getvalidtimeoffdates
+        description: Workday Integration Retrieve valid time off dates for a worker
+        call: absence-management-time-off.getvalidtimeoffdates
+        with:
+          startDate: rest.startDate
+          endDate: rest.endDate
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: absence-management-time-off-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Integration Workday Absence Management API — Time Off. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: workday-integration-create-time-off
+      description: Workday Integration Create a time off request for a worker
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: absence-management-time-off.requesttimeoff
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-integration-retrieve-valid-time
+      description: Workday Integration Retrieve valid time off dates for a worker
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: absence-management-time-off.getvalidtimeoffdates
+      with:
+        startDate: tools.startDate
+        endDate: tools.endDate
+      outputParameters:
+      - type: object
+        mapping: $.

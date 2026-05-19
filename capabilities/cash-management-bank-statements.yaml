@@ -1,0 +1,71 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Integration Workday Cash Management API — Bank Statements
+  description: 'Workday Integration Workday Cash Management API — Bank Statements. 1 operations. Lead operation: Workday Integration
+    Retrieve bank statements. Self-contained Naftiko capability covering one Workday Integration business surface.'
+  tags:
+  - Workday Integration
+  - Bank Statements
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_INTEGRATION_API_KEY: WORKDAY_INTEGRATION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cash-management-bank-statements
+    baseUri: https://{baseUrl}/ccx/api/cashManagement/v1/{tenant}
+    description: Workday Integration Workday Cash Management API — Bank Statements business capability. Self-contained, no
+      shared references.
+    resources:
+    - name: bankStatements
+      path: /bankStatements
+      operations:
+      - name: getbankstatements
+        method: GET
+        description: Workday Integration Retrieve bank statements
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_INTEGRATION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: cash-management-bank-statements-rest
+    port: 8080
+    description: REST adapter for Workday Integration Workday Cash Management API — Bank Statements. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/bankstatements
+      name: bankstatements
+      description: REST surface for bankStatements.
+      operations:
+      - method: GET
+        name: getbankstatements
+        description: Workday Integration Retrieve bank statements
+        call: cash-management-bank-statements.getbankstatements
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cash-management-bank-statements-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Integration Workday Cash Management API — Bank Statements. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: workday-integration-retrieve-bank-statements
+      description: Workday Integration Retrieve bank statements
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cash-management-bank-statements.getbankstatements
+      outputParameters:
+      - type: object
+        mapping: $.
