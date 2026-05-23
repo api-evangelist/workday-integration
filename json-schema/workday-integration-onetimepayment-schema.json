@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/OneTimePayment",
+  "title": "OneTimePayment",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "descriptor": {
+      "type": "string"
+    },
+    "worker": {
+      "$ref": "#/components/schemas/ResourceReference"
+    },
+    "amount": {
+      "type": "number"
+    },
+    "currency": {
+      "$ref": "#/components/schemas/ResourceReference"
+    },
+    "payComponent": {
+      "$ref": "#/components/schemas/ResourceReference"
+    },
+    "effectiveDate": {
+      "type": "string",
+      "format": "date"
+    }
+  }
+}

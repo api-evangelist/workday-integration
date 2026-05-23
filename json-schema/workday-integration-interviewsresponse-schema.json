@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/InterviewsResponse",
+  "title": "InterviewsResponse",
+  "type": "object",
+  "properties": {
+    "total": {
+      "type": "integer"
+    },
+    "data": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "descriptor": {
+            "type": "string"
+          },
+          "interviewDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "candidate": {
+            "$ref": "#/components/schemas/ResourceReference"
+          },
+          "jobRequisition": {
+            "$ref": "#/components/schemas/ResourceReference"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

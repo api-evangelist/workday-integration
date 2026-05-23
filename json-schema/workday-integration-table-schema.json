@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Table",
+  "title": "Table",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "descriptor": {
+      "type": "string"
+    },
+    "displayName": {
+      "type": "string"
+    },
+    "enableForAnalysis": {
+      "type": "boolean"
+    },
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "ordinal": {
+            "type": "integer"
+          },
+          "type": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "descriptor": {
+                "type": "string"
+              }
+            }
+          },
+          "parseFormat": {
+            "type": "string"
+          },
+          "precision": {
+            "type": "integer"
+          },
+          "scale": {
+            "type": "integer"
+          }
+        }
+      }
+    }
+  }
+}

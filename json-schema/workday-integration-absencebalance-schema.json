@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AbsenceBalance",
+  "title": "AbsenceBalance",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "descriptor": {
+      "type": "string"
+    },
+    "worker": {
+      "$ref": "#/components/schemas/ResourceReference"
+    },
+    "absencePlan": {
+      "$ref": "#/components/schemas/ResourceReference"
+    },
+    "balance": {
+      "type": "number"
+    },
+    "unit": {
+      "type": "string"
+    },
+    "asOfDate": {
+      "type": "string",
+      "format": "date"
+    }
+  }
+}

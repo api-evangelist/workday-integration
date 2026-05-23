@@ -1,0 +1,312 @@
+{
+  "provider": "Workday Integration",
+  "providerId": "workday-integration",
+  "kind": "json-structure",
+  "description": "Structural overview of the Workday Integration API surface; extracted from openapi/.",
+  "schemaCount": 20,
+  "operationCount": 19,
+  "schemas": [
+    {
+      "name": "ErrorResponse",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "WorkersResponse",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "WorkerSummary",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "Worker",
+      "type": "object",
+      "propertyCount": 11,
+      "required": []
+    },
+    {
+      "name": "ResourceReference",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "SupervisoryOrganization",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "SupervisoryOrganizationsResponse",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "Organization",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "OrganizationsResponse",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "OrganizationTypesResponse",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "HistoryResponse",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "BusinessTitleChange",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "BusinessTitleChangesResponse",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "BusinessTitleChangeRequest",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "proposedBusinessTitle",
+        "effectiveDate"
+      ]
+    },
+    {
+      "name": "JobChangeRequest",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "effectiveDate"
+      ]
+    },
+    {
+      "name": "JobChange",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "PaySlipsResponse",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "JobChangeReasonsResponse",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "CurrenciesResponse",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "AuditLogsResponse",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    }
+  ],
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/workers",
+      "operationId": "getWorkers",
+      "summary": "Workday Integration Retrieve a collection of workers",
+      "tags": [
+        "Workers"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/workers/{ID}",
+      "operationId": "getWorkerById",
+      "summary": "Workday Integration Retrieve a single worker instance",
+      "tags": [
+        "Workers"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/workers/{ID}/organizations",
+      "operationId": "getWorkerOrganizations",
+      "summary": "Workday Integration Retrieve organizations for a worker",
+      "tags": [
+        "Organizations",
+        "Workers"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/workers/{ID}/reports",
+      "operationId": "getWorkerDirectReports",
+      "summary": "Workday Integration Retrieve direct reports for a worker",
+      "tags": [
+        "Workers"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/workers/{ID}/history",
+      "operationId": "getWorkerHistory",
+      "summary": "Workday Integration Retrieve history items for a worker",
+      "tags": [
+        "Workers"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/workers/{ID}/businessTitleChanges",
+      "operationId": "getWorkerBusinessTitleChanges",
+      "summary": "Workday Integration Retrieve business title changes for a worker",
+      "tags": [
+        "Workers"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/workers/{ID}/businessTitleChanges",
+      "operationId": "createBusinessTitleChange",
+      "summary": "Workday Integration Create a business title change",
+      "tags": [
+        "Workers"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/workers/{ID}/jobChanges",
+      "operationId": "createJobChange",
+      "summary": "Workday Integration Create a job change for a worker",
+      "tags": [
+        "Workers"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/workers/{ID}/supervisoryOrganizations",
+      "operationId": "getWorkerSupervisoryOrganizations",
+      "summary": "Workday Integration Retrieve supervisory organizations managed by a worker",
+      "tags": [
+        "Organizations",
+        "Workers"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/workers/{ID}/paySlips",
+      "operationId": "getWorkerPaySlips",
+      "summary": "Workday Integration Retrieve pay slips for a worker",
+      "tags": [
+        "Payroll",
+        "Workers"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/supervisoryOrganizations",
+      "operationId": "getSupervisoryOrganizations",
+      "summary": "Workday Integration Retrieve all supervisory organizations",
+      "tags": [
+        "Organizations"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/supervisoryOrganizations/{ID}",
+      "operationId": "getSupervisoryOrganizationById",
+      "summary": "Workday Integration Retrieve a specific supervisory organization",
+      "tags": [
+        "Organizations"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/supervisoryOrganizations/{ID}/workers",
+      "operationId": "getSupervisoryOrganizationWorkers",
+      "summary": "Workday Integration Retrieve workers in a supervisory organization",
+      "tags": [
+        "Organizations",
+        "Workers"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/organizations",
+      "operationId": "getOrganizations",
+      "summary": "Workday Integration Retrieve all organizations",
+      "tags": [
+        "Organizations"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/organizations/{ID}",
+      "operationId": "getOrganizationById",
+      "summary": "Workday Integration Retrieve a specific organization",
+      "tags": [
+        "Organizations"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/organizationTypes",
+      "operationId": "getOrganizationTypes",
+      "summary": "Workday Integration Retrieve organization types",
+      "tags": [
+        "Organizations"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/jobChangeReasons",
+      "operationId": "getJobChangeReasons",
+      "summary": "Workday Integration Retrieve job change reasons",
+      "tags": [
+        "Reference Data"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/currencies",
+      "operationId": "getCurrencies",
+      "summary": "Workday Integration Retrieve currencies",
+      "tags": [
+        "Reference Data"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/auditLogs",
+      "operationId": "getAuditLogs",
+      "summary": "Workday Integration Retrieve audit logs",
+      "tags": [
+        "Audit"
+      ]
+    }
+  ]
+}

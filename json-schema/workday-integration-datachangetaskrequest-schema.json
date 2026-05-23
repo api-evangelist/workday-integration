@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/DataChangeTaskRequest",
+  "title": "DataChangeTaskRequest",
+  "type": "object",
+  "required": [
+    "targetTable",
+    "operation"
+  ],
+  "properties": {
+    "targetTable": {
+      "$ref": "#/components/schemas/ResourceReference"
+    },
+    "operation": {
+      "type": "string",
+      "enum": [
+        "TruncateAndInsert",
+        "Insert",
+        "Update",
+        "Upsert",
+        "Delete"
+      ]
+    },
+    "fileContainer": {
+      "$ref": "#/components/schemas/ResourceReference"
+    }
+  }
+}

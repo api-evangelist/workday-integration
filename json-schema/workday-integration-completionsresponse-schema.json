@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CompletionsResponse",
+  "title": "CompletionsResponse",
+  "type": "object",
+  "properties": {
+    "total": {
+      "type": "integer"
+    },
+    "data": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "course": {
+            "$ref": "#/components/schemas/ResourceReference"
+          },
+          "completionDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "grade": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

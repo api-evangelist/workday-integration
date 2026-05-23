@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PerformanceReviewsResponse",
+  "title": "PerformanceReviewsResponse",
+  "type": "object",
+  "properties": {
+    "total": {
+      "type": "integer"
+    },
+    "data": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "descriptor": {
+            "type": "string"
+          },
+          "reviewPeriod": {
+            "type": "string"
+          },
+          "overallRating": {
+            "type": "string"
+          },
+          "manager": {
+            "$ref": "#/components/schemas/ResourceReference"
+          },
+          "completionDate": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      }
+    }
+  }
+}

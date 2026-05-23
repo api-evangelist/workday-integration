@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/TimeOffEntry",
+  "title": "TimeOffEntry",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "descriptor": {
+      "type": "string"
+    },
+    "worker": {
+      "$ref": "#/components/schemas/ResourceReference"
+    },
+    "absenceType": {
+      "$ref": "#/components/schemas/ResourceReference"
+    },
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "quantity": {
+      "type": "number"
+    },
+    "unit": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    }
+  }
+}

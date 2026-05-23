@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/IntegrationEvent",
+  "title": "IntegrationEvent",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "descriptor": {
+      "type": "string"
+    },
+    "integrationSystem": {
+      "$ref": "#/components/schemas/ResourceReference"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Completed",
+        "Failed",
+        "In_Progress",
+        "Cancelled"
+      ]
+    },
+    "startDateTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "endDateTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "recordsProcessed": {
+      "type": "integer"
+    },
+    "recordsFailed": {
+      "type": "integer"
+    }
+  }
+}

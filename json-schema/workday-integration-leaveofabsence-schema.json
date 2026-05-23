@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/LeaveOfAbsence",
+  "title": "LeaveOfAbsence",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "descriptor": {
+      "type": "string"
+    },
+    "worker": {
+      "$ref": "#/components/schemas/ResourceReference"
+    },
+    "leaveType": {
+      "$ref": "#/components/schemas/ResourceReference"
+    },
+    "startDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "estimatedEndDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "actualEndDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "status": {
+      "type": "string"
+    }
+  }
+}

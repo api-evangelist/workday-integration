@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SUIRateRequest",
+  "title": "SUIRateRequest",
+  "type": "object",
+  "required": [
+    "company",
+    "state",
+    "rate",
+    "effectiveDate"
+  ],
+  "properties": {
+    "company": {
+      "$ref": "#/components/schemas/ResourceReference"
+    },
+    "state": {
+      "$ref": "#/components/schemas/ResourceReference"
+    },
+    "rate": {
+      "type": "number"
+    },
+    "effectiveDate": {
+      "type": "string",
+      "format": "date"
+    }
+  }
+}

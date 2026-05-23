@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/DataChangeTask",
+  "title": "DataChangeTask",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "descriptor": {
+      "type": "string"
+    },
+    "targetTable": {
+      "$ref": "#/components/schemas/ResourceReference"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Processing",
+        "Completed",
+        "Failed"
+      ]
+    },
+    "operation": {
+      "type": "string",
+      "enum": [
+        "TruncateAndInsert",
+        "Insert",
+        "Update",
+        "Upsert",
+        "Delete"
+      ]
+    },
+    "createdDateTime": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

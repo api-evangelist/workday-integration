@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/TimeClockEvent",
+  "title": "TimeClockEvent",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "descriptor": {
+      "type": "string"
+    },
+    "worker": {
+      "$ref": "#/components/schemas/ResourceReference"
+    },
+    "eventType": {
+      "type": "string",
+      "enum": [
+        "Clock_In",
+        "Clock_Out"
+      ]
+    },
+    "eventDateTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "timeZone": {
+      "type": "string"
+    }
+  }
+}

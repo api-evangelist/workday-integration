@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/TableRequest",
+  "title": "TableRequest",
+  "type": "object",
+  "required": [
+    "displayName",
+    "fields"
+  ],
+  "properties": {
+    "displayName": {
+      "type": "string"
+    },
+    "enableForAnalysis": {
+      "type": "boolean"
+    },
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "type"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "ordinal": {
+            "type": "integer"
+          },
+          "type": {
+            "$ref": "#/components/schemas/ResourceReference"
+          }
+        }
+      }
+    }
+  }
+}

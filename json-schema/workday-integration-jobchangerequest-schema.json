@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/JobChangeRequest",
+  "title": "JobChangeRequest",
+  "type": "object",
+  "required": [
+    "effectiveDate"
+  ],
+  "properties": {
+    "effectiveDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "reason": {
+      "$ref": "#/components/schemas/ResourceReference"
+    },
+    "proposedPosition": {
+      "$ref": "#/components/schemas/ResourceReference"
+    }
+  }
+}
