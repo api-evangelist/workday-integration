@@ -1,0 +1,172 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workday Integration Workday Benefits Administration API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://{baseUrl}/authorize",
+      "accessTokenUrl": "https://{baseUrl}/oauth2/{tenant}/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Benefit Plans",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Integration Retrieve benefit plans for a worker",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/benefits/v1/{tenant}/workers/:ID/benefitPlans",
+            "params": [
+              {
+                "name": "ID",
+                "value": "",
+                "type": "path",
+                "description": "The Workday ID of the resource"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of objects in a single response (default 20, maximum 100)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Zero-based index of the first object in a response collection"
+              }
+            ]
+          },
+          "docs": "Returns the benefit plan enrollments for the specified worker."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Benefit Elections",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Integration Retrieve benefit elections for a worker",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/benefits/v1/{tenant}/workers/:ID/benefitElections",
+            "params": [
+              {
+                "name": "ID",
+                "value": "",
+                "type": "path",
+                "description": "The Workday ID of the resource"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of objects in a single response (default 20, maximum 100)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Zero-based index of the first object in a response collection"
+              }
+            ]
+          },
+          "docs": "Returns the current benefit elections for the specified worker including coverage levels and dependents."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Dependents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Integration Retrieve dependents for a worker",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/benefits/v1/{tenant}/workers/:ID/dependents",
+            "params": [
+              {
+                "name": "ID",
+                "value": "",
+                "type": "path",
+                "description": "The Workday ID of the resource"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of objects in a single response (default 20, maximum 100)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Zero-based index of the first object in a response collection"
+              }
+            ]
+          },
+          "docs": "Returns the dependents and beneficiaries for the specified worker."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Reference Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Integration Retrieve benefit plan types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/benefits/v1/{tenant}/benefitPlanTypes",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of objects in a single response (default 20, maximum 100)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Zero-based index of the first object in a response collection"
+              }
+            ]
+          },
+          "docs": "Returns the available benefit plan types configured in the tenant."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

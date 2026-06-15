@@ -1,0 +1,246 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workday Integration Workday Compensation API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://{baseUrl}/authorize",
+      "accessTokenUrl": "https://{baseUrl}/oauth2/{tenant}/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Scorecards",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Integration Retrieve scorecard results",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/compensation/v1/{tenant}/scorecardResults",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of objects in a single response (default 20, maximum 100)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Zero-based index of the first object in a response collection"
+              }
+            ]
+          },
+          "docs": "Returns a collection of compensation scorecard results with pagination support."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Create a new scorecard result",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{baseUrl}/ccx/api/compensation/v1/{tenant}/scorecardResults",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new compensation scorecard result."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Retrieve a specific scorecard result",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/compensation/v1/{tenant}/scorecardResults/:ID",
+            "params": [
+              {
+                "name": "ID",
+                "value": "",
+                "type": "path",
+                "description": "The Workday ID of the resource"
+              }
+            ]
+          },
+          "docs": "Returns the specified scorecard result with scores and details."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Delete a scorecard result",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{baseUrl}/ccx/api/compensation/v1/{tenant}/scorecardResults/:ID",
+            "params": [
+              {
+                "name": "ID",
+                "value": "",
+                "type": "path",
+                "description": "The Workday ID of the resource"
+              }
+            ]
+          },
+          "docs": "Removes the specified scorecard result."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Retrieve compensation scorecards",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/compensation/v1/{tenant}/scorecards",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of objects in a single response (default 20, maximum 100)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Zero-based index of the first object in a response collection"
+              },
+              {
+                "name": "effectiveDate",
+                "value": "",
+                "type": "query",
+                "description": "Filter by effective date"
+              }
+            ]
+          },
+          "docs": "Returns compensation scorecards filtered by effective date."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Create a compensation scorecard",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{baseUrl}/ccx/api/compensation/v1/{tenant}/scorecards",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new compensation scorecard definition."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Retrieve a specific compensation scorecard",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/compensation/v1/{tenant}/scorecards/:ID",
+            "params": [
+              {
+                "name": "ID",
+                "value": "",
+                "type": "path",
+                "description": "The Workday ID of the resource"
+              }
+            ]
+          },
+          "docs": "Returns the specified compensation scorecard with its configuration."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Update a compensation scorecard",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{baseUrl}/ccx/api/compensation/v1/{tenant}/scorecards/:ID",
+            "params": [
+              {
+                "name": "ID",
+                "value": "",
+                "type": "path",
+                "description": "The Workday ID of the resource"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modifies the specified compensation scorecard."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Delete a compensation scorecard",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{baseUrl}/ccx/api/compensation/v1/{tenant}/scorecards/:ID",
+            "params": [
+              {
+                "name": "ID",
+                "value": "",
+                "type": "path",
+                "description": "The Workday ID of the resource"
+              }
+            ]
+          },
+          "docs": "Removes the specified compensation scorecard."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Integration Create a one-time payment request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{baseUrl}/ccx/api/compensation/v1/{tenant}/workers/:ID/requestOneTimePayment",
+            "params": [
+              {
+                "name": "ID",
+                "value": "",
+                "type": "path",
+                "description": "The Workday ID of the resource"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a one-time payment request for the specified worker, such as a bonus or award, and initiates the approval business process."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

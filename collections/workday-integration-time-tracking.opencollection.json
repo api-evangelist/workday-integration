@@ -1,0 +1,161 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workday Integration Workday Time Tracking API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://{baseUrl}/authorize",
+      "accessTokenUrl": "https://{baseUrl}/oauth2/{tenant}/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Clock Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Integration Create a time clock event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{baseUrl}/ccx/api/timeTracking/v1/{tenant}/timeClockEvents",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Records a time clock event such as a clock-in or clock-out for a worker."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Validations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Integration Retrieve time validation results",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/timeTracking/v1/{tenant}/timeValidations",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of objects in a single response (default 20, maximum 100)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The zero-based index of the first object in a response collection"
+              }
+            ]
+          },
+          "docs": "Returns time validation results for worker time entries, identifying errors and warnings that need to be resolved."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Time Blocks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Integration Retrieve worker time blocks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/timeTracking/v1/{tenant}/workerTimeBlocks",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of objects in a single response (default 20, maximum 100)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The zero-based index of the first object in a response collection"
+              }
+            ]
+          },
+          "docs": "Returns a collection of time blocks representing worked hours for workers."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Retrieve a specific worker time block",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/timeTracking/v1/{tenant}/workerTimeBlocks/:ID",
+            "params": [
+              {
+                "name": "ID",
+                "value": "",
+                "type": "path",
+                "description": "The Workday ID of the resource"
+              }
+            ]
+          },
+          "docs": "Returns the specified worker time block with start and end times."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Time Reviews",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Integration Create a time review event for a worker",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{baseUrl}/ccx/api/timeTracking/v1/{tenant}/workers/:ID/timeReviewEvents",
+            "params": [
+              {
+                "name": "ID",
+                "value": "",
+                "type": "path",
+                "description": "The Workday ID of the resource"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiates a time review event for the specified worker to approve or adjust time entries."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

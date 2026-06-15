@@ -1,0 +1,360 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workday Integration Workday Payroll API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://{baseUrl}/authorize",
+      "accessTokenUrl": "https://{baseUrl}/oauth2/{tenant}/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Pay Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Integration Retrieve a collection of pay groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/payroll/v2/{tenant}/payGroups",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of objects in a single response (default 20, maximum 100)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The zero-based index of the first object in a response collection"
+              }
+            ]
+          },
+          "docs": "Returns a collection of pay groups configured in the tenant, which define payroll processing schedules and parameters."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Retrieve a specific pay group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/payroll/v2/{tenant}/payGroups/:ID",
+            "params": [
+              {
+                "name": "ID",
+                "value": "",
+                "type": "path",
+                "description": "The Workday ID of the resource"
+              }
+            ]
+          },
+          "docs": "Returns the specified pay group including its configuration and schedule."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Retrieve pay group details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/payroll/v2/{tenant}/payGroupDetails",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of objects in a single response (default 20, maximum 100)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The zero-based index of the first object in a response collection"
+              }
+            ]
+          },
+          "docs": "Returns detailed pay group information including pay period dates and processing status."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Retrieve specific pay group detail",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/payroll/v2/{tenant}/payGroupDetails/:ID",
+            "params": [
+              {
+                "name": "ID",
+                "value": "",
+                "type": "path",
+                "description": "The Workday ID of the resource"
+              }
+            ]
+          },
+          "docs": "Returns the pay group detail for the specified ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Integration Retrieve the pay group for a job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/payroll/v2/{tenant}/jobs/:ID/payGroup",
+            "params": [
+              {
+                "name": "ID",
+                "value": "",
+                "type": "path",
+                "description": "The Workday ID of the resource"
+              }
+            ]
+          },
+          "docs": "Returns the pay group assignment for the specified job."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Payroll Inputs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Integration Retrieve payroll inputs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/payroll/v2/{tenant}/payrollInputs",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of objects in a single response (default 20, maximum 100)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The zero-based index of the first object in a response collection"
+              }
+            ]
+          },
+          "docs": "Returns a collection of payroll input entries for processing."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Create a payroll input",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{baseUrl}/ccx/api/payroll/v2/{tenant}/payrollInputs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new payroll input entry for an upcoming payroll run."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Retrieve a specific payroll input",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/payroll/v2/{tenant}/payrollInputs/:ID",
+            "params": [
+              {
+                "name": "ID",
+                "value": "",
+                "type": "path",
+                "description": "The Workday ID of the resource"
+              }
+            ]
+          },
+          "docs": "Returns the specified payroll input entry."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Update a payroll input",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{baseUrl}/ccx/api/payroll/v2/{tenant}/payrollInputs/:ID",
+            "params": [
+              {
+                "name": "ID",
+                "value": "",
+                "type": "path",
+                "description": "The Workday ID of the resource"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing payroll input entry."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Delete a payroll input",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{baseUrl}/ccx/api/payroll/v2/{tenant}/payrollInputs/:ID",
+            "params": [
+              {
+                "name": "ID",
+                "value": "",
+                "type": "path",
+                "description": "The Workday ID of the resource"
+              }
+            ]
+          },
+          "docs": "Deletes the specified payroll input entry."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Tax Rates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Integration Retrieve company SUI rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/payroll/v2/{tenant}/companySUIRates",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of objects in a single response (default 20, maximum 100)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The zero-based index of the first object in a response collection"
+              }
+            ]
+          },
+          "docs": "Returns company state unemployment insurance rates."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Create a company SUI rate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{baseUrl}/ccx/api/payroll/v2/{tenant}/companySUIRates",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new state unemployment insurance rate entry."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Reference Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Integration Retrieve pay components",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/payroll/v2/{tenant}/values/payrollInputsGroup/payComponents",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of objects in a single response (default 20, maximum 100)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The zero-based index of the first object in a response collection"
+              }
+            ]
+          },
+          "docs": "Returns the available pay components that can be used in payroll inputs."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Retrieve run categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/payroll/v2/{tenant}/values/runCategories",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of objects in a single response (default 20, maximum 100)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The zero-based index of the first object in a response collection"
+              }
+            ]
+          },
+          "docs": "Returns the available payroll run categories."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

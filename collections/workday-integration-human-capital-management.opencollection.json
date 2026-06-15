@@ -1,0 +1,575 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workday Integration Workday Human Capital Management API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://{baseUrl}/authorize",
+      "accessTokenUrl": "https://{baseUrl}/oauth2/{tenant}/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Workers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Integration Retrieve a collection of workers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/v1/{tenant}/workers",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of objects in a single response (default 20, maximum 100)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The zero-based index of the first object in a response collection"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search string used to filter results"
+              }
+            ]
+          },
+          "docs": "Returns a collection of workers and current staffing information. Supports pagination, search, and filtering by various criteria."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Retrieve a single worker instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/v1/{tenant}/workers/:ID",
+            "params": [
+              {
+                "name": "ID",
+                "value": "",
+                "type": "path",
+                "description": "The Workday ID of the resource"
+              }
+            ]
+          },
+          "docs": "Returns the specified worker including personal data, employment information, and organizational assignments."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Retrieve direct reports for a worker",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/v1/{tenant}/workers/:ID/reports",
+            "params": [
+              {
+                "name": "ID",
+                "value": "",
+                "type": "path",
+                "description": "The Workday ID of the resource"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of objects in a single response (default 20, maximum 100)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The zero-based index of the first object in a response collection"
+              }
+            ]
+          },
+          "docs": "Returns the direct reports for the specified worker within their supervisory organization hierarchy."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Retrieve history items for a worker",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/v1/{tenant}/workers/:ID/history",
+            "params": [
+              {
+                "name": "ID",
+                "value": "",
+                "type": "path",
+                "description": "The Workday ID of the resource"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of objects in a single response (default 20, maximum 100)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The zero-based index of the first object in a response collection"
+              }
+            ]
+          },
+          "docs": "Returns the job history and staffing event history for the specified worker."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Retrieve business title changes for a worker",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/v1/{tenant}/workers/:ID/businessTitleChanges",
+            "params": [
+              {
+                "name": "ID",
+                "value": "",
+                "type": "path",
+                "description": "The Workday ID of the resource"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of objects in a single response (default 20, maximum 100)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The zero-based index of the first object in a response collection"
+              }
+            ]
+          },
+          "docs": "Returns the history of business title changes for the specified worker."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Create a business title change",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{baseUrl}/ccx/api/v1/{tenant}/workers/:ID/businessTitleChanges",
+            "params": [
+              {
+                "name": "ID",
+                "value": "",
+                "type": "path",
+                "description": "The Workday ID of the resource"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiates a business title change for the specified worker."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Create a job change for a worker",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{baseUrl}/ccx/api/v1/{tenant}/workers/:ID/jobChanges",
+            "params": [
+              {
+                "name": "ID",
+                "value": "",
+                "type": "path",
+                "description": "The Workday ID of the resource"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiates a job change event for the specified worker, such as a promotion, transfer, or reassignment."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Organizations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Integration Retrieve organizations for a worker",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/v1/{tenant}/workers/:ID/organizations",
+            "params": [
+              {
+                "name": "ID",
+                "value": "",
+                "type": "path",
+                "description": "The Workday ID of the resource"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of objects in a single response (default 20, maximum 100)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The zero-based index of the first object in a response collection"
+              }
+            ]
+          },
+          "docs": "Returns the organizational memberships for the specified worker, including supervisory organizations and cost centers."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Retrieve supervisory organizations managed by a worker",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/v1/{tenant}/workers/:ID/supervisoryOrganizations",
+            "params": [
+              {
+                "name": "ID",
+                "value": "",
+                "type": "path",
+                "description": "The Workday ID of the resource"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of objects in a single response (default 20, maximum 100)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The zero-based index of the first object in a response collection"
+              }
+            ]
+          },
+          "docs": "Returns the supervisory organizations managed by the specified worker."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Retrieve all supervisory organizations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/v1/{tenant}/supervisoryOrganizations",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of objects in a single response (default 20, maximum 100)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The zero-based index of the first object in a response collection"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search string used to filter results"
+              }
+            ]
+          },
+          "docs": "Returns a collection of supervisory organizations within the tenant."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Retrieve a specific supervisory organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/v1/{tenant}/supervisoryOrganizations/:ID",
+            "params": [
+              {
+                "name": "ID",
+                "value": "",
+                "type": "path",
+                "description": "The Workday ID of the resource"
+              }
+            ]
+          },
+          "docs": "Returns the specified supervisory organization including its members and hierarchy."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Retrieve workers in a supervisory organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/v1/{tenant}/supervisoryOrganizations/:ID/workers",
+            "params": [
+              {
+                "name": "ID",
+                "value": "",
+                "type": "path",
+                "description": "The Workday ID of the resource"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of objects in a single response (default 20, maximum 100)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The zero-based index of the first object in a response collection"
+              }
+            ]
+          },
+          "docs": "Returns the workers assigned to the specified supervisory organization."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Retrieve all organizations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/v1/{tenant}/organizations",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of objects in a single response (default 20, maximum 100)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The zero-based index of the first object in a response collection"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search string used to filter results"
+              }
+            ]
+          },
+          "docs": "Returns a collection of organizations including company, cost center, and region organizations."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Retrieve a specific organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/v1/{tenant}/organizations/:ID",
+            "params": [
+              {
+                "name": "ID",
+                "value": "",
+                "type": "path",
+                "description": "The Workday ID of the resource"
+              }
+            ]
+          },
+          "docs": "Returns the specified organization instance."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Retrieve organization types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/v1/{tenant}/organizationTypes",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of objects in a single response (default 20, maximum 100)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The zero-based index of the first object in a response collection"
+              }
+            ]
+          },
+          "docs": "Returns all available organization types in the tenant."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Payroll",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Integration Retrieve pay slips for a worker",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/v1/{tenant}/workers/:ID/paySlips",
+            "params": [
+              {
+                "name": "ID",
+                "value": "",
+                "type": "path",
+                "description": "The Workday ID of the resource"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of objects in a single response (default 20, maximum 100)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The zero-based index of the first object in a response collection"
+              }
+            ]
+          },
+          "docs": "Returns the pay slips for the specified worker."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Reference Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Integration Retrieve job change reasons",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/v1/{tenant}/jobChangeReasons",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of objects in a single response (default 20, maximum 100)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The zero-based index of the first object in a response collection"
+              }
+            ]
+          },
+          "docs": "Returns the available job change reasons for staffing transactions."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Retrieve currencies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/v1/{tenant}/currencies",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of objects in a single response (default 20, maximum 100)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The zero-based index of the first object in a response collection"
+              }
+            ]
+          },
+          "docs": "Returns the available currencies configured in the tenant."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Audit",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Integration Retrieve audit logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/v1/{tenant}/auditLogs",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of objects in a single response (default 20, maximum 100)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The zero-based index of the first object in a response collection"
+              }
+            ]
+          },
+          "docs": "Returns audit log entries for tracking data changes and system events."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

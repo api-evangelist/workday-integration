@@ -1,0 +1,259 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workday Integration Workday Prism Analytics API",
+    "version": "v3"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://{baseUrl}/authorize",
+      "accessTokenUrl": "https://{baseUrl}/oauth2/{tenant}/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tables",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Integration Retrieve Prism Analytics tables",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/prismAnalytics/v3/{tenant}/tables",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a collection of Prism Analytics tables in the tenant."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Create a Prism Analytics table",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{baseUrl}/ccx/api/prismAnalytics/v3/{tenant}/tables",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Prism Analytics table with the specified schema."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Retrieve a specific Prism Analytics table",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/prismAnalytics/v3/{tenant}/tables/:ID",
+            "params": [
+              {
+                "name": "ID",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the specified Prism Analytics table with its schema definition."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Update a Prism Analytics table",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{baseUrl}/ccx/api/prismAnalytics/v3/{tenant}/tables/:ID",
+            "params": [
+              {
+                "name": "ID",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the specified Prism Analytics table schema."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Delete a Prism Analytics table",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{baseUrl}/ccx/api/prismAnalytics/v3/{tenant}/tables/:ID",
+            "params": [
+              {
+                "name": "ID",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes the specified Prism Analytics table and its data."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Data Change Tasks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Integration Retrieve data change tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/prismAnalytics/v3/{tenant}/dataChangeTasks",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a collection of data change tasks for Prism Analytics tables."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Create a data change task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{baseUrl}/ccx/api/prismAnalytics/v3/{tenant}/dataChangeTasks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new data change task to load data into a Prism Analytics table."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Retrieve a specific data change task",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/prismAnalytics/v3/{tenant}/dataChangeTasks/:ID",
+            "params": [
+              {
+                "name": "ID",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the specified data change task with its status and details."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "File Containers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Integration Create a file container for data upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{baseUrl}/ccx/api/prismAnalytics/v3/{tenant}/fileContainers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a file container for uploading data files to be processed by a data change task."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Retrieve a specific file container",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/prismAnalytics/v3/{tenant}/fileContainers/:ID",
+            "params": [
+              {
+                "name": "ID",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the specified file container with its upload status."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "WQL",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Integration Execute a WQL query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{baseUrl}/ccx/api/prismAnalytics/v3/{tenant}/wql",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Executes a Workday Query Language (WQL) query against Prism Analytics data and returns the results."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
