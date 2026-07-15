@@ -1,0 +1,2680 @@
+generated: '2026-07-15'
+method: generated
+source: openapi/workday-integration-absence-management-openapi.yml, openapi/workday-integration-aca-partner-integrations-openapi.yml,
+  openapi/workday-integration-academic-advising-openapi.yml, openapi/workday-integration-academic-foundation-openapi.yml,
+  openapi/workday-integration-admissions-openapi.yml, openapi/workday-integration-adoption-openapi.yml,
+  openapi/workday-integration-benefits-administration-openapi.yml, openapi/workday-integration-benefits-partner-program-integrations-openapi.yml,
+  openapi/workday-integration-campus-engagement-openapi.yml, openapi/workday-integration-cash-management-openapi.yml,
+  openapi/workday-integration-compensation-openapi.yml, openapi/workday-integration-compensation-review-openapi.yml,
+  openapi/workday-integration-connect-openapi.yml, openapi/workday-integration-drive-openapi.yml,
+  openapi/workday-integration-dynamic-document-generation-openapi.yml, openapi/workday-integration-extensibility-openapi.yml,
+  openapi/workday-integration-external-integrations-openapi.yml, openapi/workday-integration-financial-aid-openapi.yml,
+  openapi/workday-integration-financial-management-openapi.yml, openapi/workday-integration-flex-team-openapi.yml,
+  openapi/workday-integration-human-capital-management-openapi.yml, openapi/workday-integration-identity-management-openapi.yml,
+  openapi/workday-integration-integrations-openapi.yml, openapi/workday-integration-inventory-openapi.yml,
+  openapi/workday-integration-learning-openapi.yml, openapi/workday-integration-metadata-translations-openapi.yml,
+  openapi/workday-integration-moments-openapi.yml, openapi/workday-integration-notification-openapi.yml,
+  openapi/workday-integration-org-studio-openapi.yml, openapi/workday-integration-payroll-aus-openapi.yml,
+  openapi/workday-integration-payroll-can-openapi.yml, openapi/workday-integration-payroll-fra-openapi.yml,
+  openapi/workday-integration-payroll-gbr-openapi.yml, openapi/workday-integration-payroll-interface-openapi.yml,
+  openapi/workday-integration-payroll-openapi.yml, openapi/workday-integration-performance-management-openapi.yml,
+  openapi/workday-integration-prism-analytics-openapi.yml, openapi/workday-integration-professional-services-automation-openapi.yml,
+  openapi/workday-integration-recruiting-openapi.yml, openapi/workday-integration-requests-openapi.yml,
+  openapi/workday-integration-resource-management-openapi.yml, openapi/workday-integration-revenue-management-openapi.yml,
+  openapi/workday-integration-scheduling-openapi.yml, openapi/workday-integration-settlement-services-openapi.yml,
+  openapi/workday-integration-staffing-openapi.yml, openapi/workday-integration-student-core-openapi.yml,
+  openapi/workday-integration-student-finance-openapi.yml, openapi/workday-integration-student-records-openapi.yml,
+  openapi/workday-integration-student-recruiting-openapi.yml, openapi/workday-integration-student-transfer-credit-openapi.yml,
+  openapi/workday-integration-talent-openapi.yml, openapi/workday-integration-tenant-data-translation-openapi.yml,
+  openapi/workday-integration-time-tracking-openapi.yml, openapi/workday-integration-workforce-planning-openapi.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 196
+  by_action_class:
+    connected: 168
+    acting: 28
+  by_consequence:
+    read: 168
+    write: 23
+    physical: 5
+  human_in_the_loop_required: 0
+operations:
+- path: /workers/{ID}/eligibleAbsenceTypes
+  method: get
+  operationId: getWorkerEligibleAbsenceTypes
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:absenceManagement
+    - w:absenceManagement
+- path: /workers/{ID}/requestTimeOff
+  method: post
+  operationId: requestTimeOff
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - r:absenceManagement
+    - w:absenceManagement
+- path: /workers/{ID}/validTimeOffDates
+  method: get
+  operationId: getValidTimeOffDates
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:absenceManagement
+    - w:absenceManagement
+- path: /workers/{ID}/leavesOfAbsence
+  method: get
+  operationId: getWorkerLeavesOfAbsence
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:absenceManagement
+    - w:absenceManagement
+- path: /workers/{ID}/leavesOfAbsence/{subresourceID}
+  method: get
+  operationId: getWorkerLeaveOfAbsenceById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:absenceManagement
+    - w:absenceManagement
+- path: /balances/{ID}
+  method: get
+  operationId: getAbsenceBalance
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:absenceManagement
+    - w:absenceManagement
+- path: /values/leave/status
+  method: get
+  operationId: getLeaveStatusValues
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:absenceManagement
+    - w:absenceManagement
+- path: /values/timeOff/status
+  method: get
+  operationId: getTimeOffStatusValues
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:absenceManagement
+    - w:absenceManagement
+- path: /acaReports
+  method: get
+  operationId: getACAReports
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:acaPartnerIntegrations
+- path: /acaReports/{ID}
+  method: get
+  operationId: getACAReportById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:acaPartnerIntegrations
+- path: /appointments
+  method: get
+  operationId: getAppointments
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:academicAdvising
+- path: /appointments/{ID}
+  method: get
+  operationId: getAppointmentById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:academicAdvising
+- path: /academicUnits
+  method: get
+  operationId: getAcademicUnits
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:academicFoundation
+- path: /academicUnits/{ID}
+  method: get
+  operationId: getAcademicUnitById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:academicFoundation
+- path: /applications
+  method: get
+  operationId: getApplications
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:admissions
+- path: /applications/{ID}
+  method: get
+  operationId: getApplicationById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:admissions
+- path: /adoptionMetrics
+  method: get
+  operationId: getAdoptionMetrics
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:adoption
+- path: /adoptionMetrics/{ID}
+  method: get
+  operationId: getAdoptionMetricById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:adoption
+- path: /workers/{ID}/benefitPlans
+  method: get
+  operationId: getWorkerBenefitPlans
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:benefits
+    - w:benefits
+- path: /workers/{ID}/benefitElections
+  method: get
+  operationId: getWorkerBenefitElections
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:benefits
+    - w:benefits
+- path: /workers/{ID}/dependents
+  method: get
+  operationId: getWorkerDependents
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:benefits
+    - w:benefits
+- path: /benefitPlanTypes
+  method: get
+  operationId: getBenefitPlanTypes
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:benefits
+    - w:benefits
+- path: /carrierConnections
+  method: get
+  operationId: getCarrierConnections
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:benefitsPartnerProgram
+- path: /carrierConnections/{ID}
+  method: get
+  operationId: getCarrierConnectionById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:benefitsPartnerProgram
+- path: /events
+  method: get
+  operationId: getEvents
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:campusEngagement
+- path: /events/{ID}
+  method: get
+  operationId: getEventById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:campusEngagement
+- path: /bankAccounts
+  method: get
+  operationId: getBankAccounts
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:cashManagement
+- path: /bankAccounts/{ID}
+  method: get
+  operationId: getBankAccountById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:cashManagement
+- path: /bankStatements
+  method: get
+  operationId: getBankStatements
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:cashManagement
+- path: /cashPositions
+  method: get
+  operationId: getCashPositions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:cashManagement
+- path: /scorecardResults
+  method: get
+  operationId: getScorecardResults
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:compensation
+    - w:compensation
+- path: /scorecardResults
+  method: post
+  operationId: createScorecardResult
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - r:compensation
+    - w:compensation
+- path: /scorecardResults/{ID}
+  method: get
+  operationId: getScorecardResultById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:compensation
+    - w:compensation
+- path: /scorecardResults/{ID}
+  method: delete
+  operationId: deleteScorecardResult
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - r:compensation
+    - w:compensation
+- path: /scorecards
+  method: get
+  operationId: getCompensationScorecards
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:compensation
+    - w:compensation
+- path: /scorecards
+  method: post
+  operationId: createCompensationScorecard
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - r:compensation
+    - w:compensation
+- path: /scorecards/{ID}
+  method: get
+  operationId: getCompensationScorecardById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:compensation
+    - w:compensation
+- path: /scorecards/{ID}
+  method: put
+  operationId: updateCompensationScorecard
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - r:compensation
+    - w:compensation
+- path: /scorecards/{ID}
+  method: delete
+  operationId: deleteCompensationScorecard
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - r:compensation
+    - w:compensation
+- path: /workers/{ID}/requestOneTimePayment
+  method: post
+  operationId: requestOneTimePayment
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - r:compensation
+    - w:compensation
+- path: /compensationReviewEvents
+  method: get
+  operationId: getCompensationReviewEvents
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:compensationReview
+    - w:compensationReview
+- path: /compensationReviewEvents/{ID}
+  method: get
+  operationId: getCompensationReviewEventById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:compensationReview
+    - w:compensationReview
+- path: /compensationReviewEvents/{ID}/awards
+  method: get
+  operationId: getCompensationReviewAwards
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:compensationReview
+    - w:compensationReview
+- path: /messages
+  method: get
+  operationId: getMessages
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:connect
+- path: /messages/{ID}
+  method: get
+  operationId: getMessageById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:connect
+- path: /files
+  method: get
+  operationId: getFiles
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:drive
+- path: /files/{ID}
+  method: get
+  operationId: getFileById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:drive
+- path: /templates
+  method: get
+  operationId: getTemplates
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:dynamicDocumentGeneration
+- path: /templates/{ID}
+  method: get
+  operationId: getTemplateById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:dynamicDocumentGeneration
+- path: /customObjects
+  method: get
+  operationId: getCustomObjects
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:extensibility
+- path: /customObjects/{ID}
+  method: get
+  operationId: getCustomObjectById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:extensibility
+- path: /connections
+  method: get
+  operationId: getConnections
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:externalIntegrations
+- path: /connections/{ID}
+  method: get
+  operationId: getConnectionById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:externalIntegrations
+- path: /awards
+  method: get
+  operationId: getAwards
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:financialAid
+- path: /awards/{ID}
+  method: get
+  operationId: getAwardById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:financialAid
+- path: /customers
+  method: get
+  operationId: getCustomers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:financials
+    - w:financials
+- path: /customers/{ID}
+  method: get
+  operationId: getCustomerById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:financials
+    - w:financials
+- path: /customers/{ID}/activities
+  method: get
+  operationId: getCustomerActivities
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:financials
+    - w:financials
+- path: /suppliers
+  method: get
+  operationId: getSuppliers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:financials
+    - w:financials
+- path: /suppliers/{ID}
+  method: get
+  operationId: getSupplierById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:financials
+    - w:financials
+- path: /validateWorktags
+  method: post
+  operationId: validateWorktags
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - r:financials
+    - w:financials
+- path: /teams
+  method: get
+  operationId: getTeams
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:flexTeam
+- path: /teams/{ID}
+  method: get
+  operationId: getTeamById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:flexTeam
+- path: /workers
+  method: get
+  operationId: getWorkers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:workers
+    - w:workers
+- path: /workers/{ID}
+  method: get
+  operationId: getWorkerById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:workers
+    - w:workers
+- path: /workers/{ID}/organizations
+  method: get
+  operationId: getWorkerOrganizations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:workers
+    - w:workers
+- path: /workers/{ID}/reports
+  method: get
+  operationId: getWorkerDirectReports
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:workers
+    - w:workers
+- path: /workers/{ID}/history
+  method: get
+  operationId: getWorkerHistory
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:workers
+    - w:workers
+- path: /workers/{ID}/businessTitleChanges
+  method: get
+  operationId: getWorkerBusinessTitleChanges
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:workers
+    - w:workers
+- path: /workers/{ID}/businessTitleChanges
+  method: post
+  operationId: createBusinessTitleChange
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - r:workers
+    - w:workers
+- path: /workers/{ID}/jobChanges
+  method: post
+  operationId: createJobChange
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - r:workers
+    - w:workers
+- path: /workers/{ID}/supervisoryOrganizations
+  method: get
+  operationId: getWorkerSupervisoryOrganizations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:workers
+    - w:workers
+- path: /workers/{ID}/paySlips
+  method: get
+  operationId: getWorkerPaySlips
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:workers
+    - w:workers
+- path: /supervisoryOrganizations
+  method: get
+  operationId: getSupervisoryOrganizations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:workers
+    - w:workers
+- path: /supervisoryOrganizations/{ID}
+  method: get
+  operationId: getSupervisoryOrganizationById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:workers
+    - w:workers
+- path: /supervisoryOrganizations/{ID}/workers
+  method: get
+  operationId: getSupervisoryOrganizationWorkers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:workers
+    - w:workers
+- path: /organizations
+  method: get
+  operationId: getOrganizations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:workers
+    - w:workers
+- path: /organizations/{ID}
+  method: get
+  operationId: getOrganizationById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:workers
+    - w:workers
+- path: /organizationTypes
+  method: get
+  operationId: getOrganizationTypes
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:workers
+    - w:workers
+- path: /jobChangeReasons
+  method: get
+  operationId: getJobChangeReasons
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:workers
+    - w:workers
+- path: /currencies
+  method: get
+  operationId: getCurrencies
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:workers
+    - w:workers
+- path: /auditLogs
+  method: get
+  operationId: getAuditLogs
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:workers
+    - w:workers
+- path: /accounts
+  method: get
+  operationId: getAccounts
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:identityManagement
+- path: /accounts/{ID}
+  method: get
+  operationId: getAccountById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:identityManagement
+- path: /integrationEvents
+  method: get
+  operationId: getIntegrationEvents
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:integrations
+    - w:integrations
+- path: /integrationEvents/{ID}
+  method: get
+  operationId: getIntegrationEventById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:integrations
+    - w:integrations
+- path: /integrationSystems
+  method: get
+  operationId: getIntegrationSystems
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:integrations
+    - w:integrations
+- path: /integrationSystems/{ID}
+  method: get
+  operationId: getIntegrationSystemById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:integrations
+    - w:integrations
+- path: /integrationSystems/{ID}/launch
+  method: post
+  operationId: launchIntegration
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - r:integrations
+    - w:integrations
+- path: /inventoryItems
+  method: get
+  operationId: getInventoryItems
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:inventory
+- path: /inventoryItems/{ID}
+  method: get
+  operationId: getInventoryItemById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:inventory
+- path: /learningCourses
+  method: get
+  operationId: getLearningCourses
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:learning
+- path: /learningCourses/{ID}
+  method: get
+  operationId: getLearningCourseById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:learning
+- path: /workers/{ID}/learningAssignments
+  method: get
+  operationId: getWorkerLearningAssignments
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:learning
+- path: /workers/{ID}/learningCompletions
+  method: get
+  operationId: getWorkerLearningCompletions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:learning
+- path: /metadataTranslations
+  method: get
+  operationId: getMetadataTranslations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:metadataTranslations
+- path: /metadataTranslations/{ID}
+  method: get
+  operationId: getMetadataTranslationById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:metadataTranslations
+- path: /moments
+  method: get
+  operationId: getMoments
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:moments
+- path: /moments/{ID}
+  method: get
+  operationId: getMomentById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:moments
+- path: /notifications
+  method: get
+  operationId: getNotifications
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:notification
+- path: /notifications/{ID}
+  method: get
+  operationId: getNotificationById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:notification
+- path: /orgDesigns
+  method: get
+  operationId: getOrgDesigns
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:orgStudio
+- path: /orgDesigns/{ID}
+  method: get
+  operationId: getOrgDesignById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:orgStudio
+- path: /payrollRuns
+  method: get
+  operationId: getPayrollRuns
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:payrollAUS
+- path: /payrollRuns/{ID}
+  method: get
+  operationId: getPayrollRunById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:payrollAUS
+- path: /payrollRuns
+  method: get
+  operationId: getPayrollRuns
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:payrollCAN
+- path: /payrollRuns/{ID}
+  method: get
+  operationId: getPayrollRunById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:payrollCAN
+- path: /payrollRuns
+  method: get
+  operationId: getPayrollRuns
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:payrollFRA
+- path: /payrollRuns/{ID}
+  method: get
+  operationId: getPayrollRunById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:payrollFRA
+- path: /payrollRuns
+  method: get
+  operationId: getPayrollRuns
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:payrollGBR
+- path: /payrollRuns/{ID}
+  method: get
+  operationId: getPayrollRunById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:payrollGBR
+- path: /payrollExports
+  method: get
+  operationId: getPayrollExports
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:payrollInterface
+- path: /payrollExports/{ID}
+  method: get
+  operationId: getPayrollExportById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:payrollInterface
+- path: /payGroups
+  method: get
+  operationId: getPayGroups
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:payroll
+    - w:payroll
+- path: /payGroups/{ID}
+  method: get
+  operationId: getPayGroupById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:payroll
+    - w:payroll
+- path: /payGroupDetails
+  method: get
+  operationId: getPayGroupDetails
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:payroll
+    - w:payroll
+- path: /payGroupDetails/{ID}
+  method: get
+  operationId: getPayGroupDetailById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:payroll
+    - w:payroll
+- path: /jobs/{ID}/payGroup
+  method: get
+  operationId: getPayGroupForJob
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:payroll
+    - w:payroll
+- path: /payrollInputs
+  method: get
+  operationId: getPayrollInputs
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:payroll
+    - w:payroll
+- path: /payrollInputs
+  method: post
+  operationId: createPayrollInput
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - r:payroll
+    - w:payroll
+- path: /payrollInputs/{ID}
+  method: get
+  operationId: getPayrollInputById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:payroll
+    - w:payroll
+- path: /payrollInputs/{ID}
+  method: patch
+  operationId: updatePayrollInput
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - r:payroll
+    - w:payroll
+- path: /payrollInputs/{ID}
+  method: delete
+  operationId: deletePayrollInput
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - r:payroll
+    - w:payroll
+- path: /companySUIRates
+  method: get
+  operationId: getCompanySUIRates
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:payroll
+    - w:payroll
+- path: /companySUIRates
+  method: post
+  operationId: createCompanySUIRate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - r:payroll
+    - w:payroll
+- path: /values/payrollInputsGroup/payComponents
+  method: get
+  operationId: getPayComponents
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:payroll
+    - w:payroll
+- path: /values/runCategories
+  method: get
+  operationId: getRunCategories
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:payroll
+    - w:payroll
+- path: /feedbackBadges
+  method: get
+  operationId: getFeedbackBadges
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:performanceManagement
+- path: /feedbackBadges/{ID}
+  method: get
+  operationId: getFeedbackBadgeById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:performanceManagement
+- path: /workers/{ID}/goals
+  method: get
+  operationId: getWorkerGoals
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:performanceManagement
+- path: /workers/{ID}/performanceReviews
+  method: get
+  operationId: getWorkerPerformanceReviews
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:performanceManagement
+- path: /tables
+  method: get
+  operationId: getTables
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:prismAnalytics
+    - w:prismAnalytics
+- path: /tables
+  method: post
+  operationId: createTable
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - r:prismAnalytics
+    - w:prismAnalytics
+- path: /tables/{ID}
+  method: get
+  operationId: getTableById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:prismAnalytics
+    - w:prismAnalytics
+- path: /tables/{ID}
+  method: put
+  operationId: updateTable
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - r:prismAnalytics
+    - w:prismAnalytics
+- path: /tables/{ID}
+  method: delete
+  operationId: deleteTable
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - r:prismAnalytics
+    - w:prismAnalytics
+- path: /dataChangeTasks
+  method: get
+  operationId: getDataChangeTasks
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:prismAnalytics
+    - w:prismAnalytics
+- path: /dataChangeTasks
+  method: post
+  operationId: createDataChangeTask
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - r:prismAnalytics
+    - w:prismAnalytics
+- path: /dataChangeTasks/{ID}
+  method: get
+  operationId: getDataChangeTaskById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:prismAnalytics
+    - w:prismAnalytics
+- path: /fileContainers
+  method: post
+  operationId: createFileContainer
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - r:prismAnalytics
+    - w:prismAnalytics
+- path: /fileContainers/{ID}
+  method: get
+  operationId: getFileContainerById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:prismAnalytics
+    - w:prismAnalytics
+- path: /wql
+  method: post
+  operationId: executeWQL
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - r:prismAnalytics
+    - w:prismAnalytics
+- path: /projects
+  method: get
+  operationId: getProjects
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:professionalServicesAutomation
+- path: /projects/{ID}
+  method: get
+  operationId: getProjectById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:professionalServicesAutomation
+- path: /interviews
+  method: get
+  operationId: getInterviews
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:recruiting
+    - w:recruiting
+- path: /interviews/{ID}/feedback
+  method: get
+  operationId: getInterviewFeedback
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:recruiting
+    - w:recruiting
+- path: /jobPostings
+  method: get
+  operationId: getJobPostings
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:recruiting
+    - w:recruiting
+- path: /jobPostings/{ID}
+  method: get
+  operationId: getJobPostingById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:recruiting
+    - w:recruiting
+- path: /prospects/{ID}/educations
+  method: get
+  operationId: getProspectEducations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:recruiting
+    - w:recruiting
+- path: /prospects/{ID}/experiences
+  method: get
+  operationId: getProspectExperiences
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:recruiting
+    - w:recruiting
+- path: /prospects/{ID}/experiences
+  method: post
+  operationId: createProspectExperience
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - r:recruiting
+    - w:recruiting
+- path: /prospects/{ID}/resumeAttachments
+  method: get
+  operationId: getProspectResumeAttachments
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:recruiting
+    - w:recruiting
+- path: /prospects/{ID}/skills
+  method: get
+  operationId: getProspectSkills
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:recruiting
+    - w:recruiting
+- path: /values/common/countries
+  method: get
+  operationId: getCountries
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:recruiting
+    - w:recruiting
+- path: /requests
+  method: get
+  operationId: getRequests
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:requests
+- path: /requests/{ID}
+  method: get
+  operationId: getRequestById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:requests
+- path: /resources
+  method: get
+  operationId: getResources
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:resourceManagement
+- path: /resources/{ID}
+  method: get
+  operationId: getResourceById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:resourceManagement
+- path: /revenueSchedules
+  method: get
+  operationId: getRevenueSchedules
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:revenueManagement
+- path: /contracts
+  method: get
+  operationId: getContracts
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:revenueManagement
+- path: /contracts/{ID}
+  method: get
+  operationId: getContractById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:revenueManagement
+- path: /schedules
+  method: get
+  operationId: getSchedules
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:scheduling
+- path: /schedules/{ID}
+  method: get
+  operationId: getScheduleById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:scheduling
+- path: /settlements
+  method: get
+  operationId: getSettlements
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:settlementServices
+- path: /settlements/{ID}
+  method: get
+  operationId: getSettlementById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:settlementServices
+- path: /workers
+  method: get
+  operationId: getWorkers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:staffing
+    - w:staffing
+- path: /workers/{ID}
+  method: get
+  operationId: getWorkerById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:staffing
+    - w:staffing
+- path: /positions
+  method: get
+  operationId: getPositions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:staffing
+    - w:staffing
+- path: /positions/{ID}
+  method: get
+  operationId: getPositionById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:staffing
+    - w:staffing
+- path: /jobProfiles
+  method: get
+  operationId: getJobProfiles
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:staffing
+    - w:staffing
+- path: /jobProfiles/{ID}
+  method: get
+  operationId: getJobProfileById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:staffing
+    - w:staffing
+- path: /students
+  method: get
+  operationId: getStudents
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:studentCore
+- path: /students/{ID}
+  method: get
+  operationId: getStudentById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:studentCore
+- path: /studentAccounts
+  method: get
+  operationId: getStudentAccounts
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:studentFinance
+- path: /studentAccounts/{ID}
+  method: get
+  operationId: getStudentAccountById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:studentFinance
+- path: /academicRecords
+  method: get
+  operationId: getAcademicRecords
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:studentRecords
+- path: /academicRecords/{ID}
+  method: get
+  operationId: getAcademicRecordById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:studentRecords
+- path: /prospects
+  method: get
+  operationId: getProspects
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:studentRecruiting
+- path: /prospects/{ID}
+  method: get
+  operationId: getProspectById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:studentRecruiting
+- path: /transferCredits
+  method: get
+  operationId: getTransferCredits
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:studentTransferCredit
+- path: /transferCredits/{ID}
+  method: get
+  operationId: getTransferCreditById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:studentTransferCredit
+- path: /mentorships
+  method: get
+  operationId: getMentorships
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:talent
+    - w:talent
+- path: /createMentorshipForMe
+  method: post
+  operationId: createMentorshipForMe
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - r:talent
+    - w:talent
+- path: /createMentorshipForWorker
+  method: post
+  operationId: createMentorshipForWorker
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - r:talent
+    - w:talent
+- path: /mentorships/{ID}/close
+  method: post
+  operationId: closeMentorship
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - r:talent
+    - w:talent
+- path: /mentorships/{ID}/edit
+  method: post
+  operationId: editMentorship
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - r:talent
+    - w:talent
+- path: /talentPools
+  method: get
+  operationId: getTalentPools
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:talent
+    - w:talent
+- path: /translations
+  method: get
+  operationId: getTranslations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:tenantDataTranslation
+- path: /translations/{ID}
+  method: get
+  operationId: getTranslationById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:tenantDataTranslation
+- path: /timeClockEvents
+  method: post
+  operationId: createTimeClockEvent
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - r:timeTracking
+    - w:timeTracking
+- path: /timeValidations
+  method: get
+  operationId: getTimeValidations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:timeTracking
+    - w:timeTracking
+- path: /workerTimeBlocks
+  method: get
+  operationId: getWorkerTimeBlocks
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:timeTracking
+    - w:timeTracking
+- path: /workerTimeBlocks/{ID}
+  method: get
+  operationId: getWorkerTimeBlockById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:timeTracking
+    - w:timeTracking
+- path: /workers/{ID}/timeReviewEvents
+  method: post
+  operationId: createTimeReviewEvent
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - r:timeTracking
+    - w:timeTracking
+- path: /plans
+  method: get
+  operationId: getPlans
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:workforcePlanning
+- path: /plans/{ID}
+  method: get
+  operationId: getPlanById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - r:workforcePlanning
