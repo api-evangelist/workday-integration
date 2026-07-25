@@ -1,0 +1,276 @@
+openapi: 3.1.0
+info:
+  title: Workday Integration Workday Absence Management Absence Types Payroll Inputs API
+  description: API for managing employee leave requests, absence types, and time-off balances. Retrieves eligible absence types for employees and supports validation of leave category selections.
+  version: v1
+  contact:
+    name: Workday API Support
+    email: api-support@workday.com
+    url: https://community.workday.com
+  license:
+    name: Proprietary
+    url: https://www.workday.com/en-us/legal/site-terms.html
+servers:
+- url: https://{baseUrl}/ccx/api/absenceManagement/v1/{tenant}
+  description: Workday Absence Management REST API server
+  variables:
+    baseUrl:
+      default: wd2-impl-services1.workday.com
+      description: The Workday data center hostname
+    tenant:
+      default: tenant
+      description: The Workday tenant name
+security:
+- OAuth2:
+  - r:absenceManagement
+  - w:absenceManagement
+tags:
+- name: Payroll Inputs
+paths:
+  /payrollInputs:
+    get:
+      operationId: getPayrollInputs
+      summary: Workday Integration Retrieve payroll inputs
+      description: Returns a collection of payroll input entries for processing.
+      tags:
+      - Payroll Inputs
+      parameters:
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response with payroll inputs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayrollInputsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    post:
+      operationId: createPayrollInput
+      summary: Workday Integration Create a payroll input
+      description: Creates a new payroll input entry for an upcoming payroll run.
+      tags:
+      - Payroll Inputs
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayrollInputRequest'
+      responses:
+        '201':
+          description: Payroll input created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayrollInput'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /payrollInputs/{ID}:
+    get:
+      operationId: getPayrollInputById
+      summary: Workday Integration Retrieve a specific payroll input
+      description: Returns the specified payroll input entry.
+      tags:
+      - Payroll Inputs
+      parameters:
+      - $ref: '#/components/parameters/ID'
+      responses:
+        '200':
+          description: Successful response with the payroll input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayrollInput'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updatePayrollInput
+      summary: Workday Integration Update a payroll input
+      description: Updates an existing payroll input entry.
+      tags:
+      - Payroll Inputs
+      parameters:
+      - $ref: '#/components/parameters/ID'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayrollInputRequest'
+      responses:
+        '200':
+          description: Payroll input updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayrollInput'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deletePayrollInput
+      summary: Workday Integration Delete a payroll input
+      description: Deletes the specified payroll input entry.
+      tags:
+      - Payroll Inputs
+      parameters:
+      - $ref: '#/components/parameters/ID'
+      responses:
+        '204':
+          description: Payroll input deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  responses:
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ResourceReference:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        href:
+          type: string
+          format: uri
+    PayrollInput:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        worker:
+          $ref: '#/components/schemas/ResourceReference'
+        payComponent:
+          $ref: '#/components/schemas/ResourceReference'
+        amount:
+          type: number
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+    PayrollInputsResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PayrollInput'
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              error:
+                type: string
+              field:
+                type: string
+              message:
+                type: string
+    PayrollInputRequest:
+      type: object
+      required:
+      - worker
+      - payComponent
+      properties:
+        worker:
+          $ref: '#/components/schemas/ResourceReference'
+        payComponent:
+          $ref: '#/components/schemas/ResourceReference'
+        amount:
+          type: number
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+  parameters:
+    offset:
+      name: offset
+      in: query
+      description: The zero-based index of the first object in a response collection
+      schema:
+        type: integer
+        default: 0
+    ID:
+      name: ID
+      in: path
+      required: true
+      description: The Workday ID of the resource
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      description: The maximum number of objects in a single response (default 20, maximum 100)
+      schema:
+        type: integer
+        default: 20
+        maximum: 100
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{baseUrl}/authorize
+          tokenUrl: https://{baseUrl}/oauth2/{tenant}/token
+          refreshUrl: https://{baseUrl}/oauth2/{tenant}/token
+          scopes:
+            r:absenceManagement: Read absence data
+            w:absenceManagement: Write absence data

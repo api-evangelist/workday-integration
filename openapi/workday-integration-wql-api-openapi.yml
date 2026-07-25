@@ -1,0 +1,110 @@
+openapi: 3.1.0
+info:
+  title: Workday Integration Workday Absence Management Absence Types WQL API
+  description: API for managing employee leave requests, absence types, and time-off balances. Retrieves eligible absence types for employees and supports validation of leave category selections.
+  version: v1
+  contact:
+    name: Workday API Support
+    email: api-support@workday.com
+    url: https://community.workday.com
+  license:
+    name: Proprietary
+    url: https://www.workday.com/en-us/legal/site-terms.html
+servers:
+- url: https://{baseUrl}/ccx/api/absenceManagement/v1/{tenant}
+  description: Workday Absence Management REST API server
+  variables:
+    baseUrl:
+      default: wd2-impl-services1.workday.com
+      description: The Workday data center hostname
+    tenant:
+      default: tenant
+      description: The Workday tenant name
+security:
+- OAuth2:
+  - r:absenceManagement
+  - w:absenceManagement
+tags:
+- name: WQL
+paths:
+  /wql:
+    post:
+      operationId: executeWQL
+      summary: Workday Integration Execute a WQL query
+      description: Executes a Workday Query Language (WQL) query against Prism Analytics data and returns the results.
+      tags:
+      - WQL
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WQLRequest'
+      responses:
+        '200':
+          description: Successful WQL query response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WQLResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+components:
+  schemas:
+    WQLRequest:
+      type: object
+      required:
+      - query
+      properties:
+        query:
+          type: string
+          description: The WQL query string to execute
+    WQLResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+  responses:
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{baseUrl}/authorize
+          tokenUrl: https://{baseUrl}/oauth2/{tenant}/token
+          refreshUrl: https://{baseUrl}/oauth2/{tenant}/token
+          scopes:
+            r:absenceManagement: Read absence data
+            w:absenceManagement: Write absence data

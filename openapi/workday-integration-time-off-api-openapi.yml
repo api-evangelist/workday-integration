@@ -1,0 +1,221 @@
+openapi: 3.1.0
+info:
+  title: Workday Integration Workday Absence Management Absence Types Time Off API
+  description: API for managing employee leave requests, absence types, and time-off balances. Retrieves eligible absence types for employees and supports validation of leave category selections.
+  version: v1
+  contact:
+    name: Workday API Support
+    email: api-support@workday.com
+    url: https://community.workday.com
+  license:
+    name: Proprietary
+    url: https://www.workday.com/en-us/legal/site-terms.html
+servers:
+- url: https://{baseUrl}/ccx/api/absenceManagement/v1/{tenant}
+  description: Workday Absence Management REST API server
+  variables:
+    baseUrl:
+      default: wd2-impl-services1.workday.com
+      description: The Workday data center hostname
+    tenant:
+      default: tenant
+      description: The Workday tenant name
+security:
+- OAuth2:
+  - r:absenceManagement
+  - w:absenceManagement
+tags:
+- name: Time Off
+paths:
+  /workers/{ID}/requestTimeOff:
+    post:
+      operationId: requestTimeOff
+      summary: Workday Integration Create a time off request for a worker
+      description: Creates a time off request for the specified worker ID and initiates the approval business process.
+      tags:
+      - Time Off
+      parameters:
+      - $ref: '#/components/parameters/ID'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TimeOffRequest'
+      responses:
+        '201':
+          description: Time off request created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeOffEntry'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /workers/{ID}/validTimeOffDates:
+    get:
+      operationId: getValidTimeOffDates
+      summary: Workday Integration Retrieve valid time off dates for a worker
+      description: Returns the valid dates on which the specified worker can request time off, based on their schedule and existing requests.
+      tags:
+      - Time Off
+      parameters:
+      - $ref: '#/components/parameters/ID'
+      - name: startDate
+        in: query
+        description: Start date for the range of valid dates
+        schema:
+          type: string
+          format: date
+      - name: endDate
+        in: query
+        description: End date for the range of valid dates
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: Successful response with valid time off dates
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidDatesResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    ValidDatesResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+                format: date
+              isValid:
+                type: boolean
+    TimeOffEntry:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        worker:
+          $ref: '#/components/schemas/ResourceReference'
+        absenceType:
+          $ref: '#/components/schemas/ResourceReference'
+        date:
+          type: string
+          format: date
+        quantity:
+          type: number
+        unit:
+          type: string
+        status:
+          type: string
+    ResourceReference:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        href:
+          type: string
+          format: uri
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              error:
+                type: string
+              field:
+                type: string
+              message:
+                type: string
+    TimeOffRequest:
+      type: object
+      required:
+      - absenceType
+      - days
+      properties:
+        absenceType:
+          $ref: '#/components/schemas/ResourceReference'
+        days:
+          type: array
+          items:
+            type: object
+            required:
+            - date
+            - quantity
+            properties:
+              date:
+                type: string
+                format: date
+              quantity:
+                type: number
+              comment:
+                type: string
+  responses:
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    ID:
+      name: ID
+      in: path
+      required: true
+      description: The Workday ID of the resource
+      schema:
+        type: string
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{baseUrl}/authorize
+          tokenUrl: https://{baseUrl}/oauth2/{tenant}/token
+          refreshUrl: https://{baseUrl}/oauth2/{tenant}/token
+          scopes:
+            r:absenceManagement: Read absence data
+            w:absenceManagement: Write absence data

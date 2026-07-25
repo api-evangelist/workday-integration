@@ -1,0 +1,223 @@
+openapi: 3.1.0
+info:
+  title: Workday Integration Workday Absence Management Absence Types Data Change Tasks API
+  description: API for managing employee leave requests, absence types, and time-off balances. Retrieves eligible absence types for employees and supports validation of leave category selections.
+  version: v1
+  contact:
+    name: Workday API Support
+    email: api-support@workday.com
+    url: https://community.workday.com
+  license:
+    name: Proprietary
+    url: https://www.workday.com/en-us/legal/site-terms.html
+servers:
+- url: https://{baseUrl}/ccx/api/absenceManagement/v1/{tenant}
+  description: Workday Absence Management REST API server
+  variables:
+    baseUrl:
+      default: wd2-impl-services1.workday.com
+      description: The Workday data center hostname
+    tenant:
+      default: tenant
+      description: The Workday tenant name
+security:
+- OAuth2:
+  - r:absenceManagement
+  - w:absenceManagement
+tags:
+- name: Data Change Tasks
+paths:
+  /dataChangeTasks:
+    get:
+      operationId: getDataChangeTasks
+      summary: Workday Integration Retrieve data change tasks
+      description: Returns a collection of data change tasks for Prism Analytics tables.
+      tags:
+      - Data Change Tasks
+      parameters:
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Successful response with data change tasks
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataChangeTasksResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    post:
+      operationId: createDataChangeTask
+      summary: Workday Integration Create a data change task
+      description: Creates a new data change task to load data into a Prism Analytics table.
+      tags:
+      - Data Change Tasks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataChangeTaskRequest'
+      responses:
+        '201':
+          description: Data change task created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataChangeTask'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /dataChangeTasks/{ID}:
+    get:
+      operationId: getDataChangeTaskById
+      summary: Workday Integration Retrieve a specific data change task
+      description: Returns the specified data change task with its status and details.
+      tags:
+      - Data Change Tasks
+      parameters:
+      - $ref: '#/components/parameters/ID'
+      responses:
+        '200':
+          description: Successful response with the data change task
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataChangeTask'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    DataChangeTasksResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataChangeTask'
+    DataChangeTaskRequest:
+      type: object
+      required:
+      - targetTable
+      - operation
+      properties:
+        targetTable:
+          $ref: '#/components/schemas/ResourceReference'
+        operation:
+          type: string
+          enum:
+          - TruncateAndInsert
+          - Insert
+          - Update
+          - Upsert
+          - Delete
+        fileContainer:
+          $ref: '#/components/schemas/ResourceReference'
+    ResourceReference:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        href:
+          type: string
+          format: uri
+    DataChangeTask:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        targetTable:
+          $ref: '#/components/schemas/ResourceReference'
+        status:
+          type: string
+          enum:
+          - Processing
+          - Completed
+          - Failed
+        operation:
+          type: string
+          enum:
+          - TruncateAndInsert
+          - Insert
+          - Update
+          - Upsert
+          - Delete
+        createdDateTime:
+          type: string
+          format: date-time
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+  responses:
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+    ID:
+      name: ID
+      in: path
+      required: true
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 20
+        maximum: 100
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{baseUrl}/authorize
+          tokenUrl: https://{baseUrl}/oauth2/{tenant}/token
+          refreshUrl: https://{baseUrl}/oauth2/{tenant}/token
+          scopes:
+            r:absenceManagement: Read absence data
+            w:absenceManagement: Write absence data

@@ -1,0 +1,256 @@
+openapi: 3.1.0
+info:
+  title: Workday Integration Workday Absence Management Absence Types Integration Systems API
+  description: API for managing employee leave requests, absence types, and time-off balances. Retrieves eligible absence types for employees and supports validation of leave category selections.
+  version: v1
+  contact:
+    name: Workday API Support
+    email: api-support@workday.com
+    url: https://community.workday.com
+  license:
+    name: Proprietary
+    url: https://www.workday.com/en-us/legal/site-terms.html
+servers:
+- url: https://{baseUrl}/ccx/api/absenceManagement/v1/{tenant}
+  description: Workday Absence Management REST API server
+  variables:
+    baseUrl:
+      default: wd2-impl-services1.workday.com
+      description: The Workday data center hostname
+    tenant:
+      default: tenant
+      description: The Workday tenant name
+security:
+- OAuth2:
+  - r:absenceManagement
+  - w:absenceManagement
+tags:
+- name: Integration Systems
+paths:
+  /integrationSystems:
+    get:
+      operationId: getIntegrationSystems
+      summary: Workday Integration Retrieve integration systems
+      description: Returns a collection of configured integration systems in the tenant.
+      tags:
+      - Integration Systems
+      parameters:
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      - $ref: '#/components/parameters/search'
+      responses:
+        '200':
+          description: Successful response with integration systems
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntegrationSystemsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /integrationSystems/{ID}:
+    get:
+      operationId: getIntegrationSystemById
+      summary: Workday Integration Retrieve a specific integration system
+      description: Returns the specified integration system with its configuration details.
+      tags:
+      - Integration Systems
+      parameters:
+      - $ref: '#/components/parameters/ID'
+      responses:
+        '200':
+          description: Successful response with the integration system
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntegrationSystem'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /integrationSystems/{ID}/launch:
+    post:
+      operationId: launchIntegration
+      summary: Workday Integration Launch an integration system
+      description: Triggers execution of the specified integration system.
+      tags:
+      - Integration Systems
+      parameters:
+      - $ref: '#/components/parameters/ID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IntegrationLaunchRequest'
+      responses:
+        '201':
+          description: Integration launched successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntegrationEvent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+components:
+  schemas:
+    IntegrationEvent:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        integrationSystem:
+          $ref: '#/components/schemas/ResourceReference'
+        status:
+          type: string
+          enum:
+          - Completed
+          - Failed
+          - In_Progress
+          - Cancelled
+        startDateTime:
+          type: string
+          format: date-time
+        endDateTime:
+          type: string
+          format: date-time
+        recordsProcessed:
+          type: integer
+        recordsFailed:
+          type: integer
+    IntegrationLaunchRequest:
+      type: object
+      properties:
+        launchParameters:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              value:
+                type: string
+    ResourceReference:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        href:
+          type: string
+          format: uri
+    IntegrationSystem:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        integrationSystemName:
+          type: string
+        template:
+          $ref: '#/components/schemas/ResourceReference'
+        isActive:
+          type: boolean
+        lastRunDateTime:
+          type: string
+          format: date-time
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              error:
+                type: string
+              field:
+                type: string
+              message:
+                type: string
+    IntegrationSystemsResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/IntegrationSystem'
+  responses:
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    offset:
+      name: offset
+      in: query
+      description: The zero-based index of the first object in a response collection
+      schema:
+        type: integer
+        default: 0
+    ID:
+      name: ID
+      in: path
+      required: true
+      description: The Workday ID of the resource
+      schema:
+        type: string
+    search:
+      name: search
+      in: query
+      description: Search string used to filter results
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      description: The maximum number of objects in a single response (default 20, maximum 100)
+      schema:
+        type: integer
+        default: 20
+        maximum: 100
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{baseUrl}/authorize
+          tokenUrl: https://{baseUrl}/oauth2/{tenant}/token
+          refreshUrl: https://{baseUrl}/oauth2/{tenant}/token
+          scopes:
+            r:absenceManagement: Read absence data
+            w:absenceManagement: Write absence data
