@@ -1,0 +1,268 @@
+{
+  "info": {
+    "_postman_id": "f54f6760-f5c5-408b-8d79-97d3c6c8c95a",
+    "name": "Workday Integration Workday Absence Management Absence Types Audit API",
+    "description": "API for managing employee leave requests, absence types, and time-off balances. Retrieves eligible absence types for employees and supports validation of leave category selections.\n\nContact Support:\n Name: Workday API Support\n Email: api-support@workday.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:32:08.000Z",
+    "updatedAt": "2026-07-28T03:32:08.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f54f6760-f5c5-408b-8d79-97d3c6c8c95a"
+  },
+  "item": [
+    {
+      "name": "auditLogs",
+      "item": [
+        {
+          "name": "Workday Integration Retrieve audit logs",
+          "id": "c495ec75-4bfb-45a2-8bc9-c563d79960a9",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auditLogs?limit=20&offset=0",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auditLogs"
+              ],
+              "query": [
+                {
+                  "description": "The maximum number of objects in a single response (default 20, maximum 100)",
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "description": "The zero-based index of the first object in a response collection",
+                  "key": "offset",
+                  "value": "0"
+                }
+              ]
+            },
+            "description": "Returns audit log entries for tracking data changes and system events."
+          },
+          "response": [
+            {
+              "id": "32d78761-faed-4886-925f-b5fbe01834bb",
+              "name": "Successful response with audit logs",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/auditLogs?limit=20&offset=0",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auditLogs"
+                  ],
+                  "query": [
+                    {
+                      "description": "The maximum number of objects in a single response (default 20, maximum 100)",
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "description": "The zero-based index of the first object in a response collection",
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"descriptor\": \"<string>\",\n      \"timestamp\": \"<dateTime>\",\n      \"action\": \"<string>\",\n      \"target\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"descriptor\": \"<string>\",\n      \"timestamp\": \"<dateTime>\",\n      \"action\": \"<string>\",\n      \"target\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:32:09.000Z",
+              "updatedAt": "2026-07-28T03:32:09.000Z",
+              "uid": "35240-32d78761-faed-4886-925f-b5fbe01834bb"
+            },
+            {
+              "id": "f70ef4f4-f661-4472-ab44-c3638e611724",
+              "name": "Authentication required",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/auditLogs?limit=20&offset=0",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auditLogs"
+                  ],
+                  "query": [
+                    {
+                      "description": "The maximum number of objects in a single response (default 20, maximum 100)",
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "description": "The zero-based index of the first object in a response collection",
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:32:09.000Z",
+              "updatedAt": "2026-07-28T03:32:09.000Z",
+              "uid": "35240-f70ef4f4-f661-4472-ab44-c3638e611724"
+            },
+            {
+              "id": "a88ccc9a-44f9-4f36-bbf5-8dcd97cea610",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/auditLogs?limit=20&offset=0",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auditLogs"
+                  ],
+                  "query": [
+                    {
+                      "description": "The maximum number of objects in a single response (default 20, maximum 100)",
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "description": "The zero-based index of the first object in a response collection",
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:32:09.000Z",
+              "updatedAt": "2026-07-28T03:32:09.000Z",
+              "uid": "35240-a88ccc9a-44f9-4f36-bbf5-8dcd97cea610"
+            }
+          ],
+          "createdAt": "2026-07-28T03:32:09.000Z",
+          "updatedAt": "2026-07-28T03:32:09.000Z",
+          "uid": "35240-c495ec75-4bfb-45a2-8bc9-c563d79960a9"
+        }
+      ],
+      "id": "7df54af2-f6f5-4f13-82d3-dfb55a06a5c5",
+      "createdAt": "2026-07-28T03:32:09.000Z",
+      "updatedAt": "2026-07-28T03:32:09.000Z",
+      "uid": "35240-7df54af2-f6f5-4f13-82d3-dfb55a06a5c5"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "r:absenceManagement w:absenceManagement",
+        "type": "string"
+      },
+      {
+        "key": "redirect_uri",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://{baseUrl}/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "wd2-impl-services1.workday.com"
+    },
+    {
+      "key": "tenant",
+      "value": "tenant"
+    }
+  ]
+}

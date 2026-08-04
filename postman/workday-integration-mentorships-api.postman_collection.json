@@ -1,0 +1,1450 @@
+{
+  "info": {
+    "_postman_id": "d2a63eeb-7aba-4c89-9d6f-0f9457250fbf",
+    "name": "Workday Integration Workday Absence Management Absence Types Mentorships API",
+    "description": "API for managing employee leave requests, absence types, and time-off balances. Retrieves eligible absence types for employees and supports validation of leave category selections.\n\nContact Support:\n Name: Workday API Support\n Email: api-support@workday.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:33:05.000Z",
+    "updatedAt": "2026-07-28T03:33:05.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-d2a63eeb-7aba-4c89-9d6f-0f9457250fbf"
+  },
+  "item": [
+    {
+      "name": "mentorships",
+      "item": [
+        {
+          "name": "{ID}",
+          "item": [
+            {
+              "name": "close",
+              "item": [
+                {
+                  "name": "Workday Integration Close a mentorship",
+                  "id": "92086771-b0b3-46c5-9a2d-936a303d25a3",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/mentorships/:ID/close",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "mentorships",
+                        ":ID",
+                        "close"
+                      ],
+                      "variable": [
+                        {
+                          "id": "77d249e4-c25f-47c0-a716-d3e1227894d0",
+                          "key": "ID",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Closes an active mentorship relationship."
+                  },
+                  "response": [
+                    {
+                      "id": "0d67858e-2f06-4312-88f7-206ef40ff0bc",
+                      "name": "Mentorship closed successfully",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/mentorships/:ID/close",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "mentorships",
+                            ":ID",
+                            "close"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"descriptor\": \"<string>\",\n  \"mentor\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\",\n    \"href\": \"<uri>\"\n  },\n  \"mentee\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\",\n    \"href\": \"<uri>\"\n  },\n  \"status\": \"<string>\",\n  \"startDate\": \"<date>\",\n  \"endDate\": \"<date>\"\n}",
+                      "createdAt": "2026-07-28T03:33:05.000Z",
+                      "updatedAt": "2026-07-28T03:33:05.000Z",
+                      "uid": "35240-0d67858e-2f06-4312-88f7-206ef40ff0bc"
+                    },
+                    {
+                      "id": "fc5f9661-198b-4a1f-8e04-6626b9d519c9",
+                      "name": "Authentication required",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/mentorships/:ID/close",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "mentorships",
+                            ":ID",
+                            "close"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:33:05.000Z",
+                      "updatedAt": "2026-07-28T03:33:05.000Z",
+                      "uid": "35240-fc5f9661-198b-4a1f-8e04-6626b9d519c9"
+                    },
+                    {
+                      "id": "7ee9505a-3333-43e6-827a-8059dc85b9a9",
+                      "name": "Insufficient permissions",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/mentorships/:ID/close",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "mentorships",
+                            ":ID",
+                            "close"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:33:05.000Z",
+                      "updatedAt": "2026-07-28T03:33:05.000Z",
+                      "uid": "35240-7ee9505a-3333-43e6-827a-8059dc85b9a9"
+                    },
+                    {
+                      "id": "c792d25d-092e-4988-89ad-6b6117596a8d",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/mentorships/:ID/close",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "mentorships",
+                            ":ID",
+                            "close"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:33:05.000Z",
+                      "updatedAt": "2026-07-28T03:33:05.000Z",
+                      "uid": "35240-c792d25d-092e-4988-89ad-6b6117596a8d"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:33:05.000Z",
+                  "updatedAt": "2026-07-28T03:33:05.000Z",
+                  "uid": "35240-92086771-b0b3-46c5-9a2d-936a303d25a3"
+                }
+              ],
+              "id": "47a100a2-ecba-4e7c-b6bc-0955b96be191",
+              "createdAt": "2026-07-28T03:33:05.000Z",
+              "updatedAt": "2026-07-28T03:33:05.000Z",
+              "uid": "35240-47a100a2-ecba-4e7c-b6bc-0955b96be191"
+            },
+            {
+              "name": "edit",
+              "item": [
+                {
+                  "name": "Workday Integration Edit a mentorship",
+                  "id": "c981a560-e82b-41b1-bfdb-c4f2f27b84d5",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"topic\": \"<string>\",\n  \"endDate\": \"<date>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/mentorships/:ID/edit",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "mentorships",
+                        ":ID",
+                        "edit"
+                      ],
+                      "variable": [
+                        {
+                          "id": "301c86ae-ea47-4f9b-97ab-0d115f2c6006",
+                          "key": "ID",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Modifies an existing mentorship relationship."
+                  },
+                  "response": [
+                    {
+                      "id": "38feaf68-99b7-4b70-8769-ab534e865da4",
+                      "name": "Mentorship updated successfully",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"topic\": \"<string>\",\n  \"endDate\": \"<date>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/mentorships/:ID/edit",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "mentorships",
+                            ":ID",
+                            "edit"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"descriptor\": \"<string>\",\n  \"mentor\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\",\n    \"href\": \"<uri>\"\n  },\n  \"mentee\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\",\n    \"href\": \"<uri>\"\n  },\n  \"status\": \"<string>\",\n  \"startDate\": \"<date>\",\n  \"endDate\": \"<date>\"\n}",
+                      "createdAt": "2026-07-28T03:33:05.000Z",
+                      "updatedAt": "2026-07-28T03:33:05.000Z",
+                      "uid": "35240-38feaf68-99b7-4b70-8769-ab534e865da4"
+                    },
+                    {
+                      "id": "6d4371ef-e586-42d6-a5d2-672516fa82ec",
+                      "name": "Invalid request parameters",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"topic\": \"<string>\",\n  \"endDate\": \"<date>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/mentorships/:ID/edit",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "mentorships",
+                            ":ID",
+                            "edit"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:33:05.000Z",
+                      "updatedAt": "2026-07-28T03:33:05.000Z",
+                      "uid": "35240-6d4371ef-e586-42d6-a5d2-672516fa82ec"
+                    },
+                    {
+                      "id": "c28ed313-0482-4298-aeb9-7cb13ac5cf51",
+                      "name": "Authentication required",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"topic\": \"<string>\",\n  \"endDate\": \"<date>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/mentorships/:ID/edit",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "mentorships",
+                            ":ID",
+                            "edit"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:33:05.000Z",
+                      "updatedAt": "2026-07-28T03:33:05.000Z",
+                      "uid": "35240-c28ed313-0482-4298-aeb9-7cb13ac5cf51"
+                    },
+                    {
+                      "id": "6419e276-ca7b-489c-a36b-63ff4196a0b6",
+                      "name": "Insufficient permissions",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"topic\": \"<string>\",\n  \"endDate\": \"<date>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/mentorships/:ID/edit",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "mentorships",
+                            ":ID",
+                            "edit"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:33:05.000Z",
+                      "updatedAt": "2026-07-28T03:33:05.000Z",
+                      "uid": "35240-6419e276-ca7b-489c-a36b-63ff4196a0b6"
+                    },
+                    {
+                      "id": "8e64275c-e8f6-4262-b715-395ee95c3d65",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"topic\": \"<string>\",\n  \"endDate\": \"<date>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/mentorships/:ID/edit",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "mentorships",
+                            ":ID",
+                            "edit"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:33:05.000Z",
+                      "updatedAt": "2026-07-28T03:33:05.000Z",
+                      "uid": "35240-8e64275c-e8f6-4262-b715-395ee95c3d65"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:33:05.000Z",
+                  "updatedAt": "2026-07-28T03:33:05.000Z",
+                  "uid": "35240-c981a560-e82b-41b1-bfdb-c4f2f27b84d5"
+                }
+              ],
+              "id": "0c27b082-e232-4ad6-b171-69692e62b3c6",
+              "createdAt": "2026-07-28T03:33:05.000Z",
+              "updatedAt": "2026-07-28T03:33:05.000Z",
+              "uid": "35240-0c27b082-e232-4ad6-b171-69692e62b3c6"
+            }
+          ],
+          "id": "d265143d-2e0d-41ff-926d-5d43548d9e45",
+          "createdAt": "2026-07-28T03:33:05.000Z",
+          "updatedAt": "2026-07-28T03:33:05.000Z",
+          "uid": "35240-d265143d-2e0d-41ff-926d-5d43548d9e45"
+        },
+        {
+          "name": "Workday Integration Retrieve mentorships",
+          "id": "ab6a7e86-e43c-4d5f-bac1-9e68239e2360",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/mentorships?limit=20&offset=0",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "mentorships"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "key": "offset",
+                  "value": "0"
+                }
+              ]
+            },
+            "description": "Returns a collection of active and completed mentorship relationships."
+          },
+          "response": [
+            {
+              "id": "b0042e9a-c96c-45e6-ba81-b2d4d63890b4",
+              "name": "Successful response with mentorships",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/mentorships?limit=20&offset=0",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "mentorships"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"descriptor\": \"<string>\",\n      \"mentor\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      \"mentee\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      \"status\": \"<string>\",\n      \"startDate\": \"<date>\",\n      \"endDate\": \"<date>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"descriptor\": \"<string>\",\n      \"mentor\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      \"mentee\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      \"status\": \"<string>\",\n      \"startDate\": \"<date>\",\n      \"endDate\": \"<date>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:33:05.000Z",
+              "updatedAt": "2026-07-28T03:33:05.000Z",
+              "uid": "35240-b0042e9a-c96c-45e6-ba81-b2d4d63890b4"
+            },
+            {
+              "id": "4da740bb-a89e-461a-a22d-85eee9101f0d",
+              "name": "Authentication required",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/mentorships?limit=20&offset=0",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "mentorships"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:33:05.000Z",
+              "updatedAt": "2026-07-28T03:33:05.000Z",
+              "uid": "35240-4da740bb-a89e-461a-a22d-85eee9101f0d"
+            },
+            {
+              "id": "1bd2524b-5ab1-4662-b8a4-59e4c00201fc",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/mentorships?limit=20&offset=0",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "mentorships"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:33:05.000Z",
+              "updatedAt": "2026-07-28T03:33:05.000Z",
+              "uid": "35240-1bd2524b-5ab1-4662-b8a4-59e4c00201fc"
+            }
+          ],
+          "createdAt": "2026-07-28T03:33:05.000Z",
+          "updatedAt": "2026-07-28T03:33:05.000Z",
+          "uid": "35240-ab6a7e86-e43c-4d5f-bac1-9e68239e2360"
+        }
+      ],
+      "id": "e26de7dc-c968-4d94-9460-4891f99ea178",
+      "createdAt": "2026-07-28T03:33:05.000Z",
+      "updatedAt": "2026-07-28T03:33:05.000Z",
+      "uid": "35240-e26de7dc-c968-4d94-9460-4891f99ea178"
+    },
+    {
+      "name": "createMentorshipForMe",
+      "item": [
+        {
+          "name": "Workday Integration Create a mentorship for the current user",
+          "id": "4dbe85e7-eed8-43b7-a9c3-108ff0668395",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"mentor\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\",\n    \"href\": \"<uri>\"\n  },\n  \"topic\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/createMentorshipForMe",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "createMentorshipForMe"
+              ]
+            },
+            "description": "Creates a mentorship relationship where the current authenticated user is the mentee."
+          },
+          "response": [
+            {
+              "id": "5d70b1ec-c297-41ae-bf3c-08463fb141d5",
+              "name": "Mentorship created successfully",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mentor\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\",\n    \"href\": \"<uri>\"\n  },\n  \"topic\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/createMentorshipForMe",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "createMentorshipForMe"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"descriptor\": \"<string>\",\n  \"mentor\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\",\n    \"href\": \"<uri>\"\n  },\n  \"mentee\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\",\n    \"href\": \"<uri>\"\n  },\n  \"status\": \"<string>\",\n  \"startDate\": \"<date>\",\n  \"endDate\": \"<date>\"\n}",
+              "createdAt": "2026-07-28T03:33:05.000Z",
+              "updatedAt": "2026-07-28T03:33:05.000Z",
+              "uid": "35240-5d70b1ec-c297-41ae-bf3c-08463fb141d5"
+            },
+            {
+              "id": "e7804895-0775-469a-b578-44f101f79335",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mentor\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\",\n    \"href\": \"<uri>\"\n  },\n  \"topic\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/createMentorshipForMe",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "createMentorshipForMe"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:33:05.000Z",
+              "updatedAt": "2026-07-28T03:33:05.000Z",
+              "uid": "35240-e7804895-0775-469a-b578-44f101f79335"
+            },
+            {
+              "id": "d480f378-32cb-419b-abe0-04a722d5529e",
+              "name": "Authentication required",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mentor\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\",\n    \"href\": \"<uri>\"\n  },\n  \"topic\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/createMentorshipForMe",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "createMentorshipForMe"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:33:05.000Z",
+              "updatedAt": "2026-07-28T03:33:05.000Z",
+              "uid": "35240-d480f378-32cb-419b-abe0-04a722d5529e"
+            },
+            {
+              "id": "30c16ddc-f57b-418c-9f64-868875ba6b05",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mentor\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\",\n    \"href\": \"<uri>\"\n  },\n  \"topic\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/createMentorshipForMe",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "createMentorshipForMe"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:33:05.000Z",
+              "updatedAt": "2026-07-28T03:33:05.000Z",
+              "uid": "35240-30c16ddc-f57b-418c-9f64-868875ba6b05"
+            }
+          ],
+          "createdAt": "2026-07-28T03:33:05.000Z",
+          "updatedAt": "2026-07-28T03:33:05.000Z",
+          "uid": "35240-4dbe85e7-eed8-43b7-a9c3-108ff0668395"
+        }
+      ],
+      "id": "7e7e2f78-b3d2-439d-942b-89d51ba25c01",
+      "createdAt": "2026-07-28T03:33:05.000Z",
+      "updatedAt": "2026-07-28T03:33:05.000Z",
+      "uid": "35240-7e7e2f78-b3d2-439d-942b-89d51ba25c01"
+    },
+    {
+      "name": "createMentorshipForWorker",
+      "item": [
+        {
+          "name": "Workday Integration Create a mentorship for a worker",
+          "id": "4e6acb32-69f4-47bc-aeaa-1d6823bb3ff4",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"mentor\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\",\n    \"href\": \"<uri>\"\n  },\n  \"mentee\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\",\n    \"href\": \"<uri>\"\n  },\n  \"topic\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/createMentorshipForWorker",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "createMentorshipForWorker"
+              ]
+            },
+            "description": "Creates a mentorship relationship for the specified worker."
+          },
+          "response": [
+            {
+              "id": "d6be6e25-a565-4354-804f-3a30d63d5e7e",
+              "name": "Mentorship created successfully",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mentor\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\",\n    \"href\": \"<uri>\"\n  },\n  \"mentee\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\",\n    \"href\": \"<uri>\"\n  },\n  \"topic\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/createMentorshipForWorker",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "createMentorshipForWorker"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"descriptor\": \"<string>\",\n  \"mentor\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\",\n    \"href\": \"<uri>\"\n  },\n  \"mentee\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\",\n    \"href\": \"<uri>\"\n  },\n  \"status\": \"<string>\",\n  \"startDate\": \"<date>\",\n  \"endDate\": \"<date>\"\n}",
+              "createdAt": "2026-07-28T03:33:05.000Z",
+              "updatedAt": "2026-07-28T03:33:05.000Z",
+              "uid": "35240-d6be6e25-a565-4354-804f-3a30d63d5e7e"
+            },
+            {
+              "id": "0209db3b-a72f-4e77-9790-23313b76c3a8",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mentor\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\",\n    \"href\": \"<uri>\"\n  },\n  \"mentee\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\",\n    \"href\": \"<uri>\"\n  },\n  \"topic\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/createMentorshipForWorker",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "createMentorshipForWorker"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:33:05.000Z",
+              "updatedAt": "2026-07-28T03:33:05.000Z",
+              "uid": "35240-0209db3b-a72f-4e77-9790-23313b76c3a8"
+            },
+            {
+              "id": "dd405249-c437-42c8-bdbc-f7f0b8bfcf3a",
+              "name": "Authentication required",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mentor\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\",\n    \"href\": \"<uri>\"\n  },\n  \"mentee\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\",\n    \"href\": \"<uri>\"\n  },\n  \"topic\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/createMentorshipForWorker",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "createMentorshipForWorker"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:33:05.000Z",
+              "updatedAt": "2026-07-28T03:33:05.000Z",
+              "uid": "35240-dd405249-c437-42c8-bdbc-f7f0b8bfcf3a"
+            },
+            {
+              "id": "2f2b8151-5cc5-4c19-8f48-b85ae4ea24cb",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mentor\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\",\n    \"href\": \"<uri>\"\n  },\n  \"mentee\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\",\n    \"href\": \"<uri>\"\n  },\n  \"topic\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/createMentorshipForWorker",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "createMentorshipForWorker"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:33:05.000Z",
+              "updatedAt": "2026-07-28T03:33:05.000Z",
+              "uid": "35240-2f2b8151-5cc5-4c19-8f48-b85ae4ea24cb"
+            }
+          ],
+          "createdAt": "2026-07-28T03:33:05.000Z",
+          "updatedAt": "2026-07-28T03:33:05.000Z",
+          "uid": "35240-4e6acb32-69f4-47bc-aeaa-1d6823bb3ff4"
+        }
+      ],
+      "id": "dc97fe83-ea3d-4d6e-b8bb-0f81e887ba40",
+      "createdAt": "2026-07-28T03:33:05.000Z",
+      "updatedAt": "2026-07-28T03:33:05.000Z",
+      "uid": "35240-dc97fe83-ea3d-4d6e-b8bb-0f81e887ba40"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "r:absenceManagement w:absenceManagement",
+        "type": "string"
+      },
+      {
+        "key": "redirect_uri",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://{baseUrl}/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "wd2-impl-services1.workday.com"
+    },
+    {
+      "key": "tenant",
+      "value": "tenant"
+    }
+  ]
+}

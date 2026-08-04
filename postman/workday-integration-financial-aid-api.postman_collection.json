@@ -1,0 +1,517 @@
+{
+  "info": {
+    "_postman_id": "044de6a9-793c-4fbb-81b6-cae747c9c3f4",
+    "name": "Workday Integration Workday Absence Management Absence Types Financial Aid API",
+    "description": "API for managing employee leave requests, absence types, and time-off balances. Retrieves eligible absence types for employees and supports validation of leave category selections.\n\nContact Support:\n Name: Workday API Support\n Email: api-support@workday.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:32:53.000Z",
+    "updatedAt": "2026-07-28T03:32:53.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-044de6a9-793c-4fbb-81b6-cae747c9c3f4"
+  },
+  "item": [
+    {
+      "name": "awards",
+      "item": [
+        {
+          "name": "{ID}",
+          "item": [
+            {
+              "name": "Workday Integration Retrieve a specific Award",
+              "id": "df5ffa61-06cc-4337-9267-b6db3c9343ee",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/awards/:ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "awards",
+                    ":ID"
+                  ],
+                  "variable": [
+                    {
+                      "id": "ad162b9c-e312-45bb-8791-2f0c584e0b24",
+                      "key": "ID",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Returns the specified Award instance with its details."
+              },
+              "response": [
+                {
+                  "id": "e955d555-9ddc-4f82-a987-7f85d7c3884d",
+                  "name": "Successful response with the Award",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/awards/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "awards",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"descriptor\": \"<string>\",\n  \"href\": \"<uri>\"\n}",
+                  "createdAt": "2026-07-28T03:32:54.000Z",
+                  "updatedAt": "2026-07-28T03:32:54.000Z",
+                  "uid": "35240-e955d555-9ddc-4f82-a987-7f85d7c3884d"
+                },
+                {
+                  "id": "6c3df0b7-bc8d-44a1-a7d7-a21acb54b0b5",
+                  "name": "Authentication required",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/awards/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "awards",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:32:54.000Z",
+                  "updatedAt": "2026-07-28T03:32:54.000Z",
+                  "uid": "35240-6c3df0b7-bc8d-44a1-a7d7-a21acb54b0b5"
+                },
+                {
+                  "id": "416207d2-c76d-4e13-914d-543e5bcf8563",
+                  "name": "Insufficient permissions",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/awards/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "awards",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:32:54.000Z",
+                  "updatedAt": "2026-07-28T03:32:54.000Z",
+                  "uid": "35240-416207d2-c76d-4e13-914d-543e5bcf8563"
+                },
+                {
+                  "id": "c54d678c-31bc-4d76-8dc6-8c4c2c9a3665",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/awards/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "awards",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:32:54.000Z",
+                  "updatedAt": "2026-07-28T03:32:54.000Z",
+                  "uid": "35240-c54d678c-31bc-4d76-8dc6-8c4c2c9a3665"
+                }
+              ],
+              "createdAt": "2026-07-28T03:32:53.000Z",
+              "updatedAt": "2026-07-28T03:32:53.000Z",
+              "uid": "35240-df5ffa61-06cc-4337-9267-b6db3c9343ee"
+            }
+          ],
+          "id": "8a2c7c23-3475-487f-b000-91a4fc43581e",
+          "createdAt": "2026-07-28T03:32:53.000Z",
+          "updatedAt": "2026-07-28T03:32:53.000Z",
+          "uid": "35240-8a2c7c23-3475-487f-b000-91a4fc43581e"
+        },
+        {
+          "name": "Workday Integration Retrieve a collection of awards",
+          "id": "909d8b69-8dff-4242-b236-e8d719252b3a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/awards?limit=20&offset=0&search=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "awards"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "key": "search",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Returns a collection of awards from the Workday Financial Aid API."
+          },
+          "response": [
+            {
+              "id": "59dfe6ef-df8d-4b80-976c-896cbcbdcd96",
+              "name": "Successful response with awards",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/awards?limit=20&offset=0&search=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "awards"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"descriptor\": \"<string>\",\n      \"href\": \"<uri>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"descriptor\": \"<string>\",\n      \"href\": \"<uri>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:32:54.000Z",
+              "updatedAt": "2026-07-28T03:32:54.000Z",
+              "uid": "35240-59dfe6ef-df8d-4b80-976c-896cbcbdcd96"
+            },
+            {
+              "id": "c61d2b6a-fc9f-4d13-8e61-ce0db28a585d",
+              "name": "Authentication required",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/awards?limit=20&offset=0&search=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "awards"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:32:54.000Z",
+              "updatedAt": "2026-07-28T03:32:54.000Z",
+              "uid": "35240-c61d2b6a-fc9f-4d13-8e61-ce0db28a585d"
+            },
+            {
+              "id": "96c27a52-4591-4629-ab87-b0e87b3b2630",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/awards?limit=20&offset=0&search=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "awards"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:32:54.000Z",
+              "updatedAt": "2026-07-28T03:32:54.000Z",
+              "uid": "35240-96c27a52-4591-4629-ab87-b0e87b3b2630"
+            }
+          ],
+          "createdAt": "2026-07-28T03:32:53.000Z",
+          "updatedAt": "2026-07-28T03:32:53.000Z",
+          "uid": "35240-909d8b69-8dff-4242-b236-e8d719252b3a"
+        }
+      ],
+      "id": "f251ef1a-f089-45a2-8a6c-37e31005a256",
+      "createdAt": "2026-07-28T03:32:53.000Z",
+      "updatedAt": "2026-07-28T03:32:53.000Z",
+      "uid": "35240-f251ef1a-f089-45a2-8a6c-37e31005a256"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "r:absenceManagement w:absenceManagement",
+        "type": "string"
+      },
+      {
+        "key": "redirect_uri",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://{baseUrl}/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "wd2-impl-services1.workday.com"
+    },
+    {
+      "key": "tenant",
+      "value": "tenant"
+    }
+  ]
+}

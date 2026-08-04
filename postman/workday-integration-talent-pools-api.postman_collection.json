@@ -1,0 +1,260 @@
+{
+  "info": {
+    "_postman_id": "f296fef8-39f2-4d60-9e7e-83831bd55381",
+    "name": "Workday Integration Workday Absence Management Absence Types Talent Pools API",
+    "description": "API for managing employee leave requests, absence types, and time-off balances. Retrieves eligible absence types for employees and supports validation of leave category selections.\n\nContact Support:\n Name: Workday API Support\n Email: api-support@workday.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:34:31.000Z",
+    "updatedAt": "2026-07-28T03:34:31.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f296fef8-39f2-4d60-9e7e-83831bd55381"
+  },
+  "item": [
+    {
+      "name": "talentPools",
+      "item": [
+        {
+          "name": "Workday Integration Retrieve talent pools",
+          "id": "a4ee65ec-937c-4f77-acc7-d539dd881c02",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/talentPools?limit=20&offset=0",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "talentPools"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "key": "offset",
+                  "value": "0"
+                }
+              ]
+            },
+            "description": "Returns a collection of talent pools for succession planning."
+          },
+          "response": [
+            {
+              "id": "24b66247-6785-43e7-8655-7d0665d3328c",
+              "name": "Successful response with talent pools",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/talentPools?limit=20&offset=0",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "talentPools"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"descriptor\": \"<string>\",\n      \"name\": \"<string>\",\n      \"owner\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"descriptor\": \"<string>\",\n      \"name\": \"<string>\",\n      \"owner\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:34:32.000Z",
+              "updatedAt": "2026-07-28T03:34:32.000Z",
+              "uid": "35240-24b66247-6785-43e7-8655-7d0665d3328c"
+            },
+            {
+              "id": "cce64db5-adf7-4270-a5db-1e91f092be6e",
+              "name": "Authentication required",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/talentPools?limit=20&offset=0",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "talentPools"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:34:32.000Z",
+              "updatedAt": "2026-07-28T03:34:32.000Z",
+              "uid": "35240-cce64db5-adf7-4270-a5db-1e91f092be6e"
+            },
+            {
+              "id": "c71f5792-755f-48b2-b7d6-2760b5691f7b",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/talentPools?limit=20&offset=0",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "talentPools"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:34:32.000Z",
+              "updatedAt": "2026-07-28T03:34:32.000Z",
+              "uid": "35240-c71f5792-755f-48b2-b7d6-2760b5691f7b"
+            }
+          ],
+          "createdAt": "2026-07-28T03:34:32.000Z",
+          "updatedAt": "2026-07-28T03:34:32.000Z",
+          "uid": "35240-a4ee65ec-937c-4f77-acc7-d539dd881c02"
+        }
+      ],
+      "id": "f000e89d-eac3-44c5-9e14-0dd926ca2784",
+      "createdAt": "2026-07-28T03:34:32.000Z",
+      "updatedAt": "2026-07-28T03:34:32.000Z",
+      "uid": "35240-f000e89d-eac3-44c5-9e14-0dd926ca2784"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "r:absenceManagement w:absenceManagement",
+        "type": "string"
+      },
+      {
+        "key": "redirect_uri",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://{baseUrl}/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "wd2-impl-services1.workday.com"
+    },
+    {
+      "key": "tenant",
+      "value": "tenant"
+    }
+  ]
+}

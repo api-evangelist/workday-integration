@@ -1,0 +1,517 @@
+{
+  "info": {
+    "_postman_id": "cf1f165f-815a-41e5-915e-980d52e4965c",
+    "name": "Workday Integration Workday Absence Management Absence Types Adoption API",
+    "description": "API for managing employee leave requests, absence types, and time-off balances. Retrieves eligible absence types for employees and supports validation of leave category selections.\n\nContact Support:\n Name: Workday API Support\n Email: api-support@workday.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:32:06.000Z",
+    "updatedAt": "2026-07-28T03:32:06.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-cf1f165f-815a-41e5-915e-980d52e4965c"
+  },
+  "item": [
+    {
+      "name": "adoptionMetrics",
+      "item": [
+        {
+          "name": "{ID}",
+          "item": [
+            {
+              "name": "Workday Integration Retrieve a specific AdoptionMetric",
+              "id": "f40f0420-5bdc-4384-becf-4078c7970927",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/adoptionMetrics/:ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "adoptionMetrics",
+                    ":ID"
+                  ],
+                  "variable": [
+                    {
+                      "id": "f9dd716c-c6d3-4775-8c66-490d1c5d9080",
+                      "key": "ID",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Returns the specified AdoptionMetric instance with its details."
+              },
+              "response": [
+                {
+                  "id": "8f138058-136b-4c39-8fca-257d301e88dd",
+                  "name": "Successful response with the AdoptionMetric",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/adoptionMetrics/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "adoptionMetrics",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"descriptor\": \"<string>\",\n  \"href\": \"<uri>\"\n}",
+                  "createdAt": "2026-07-28T03:32:07.000Z",
+                  "updatedAt": "2026-07-28T03:32:07.000Z",
+                  "uid": "35240-8f138058-136b-4c39-8fca-257d301e88dd"
+                },
+                {
+                  "id": "01a6d0ff-d09c-4474-b960-882a31023356",
+                  "name": "Authentication required",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/adoptionMetrics/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "adoptionMetrics",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:32:07.000Z",
+                  "updatedAt": "2026-07-28T03:32:07.000Z",
+                  "uid": "35240-01a6d0ff-d09c-4474-b960-882a31023356"
+                },
+                {
+                  "id": "7ec7f443-a7d3-40e3-b2c2-19c73588c977",
+                  "name": "Insufficient permissions",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/adoptionMetrics/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "adoptionMetrics",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:32:07.000Z",
+                  "updatedAt": "2026-07-28T03:32:07.000Z",
+                  "uid": "35240-7ec7f443-a7d3-40e3-b2c2-19c73588c977"
+                },
+                {
+                  "id": "d8f8dd50-364c-46d6-95d1-2bfb21a866ab",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/adoptionMetrics/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "adoptionMetrics",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:32:07.000Z",
+                  "updatedAt": "2026-07-28T03:32:07.000Z",
+                  "uid": "35240-d8f8dd50-364c-46d6-95d1-2bfb21a866ab"
+                }
+              ],
+              "createdAt": "2026-07-28T03:32:07.000Z",
+              "updatedAt": "2026-07-28T03:32:07.000Z",
+              "uid": "35240-f40f0420-5bdc-4384-becf-4078c7970927"
+            }
+          ],
+          "id": "2cba5e69-38f5-43f9-9b1d-cd19861c6d93",
+          "createdAt": "2026-07-28T03:32:07.000Z",
+          "updatedAt": "2026-07-28T03:32:07.000Z",
+          "uid": "35240-2cba5e69-38f5-43f9-9b1d-cd19861c6d93"
+        },
+        {
+          "name": "Workday Integration Retrieve a collection of adoptionMetrics",
+          "id": "c219747a-cd60-41a4-8a92-719a58b0b29b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/adoptionMetrics?limit=20&offset=0&search=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "adoptionMetrics"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "key": "search",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Returns a collection of adoptionMetrics from the Workday Adoption API."
+          },
+          "response": [
+            {
+              "id": "1bdf21d3-fbc4-4196-9df5-e292d8ef04a8",
+              "name": "Successful response with adoptionMetrics",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/adoptionMetrics?limit=20&offset=0&search=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "adoptionMetrics"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"descriptor\": \"<string>\",\n      \"href\": \"<uri>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"descriptor\": \"<string>\",\n      \"href\": \"<uri>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:32:07.000Z",
+              "updatedAt": "2026-07-28T03:32:07.000Z",
+              "uid": "35240-1bdf21d3-fbc4-4196-9df5-e292d8ef04a8"
+            },
+            {
+              "id": "d7e1bea0-a648-4bfb-9c88-4a074527dc83",
+              "name": "Authentication required",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/adoptionMetrics?limit=20&offset=0&search=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "adoptionMetrics"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:32:07.000Z",
+              "updatedAt": "2026-07-28T03:32:07.000Z",
+              "uid": "35240-d7e1bea0-a648-4bfb-9c88-4a074527dc83"
+            },
+            {
+              "id": "e1dc0dc3-683d-4e68-8c72-67e4f7c30f8e",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/adoptionMetrics?limit=20&offset=0&search=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "adoptionMetrics"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:32:07.000Z",
+              "updatedAt": "2026-07-28T03:32:07.000Z",
+              "uid": "35240-e1dc0dc3-683d-4e68-8c72-67e4f7c30f8e"
+            }
+          ],
+          "createdAt": "2026-07-28T03:32:07.000Z",
+          "updatedAt": "2026-07-28T03:32:07.000Z",
+          "uid": "35240-c219747a-cd60-41a4-8a92-719a58b0b29b"
+        }
+      ],
+      "id": "49ac9f61-2986-4148-828d-c986222e0b66",
+      "createdAt": "2026-07-28T03:32:07.000Z",
+      "updatedAt": "2026-07-28T03:32:07.000Z",
+      "uid": "35240-49ac9f61-2986-4148-828d-c986222e0b66"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "r:absenceManagement w:absenceManagement",
+        "type": "string"
+      },
+      {
+        "key": "redirect_uri",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://{baseUrl}/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "wd2-impl-services1.workday.com"
+    },
+    {
+      "key": "tenant",
+      "value": "tenant"
+    }
+  ]
+}

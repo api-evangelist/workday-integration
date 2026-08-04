@@ -1,0 +1,517 @@
+{
+  "info": {
+    "_postman_id": "bd2835de-d71a-4452-b08b-a4ac326754d0",
+    "name": "Workday Integration Workday Absence Management Absence Types Payroll UK API",
+    "description": "API for managing employee leave requests, absence types, and time-off balances. Retrieves eligible absence types for employees and supports validation of leave category selections.\n\nContact Support:\n Name: Workday API Support\n Email: api-support@workday.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:33:51.000Z",
+    "updatedAt": "2026-07-28T03:33:52.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-bd2835de-d71a-4452-b08b-a4ac326754d0"
+  },
+  "item": [
+    {
+      "name": "payrollRuns",
+      "item": [
+        {
+          "name": "{ID}",
+          "item": [
+            {
+              "name": "Workday Integration Retrieve a specific PayrollRun",
+              "id": "e71d3ecf-1b1a-4271-ae7c-462fe4dab7f3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/payrollRuns/:ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payrollRuns",
+                    ":ID"
+                  ],
+                  "variable": [
+                    {
+                      "id": "a640d870-efc2-412b-a66a-2a4425aa081e",
+                      "key": "ID",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Returns the specified PayrollRun instance with its details."
+              },
+              "response": [
+                {
+                  "id": "282c067d-719c-40eb-98d3-9ac8e98e2d20",
+                  "name": "Successful response with the PayrollRun",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/payrollRuns/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payrollRuns",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"descriptor\": \"<string>\",\n  \"href\": \"<uri>\"\n}",
+                  "createdAt": "2026-07-28T03:33:52.000Z",
+                  "updatedAt": "2026-07-28T03:33:52.000Z",
+                  "uid": "35240-282c067d-719c-40eb-98d3-9ac8e98e2d20"
+                },
+                {
+                  "id": "cdd2f1ac-bc9c-44c6-907e-4d7d0223d699",
+                  "name": "Authentication required",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/payrollRuns/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payrollRuns",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:33:52.000Z",
+                  "updatedAt": "2026-07-28T03:33:52.000Z",
+                  "uid": "35240-cdd2f1ac-bc9c-44c6-907e-4d7d0223d699"
+                },
+                {
+                  "id": "34956ceb-b569-40bc-a24f-70054db0063e",
+                  "name": "Insufficient permissions",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/payrollRuns/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payrollRuns",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:33:52.000Z",
+                  "updatedAt": "2026-07-28T03:33:52.000Z",
+                  "uid": "35240-34956ceb-b569-40bc-a24f-70054db0063e"
+                },
+                {
+                  "id": "58cd72a9-0d31-434f-a51c-3427c6db9405",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/payrollRuns/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payrollRuns",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:33:52.000Z",
+                  "updatedAt": "2026-07-28T03:33:52.000Z",
+                  "uid": "35240-58cd72a9-0d31-434f-a51c-3427c6db9405"
+                }
+              ],
+              "createdAt": "2026-07-28T03:33:52.000Z",
+              "updatedAt": "2026-07-28T03:33:52.000Z",
+              "uid": "35240-e71d3ecf-1b1a-4271-ae7c-462fe4dab7f3"
+            }
+          ],
+          "id": "9258ca8f-ae80-43ef-b35b-4f825fe6a77c",
+          "createdAt": "2026-07-28T03:33:52.000Z",
+          "updatedAt": "2026-07-28T03:33:52.000Z",
+          "uid": "35240-9258ca8f-ae80-43ef-b35b-4f825fe6a77c"
+        },
+        {
+          "name": "Workday Integration Retrieve a collection of payrollRuns",
+          "id": "2785945f-388a-4d65-8ab4-75c0ace6ec5a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/payrollRuns?limit=20&offset=0&search=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "payrollRuns"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "key": "search",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Returns a collection of payrollRuns from the Workday Payroll GBR API."
+          },
+          "response": [
+            {
+              "id": "c016fe57-e142-4856-a670-de26abbdb34c",
+              "name": "Successful response with payrollRuns",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/payrollRuns?limit=20&offset=0&search=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payrollRuns"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"descriptor\": \"<string>\",\n      \"href\": \"<uri>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"descriptor\": \"<string>\",\n      \"href\": \"<uri>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:33:52.000Z",
+              "updatedAt": "2026-07-28T03:33:52.000Z",
+              "uid": "35240-c016fe57-e142-4856-a670-de26abbdb34c"
+            },
+            {
+              "id": "7f567046-925f-488d-bec3-24440d046255",
+              "name": "Authentication required",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/payrollRuns?limit=20&offset=0&search=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payrollRuns"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:33:52.000Z",
+              "updatedAt": "2026-07-28T03:33:52.000Z",
+              "uid": "35240-7f567046-925f-488d-bec3-24440d046255"
+            },
+            {
+              "id": "25fefa8a-b16e-4447-bce6-ab1f37998aca",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/payrollRuns?limit=20&offset=0&search=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payrollRuns"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:33:52.000Z",
+              "updatedAt": "2026-07-28T03:33:52.000Z",
+              "uid": "35240-25fefa8a-b16e-4447-bce6-ab1f37998aca"
+            }
+          ],
+          "createdAt": "2026-07-28T03:33:52.000Z",
+          "updatedAt": "2026-07-28T03:33:52.000Z",
+          "uid": "35240-2785945f-388a-4d65-8ab4-75c0ace6ec5a"
+        }
+      ],
+      "id": "73e81b20-8a7e-40a7-85ff-9b3822b8ac2a",
+      "createdAt": "2026-07-28T03:33:52.000Z",
+      "updatedAt": "2026-07-28T03:33:52.000Z",
+      "uid": "35240-73e81b20-8a7e-40a7-85ff-9b3822b8ac2a"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "r:absenceManagement w:absenceManagement",
+        "type": "string"
+      },
+      {
+        "key": "redirect_uri",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://{baseUrl}/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "wd2-impl-services1.workday.com"
+    },
+    {
+      "key": "tenant",
+      "value": "tenant"
+    }
+  ]
+}

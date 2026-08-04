@@ -1,0 +1,573 @@
+{
+  "info": {
+    "_postman_id": "277d77d1-2c73-43d8-be9a-8d24fe564050",
+    "name": "Workday Integration Workday Absence Management Absence Types File Containers API",
+    "description": "API for managing employee leave requests, absence types, and time-off balances. Retrieves eligible absence types for employees and supports validation of leave category selections.\n\nContact Support:\n Name: Workday API Support\n Email: api-support@workday.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:32:52.000Z",
+    "updatedAt": "2026-07-28T03:32:52.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-277d77d1-2c73-43d8-be9a-8d24fe564050"
+  },
+  "item": [
+    {
+      "name": "fileContainers",
+      "item": [
+        {
+          "name": "{ID}",
+          "item": [
+            {
+              "name": "Workday Integration Retrieve a specific file container",
+              "id": "014caf22-04c2-4a89-9b76-4eca9af5ea48",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/fileContainers/:ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "fileContainers",
+                    ":ID"
+                  ],
+                  "variable": [
+                    {
+                      "id": "b361a453-750b-41ac-9f03-44b813af1c4d",
+                      "key": "ID",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Returns the specified file container with its upload status."
+              },
+              "response": [
+                {
+                  "id": "92dcf4ff-d1a2-4826-91a6-c3cd5ff84efc",
+                  "name": "Successful response with the file container",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/fileContainers/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "fileContainers",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"descriptor\": \"<string>\",\n  \"status\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:32:53.000Z",
+                  "updatedAt": "2026-07-28T03:32:53.000Z",
+                  "uid": "35240-92dcf4ff-d1a2-4826-91a6-c3cd5ff84efc"
+                },
+                {
+                  "id": "a24332f2-c678-49d7-9cc8-53bf829acf92",
+                  "name": "Authentication required",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/fileContainers/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "fileContainers",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:32:53.000Z",
+                  "updatedAt": "2026-07-28T03:32:53.000Z",
+                  "uid": "35240-a24332f2-c678-49d7-9cc8-53bf829acf92"
+                },
+                {
+                  "id": "248da817-fe14-4af1-a40d-58bc7bcd543f",
+                  "name": "Insufficient permissions",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/fileContainers/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "fileContainers",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:32:53.000Z",
+                  "updatedAt": "2026-07-28T03:32:53.000Z",
+                  "uid": "35240-248da817-fe14-4af1-a40d-58bc7bcd543f"
+                },
+                {
+                  "id": "f4b61eff-0055-4b46-b43c-27516f3ad0b3",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/fileContainers/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "fileContainers",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:32:53.000Z",
+                  "updatedAt": "2026-07-28T03:32:53.000Z",
+                  "uid": "35240-f4b61eff-0055-4b46-b43c-27516f3ad0b3"
+                }
+              ],
+              "createdAt": "2026-07-28T03:32:53.000Z",
+              "updatedAt": "2026-07-28T03:32:53.000Z",
+              "uid": "35240-014caf22-04c2-4a89-9b76-4eca9af5ea48"
+            }
+          ],
+          "id": "a27af3b7-10c8-43df-bb3f-7d1b34bf9630",
+          "createdAt": "2026-07-28T03:32:53.000Z",
+          "updatedAt": "2026-07-28T03:32:53.000Z",
+          "uid": "35240-a27af3b7-10c8-43df-bb3f-7d1b34bf9630"
+        },
+        {
+          "name": "Workday Integration Create a file container for data upload",
+          "id": "47e96429-45a7-4d72-bb67-7a1b425df78b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/fileContainers",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "fileContainers"
+              ]
+            },
+            "description": "Creates a file container for uploading data files to be processed by a data change task."
+          },
+          "response": [
+            {
+              "id": "c6e3da33-c9fe-4d76-8fb7-435ab5c2c31b",
+              "name": "File container created successfully",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/fileContainers",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "fileContainers"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"descriptor\": \"<string>\",\n  \"status\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:32:53.000Z",
+              "updatedAt": "2026-07-28T03:32:53.000Z",
+              "uid": "35240-c6e3da33-c9fe-4d76-8fb7-435ab5c2c31b"
+            },
+            {
+              "id": "0bcdfa77-61ba-4d8d-b963-ee9b1a1c9cb7",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/fileContainers",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "fileContainers"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:32:53.000Z",
+              "updatedAt": "2026-07-28T03:32:53.000Z",
+              "uid": "35240-0bcdfa77-61ba-4d8d-b963-ee9b1a1c9cb7"
+            },
+            {
+              "id": "6dc88dac-e858-410d-ac41-c66e2208032a",
+              "name": "Authentication required",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/fileContainers",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "fileContainers"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:32:53.000Z",
+              "updatedAt": "2026-07-28T03:32:53.000Z",
+              "uid": "35240-6dc88dac-e858-410d-ac41-c66e2208032a"
+            },
+            {
+              "id": "1f54a5d0-d786-45d0-82cb-5fb49eb8c6ab",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/fileContainers",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "fileContainers"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:32:53.000Z",
+              "updatedAt": "2026-07-28T03:32:53.000Z",
+              "uid": "35240-1f54a5d0-d786-45d0-82cb-5fb49eb8c6ab"
+            }
+          ],
+          "createdAt": "2026-07-28T03:32:53.000Z",
+          "updatedAt": "2026-07-28T03:32:53.000Z",
+          "uid": "35240-47e96429-45a7-4d72-bb67-7a1b425df78b"
+        }
+      ],
+      "id": "cbdcb4e5-c089-45ee-bf7d-667ebbd53268",
+      "createdAt": "2026-07-28T03:32:53.000Z",
+      "updatedAt": "2026-07-28T03:32:53.000Z",
+      "uid": "35240-cbdcb4e5-c089-45ee-bf7d-667ebbd53268"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "r:absenceManagement w:absenceManagement",
+        "type": "string"
+      },
+      {
+        "key": "redirect_uri",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://{baseUrl}/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "wd2-impl-services1.workday.com"
+    },
+    {
+      "key": "tenant",
+      "value": "tenant"
+    }
+  ]
+}

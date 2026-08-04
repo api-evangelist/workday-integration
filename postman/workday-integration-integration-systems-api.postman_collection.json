@@ -1,0 +1,845 @@
+{
+  "info": {
+    "_postman_id": "dc208104-7e95-491f-9756-872971cdc9fc",
+    "name": "Workday Integration Workday Absence Management Absence Types Integration Systems API",
+    "description": "API for managing employee leave requests, absence types, and time-off balances. Retrieves eligible absence types for employees and supports validation of leave category selections.\n\nContact Support:\n Name: Workday API Support\n Email: api-support@workday.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:32:58.000Z",
+    "updatedAt": "2026-07-28T03:32:58.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-dc208104-7e95-491f-9756-872971cdc9fc"
+  },
+  "item": [
+    {
+      "name": "integrationSystems",
+      "item": [
+        {
+          "name": "{ID}",
+          "item": [
+            {
+              "name": "launch",
+              "item": [
+                {
+                  "name": "Workday Integration Launch an integration system",
+                  "id": "589d7981-6560-4a0a-a94f-bf774ddfa018",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"launchParameters\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/integrationSystems/:ID/launch",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "integrationSystems",
+                        ":ID",
+                        "launch"
+                      ],
+                      "variable": [
+                        {
+                          "id": "90c59b42-9fab-42d4-8d74-d5a59540c011",
+                          "key": "ID",
+                          "value": "<string>",
+                          "description": "(Required) The Workday ID of the resource"
+                        }
+                      ]
+                    },
+                    "description": "Triggers execution of the specified integration system."
+                  },
+                  "response": [
+                    {
+                      "id": "77ea2d6a-cb76-482d-a541-61dddf2b84a6",
+                      "name": "Integration launched successfully",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"launchParameters\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/integrationSystems/:ID/launch",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "integrationSystems",
+                            ":ID",
+                            "launch"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"descriptor\": \"<string>\",\n  \"integrationSystem\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\",\n    \"href\": \"<uri>\"\n  },\n  \"status\": \"Completed\",\n  \"startDateTime\": \"<dateTime>\",\n  \"endDateTime\": \"<dateTime>\",\n  \"recordsProcessed\": \"<integer>\",\n  \"recordsFailed\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T03:32:59.000Z",
+                      "updatedAt": "2026-07-28T03:32:59.000Z",
+                      "uid": "35240-77ea2d6a-cb76-482d-a541-61dddf2b84a6"
+                    },
+                    {
+                      "id": "1398ab9b-5799-4c1a-b5e4-bc8eeb43a622",
+                      "name": "Invalid request parameters",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"launchParameters\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/integrationSystems/:ID/launch",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "integrationSystems",
+                            ":ID",
+                            "launch"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:32:59.000Z",
+                      "updatedAt": "2026-07-28T03:32:59.000Z",
+                      "uid": "35240-1398ab9b-5799-4c1a-b5e4-bc8eeb43a622"
+                    },
+                    {
+                      "id": "808d4cff-77af-4477-bbcc-00437a0aacde",
+                      "name": "Authentication required",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"launchParameters\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/integrationSystems/:ID/launch",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "integrationSystems",
+                            ":ID",
+                            "launch"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:32:59.000Z",
+                      "updatedAt": "2026-07-28T03:32:59.000Z",
+                      "uid": "35240-808d4cff-77af-4477-bbcc-00437a0aacde"
+                    },
+                    {
+                      "id": "b463cb1c-18ab-4a53-a184-37017878800e",
+                      "name": "Insufficient permissions",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"launchParameters\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/integrationSystems/:ID/launch",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "integrationSystems",
+                            ":ID",
+                            "launch"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:32:59.000Z",
+                      "updatedAt": "2026-07-28T03:32:59.000Z",
+                      "uid": "35240-b463cb1c-18ab-4a53-a184-37017878800e"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:32:59.000Z",
+                  "updatedAt": "2026-07-28T03:32:59.000Z",
+                  "uid": "35240-589d7981-6560-4a0a-a94f-bf774ddfa018"
+                }
+              ],
+              "id": "e4f8e536-bb1d-4499-ac47-92021d521cb4",
+              "createdAt": "2026-07-28T03:32:59.000Z",
+              "updatedAt": "2026-07-28T03:32:59.000Z",
+              "uid": "35240-e4f8e536-bb1d-4499-ac47-92021d521cb4"
+            },
+            {
+              "name": "Workday Integration Retrieve a specific integration system",
+              "id": "586e06d8-cfb8-47f5-b224-4700811dc603",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/integrationSystems/:ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "integrationSystems",
+                    ":ID"
+                  ],
+                  "variable": [
+                    {
+                      "id": "85160d9e-7071-4bfb-8e6a-6d31b7c0cdfc",
+                      "key": "ID",
+                      "value": "<string>",
+                      "description": "(Required) The Workday ID of the resource"
+                    }
+                  ]
+                },
+                "description": "Returns the specified integration system with its configuration details."
+              },
+              "response": [
+                {
+                  "id": "7741749d-60ea-48ad-b75b-3ad04726fd17",
+                  "name": "Successful response with the integration system",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/integrationSystems/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "integrationSystems",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"descriptor\": \"<string>\",\n  \"integrationSystemName\": \"<string>\",\n  \"template\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\",\n    \"href\": \"<uri>\"\n  },\n  \"isActive\": \"<boolean>\",\n  \"lastRunDateTime\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-07-28T03:32:59.000Z",
+                  "updatedAt": "2026-07-28T03:32:59.000Z",
+                  "uid": "35240-7741749d-60ea-48ad-b75b-3ad04726fd17"
+                },
+                {
+                  "id": "b09279ce-cffa-4cd5-8cf2-590a204ba5e4",
+                  "name": "Authentication required",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/integrationSystems/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "integrationSystems",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:32:59.000Z",
+                  "updatedAt": "2026-07-28T03:32:59.000Z",
+                  "uid": "35240-b09279ce-cffa-4cd5-8cf2-590a204ba5e4"
+                },
+                {
+                  "id": "b6da8ebc-a0e6-413f-929f-52778d958792",
+                  "name": "Insufficient permissions",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/integrationSystems/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "integrationSystems",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:32:59.000Z",
+                  "updatedAt": "2026-07-28T03:32:59.000Z",
+                  "uid": "35240-b6da8ebc-a0e6-413f-929f-52778d958792"
+                },
+                {
+                  "id": "352259f2-97f1-4506-bd79-34a37daa89ca",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/integrationSystems/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "integrationSystems",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:32:59.000Z",
+                  "updatedAt": "2026-07-28T03:32:59.000Z",
+                  "uid": "35240-352259f2-97f1-4506-bd79-34a37daa89ca"
+                }
+              ],
+              "createdAt": "2026-07-28T03:32:59.000Z",
+              "updatedAt": "2026-07-28T03:32:59.000Z",
+              "uid": "35240-586e06d8-cfb8-47f5-b224-4700811dc603"
+            }
+          ],
+          "id": "90c18733-12d3-4094-ba35-14b4193fb2f9",
+          "createdAt": "2026-07-28T03:32:59.000Z",
+          "updatedAt": "2026-07-28T03:32:59.000Z",
+          "uid": "35240-90c18733-12d3-4094-ba35-14b4193fb2f9"
+        },
+        {
+          "name": "Workday Integration Retrieve integration systems",
+          "id": "ef780b7a-9277-44a7-a272-5445a2aec289",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/integrationSystems?limit=20&offset=0&search=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "integrationSystems"
+              ],
+              "query": [
+                {
+                  "description": "The maximum number of objects in a single response (default 20, maximum 100)",
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "description": "The zero-based index of the first object in a response collection",
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "description": "Search string used to filter results",
+                  "key": "search",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Returns a collection of configured integration systems in the tenant."
+          },
+          "response": [
+            {
+              "id": "c94f8242-6f16-4fa5-baff-b8d4f24b269f",
+              "name": "Successful response with integration systems",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/integrationSystems?limit=20&offset=0&search=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "integrationSystems"
+                  ],
+                  "query": [
+                    {
+                      "description": "The maximum number of objects in a single response (default 20, maximum 100)",
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "description": "The zero-based index of the first object in a response collection",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Search string used to filter results",
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"descriptor\": \"<string>\",\n      \"integrationSystemName\": \"<string>\",\n      \"template\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      \"isActive\": \"<boolean>\",\n      \"lastRunDateTime\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"descriptor\": \"<string>\",\n      \"integrationSystemName\": \"<string>\",\n      \"template\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      \"isActive\": \"<boolean>\",\n      \"lastRunDateTime\": \"<dateTime>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:32:59.000Z",
+              "updatedAt": "2026-07-28T03:32:59.000Z",
+              "uid": "35240-c94f8242-6f16-4fa5-baff-b8d4f24b269f"
+            },
+            {
+              "id": "432b4f01-142d-49ce-8e47-66e7435e5058",
+              "name": "Authentication required",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/integrationSystems?limit=20&offset=0&search=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "integrationSystems"
+                  ],
+                  "query": [
+                    {
+                      "description": "The maximum number of objects in a single response (default 20, maximum 100)",
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "description": "The zero-based index of the first object in a response collection",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Search string used to filter results",
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:32:59.000Z",
+              "updatedAt": "2026-07-28T03:32:59.000Z",
+              "uid": "35240-432b4f01-142d-49ce-8e47-66e7435e5058"
+            },
+            {
+              "id": "91ac9b47-d987-4161-bf09-22e7f4a9790c",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/integrationSystems?limit=20&offset=0&search=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "integrationSystems"
+                  ],
+                  "query": [
+                    {
+                      "description": "The maximum number of objects in a single response (default 20, maximum 100)",
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "description": "The zero-based index of the first object in a response collection",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Search string used to filter results",
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:32:59.000Z",
+              "updatedAt": "2026-07-28T03:32:59.000Z",
+              "uid": "35240-91ac9b47-d987-4161-bf09-22e7f4a9790c"
+            }
+          ],
+          "createdAt": "2026-07-28T03:32:59.000Z",
+          "updatedAt": "2026-07-28T03:32:59.000Z",
+          "uid": "35240-ef780b7a-9277-44a7-a272-5445a2aec289"
+        }
+      ],
+      "id": "d16a97e3-2b34-4463-a48f-5ab7d3371566",
+      "createdAt": "2026-07-28T03:32:59.000Z",
+      "updatedAt": "2026-07-28T03:32:59.000Z",
+      "uid": "35240-d16a97e3-2b34-4463-a48f-5ab7d3371566"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "r:absenceManagement w:absenceManagement",
+        "type": "string"
+      },
+      {
+        "key": "redirect_uri",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://{baseUrl}/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "wd2-impl-services1.workday.com"
+    },
+    {
+      "key": "tenant",
+      "value": "tenant"
+    }
+  ]
+}

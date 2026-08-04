@@ -1,0 +1,1603 @@
+{
+  "info": {
+    "_postman_id": "d8cf31af-8641-4471-a401-4141b6e4fbec",
+    "name": "Workday Integration Workday Absence Management Absence Types Prospects API",
+    "description": "API for managing employee leave requests, absence types, and time-off balances. Retrieves eligible absence types for employees and supports validation of leave category selections.\n\nContact Support:\n Name: Workday API Support\n Email: api-support@workday.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:33:57.000Z",
+    "updatedAt": "2026-07-28T03:33:57.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-d8cf31af-8641-4471-a401-4141b6e4fbec"
+  },
+  "item": [
+    {
+      "name": "prospects",
+      "item": [
+        {
+          "name": "{ID}",
+          "item": [
+            {
+              "name": "educations",
+              "item": [
+                {
+                  "name": "Workday Integration Retrieve education records for a prospect",
+                  "id": "5922da25-77db-4976-8028-abb650389ed8",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/prospects/:ID/educations?limit=20&offset=0",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "prospects",
+                        ":ID",
+                        "educations"
+                      ],
+                      "query": [
+                        {
+                          "description": "The maximum number of objects in a single response (default 20, maximum 100)",
+                          "key": "limit",
+                          "value": "20"
+                        },
+                        {
+                          "description": "The zero-based index of the first object in a response collection",
+                          "key": "offset",
+                          "value": "0"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "093ffbcc-09d0-4dff-96a8-25a32db037c1",
+                          "key": "ID",
+                          "value": "<string>",
+                          "description": "(Required) The Workday ID of the resource"
+                        }
+                      ]
+                    },
+                    "description": "Returns the education history for the specified recruiting prospect."
+                  },
+                  "response": [
+                    {
+                      "id": "0af97732-27ee-4114-98d3-5dfb5f8b79d9",
+                      "name": "Successful response with prospect education records",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/prospects/:ID/educations?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "prospects",
+                            ":ID",
+                            "educations"
+                          ],
+                          "query": [
+                            {
+                              "description": "The maximum number of objects in a single response (default 20, maximum 100)",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "The zero-based index of the first object in a response collection",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"total\": \"<integer>\",\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"school\": \"<string>\",\n      \"degree\": \"<string>\",\n      \"fieldOfStudy\": \"<string>\",\n      \"startDate\": \"<date>\",\n      \"endDate\": \"<date>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"school\": \"<string>\",\n      \"degree\": \"<string>\",\n      \"fieldOfStudy\": \"<string>\",\n      \"startDate\": \"<date>\",\n      \"endDate\": \"<date>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:33:57.000Z",
+                      "updatedAt": "2026-07-28T03:33:57.000Z",
+                      "uid": "35240-0af97732-27ee-4114-98d3-5dfb5f8b79d9"
+                    },
+                    {
+                      "id": "23f41919-6f7b-4d4c-b44c-7d659bcb9573",
+                      "name": "Authentication required",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/prospects/:ID/educations?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "prospects",
+                            ":ID",
+                            "educations"
+                          ],
+                          "query": [
+                            {
+                              "description": "The maximum number of objects in a single response (default 20, maximum 100)",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "The zero-based index of the first object in a response collection",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:33:57.000Z",
+                      "updatedAt": "2026-07-28T03:33:57.000Z",
+                      "uid": "35240-23f41919-6f7b-4d4c-b44c-7d659bcb9573"
+                    },
+                    {
+                      "id": "87da36ac-20e8-4892-9eaf-877ba7bbdfe5",
+                      "name": "Insufficient permissions",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/prospects/:ID/educations?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "prospects",
+                            ":ID",
+                            "educations"
+                          ],
+                          "query": [
+                            {
+                              "description": "The maximum number of objects in a single response (default 20, maximum 100)",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "The zero-based index of the first object in a response collection",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:33:57.000Z",
+                      "updatedAt": "2026-07-28T03:33:57.000Z",
+                      "uid": "35240-87da36ac-20e8-4892-9eaf-877ba7bbdfe5"
+                    },
+                    {
+                      "id": "6163538d-6241-4d70-9a51-c2c7a5bc23b3",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/prospects/:ID/educations?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "prospects",
+                            ":ID",
+                            "educations"
+                          ],
+                          "query": [
+                            {
+                              "description": "The maximum number of objects in a single response (default 20, maximum 100)",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "The zero-based index of the first object in a response collection",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:33:57.000Z",
+                      "updatedAt": "2026-07-28T03:33:57.000Z",
+                      "uid": "35240-6163538d-6241-4d70-9a51-c2c7a5bc23b3"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:33:57.000Z",
+                  "updatedAt": "2026-07-28T03:33:57.000Z",
+                  "uid": "35240-5922da25-77db-4976-8028-abb650389ed8"
+                }
+              ],
+              "id": "bb669be6-0c78-47e4-af22-ec856a3bb4f2",
+              "createdAt": "2026-07-28T03:33:57.000Z",
+              "updatedAt": "2026-07-28T03:33:57.000Z",
+              "uid": "35240-bb669be6-0c78-47e4-af22-ec856a3bb4f2"
+            },
+            {
+              "name": "experiences",
+              "item": [
+                {
+                  "name": "Workday Integration Retrieve work experiences for a prospect",
+                  "id": "f75cb940-d7cd-48fc-b369-0112a23cbc85",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/prospects/:ID/experiences?limit=20&offset=0",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "prospects",
+                        ":ID",
+                        "experiences"
+                      ],
+                      "query": [
+                        {
+                          "description": "The maximum number of objects in a single response (default 20, maximum 100)",
+                          "key": "limit",
+                          "value": "20"
+                        },
+                        {
+                          "description": "The zero-based index of the first object in a response collection",
+                          "key": "offset",
+                          "value": "0"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "5f602459-c224-4595-a100-44630c88c07d",
+                          "key": "ID",
+                          "value": "<string>",
+                          "description": "(Required) The Workday ID of the resource"
+                        }
+                      ]
+                    },
+                    "description": "Returns the work experience records for the specified recruiting prospect."
+                  },
+                  "response": [
+                    {
+                      "id": "aa62525f-89bd-4622-a4fe-87131c560f52",
+                      "name": "Successful response with prospect experience records",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/prospects/:ID/experiences?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "prospects",
+                            ":ID",
+                            "experiences"
+                          ],
+                          "query": [
+                            {
+                              "description": "The maximum number of objects in a single response (default 20, maximum 100)",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "The zero-based index of the first object in a response collection",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"total\": \"<integer>\",\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"company\": \"<string>\",\n      \"title\": \"<string>\",\n      \"startDate\": \"<date>\",\n      \"endDate\": \"<date>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"company\": \"<string>\",\n      \"title\": \"<string>\",\n      \"startDate\": \"<date>\",\n      \"endDate\": \"<date>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:33:57.000Z",
+                      "updatedAt": "2026-07-28T03:33:57.000Z",
+                      "uid": "35240-aa62525f-89bd-4622-a4fe-87131c560f52"
+                    },
+                    {
+                      "id": "f1e0edf7-9dde-436a-9682-c6f98645b599",
+                      "name": "Authentication required",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/prospects/:ID/experiences?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "prospects",
+                            ":ID",
+                            "experiences"
+                          ],
+                          "query": [
+                            {
+                              "description": "The maximum number of objects in a single response (default 20, maximum 100)",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "The zero-based index of the first object in a response collection",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:33:57.000Z",
+                      "updatedAt": "2026-07-28T03:33:57.000Z",
+                      "uid": "35240-f1e0edf7-9dde-436a-9682-c6f98645b599"
+                    },
+                    {
+                      "id": "ae291c26-328b-42bc-ac69-6bcbfcc2ae8d",
+                      "name": "Insufficient permissions",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/prospects/:ID/experiences?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "prospects",
+                            ":ID",
+                            "experiences"
+                          ],
+                          "query": [
+                            {
+                              "description": "The maximum number of objects in a single response (default 20, maximum 100)",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "The zero-based index of the first object in a response collection",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:33:57.000Z",
+                      "updatedAt": "2026-07-28T03:33:57.000Z",
+                      "uid": "35240-ae291c26-328b-42bc-ac69-6bcbfcc2ae8d"
+                    },
+                    {
+                      "id": "c47cfb53-c714-47e6-adcc-9048622cbb85",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/prospects/:ID/experiences?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "prospects",
+                            ":ID",
+                            "experiences"
+                          ],
+                          "query": [
+                            {
+                              "description": "The maximum number of objects in a single response (default 20, maximum 100)",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "The zero-based index of the first object in a response collection",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:33:57.000Z",
+                      "updatedAt": "2026-07-28T03:33:57.000Z",
+                      "uid": "35240-c47cfb53-c714-47e6-adcc-9048622cbb85"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:33:57.000Z",
+                  "updatedAt": "2026-07-28T03:33:57.000Z",
+                  "uid": "35240-f75cb940-d7cd-48fc-b369-0112a23cbc85"
+                },
+                {
+                  "name": "Workday Integration Create a work experience entry for a prospect",
+                  "id": "d23352d6-d51f-459f-93dc-feca418178bc",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"company\": \"<string>\",\n  \"title\": \"<string>\",\n  \"startDate\": \"<date>\",\n  \"endDate\": \"<date>\",\n  \"description\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/prospects/:ID/experiences",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "prospects",
+                        ":ID",
+                        "experiences"
+                      ],
+                      "variable": [
+                        {
+                          "id": "22bc0789-fb0d-4caa-8168-2f7870c8f1fe",
+                          "key": "ID",
+                          "value": "<string>",
+                          "description": "(Required) The Workday ID of the resource"
+                        }
+                      ]
+                    },
+                    "description": "Adds a new work experience record to the specified recruiting prospect."
+                  },
+                  "response": [
+                    {
+                      "id": "5d71591c-0fe4-449a-af88-a22d5b6c82d7",
+                      "name": "Experience record created successfully",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"company\": \"<string>\",\n  \"title\": \"<string>\",\n  \"startDate\": \"<date>\",\n  \"endDate\": \"<date>\",\n  \"description\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/prospects/:ID/experiences",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "prospects",
+                            ":ID",
+                            "experiences"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"company\": \"<string>\",\n  \"title\": \"<string>\",\n  \"startDate\": \"<date>\",\n  \"endDate\": \"<date>\",\n  \"description\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:33:57.000Z",
+                      "updatedAt": "2026-07-28T03:33:57.000Z",
+                      "uid": "35240-5d71591c-0fe4-449a-af88-a22d5b6c82d7"
+                    },
+                    {
+                      "id": "c9f790dd-a45b-4aec-8688-c1d39d2d7925",
+                      "name": "Invalid request parameters",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"company\": \"<string>\",\n  \"title\": \"<string>\",\n  \"startDate\": \"<date>\",\n  \"endDate\": \"<date>\",\n  \"description\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/prospects/:ID/experiences",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "prospects",
+                            ":ID",
+                            "experiences"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:33:57.000Z",
+                      "updatedAt": "2026-07-28T03:33:57.000Z",
+                      "uid": "35240-c9f790dd-a45b-4aec-8688-c1d39d2d7925"
+                    },
+                    {
+                      "id": "4a0a6981-ba93-40ea-9725-01c1cf6b33c4",
+                      "name": "Authentication required",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"company\": \"<string>\",\n  \"title\": \"<string>\",\n  \"startDate\": \"<date>\",\n  \"endDate\": \"<date>\",\n  \"description\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/prospects/:ID/experiences",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "prospects",
+                            ":ID",
+                            "experiences"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:33:57.000Z",
+                      "updatedAt": "2026-07-28T03:33:57.000Z",
+                      "uid": "35240-4a0a6981-ba93-40ea-9725-01c1cf6b33c4"
+                    },
+                    {
+                      "id": "a97ba61e-422a-49b2-a694-3e6904356ec7",
+                      "name": "Insufficient permissions",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"company\": \"<string>\",\n  \"title\": \"<string>\",\n  \"startDate\": \"<date>\",\n  \"endDate\": \"<date>\",\n  \"description\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/prospects/:ID/experiences",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "prospects",
+                            ":ID",
+                            "experiences"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:33:57.000Z",
+                      "updatedAt": "2026-07-28T03:33:57.000Z",
+                      "uid": "35240-a97ba61e-422a-49b2-a694-3e6904356ec7"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:33:57.000Z",
+                  "updatedAt": "2026-07-28T03:33:57.000Z",
+                  "uid": "35240-d23352d6-d51f-459f-93dc-feca418178bc"
+                }
+              ],
+              "id": "13e08077-47f2-443b-9198-94fa358ca032",
+              "createdAt": "2026-07-28T03:33:57.000Z",
+              "updatedAt": "2026-07-28T03:33:57.000Z",
+              "uid": "35240-13e08077-47f2-443b-9198-94fa358ca032"
+            },
+            {
+              "name": "resumeAttachments",
+              "item": [
+                {
+                  "name": "Workday Integration Retrieve resume attachments for a prospect",
+                  "id": "e6b59af8-6b90-4c93-aa9d-f04a1da35e06",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/prospects/:ID/resumeAttachments?limit=20&offset=0",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "prospects",
+                        ":ID",
+                        "resumeAttachments"
+                      ],
+                      "query": [
+                        {
+                          "description": "The maximum number of objects in a single response (default 20, maximum 100)",
+                          "key": "limit",
+                          "value": "20"
+                        },
+                        {
+                          "description": "The zero-based index of the first object in a response collection",
+                          "key": "offset",
+                          "value": "0"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "e1648072-4bd9-42fd-a8b2-e2841c0b339a",
+                          "key": "ID",
+                          "value": "<string>",
+                          "description": "(Required) The Workday ID of the resource"
+                        }
+                      ]
+                    },
+                    "description": "Returns the resume and document attachments for the specified recruiting prospect."
+                  },
+                  "response": [
+                    {
+                      "id": "b5dbc545-36ab-449e-bb00-adac3424e9a8",
+                      "name": "Successful response with resume attachments",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/prospects/:ID/resumeAttachments?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "prospects",
+                            ":ID",
+                            "resumeAttachments"
+                          ],
+                          "query": [
+                            {
+                              "description": "The maximum number of objects in a single response (default 20, maximum 100)",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "The zero-based index of the first object in a response collection",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"total\": \"<integer>\",\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"descriptor\": \"<string>\",\n      \"fileName\": \"<string>\",\n      \"contentType\": \"<string>\",\n      \"uploadDate\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"descriptor\": \"<string>\",\n      \"fileName\": \"<string>\",\n      \"contentType\": \"<string>\",\n      \"uploadDate\": \"<dateTime>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:33:57.000Z",
+                      "updatedAt": "2026-07-28T03:33:57.000Z",
+                      "uid": "35240-b5dbc545-36ab-449e-bb00-adac3424e9a8"
+                    },
+                    {
+                      "id": "21c9cfe4-1b57-45c5-a9bc-a226e23b21b2",
+                      "name": "Authentication required",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/prospects/:ID/resumeAttachments?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "prospects",
+                            ":ID",
+                            "resumeAttachments"
+                          ],
+                          "query": [
+                            {
+                              "description": "The maximum number of objects in a single response (default 20, maximum 100)",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "The zero-based index of the first object in a response collection",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:33:57.000Z",
+                      "updatedAt": "2026-07-28T03:33:57.000Z",
+                      "uid": "35240-21c9cfe4-1b57-45c5-a9bc-a226e23b21b2"
+                    },
+                    {
+                      "id": "ab39f136-af4c-4a1b-a702-6fd9ad69cd0f",
+                      "name": "Insufficient permissions",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/prospects/:ID/resumeAttachments?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "prospects",
+                            ":ID",
+                            "resumeAttachments"
+                          ],
+                          "query": [
+                            {
+                              "description": "The maximum number of objects in a single response (default 20, maximum 100)",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "The zero-based index of the first object in a response collection",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:33:57.000Z",
+                      "updatedAt": "2026-07-28T03:33:57.000Z",
+                      "uid": "35240-ab39f136-af4c-4a1b-a702-6fd9ad69cd0f"
+                    },
+                    {
+                      "id": "5dc85f03-fc5a-4bd7-afea-552b30c91b86",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/prospects/:ID/resumeAttachments?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "prospects",
+                            ":ID",
+                            "resumeAttachments"
+                          ],
+                          "query": [
+                            {
+                              "description": "The maximum number of objects in a single response (default 20, maximum 100)",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "The zero-based index of the first object in a response collection",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:33:57.000Z",
+                      "updatedAt": "2026-07-28T03:33:57.000Z",
+                      "uid": "35240-5dc85f03-fc5a-4bd7-afea-552b30c91b86"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:33:57.000Z",
+                  "updatedAt": "2026-07-28T03:33:57.000Z",
+                  "uid": "35240-e6b59af8-6b90-4c93-aa9d-f04a1da35e06"
+                }
+              ],
+              "id": "17ce8f59-6aaa-4792-89e0-f71e264a0b8d",
+              "createdAt": "2026-07-28T03:33:57.000Z",
+              "updatedAt": "2026-07-28T03:33:57.000Z",
+              "uid": "35240-17ce8f59-6aaa-4792-89e0-f71e264a0b8d"
+            },
+            {
+              "name": "skills",
+              "item": [
+                {
+                  "name": "Workday Integration Retrieve skills for a prospect",
+                  "id": "41adadee-75f6-4aff-af6a-6dbbc96f4f38",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/prospects/:ID/skills?limit=20&offset=0",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "prospects",
+                        ":ID",
+                        "skills"
+                      ],
+                      "query": [
+                        {
+                          "description": "The maximum number of objects in a single response (default 20, maximum 100)",
+                          "key": "limit",
+                          "value": "20"
+                        },
+                        {
+                          "description": "The zero-based index of the first object in a response collection",
+                          "key": "offset",
+                          "value": "0"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "5aee0d56-b46b-4426-b09a-c96a7305b8ca",
+                          "key": "ID",
+                          "value": "<string>",
+                          "description": "(Required) The Workday ID of the resource"
+                        }
+                      ]
+                    },
+                    "description": "Returns the skills profile for the specified recruiting prospect."
+                  },
+                  "response": [
+                    {
+                      "id": "6b49fb8e-1f7d-496b-8037-76bfa836f6b1",
+                      "name": "Successful response with prospect skills",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/prospects/:ID/skills?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "prospects",
+                            ":ID",
+                            "skills"
+                          ],
+                          "query": [
+                            {
+                              "description": "The maximum number of objects in a single response (default 20, maximum 100)",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "The zero-based index of the first object in a response collection",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"total\": \"<integer>\",\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"descriptor\": \"<string>\",\n      \"proficiencyLevel\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"descriptor\": \"<string>\",\n      \"proficiencyLevel\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:33:57.000Z",
+                      "updatedAt": "2026-07-28T03:33:57.000Z",
+                      "uid": "35240-6b49fb8e-1f7d-496b-8037-76bfa836f6b1"
+                    },
+                    {
+                      "id": "c3ade29c-bdcd-466b-98e4-06b28135d4c5",
+                      "name": "Authentication required",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/prospects/:ID/skills?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "prospects",
+                            ":ID",
+                            "skills"
+                          ],
+                          "query": [
+                            {
+                              "description": "The maximum number of objects in a single response (default 20, maximum 100)",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "The zero-based index of the first object in a response collection",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:33:57.000Z",
+                      "updatedAt": "2026-07-28T03:33:57.000Z",
+                      "uid": "35240-c3ade29c-bdcd-466b-98e4-06b28135d4c5"
+                    },
+                    {
+                      "id": "7a35bbdd-55d8-40d8-afa7-82ce1678a14f",
+                      "name": "Insufficient permissions",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/prospects/:ID/skills?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "prospects",
+                            ":ID",
+                            "skills"
+                          ],
+                          "query": [
+                            {
+                              "description": "The maximum number of objects in a single response (default 20, maximum 100)",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "The zero-based index of the first object in a response collection",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:33:57.000Z",
+                      "updatedAt": "2026-07-28T03:33:57.000Z",
+                      "uid": "35240-7a35bbdd-55d8-40d8-afa7-82ce1678a14f"
+                    },
+                    {
+                      "id": "99fbf290-718e-4e74-a7e5-47414eafd15d",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/prospects/:ID/skills?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "prospects",
+                            ":ID",
+                            "skills"
+                          ],
+                          "query": [
+                            {
+                              "description": "The maximum number of objects in a single response (default 20, maximum 100)",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "The zero-based index of the first object in a response collection",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:33:57.000Z",
+                      "updatedAt": "2026-07-28T03:33:57.000Z",
+                      "uid": "35240-99fbf290-718e-4e74-a7e5-47414eafd15d"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:33:57.000Z",
+                  "updatedAt": "2026-07-28T03:33:57.000Z",
+                  "uid": "35240-41adadee-75f6-4aff-af6a-6dbbc96f4f38"
+                }
+              ],
+              "id": "a7ca68c7-16c4-45bb-86c2-fc6d1c4a092a",
+              "createdAt": "2026-07-28T03:33:57.000Z",
+              "updatedAt": "2026-07-28T03:33:57.000Z",
+              "uid": "35240-a7ca68c7-16c4-45bb-86c2-fc6d1c4a092a"
+            }
+          ],
+          "id": "d08d5848-964c-49a6-b288-dcb9e9df2b62",
+          "createdAt": "2026-07-28T03:33:57.000Z",
+          "updatedAt": "2026-07-28T03:33:57.000Z",
+          "uid": "35240-d08d5848-964c-49a6-b288-dcb9e9df2b62"
+        }
+      ],
+      "id": "71098d74-6d6a-4d56-9451-82a7c8712b99",
+      "createdAt": "2026-07-28T03:33:57.000Z",
+      "updatedAt": "2026-07-28T03:33:57.000Z",
+      "uid": "35240-71098d74-6d6a-4d56-9451-82a7c8712b99"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "r:absenceManagement w:absenceManagement",
+        "type": "string"
+      },
+      {
+        "key": "redirect_uri",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://{baseUrl}/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "wd2-impl-services1.workday.com"
+    },
+    {
+      "key": "tenant",
+      "value": "tenant"
+    }
+  ]
+}

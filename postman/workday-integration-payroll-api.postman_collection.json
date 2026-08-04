@@ -1,0 +1,378 @@
+{
+  "info": {
+    "_postman_id": "b47ec378-f25b-41b5-bb13-efff3ec57c7a",
+    "name": "Workday Integration Workday Absence Management Absence Types Payroll API",
+    "description": "API for managing employee leave requests, absence types, and time-off balances. Retrieves eligible absence types for employees and supports validation of leave category selections.\n\nContact Support:\n Name: Workday API Support\n Email: api-support@workday.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:33:13.000Z",
+    "updatedAt": "2026-07-28T03:33:13.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b47ec378-f25b-41b5-bb13-efff3ec57c7a"
+  },
+  "item": [
+    {
+      "name": "workers",
+      "item": [
+        {
+          "name": "{ID}",
+          "item": [
+            {
+              "name": "paySlips",
+              "item": [
+                {
+                  "name": "Workday Integration Retrieve pay slips for a worker",
+                  "id": "dd8ab61b-9914-46b3-9077-3f38feaa638e",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/workers/:ID/paySlips?limit=20&offset=0",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "workers",
+                        ":ID",
+                        "paySlips"
+                      ],
+                      "query": [
+                        {
+                          "description": "The maximum number of objects in a single response (default 20, maximum 100)",
+                          "key": "limit",
+                          "value": "20"
+                        },
+                        {
+                          "description": "The zero-based index of the first object in a response collection",
+                          "key": "offset",
+                          "value": "0"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "f437d4c9-8b51-4679-8135-273808fd7e91",
+                          "key": "ID",
+                          "value": "<string>",
+                          "description": "(Required) The Workday ID of the resource"
+                        }
+                      ]
+                    },
+                    "description": "Returns the pay slips for the specified worker."
+                  },
+                  "response": [
+                    {
+                      "id": "cb97c29c-1b5a-4283-94a7-1aebfa6dfa9f",
+                      "name": "Successful response with pay slips",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:ID/paySlips?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":ID",
+                            "paySlips"
+                          ],
+                          "query": [
+                            {
+                              "description": "The maximum number of objects in a single response (default 20, maximum 100)",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "The zero-based index of the first object in a response collection",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"total\": \"<integer>\",\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"descriptor\": \"<string>\",\n      \"payPeriodStartDate\": \"<date>\",\n      \"payPeriodEndDate\": \"<date>\",\n      \"grossPay\": \"<number>\",\n      \"netPay\": \"<number>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"descriptor\": \"<string>\",\n      \"payPeriodStartDate\": \"<date>\",\n      \"payPeriodEndDate\": \"<date>\",\n      \"grossPay\": \"<number>\",\n      \"netPay\": \"<number>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:33:14.000Z",
+                      "updatedAt": "2026-07-28T03:33:14.000Z",
+                      "uid": "35240-cb97c29c-1b5a-4283-94a7-1aebfa6dfa9f"
+                    },
+                    {
+                      "id": "e94a6049-c5f1-4f78-ac6a-4e2224272c64",
+                      "name": "Authentication required",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:ID/paySlips?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":ID",
+                            "paySlips"
+                          ],
+                          "query": [
+                            {
+                              "description": "The maximum number of objects in a single response (default 20, maximum 100)",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "The zero-based index of the first object in a response collection",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:33:14.000Z",
+                      "updatedAt": "2026-07-28T03:33:14.000Z",
+                      "uid": "35240-e94a6049-c5f1-4f78-ac6a-4e2224272c64"
+                    },
+                    {
+                      "id": "d949809e-dde4-45fd-9dd4-756dccd6d384",
+                      "name": "Insufficient permissions",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:ID/paySlips?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":ID",
+                            "paySlips"
+                          ],
+                          "query": [
+                            {
+                              "description": "The maximum number of objects in a single response (default 20, maximum 100)",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "The zero-based index of the first object in a response collection",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:33:14.000Z",
+                      "updatedAt": "2026-07-28T03:33:14.000Z",
+                      "uid": "35240-d949809e-dde4-45fd-9dd4-756dccd6d384"
+                    },
+                    {
+                      "id": "f1046268-0f79-41fd-bdb5-80caeab20d27",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:ID/paySlips?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":ID",
+                            "paySlips"
+                          ],
+                          "query": [
+                            {
+                              "description": "The maximum number of objects in a single response (default 20, maximum 100)",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "The zero-based index of the first object in a response collection",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:33:14.000Z",
+                      "updatedAt": "2026-07-28T03:33:14.000Z",
+                      "uid": "35240-f1046268-0f79-41fd-bdb5-80caeab20d27"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:33:14.000Z",
+                  "updatedAt": "2026-07-28T03:33:14.000Z",
+                  "uid": "35240-dd8ab61b-9914-46b3-9077-3f38feaa638e"
+                }
+              ],
+              "id": "49a02fd1-56f7-4772-a350-c7ca83c3c4a3",
+              "createdAt": "2026-07-28T03:33:14.000Z",
+              "updatedAt": "2026-07-28T03:33:14.000Z",
+              "uid": "35240-49a02fd1-56f7-4772-a350-c7ca83c3c4a3"
+            }
+          ],
+          "id": "05c5ffce-6267-4245-aa82-a70a94c60197",
+          "createdAt": "2026-07-28T03:33:14.000Z",
+          "updatedAt": "2026-07-28T03:33:14.000Z",
+          "uid": "35240-05c5ffce-6267-4245-aa82-a70a94c60197"
+        }
+      ],
+      "id": "e67ba42e-7825-48a1-919d-2ae576aa83a3",
+      "createdAt": "2026-07-28T03:33:14.000Z",
+      "updatedAt": "2026-07-28T03:33:14.000Z",
+      "uid": "35240-e67ba42e-7825-48a1-919d-2ae576aa83a3"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "r:absenceManagement w:absenceManagement",
+        "type": "string"
+      },
+      {
+        "key": "redirect_uri",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://{baseUrl}/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "wd2-impl-services1.workday.com"
+    },
+    {
+      "key": "tenant",
+      "value": "tenant"
+    }
+  ]
+}

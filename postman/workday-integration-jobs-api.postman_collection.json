@@ -1,0 +1,318 @@
+{
+  "info": {
+    "_postman_id": "74f28c1b-60f5-4c1e-ba3d-d94f7461768e",
+    "name": "Workday Integration Workday Absence Management Absence Types Jobs API",
+    "description": "API for managing employee leave requests, absence types, and time-off balances. Retrieves eligible absence types for employees and supports validation of leave category selections.\n\nContact Support:\n Name: Workday API Support\n Email: api-support@workday.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:33:03.000Z",
+    "updatedAt": "2026-07-28T03:33:03.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-74f28c1b-60f5-4c1e-ba3d-d94f7461768e"
+  },
+  "item": [
+    {
+      "name": "jobs",
+      "item": [
+        {
+          "name": "{ID}",
+          "item": [
+            {
+              "name": "payGroup",
+              "item": [
+                {
+                  "name": "Workday Integration Retrieve the pay group for a job",
+                  "id": "c65cf045-52e4-48ce-b837-cc7042bfb076",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/jobs/:ID/payGroup",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "jobs",
+                        ":ID",
+                        "payGroup"
+                      ],
+                      "variable": [
+                        {
+                          "id": "fb976d2f-9a1d-4276-b95b-23a11c5ab348",
+                          "key": "ID",
+                          "value": "<string>",
+                          "description": "(Required) The Workday ID of the resource"
+                        }
+                      ]
+                    },
+                    "description": "Returns the pay group assignment for the specified job."
+                  },
+                  "response": [
+                    {
+                      "id": "82b43f5e-f995-4876-bf59-7f937d45e283",
+                      "name": "Successful response with the job pay group",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/jobs/:ID/payGroup",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "jobs",
+                            ":ID",
+                            "payGroup"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"descriptor\": \"<string>\",\n  \"payGroupName\": \"<string>\",\n  \"frequency\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\",\n    \"href\": \"<uri>\"\n  },\n  \"country\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\",\n    \"href\": \"<uri>\"\n  }\n}",
+                      "createdAt": "2026-07-28T03:33:03.000Z",
+                      "updatedAt": "2026-07-28T03:33:03.000Z",
+                      "uid": "35240-82b43f5e-f995-4876-bf59-7f937d45e283"
+                    },
+                    {
+                      "id": "2440bf30-11e3-44e3-97d2-46e6d8a1a200",
+                      "name": "Authentication required",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/jobs/:ID/payGroup",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "jobs",
+                            ":ID",
+                            "payGroup"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:33:03.000Z",
+                      "updatedAt": "2026-07-28T03:33:03.000Z",
+                      "uid": "35240-2440bf30-11e3-44e3-97d2-46e6d8a1a200"
+                    },
+                    {
+                      "id": "0f95d2ed-be8c-4f8b-89a6-143ce072e355",
+                      "name": "Insufficient permissions",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/jobs/:ID/payGroup",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "jobs",
+                            ":ID",
+                            "payGroup"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:33:03.000Z",
+                      "updatedAt": "2026-07-28T03:33:03.000Z",
+                      "uid": "35240-0f95d2ed-be8c-4f8b-89a6-143ce072e355"
+                    },
+                    {
+                      "id": "c66132c4-7b3a-4f4f-b110-e4a252e57178",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/jobs/:ID/payGroup",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "jobs",
+                            ":ID",
+                            "payGroup"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:33:03.000Z",
+                      "updatedAt": "2026-07-28T03:33:03.000Z",
+                      "uid": "35240-c66132c4-7b3a-4f4f-b110-e4a252e57178"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:33:03.000Z",
+                  "updatedAt": "2026-07-28T03:33:03.000Z",
+                  "uid": "35240-c65cf045-52e4-48ce-b837-cc7042bfb076"
+                }
+              ],
+              "id": "10d639f3-79ee-4d7e-98e3-00f603443605",
+              "createdAt": "2026-07-28T03:33:03.000Z",
+              "updatedAt": "2026-07-28T03:33:03.000Z",
+              "uid": "35240-10d639f3-79ee-4d7e-98e3-00f603443605"
+            }
+          ],
+          "id": "f81126d6-c3c4-4dd9-88ef-063f5d3f3251",
+          "createdAt": "2026-07-28T03:33:03.000Z",
+          "updatedAt": "2026-07-28T03:33:03.000Z",
+          "uid": "35240-f81126d6-c3c4-4dd9-88ef-063f5d3f3251"
+        }
+      ],
+      "id": "a485b499-347d-452a-ad17-9574160673e1",
+      "createdAt": "2026-07-28T03:33:03.000Z",
+      "updatedAt": "2026-07-28T03:33:03.000Z",
+      "uid": "35240-a485b499-347d-452a-ad17-9574160673e1"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "r:absenceManagement w:absenceManagement",
+        "type": "string"
+      },
+      {
+        "key": "redirect_uri",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://{baseUrl}/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "wd2-impl-services1.workday.com"
+    },
+    {
+      "key": "tenant",
+      "value": "tenant"
+    }
+  ]
+}

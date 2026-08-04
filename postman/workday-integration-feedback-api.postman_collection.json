@@ -1,0 +1,501 @@
+{
+  "info": {
+    "_postman_id": "fd725a9b-62bf-4e0a-b318-e14df933c6a6",
+    "name": "Workday Integration Workday Absence Management Absence Types Feedback API",
+    "description": "API for managing employee leave requests, absence types, and time-off balances. Retrieves eligible absence types for employees and supports validation of leave category selections.\n\nContact Support:\n Name: Workday API Support\n Email: api-support@workday.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:32:51.000Z",
+    "updatedAt": "2026-07-28T03:32:51.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-fd725a9b-62bf-4e0a-b318-e14df933c6a6"
+  },
+  "item": [
+    {
+      "name": "feedbackBadges",
+      "item": [
+        {
+          "name": "{ID}",
+          "item": [
+            {
+              "name": "Workday Integration Retrieve a specific feedback badge",
+              "id": "40c46fec-fd81-488d-9502-10741637f31d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/feedbackBadges/:ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "feedbackBadges",
+                    ":ID"
+                  ],
+                  "variable": [
+                    {
+                      "id": "d8b235c8-5db2-470b-ba0c-a5ac3fddd99b",
+                      "key": "ID",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Returns the specified feedback badge with its details."
+              },
+              "response": [
+                {
+                  "id": "ac49aa91-9083-4c7e-8479-32597a049044",
+                  "name": "Successful response with the feedback badge",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/feedbackBadges/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "feedbackBadges",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"descriptor\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"isActive\": \"<boolean>\"\n}",
+                  "createdAt": "2026-07-28T03:32:52.000Z",
+                  "updatedAt": "2026-07-28T03:32:52.000Z",
+                  "uid": "35240-ac49aa91-9083-4c7e-8479-32597a049044"
+                },
+                {
+                  "id": "49e1bff1-d8d1-43b0-8840-851538a1931e",
+                  "name": "Authentication required",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/feedbackBadges/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "feedbackBadges",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:32:52.000Z",
+                  "updatedAt": "2026-07-28T03:32:52.000Z",
+                  "uid": "35240-49e1bff1-d8d1-43b0-8840-851538a1931e"
+                },
+                {
+                  "id": "22b831ee-83a4-4f3c-919b-883a92bda46a",
+                  "name": "Insufficient permissions",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/feedbackBadges/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "feedbackBadges",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:32:52.000Z",
+                  "updatedAt": "2026-07-28T03:32:52.000Z",
+                  "uid": "35240-22b831ee-83a4-4f3c-919b-883a92bda46a"
+                },
+                {
+                  "id": "83d06265-ff34-46ce-8cc3-2dc0e0611acc",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/feedbackBadges/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "feedbackBadges",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:32:52.000Z",
+                  "updatedAt": "2026-07-28T03:32:52.000Z",
+                  "uid": "35240-83d06265-ff34-46ce-8cc3-2dc0e0611acc"
+                }
+              ],
+              "createdAt": "2026-07-28T03:32:52.000Z",
+              "updatedAt": "2026-07-28T03:32:52.000Z",
+              "uid": "35240-40c46fec-fd81-488d-9502-10741637f31d"
+            }
+          ],
+          "id": "bc1413f7-adeb-4c23-a514-b83cc5de00db",
+          "createdAt": "2026-07-28T03:32:52.000Z",
+          "updatedAt": "2026-07-28T03:32:52.000Z",
+          "uid": "35240-bc1413f7-adeb-4c23-a514-b83cc5de00db"
+        },
+        {
+          "name": "Workday Integration Retrieve feedback badges",
+          "id": "020a909c-9586-451d-ab79-269ca7e62e23",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/feedbackBadges?limit=20&offset=0",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "feedbackBadges"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "key": "offset",
+                  "value": "0"
+                }
+              ]
+            },
+            "description": "Returns the available feedback badges that can be awarded to workers."
+          },
+          "response": [
+            {
+              "id": "8c104772-be7e-4ca5-9b58-3221123b2ee1",
+              "name": "Successful response with feedback badges",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/feedbackBadges?limit=20&offset=0",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "feedbackBadges"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"descriptor\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"isActive\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"descriptor\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"isActive\": \"<boolean>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:32:52.000Z",
+              "updatedAt": "2026-07-28T03:32:52.000Z",
+              "uid": "35240-8c104772-be7e-4ca5-9b58-3221123b2ee1"
+            },
+            {
+              "id": "2f80a7f0-16fe-4c09-9dff-65a41ed64f91",
+              "name": "Authentication required",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/feedbackBadges?limit=20&offset=0",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "feedbackBadges"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:32:52.000Z",
+              "updatedAt": "2026-07-28T03:32:52.000Z",
+              "uid": "35240-2f80a7f0-16fe-4c09-9dff-65a41ed64f91"
+            },
+            {
+              "id": "892ffc45-54d4-4bdb-83b7-bfb078d922ce",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/feedbackBadges?limit=20&offset=0",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "feedbackBadges"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:32:52.000Z",
+              "updatedAt": "2026-07-28T03:32:52.000Z",
+              "uid": "35240-892ffc45-54d4-4bdb-83b7-bfb078d922ce"
+            }
+          ],
+          "createdAt": "2026-07-28T03:32:52.000Z",
+          "updatedAt": "2026-07-28T03:32:52.000Z",
+          "uid": "35240-020a909c-9586-451d-ab79-269ca7e62e23"
+        }
+      ],
+      "id": "24ed1b1b-83d8-4826-bcc5-a4335f13fe25",
+      "createdAt": "2026-07-28T03:32:52.000Z",
+      "updatedAt": "2026-07-28T03:32:52.000Z",
+      "uid": "35240-24ed1b1b-83d8-4826-bcc5-a4335f13fe25"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "r:absenceManagement w:absenceManagement",
+        "type": "string"
+      },
+      {
+        "key": "redirect_uri",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://{baseUrl}/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "wd2-impl-services1.workday.com"
+    },
+    {
+      "key": "tenant",
+      "value": "tenant"
+    }
+  ]
+}

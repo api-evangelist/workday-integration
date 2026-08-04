@@ -1,0 +1,332 @@
+{
+  "info": {
+    "_postman_id": "cd373d76-7f6a-42ba-b59f-22569b3b08f7",
+    "name": "Workday Integration Workday Absence Management Absence Types Clock Events API",
+    "description": "API for managing employee leave requests, absence types, and time-off balances. Retrieves eligible absence types for employees and supports validation of leave category selections.\n\nContact Support:\n Name: Workday API Support\n Email: api-support@workday.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:32:31.000Z",
+    "updatedAt": "2026-07-28T03:32:32.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-cd373d76-7f6a-42ba-b59f-22569b3b08f7"
+  },
+  "item": [
+    {
+      "name": "timeClockEvents",
+      "item": [
+        {
+          "name": "Workday Integration Create a time clock event",
+          "id": "527f7f46-ad46-43ae-909a-9f213101ffcb",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"worker\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\",\n    \"href\": \"<uri>\"\n  },\n  \"eventType\": \"Clock_In\",\n  \"eventDateTime\": \"<dateTime>\",\n  \"timeZone\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/timeClockEvents",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "timeClockEvents"
+              ]
+            },
+            "description": "Records a time clock event such as a clock-in or clock-out for a worker."
+          },
+          "response": [
+            {
+              "id": "39fe9c80-b835-493f-bdf3-d64dc4bf9279",
+              "name": "Time clock event created successfully",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"worker\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\",\n    \"href\": \"<uri>\"\n  },\n  \"eventType\": \"Clock_In\",\n  \"eventDateTime\": \"<dateTime>\",\n  \"timeZone\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/timeClockEvents",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "timeClockEvents"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"descriptor\": \"<string>\",\n  \"worker\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\",\n    \"href\": \"<uri>\"\n  },\n  \"eventType\": \"Clock_In\",\n  \"eventDateTime\": \"<dateTime>\",\n  \"timeZone\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:32:32.000Z",
+              "updatedAt": "2026-07-28T03:32:32.000Z",
+              "uid": "35240-39fe9c80-b835-493f-bdf3-d64dc4bf9279"
+            },
+            {
+              "id": "d1b7b275-7226-4db1-84f9-25b8004944e1",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"worker\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\",\n    \"href\": \"<uri>\"\n  },\n  \"eventType\": \"Clock_In\",\n  \"eventDateTime\": \"<dateTime>\",\n  \"timeZone\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/timeClockEvents",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "timeClockEvents"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:32:32.000Z",
+              "updatedAt": "2026-07-28T03:32:32.000Z",
+              "uid": "35240-d1b7b275-7226-4db1-84f9-25b8004944e1"
+            },
+            {
+              "id": "cf9e0af2-79ce-46eb-a958-3bf8b46491a5",
+              "name": "Authentication required",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"worker\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\",\n    \"href\": \"<uri>\"\n  },\n  \"eventType\": \"Clock_In\",\n  \"eventDateTime\": \"<dateTime>\",\n  \"timeZone\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/timeClockEvents",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "timeClockEvents"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:32:32.000Z",
+              "updatedAt": "2026-07-28T03:32:32.000Z",
+              "uid": "35240-cf9e0af2-79ce-46eb-a958-3bf8b46491a5"
+            },
+            {
+              "id": "f9ace3b4-7343-4a45-8114-1b167ac05938",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"worker\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\",\n    \"href\": \"<uri>\"\n  },\n  \"eventType\": \"Clock_In\",\n  \"eventDateTime\": \"<dateTime>\",\n  \"timeZone\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/timeClockEvents",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "timeClockEvents"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:32:32.000Z",
+              "updatedAt": "2026-07-28T03:32:32.000Z",
+              "uid": "35240-f9ace3b4-7343-4a45-8114-1b167ac05938"
+            }
+          ],
+          "createdAt": "2026-07-28T03:32:32.000Z",
+          "updatedAt": "2026-07-28T03:32:32.000Z",
+          "uid": "35240-527f7f46-ad46-43ae-909a-9f213101ffcb"
+        }
+      ],
+      "id": "324a1fa3-82e5-48ec-949a-2e346be461d4",
+      "createdAt": "2026-07-28T03:32:32.000Z",
+      "updatedAt": "2026-07-28T03:32:32.000Z",
+      "uid": "35240-324a1fa3-82e5-48ec-949a-2e346be461d4"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "r:absenceManagement w:absenceManagement",
+        "type": "string"
+      },
+      {
+        "key": "redirect_uri",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://{baseUrl}/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "wd2-impl-services1.workday.com"
+    },
+    {
+      "key": "tenant",
+      "value": "tenant"
+    }
+  ]
+}

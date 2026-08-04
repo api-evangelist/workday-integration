@@ -1,0 +1,378 @@
+{
+  "info": {
+    "_postman_id": "2262d875-123b-40d2-9113-64c111843e20",
+    "name": "Workday Integration Workday Absence Management Absence Types Benefit Elections API",
+    "description": "API for managing employee leave requests, absence types, and time-off balances. Retrieves eligible absence types for employees and supports validation of leave category selections.\n\nContact Support:\n Name: Workday API Support\n Email: api-support@workday.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:32:12.000Z",
+    "updatedAt": "2026-07-28T03:32:12.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-2262d875-123b-40d2-9113-64c111843e20"
+  },
+  "item": [
+    {
+      "name": "workers",
+      "item": [
+        {
+          "name": "{ID}",
+          "item": [
+            {
+              "name": "benefitElections",
+              "item": [
+                {
+                  "name": "Workday Integration Retrieve benefit elections for a worker",
+                  "id": "9f1bc2f9-c422-41e2-b502-3e5107fc058a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/workers/:ID/benefitElections?limit=20&offset=0",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "workers",
+                        ":ID",
+                        "benefitElections"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of objects in a single response (default 20, maximum 100)",
+                          "key": "limit",
+                          "value": "20"
+                        },
+                        {
+                          "description": "Zero-based index of the first object in a response collection",
+                          "key": "offset",
+                          "value": "0"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "69d51111-17a2-4eef-920f-aa9810e65da5",
+                          "key": "ID",
+                          "value": "<string>",
+                          "description": "(Required) The Workday ID of the resource"
+                        }
+                      ]
+                    },
+                    "description": "Returns the current benefit elections for the specified worker including coverage levels and dependents."
+                  },
+                  "response": [
+                    {
+                      "id": "ce3c4c19-f6dc-45d5-96a7-04e7c7be51f1",
+                      "name": "Successful response with benefit elections",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:ID/benefitElections?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":ID",
+                            "benefitElections"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of objects in a single response (default 20, maximum 100)",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "Zero-based index of the first object in a response collection",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"total\": \"<integer>\",\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"descriptor\": \"<string>\",\n      \"benefitPlan\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      \"coverageLevel\": \"<string>\",\n      \"employeeCost\": \"<number>\",\n      \"employerCost\": \"<number>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"descriptor\": \"<string>\",\n      \"benefitPlan\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      \"coverageLevel\": \"<string>\",\n      \"employeeCost\": \"<number>\",\n      \"employerCost\": \"<number>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:32:13.000Z",
+                      "updatedAt": "2026-07-28T03:32:13.000Z",
+                      "uid": "35240-ce3c4c19-f6dc-45d5-96a7-04e7c7be51f1"
+                    },
+                    {
+                      "id": "2c831ebe-42a9-4254-b870-d2f943a01e79",
+                      "name": "Authentication required",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:ID/benefitElections?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":ID",
+                            "benefitElections"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of objects in a single response (default 20, maximum 100)",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "Zero-based index of the first object in a response collection",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:32:13.000Z",
+                      "updatedAt": "2026-07-28T03:32:13.000Z",
+                      "uid": "35240-2c831ebe-42a9-4254-b870-d2f943a01e79"
+                    },
+                    {
+                      "id": "9b5d6ec3-0725-472a-8fa6-ccfc5f68175e",
+                      "name": "Insufficient permissions",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:ID/benefitElections?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":ID",
+                            "benefitElections"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of objects in a single response (default 20, maximum 100)",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "Zero-based index of the first object in a response collection",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:32:13.000Z",
+                      "updatedAt": "2026-07-28T03:32:13.000Z",
+                      "uid": "35240-9b5d6ec3-0725-472a-8fa6-ccfc5f68175e"
+                    },
+                    {
+                      "id": "ec1d0dd8-b719-4bf1-959e-effff2865595",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:ID/benefitElections?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":ID",
+                            "benefitElections"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of objects in a single response (default 20, maximum 100)",
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "description": "Zero-based index of the first object in a response collection",
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:32:13.000Z",
+                      "updatedAt": "2026-07-28T03:32:13.000Z",
+                      "uid": "35240-ec1d0dd8-b719-4bf1-959e-effff2865595"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:32:13.000Z",
+                  "updatedAt": "2026-07-28T03:32:13.000Z",
+                  "uid": "35240-9f1bc2f9-c422-41e2-b502-3e5107fc058a"
+                }
+              ],
+              "id": "294a42c0-b3d8-4605-b41a-601b51420535",
+              "createdAt": "2026-07-28T03:32:13.000Z",
+              "updatedAt": "2026-07-28T03:32:13.000Z",
+              "uid": "35240-294a42c0-b3d8-4605-b41a-601b51420535"
+            }
+          ],
+          "id": "37bbef05-2365-4c5f-a4b7-65d53310a6eb",
+          "createdAt": "2026-07-28T03:32:13.000Z",
+          "updatedAt": "2026-07-28T03:32:13.000Z",
+          "uid": "35240-37bbef05-2365-4c5f-a4b7-65d53310a6eb"
+        }
+      ],
+      "id": "ffb93410-3510-419b-8ba7-ef85205ca696",
+      "createdAt": "2026-07-28T03:32:13.000Z",
+      "updatedAt": "2026-07-28T03:32:13.000Z",
+      "uid": "35240-ffb93410-3510-419b-8ba7-ef85205ca696"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "r:absenceManagement w:absenceManagement",
+        "type": "string"
+      },
+      {
+        "key": "redirect_uri",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://{baseUrl}/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "wd2-impl-services1.workday.com"
+    },
+    {
+      "key": "tenant",
+      "value": "tenant"
+    }
+  ]
+}

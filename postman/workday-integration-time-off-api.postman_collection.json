@@ -1,0 +1,694 @@
+{
+  "info": {
+    "_postman_id": "7ccede4f-1583-433e-997a-1fede1e7b722",
+    "name": "Workday Integration Workday Absence Management Absence Types Time Off API",
+    "description": "API for managing employee leave requests, absence types, and time-off balances. Retrieves eligible absence types for employees and supports validation of leave category selections.\n\nContact Support:\n Name: Workday API Support\n Email: api-support@workday.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:34:34.000Z",
+    "updatedAt": "2026-07-28T03:34:34.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-7ccede4f-1583-433e-997a-1fede1e7b722"
+  },
+  "item": [
+    {
+      "name": "workers",
+      "item": [
+        {
+          "name": "{ID}",
+          "item": [
+            {
+              "name": "requestTimeOff",
+              "item": [
+                {
+                  "name": "Workday Integration Create a time off request for a worker",
+                  "id": "f6c1f36e-9a72-4b7b-a436-bfd5610e2f5c",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"absenceType\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\",\n    \"href\": \"<uri>\"\n  },\n  \"days\": [\n    {\n      \"date\": \"<date>\",\n      \"quantity\": \"<number>\",\n      \"comment\": \"<string>\"\n    },\n    {\n      \"date\": \"<date>\",\n      \"quantity\": \"<number>\",\n      \"comment\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/workers/:ID/requestTimeOff",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "workers",
+                        ":ID",
+                        "requestTimeOff"
+                      ],
+                      "variable": [
+                        {
+                          "id": "199236b1-177d-4f32-a5fb-0204ddc71b2e",
+                          "key": "ID",
+                          "value": "<string>",
+                          "description": "(Required) The Workday ID of the resource"
+                        }
+                      ]
+                    },
+                    "description": "Creates a time off request for the specified worker ID and initiates the approval business process."
+                  },
+                  "response": [
+                    {
+                      "id": "ee34b585-c44c-432f-be6e-b869cf86b25b",
+                      "name": "Time off request created successfully",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"absenceType\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\",\n    \"href\": \"<uri>\"\n  },\n  \"days\": [\n    {\n      \"date\": \"<date>\",\n      \"quantity\": \"<number>\",\n      \"comment\": \"<string>\"\n    },\n    {\n      \"date\": \"<date>\",\n      \"quantity\": \"<number>\",\n      \"comment\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:ID/requestTimeOff",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":ID",
+                            "requestTimeOff"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"descriptor\": \"<string>\",\n  \"worker\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\",\n    \"href\": \"<uri>\"\n  },\n  \"absenceType\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\",\n    \"href\": \"<uri>\"\n  },\n  \"date\": \"<date>\",\n  \"quantity\": \"<number>\",\n  \"unit\": \"<string>\",\n  \"status\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:34:35.000Z",
+                      "updatedAt": "2026-07-28T03:34:35.000Z",
+                      "uid": "35240-ee34b585-c44c-432f-be6e-b869cf86b25b"
+                    },
+                    {
+                      "id": "e823ee84-7df8-491b-a645-26667f5b920e",
+                      "name": "Invalid request parameters",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"absenceType\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\",\n    \"href\": \"<uri>\"\n  },\n  \"days\": [\n    {\n      \"date\": \"<date>\",\n      \"quantity\": \"<number>\",\n      \"comment\": \"<string>\"\n    },\n    {\n      \"date\": \"<date>\",\n      \"quantity\": \"<number>\",\n      \"comment\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:ID/requestTimeOff",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":ID",
+                            "requestTimeOff"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:34:35.000Z",
+                      "updatedAt": "2026-07-28T03:34:35.000Z",
+                      "uid": "35240-e823ee84-7df8-491b-a645-26667f5b920e"
+                    },
+                    {
+                      "id": "b123e713-3a56-45b2-afe6-818f2e5c1342",
+                      "name": "Authentication required",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"absenceType\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\",\n    \"href\": \"<uri>\"\n  },\n  \"days\": [\n    {\n      \"date\": \"<date>\",\n      \"quantity\": \"<number>\",\n      \"comment\": \"<string>\"\n    },\n    {\n      \"date\": \"<date>\",\n      \"quantity\": \"<number>\",\n      \"comment\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:ID/requestTimeOff",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":ID",
+                            "requestTimeOff"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:34:35.000Z",
+                      "updatedAt": "2026-07-28T03:34:35.000Z",
+                      "uid": "35240-b123e713-3a56-45b2-afe6-818f2e5c1342"
+                    },
+                    {
+                      "id": "c5e5082e-cf7e-4312-9d84-fd99223f8242",
+                      "name": "Insufficient permissions",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"absenceType\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\",\n    \"href\": \"<uri>\"\n  },\n  \"days\": [\n    {\n      \"date\": \"<date>\",\n      \"quantity\": \"<number>\",\n      \"comment\": \"<string>\"\n    },\n    {\n      \"date\": \"<date>\",\n      \"quantity\": \"<number>\",\n      \"comment\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:ID/requestTimeOff",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":ID",
+                            "requestTimeOff"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:34:35.000Z",
+                      "updatedAt": "2026-07-28T03:34:35.000Z",
+                      "uid": "35240-c5e5082e-cf7e-4312-9d84-fd99223f8242"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:34:35.000Z",
+                  "updatedAt": "2026-07-28T03:34:35.000Z",
+                  "uid": "35240-f6c1f36e-9a72-4b7b-a436-bfd5610e2f5c"
+                }
+              ],
+              "id": "f9b87e0b-643e-4116-97ef-9c4e500af3de",
+              "createdAt": "2026-07-28T03:34:35.000Z",
+              "updatedAt": "2026-07-28T03:34:35.000Z",
+              "uid": "35240-f9b87e0b-643e-4116-97ef-9c4e500af3de"
+            },
+            {
+              "name": "validTimeOffDates",
+              "item": [
+                {
+                  "name": "Workday Integration Retrieve valid time off dates for a worker",
+                  "id": "b9953c12-aee4-4a1c-8809-3fa65658b9cf",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/workers/:ID/validTimeOffDates?startDate=<date>&endDate=<date>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "workers",
+                        ":ID",
+                        "validTimeOffDates"
+                      ],
+                      "query": [
+                        {
+                          "description": "Start date for the range of valid dates",
+                          "key": "startDate",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "End date for the range of valid dates",
+                          "key": "endDate",
+                          "value": "<date>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "2b53265e-8e81-4424-9356-5e2193695057",
+                          "key": "ID",
+                          "value": "<string>",
+                          "description": "(Required) The Workday ID of the resource"
+                        }
+                      ]
+                    },
+                    "description": "Returns the valid dates on which the specified worker can request time off, based on their schedule and existing requests."
+                  },
+                  "response": [
+                    {
+                      "id": "e15a07fb-94d2-4d63-b573-6d50df8e4337",
+                      "name": "Successful response with valid time off dates",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:ID/validTimeOffDates?startDate=<date>&endDate=<date>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":ID",
+                            "validTimeOffDates"
+                          ],
+                          "query": [
+                            {
+                              "description": "Start date for the range of valid dates",
+                              "key": "startDate",
+                              "value": "<date>"
+                            },
+                            {
+                              "description": "End date for the range of valid dates",
+                              "key": "endDate",
+                              "value": "<date>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"total\": \"<integer>\",\n  \"data\": [\n    {\n      \"date\": \"<date>\",\n      \"isValid\": \"<boolean>\"\n    },\n    {\n      \"date\": \"<date>\",\n      \"isValid\": \"<boolean>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:34:35.000Z",
+                      "updatedAt": "2026-07-28T03:34:35.000Z",
+                      "uid": "35240-e15a07fb-94d2-4d63-b573-6d50df8e4337"
+                    },
+                    {
+                      "id": "731e2c5d-69cd-421d-a7c8-0e4d61b95695",
+                      "name": "Authentication required",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:ID/validTimeOffDates?startDate=<date>&endDate=<date>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":ID",
+                            "validTimeOffDates"
+                          ],
+                          "query": [
+                            {
+                              "description": "Start date for the range of valid dates",
+                              "key": "startDate",
+                              "value": "<date>"
+                            },
+                            {
+                              "description": "End date for the range of valid dates",
+                              "key": "endDate",
+                              "value": "<date>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:34:35.000Z",
+                      "updatedAt": "2026-07-28T03:34:35.000Z",
+                      "uid": "35240-731e2c5d-69cd-421d-a7c8-0e4d61b95695"
+                    },
+                    {
+                      "id": "9585fc3a-fb1a-4f67-8f5c-c0c48887a33b",
+                      "name": "Insufficient permissions",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:ID/validTimeOffDates?startDate=<date>&endDate=<date>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":ID",
+                            "validTimeOffDates"
+                          ],
+                          "query": [
+                            {
+                              "description": "Start date for the range of valid dates",
+                              "key": "startDate",
+                              "value": "<date>"
+                            },
+                            {
+                              "description": "End date for the range of valid dates",
+                              "key": "endDate",
+                              "value": "<date>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:34:35.000Z",
+                      "updatedAt": "2026-07-28T03:34:35.000Z",
+                      "uid": "35240-9585fc3a-fb1a-4f67-8f5c-c0c48887a33b"
+                    },
+                    {
+                      "id": "301cec66-788a-416b-81b2-965554255f6b",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:ID/validTimeOffDates?startDate=<date>&endDate=<date>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":ID",
+                            "validTimeOffDates"
+                          ],
+                          "query": [
+                            {
+                              "description": "Start date for the range of valid dates",
+                              "key": "startDate",
+                              "value": "<date>"
+                            },
+                            {
+                              "description": "End date for the range of valid dates",
+                              "key": "endDate",
+                              "value": "<date>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:34:35.000Z",
+                      "updatedAt": "2026-07-28T03:34:35.000Z",
+                      "uid": "35240-301cec66-788a-416b-81b2-965554255f6b"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:34:35.000Z",
+                  "updatedAt": "2026-07-28T03:34:35.000Z",
+                  "uid": "35240-b9953c12-aee4-4a1c-8809-3fa65658b9cf"
+                }
+              ],
+              "id": "38ab97d2-1381-42e7-a3c5-3e1d25b2b721",
+              "createdAt": "2026-07-28T03:34:35.000Z",
+              "updatedAt": "2026-07-28T03:34:35.000Z",
+              "uid": "35240-38ab97d2-1381-42e7-a3c5-3e1d25b2b721"
+            }
+          ],
+          "id": "d5864804-6358-46ac-b61b-3673d5752574",
+          "createdAt": "2026-07-28T03:34:35.000Z",
+          "updatedAt": "2026-07-28T03:34:35.000Z",
+          "uid": "35240-d5864804-6358-46ac-b61b-3673d5752574"
+        }
+      ],
+      "id": "a6ec59cf-fa55-49b1-b17f-cd623ae61963",
+      "createdAt": "2026-07-28T03:34:35.000Z",
+      "updatedAt": "2026-07-28T03:34:35.000Z",
+      "uid": "35240-a6ec59cf-fa55-49b1-b17f-cd623ae61963"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "r:absenceManagement w:absenceManagement",
+        "type": "string"
+      },
+      {
+        "key": "redirect_uri",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://{baseUrl}/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "wd2-impl-services1.workday.com"
+    },
+    {
+      "key": "tenant",
+      "value": "tenant"
+    }
+  ]
+}

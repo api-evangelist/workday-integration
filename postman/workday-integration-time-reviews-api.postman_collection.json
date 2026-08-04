@@ -1,0 +1,388 @@
+{
+  "info": {
+    "_postman_id": "8c8de1d2-a3c1-4e22-b1b1-c2a43e41706c",
+    "name": "Workday Integration Workday Absence Management Absence Types Time Reviews API",
+    "description": "API for managing employee leave requests, absence types, and time-off balances. Retrieves eligible absence types for employees and supports validation of leave category selections.\n\nContact Support:\n Name: Workday API Support\n Email: api-support@workday.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:34:38.000Z",
+    "updatedAt": "2026-07-28T03:34:39.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-8c8de1d2-a3c1-4e22-b1b1-c2a43e41706c"
+  },
+  "item": [
+    {
+      "name": "workers",
+      "item": [
+        {
+          "name": "{ID}",
+          "item": [
+            {
+              "name": "timeReviewEvents",
+              "item": [
+                {
+                  "name": "Workday Integration Create a time review event for a worker",
+                  "id": "4a4a5cbc-0d93-4c56-9063-45ff752dc2ba",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"reviewPeriodStartDate\": \"<date>\",\n  \"reviewPeriodEndDate\": \"<date>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/workers/:ID/timeReviewEvents",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "workers",
+                        ":ID",
+                        "timeReviewEvents"
+                      ],
+                      "variable": [
+                        {
+                          "id": "d5b98a78-c707-44a5-9599-3f8ad6d82447",
+                          "key": "ID",
+                          "value": "<string>",
+                          "description": "(Required) The Workday ID of the resource"
+                        }
+                      ]
+                    },
+                    "description": "Initiates a time review event for the specified worker to approve or adjust time entries."
+                  },
+                  "response": [
+                    {
+                      "id": "8106e352-3311-4088-9248-2eba9d6ea8ef",
+                      "name": "Time review event created successfully",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"reviewPeriodStartDate\": \"<date>\",\n  \"reviewPeriodEndDate\": \"<date>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:ID/timeReviewEvents",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":ID",
+                            "timeReviewEvents"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"descriptor\": \"<string>\",\n  \"worker\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\",\n    \"href\": \"<uri>\"\n  },\n  \"reviewPeriodStartDate\": \"<date>\",\n  \"reviewPeriodEndDate\": \"<date>\",\n  \"status\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:34:39.000Z",
+                      "updatedAt": "2026-07-28T03:34:39.000Z",
+                      "uid": "35240-8106e352-3311-4088-9248-2eba9d6ea8ef"
+                    },
+                    {
+                      "id": "ddfd2920-d442-4ee9-b75a-69efa1901584",
+                      "name": "Invalid request parameters",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"reviewPeriodStartDate\": \"<date>\",\n  \"reviewPeriodEndDate\": \"<date>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:ID/timeReviewEvents",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":ID",
+                            "timeReviewEvents"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:34:39.000Z",
+                      "updatedAt": "2026-07-28T03:34:39.000Z",
+                      "uid": "35240-ddfd2920-d442-4ee9-b75a-69efa1901584"
+                    },
+                    {
+                      "id": "6d12a5e4-bbfa-4061-abfd-e92a3646922d",
+                      "name": "Authentication required",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"reviewPeriodStartDate\": \"<date>\",\n  \"reviewPeriodEndDate\": \"<date>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:ID/timeReviewEvents",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":ID",
+                            "timeReviewEvents"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:34:39.000Z",
+                      "updatedAt": "2026-07-28T03:34:39.000Z",
+                      "uid": "35240-6d12a5e4-bbfa-4061-abfd-e92a3646922d"
+                    },
+                    {
+                      "id": "8bc5a56e-61a4-42c0-9690-939e9dd6ec8e",
+                      "name": "Insufficient permissions",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"reviewPeriodStartDate\": \"<date>\",\n  \"reviewPeriodEndDate\": \"<date>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:ID/timeReviewEvents",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":ID",
+                            "timeReviewEvents"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"errors\": [\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"error\": \"<string>\",\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:34:39.000Z",
+                      "updatedAt": "2026-07-28T03:34:39.000Z",
+                      "uid": "35240-8bc5a56e-61a4-42c0-9690-939e9dd6ec8e"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:34:39.000Z",
+                  "updatedAt": "2026-07-28T03:34:39.000Z",
+                  "uid": "35240-4a4a5cbc-0d93-4c56-9063-45ff752dc2ba"
+                }
+              ],
+              "id": "1c83279b-ef78-46b1-aded-e0843ae4a12a",
+              "createdAt": "2026-07-28T03:34:39.000Z",
+              "updatedAt": "2026-07-28T03:34:39.000Z",
+              "uid": "35240-1c83279b-ef78-46b1-aded-e0843ae4a12a"
+            }
+          ],
+          "id": "06e145ba-b571-412a-a548-b6f3fcde954e",
+          "createdAt": "2026-07-28T03:34:39.000Z",
+          "updatedAt": "2026-07-28T03:34:39.000Z",
+          "uid": "35240-06e145ba-b571-412a-a548-b6f3fcde954e"
+        }
+      ],
+      "id": "f2ec8cf9-8184-49b9-aae2-3f4df389810f",
+      "createdAt": "2026-07-28T03:34:39.000Z",
+      "updatedAt": "2026-07-28T03:34:39.000Z",
+      "uid": "35240-f2ec8cf9-8184-49b9-aae2-3f4df389810f"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "r:absenceManagement w:absenceManagement",
+        "type": "string"
+      },
+      {
+        "key": "redirect_uri",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://{baseUrl}/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "wd2-impl-services1.workday.com"
+    },
+    {
+      "key": "tenant",
+      "value": "tenant"
+    }
+  ]
+}

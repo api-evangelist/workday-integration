@@ -1,0 +1,368 @@
+{
+  "info": {
+    "_postman_id": "8a58b972-ddf5-4e56-9ad2-76ca95c05855",
+    "name": "Workday Integration Workday Absence Management Absence Types Assignments API",
+    "description": "API for managing employee leave requests, absence types, and time-off balances. Retrieves eligible absence types for employees and supports validation of leave category selections.\n\nContact Support:\n Name: Workday API Support\n Email: api-support@workday.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:32:07.000Z",
+    "updatedAt": "2026-07-28T03:32:07.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-8a58b972-ddf5-4e56-9ad2-76ca95c05855"
+  },
+  "item": [
+    {
+      "name": "workers",
+      "item": [
+        {
+          "name": "{ID}",
+          "item": [
+            {
+              "name": "learningAssignments",
+              "item": [
+                {
+                  "name": "Workday Integration Retrieve learning assignments for a worker",
+                  "id": "856c88f2-0134-4ad0-aaea-e6ca402c55f8",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/workers/:ID/learningAssignments?limit=20&offset=0",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "workers",
+                        ":ID",
+                        "learningAssignments"
+                      ],
+                      "query": [
+                        {
+                          "key": "limit",
+                          "value": "20"
+                        },
+                        {
+                          "key": "offset",
+                          "value": "0"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "0dc483ce-0b7c-4767-acc3-d01d37868c41",
+                          "key": "ID",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Returns the learning assignments for the specified worker."
+                  },
+                  "response": [
+                    {
+                      "id": "25560b49-bae0-43da-80c3-46880bea128a",
+                      "name": "Successful response with learning assignments",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:ID/learningAssignments?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":ID",
+                            "learningAssignments"
+                          ],
+                          "query": [
+                            {
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"total\": \"<integer>\",\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"course\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      \"assignedDate\": \"<date>\",\n      \"dueDate\": \"<date>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"course\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      \"assignedDate\": \"<date>\",\n      \"dueDate\": \"<date>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:32:07.000Z",
+                      "updatedAt": "2026-07-28T03:32:07.000Z",
+                      "uid": "35240-25560b49-bae0-43da-80c3-46880bea128a"
+                    },
+                    {
+                      "id": "853b773a-cab4-45f9-a2f2-64773cbc67df",
+                      "name": "Authentication required",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:ID/learningAssignments?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":ID",
+                            "learningAssignments"
+                          ],
+                          "query": [
+                            {
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:32:07.000Z",
+                      "updatedAt": "2026-07-28T03:32:07.000Z",
+                      "uid": "35240-853b773a-cab4-45f9-a2f2-64773cbc67df"
+                    },
+                    {
+                      "id": "4fbb761b-6038-46f9-923e-47ea52d280fb",
+                      "name": "Insufficient permissions",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:ID/learningAssignments?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":ID",
+                            "learningAssignments"
+                          ],
+                          "query": [
+                            {
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:32:07.000Z",
+                      "updatedAt": "2026-07-28T03:32:07.000Z",
+                      "uid": "35240-4fbb761b-6038-46f9-923e-47ea52d280fb"
+                    },
+                    {
+                      "id": "5912e45b-0737-408a-b290-a1a1b1be8781",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:ID/learningAssignments?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":ID",
+                            "learningAssignments"
+                          ],
+                          "query": [
+                            {
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:32:07.000Z",
+                      "updatedAt": "2026-07-28T03:32:07.000Z",
+                      "uid": "35240-5912e45b-0737-408a-b290-a1a1b1be8781"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:32:07.000Z",
+                  "updatedAt": "2026-07-28T03:32:07.000Z",
+                  "uid": "35240-856c88f2-0134-4ad0-aaea-e6ca402c55f8"
+                }
+              ],
+              "id": "fc6bcecf-8015-4c56-82be-c29d25ba55c3",
+              "createdAt": "2026-07-28T03:32:07.000Z",
+              "updatedAt": "2026-07-28T03:32:07.000Z",
+              "uid": "35240-fc6bcecf-8015-4c56-82be-c29d25ba55c3"
+            }
+          ],
+          "id": "ea9cb2b9-11ca-490c-bdd7-bb55fcd65181",
+          "createdAt": "2026-07-28T03:32:07.000Z",
+          "updatedAt": "2026-07-28T03:32:07.000Z",
+          "uid": "35240-ea9cb2b9-11ca-490c-bdd7-bb55fcd65181"
+        }
+      ],
+      "id": "2d8e0606-d285-4283-8660-b91ed1b0997b",
+      "createdAt": "2026-07-28T03:32:07.000Z",
+      "updatedAt": "2026-07-28T03:32:07.000Z",
+      "uid": "35240-2d8e0606-d285-4283-8660-b91ed1b0997b"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "r:absenceManagement w:absenceManagement",
+        "type": "string"
+      },
+      {
+        "key": "redirect_uri",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://{baseUrl}/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "wd2-impl-services1.workday.com"
+    },
+    {
+      "key": "tenant",
+      "value": "tenant"
+    }
+  ]
+}

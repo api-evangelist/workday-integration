@@ -1,0 +1,332 @@
+{
+  "info": {
+    "_postman_id": "0bdbad1a-623f-480f-a165-d8d055998279",
+    "name": "Workday Integration Workday Absence Management Absence Types WQL API",
+    "description": "API for managing employee leave requests, absence types, and time-off balances. Retrieves eligible absence types for employees and supports validation of leave category selections.\n\nContact Support:\n Name: Workday API Support\n Email: api-support@workday.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:34:54.000Z",
+    "updatedAt": "2026-07-28T03:34:54.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-0bdbad1a-623f-480f-a165-d8d055998279"
+  },
+  "item": [
+    {
+      "name": "wql",
+      "item": [
+        {
+          "name": "Workday Integration Execute a WQL query",
+          "id": "a0da259a-8499-4b88-9c71-6391d174b0b2",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/wql",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "wql"
+              ]
+            },
+            "description": "Executes a Workday Query Language (WQL) query against Prism Analytics data and returns the results."
+          },
+          "response": [
+            {
+              "id": "1df65370-1149-4df8-ae59-2e0f34449ea6",
+              "name": "Successful WQL query response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/wql",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "wql"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"data\": [\n    {\n      \"nisi_5\": 25176845,\n      \"pariatura\": false\n    },\n    {\n      \"aliqua0b\": false\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:34:54.000Z",
+              "updatedAt": "2026-07-28T03:34:54.000Z",
+              "uid": "35240-1df65370-1149-4df8-ae59-2e0f34449ea6"
+            },
+            {
+              "id": "4ca961b8-3343-4d01-ae1c-fb69f00d608b",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/wql",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "wql"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:34:54.000Z",
+              "updatedAt": "2026-07-28T03:34:54.000Z",
+              "uid": "35240-4ca961b8-3343-4d01-ae1c-fb69f00d608b"
+            },
+            {
+              "id": "548ad538-0d26-4b49-91a9-dbac725d3280",
+              "name": "Authentication required",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/wql",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "wql"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:34:54.000Z",
+              "updatedAt": "2026-07-28T03:34:54.000Z",
+              "uid": "35240-548ad538-0d26-4b49-91a9-dbac725d3280"
+            },
+            {
+              "id": "9fd8fcc3-b4c8-4fd2-b065-24626635141e",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/wql",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "wql"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:34:54.000Z",
+              "updatedAt": "2026-07-28T03:34:54.000Z",
+              "uid": "35240-9fd8fcc3-b4c8-4fd2-b065-24626635141e"
+            }
+          ],
+          "createdAt": "2026-07-28T03:34:54.000Z",
+          "updatedAt": "2026-07-28T03:34:54.000Z",
+          "uid": "35240-a0da259a-8499-4b88-9c71-6391d174b0b2"
+        }
+      ],
+      "id": "1fafb87e-9cdd-4a31-a663-e8d3a2230abb",
+      "createdAt": "2026-07-28T03:34:54.000Z",
+      "updatedAt": "2026-07-28T03:34:54.000Z",
+      "uid": "35240-1fafb87e-9cdd-4a31-a663-e8d3a2230abb"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "r:absenceManagement w:absenceManagement",
+        "type": "string"
+      },
+      {
+        "key": "redirect_uri",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://{baseUrl}/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "wd2-impl-services1.workday.com"
+    },
+    {
+      "key": "tenant",
+      "value": "tenant"
+    }
+  ]
+}

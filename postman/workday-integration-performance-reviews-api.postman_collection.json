@@ -1,0 +1,368 @@
+{
+  "info": {
+    "_postman_id": "f9014cc1-6804-4e42-bc6c-628aabb176ec",
+    "name": "Workday Integration Workday Absence Management Absence Types Performance Reviews API",
+    "description": "API for managing employee leave requests, absence types, and time-off balances. Retrieves eligible absence types for employees and supports validation of leave category selections.\n\nContact Support:\n Name: Workday API Support\n Email: api-support@workday.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:33:52.000Z",
+    "updatedAt": "2026-07-28T03:33:52.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f9014cc1-6804-4e42-bc6c-628aabb176ec"
+  },
+  "item": [
+    {
+      "name": "workers",
+      "item": [
+        {
+          "name": "{ID}",
+          "item": [
+            {
+              "name": "performanceReviews",
+              "item": [
+                {
+                  "name": "Workday Integration Retrieve performance reviews for a worker",
+                  "id": "6da7ca31-033e-4490-b96f-32f8e6418c10",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/workers/:ID/performanceReviews?limit=20&offset=0",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "workers",
+                        ":ID",
+                        "performanceReviews"
+                      ],
+                      "query": [
+                        {
+                          "key": "limit",
+                          "value": "20"
+                        },
+                        {
+                          "key": "offset",
+                          "value": "0"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "4d3e2fa4-0a09-44be-9685-a7e1f11ec322",
+                          "key": "ID",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Returns the performance review records for the specified worker."
+                  },
+                  "response": [
+                    {
+                      "id": "63cf5066-f049-4443-bb2c-7d8ebe4892f6",
+                      "name": "Successful response with performance reviews",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:ID/performanceReviews?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":ID",
+                            "performanceReviews"
+                          ],
+                          "query": [
+                            {
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"total\": \"<integer>\",\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"descriptor\": \"<string>\",\n      \"reviewPeriod\": \"<string>\",\n      \"overallRating\": \"<string>\",\n      \"manager\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      \"completionDate\": \"<date>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"descriptor\": \"<string>\",\n      \"reviewPeriod\": \"<string>\",\n      \"overallRating\": \"<string>\",\n      \"manager\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      \"completionDate\": \"<date>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:33:53.000Z",
+                      "updatedAt": "2026-07-28T03:33:53.000Z",
+                      "uid": "35240-63cf5066-f049-4443-bb2c-7d8ebe4892f6"
+                    },
+                    {
+                      "id": "3dd31af4-86a2-490d-89cc-eff337d3b791",
+                      "name": "Authentication required",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:ID/performanceReviews?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":ID",
+                            "performanceReviews"
+                          ],
+                          "query": [
+                            {
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:33:53.000Z",
+                      "updatedAt": "2026-07-28T03:33:53.000Z",
+                      "uid": "35240-3dd31af4-86a2-490d-89cc-eff337d3b791"
+                    },
+                    {
+                      "id": "8b924364-ee6a-468b-876d-da55d9b053bb",
+                      "name": "Insufficient permissions",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:ID/performanceReviews?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":ID",
+                            "performanceReviews"
+                          ],
+                          "query": [
+                            {
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:33:53.000Z",
+                      "updatedAt": "2026-07-28T03:33:53.000Z",
+                      "uid": "35240-8b924364-ee6a-468b-876d-da55d9b053bb"
+                    },
+                    {
+                      "id": "36c8a7cc-5d82-4051-9f1f-b900fe2a0efe",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:ID/performanceReviews?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":ID",
+                            "performanceReviews"
+                          ],
+                          "query": [
+                            {
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:33:53.000Z",
+                      "updatedAt": "2026-07-28T03:33:53.000Z",
+                      "uid": "35240-36c8a7cc-5d82-4051-9f1f-b900fe2a0efe"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:33:53.000Z",
+                  "updatedAt": "2026-07-28T03:33:53.000Z",
+                  "uid": "35240-6da7ca31-033e-4490-b96f-32f8e6418c10"
+                }
+              ],
+              "id": "29ca9a36-7630-474d-bc1e-670705355050",
+              "createdAt": "2026-07-28T03:33:53.000Z",
+              "updatedAt": "2026-07-28T03:33:53.000Z",
+              "uid": "35240-29ca9a36-7630-474d-bc1e-670705355050"
+            }
+          ],
+          "id": "0ccd0123-49f2-410c-b05e-9df98039844b",
+          "createdAt": "2026-07-28T03:33:53.000Z",
+          "updatedAt": "2026-07-28T03:33:53.000Z",
+          "uid": "35240-0ccd0123-49f2-410c-b05e-9df98039844b"
+        }
+      ],
+      "id": "f9c9c287-5825-4571-9a4d-c666b7a139c6",
+      "createdAt": "2026-07-28T03:33:53.000Z",
+      "updatedAt": "2026-07-28T03:33:53.000Z",
+      "uid": "35240-f9c9c287-5825-4571-9a4d-c666b7a139c6"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "r:absenceManagement w:absenceManagement",
+        "type": "string"
+      },
+      {
+        "key": "redirect_uri",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://{baseUrl}/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "wd2-impl-services1.workday.com"
+    },
+    {
+      "key": "tenant",
+      "value": "tenant"
+    }
+  ]
+}

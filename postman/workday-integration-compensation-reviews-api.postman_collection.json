@@ -1,0 +1,797 @@
+{
+  "info": {
+    "_postman_id": "3f9a2000-63bb-4408-a278-a34cb8f7f538",
+    "name": "Workday Integration Workday Absence Management Absence Types Compensation Reviews API",
+    "description": "API for managing employee leave requests, absence types, and time-off balances. Retrieves eligible absence types for employees and supports validation of leave category selections.\n\nContact Support:\n Name: Workday API Support\n Email: api-support@workday.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:32:32.000Z",
+    "updatedAt": "2026-07-28T03:32:33.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-3f9a2000-63bb-4408-a278-a34cb8f7f538"
+  },
+  "item": [
+    {
+      "name": "compensationReviewEvents",
+      "item": [
+        {
+          "name": "{ID}",
+          "item": [
+            {
+              "name": "awards",
+              "item": [
+                {
+                  "name": "Workday Integration Retrieve awards for a compensation review",
+                  "id": "8f4035f1-161e-43a6-8684-37cf1f61f962",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/compensationReviewEvents/:ID/awards?limit=20&offset=0",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "compensationReviewEvents",
+                        ":ID",
+                        "awards"
+                      ],
+                      "query": [
+                        {
+                          "key": "limit",
+                          "value": "20"
+                        },
+                        {
+                          "key": "offset",
+                          "value": "0"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "5dbb6053-365e-43c1-afc1-090131bf2306",
+                          "key": "ID",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Returns the merit, bonus, and equity awards for participants in the specified compensation review event."
+                  },
+                  "response": [
+                    {
+                      "id": "567c55c8-be98-4ebc-8e77-ed19761b95ac",
+                      "name": "Successful response with review awards",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/compensationReviewEvents/:ID/awards?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "compensationReviewEvents",
+                            ":ID",
+                            "awards"
+                          ],
+                          "query": [
+                            {
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"total\": \"<integer>\",\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"worker\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      \"awardType\": \"<string>\",\n      \"amount\": \"<number>\",\n      \"currency\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      \"percentage\": \"<number>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"worker\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      \"awardType\": \"<string>\",\n      \"amount\": \"<number>\",\n      \"currency\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      \"percentage\": \"<number>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:32:33.000Z",
+                      "updatedAt": "2026-07-28T03:32:33.000Z",
+                      "uid": "35240-567c55c8-be98-4ebc-8e77-ed19761b95ac"
+                    },
+                    {
+                      "id": "24a23b8d-84c5-4400-b317-aaa1d4a56e57",
+                      "name": "Authentication required",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/compensationReviewEvents/:ID/awards?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "compensationReviewEvents",
+                            ":ID",
+                            "awards"
+                          ],
+                          "query": [
+                            {
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:32:33.000Z",
+                      "updatedAt": "2026-07-28T03:32:33.000Z",
+                      "uid": "35240-24a23b8d-84c5-4400-b317-aaa1d4a56e57"
+                    },
+                    {
+                      "id": "1313e176-567f-42f5-b610-f236f0e1a465",
+                      "name": "Insufficient permissions",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/compensationReviewEvents/:ID/awards?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "compensationReviewEvents",
+                            ":ID",
+                            "awards"
+                          ],
+                          "query": [
+                            {
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:32:33.000Z",
+                      "updatedAt": "2026-07-28T03:32:33.000Z",
+                      "uid": "35240-1313e176-567f-42f5-b610-f236f0e1a465"
+                    },
+                    {
+                      "id": "ec827eee-6c08-4f11-98d3-a24ebffb8a1a",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/compensationReviewEvents/:ID/awards?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "compensationReviewEvents",
+                            ":ID",
+                            "awards"
+                          ],
+                          "query": [
+                            {
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:32:33.000Z",
+                      "updatedAt": "2026-07-28T03:32:33.000Z",
+                      "uid": "35240-ec827eee-6c08-4f11-98d3-a24ebffb8a1a"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:32:33.000Z",
+                  "updatedAt": "2026-07-28T03:32:33.000Z",
+                  "uid": "35240-8f4035f1-161e-43a6-8684-37cf1f61f962"
+                }
+              ],
+              "id": "05ee8ec1-f4fe-43f7-b317-1d86667c1971",
+              "createdAt": "2026-07-28T03:32:33.000Z",
+              "updatedAt": "2026-07-28T03:32:33.000Z",
+              "uid": "35240-05ee8ec1-f4fe-43f7-b317-1d86667c1971"
+            },
+            {
+              "name": "Workday Integration Retrieve a specific compensation review event",
+              "id": "2af2d152-1372-4a41-a57e-e0d826ea2ac1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/compensationReviewEvents/:ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "compensationReviewEvents",
+                    ":ID"
+                  ],
+                  "variable": [
+                    {
+                      "id": "d1423789-e190-4812-9ac4-663e4e1c299b",
+                      "key": "ID",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Returns the specified compensation review event with participants and status."
+              },
+              "response": [
+                {
+                  "id": "1ffe96bc-28b2-4125-965e-491d5335da0e",
+                  "name": "Successful response with the review event",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/compensationReviewEvents/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "compensationReviewEvents",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"descriptor\": \"<string>\",\n  \"reviewType\": \"<string>\",\n  \"effectiveDate\": \"<date>\",\n  \"status\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:32:33.000Z",
+                  "updatedAt": "2026-07-28T03:32:33.000Z",
+                  "uid": "35240-1ffe96bc-28b2-4125-965e-491d5335da0e"
+                },
+                {
+                  "id": "7b208449-09db-4af5-a0ed-b856e77e131c",
+                  "name": "Authentication required",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/compensationReviewEvents/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "compensationReviewEvents",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:32:33.000Z",
+                  "updatedAt": "2026-07-28T03:32:33.000Z",
+                  "uid": "35240-7b208449-09db-4af5-a0ed-b856e77e131c"
+                },
+                {
+                  "id": "414b4800-1f3c-4552-8eb8-3ec3f9e0d7ec",
+                  "name": "Insufficient permissions",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/compensationReviewEvents/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "compensationReviewEvents",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:32:33.000Z",
+                  "updatedAt": "2026-07-28T03:32:33.000Z",
+                  "uid": "35240-414b4800-1f3c-4552-8eb8-3ec3f9e0d7ec"
+                },
+                {
+                  "id": "ad4b7f53-205f-46d3-b841-874d094b740b",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/compensationReviewEvents/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "compensationReviewEvents",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:32:33.000Z",
+                  "updatedAt": "2026-07-28T03:32:33.000Z",
+                  "uid": "35240-ad4b7f53-205f-46d3-b841-874d094b740b"
+                }
+              ],
+              "createdAt": "2026-07-28T03:32:33.000Z",
+              "updatedAt": "2026-07-28T03:32:33.000Z",
+              "uid": "35240-2af2d152-1372-4a41-a57e-e0d826ea2ac1"
+            }
+          ],
+          "id": "676a725f-1df8-4efe-ad78-1de1526e3f0c",
+          "createdAt": "2026-07-28T03:32:33.000Z",
+          "updatedAt": "2026-07-28T03:32:33.000Z",
+          "uid": "35240-676a725f-1df8-4efe-ad78-1de1526e3f0c"
+        },
+        {
+          "name": "Workday Integration Retrieve compensation review events",
+          "id": "0a4bd2b8-7cb2-4478-ad09-be9c7dcbd794",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/compensationReviewEvents?limit=20&offset=0",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "compensationReviewEvents"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "key": "offset",
+                  "value": "0"
+                }
+              ]
+            },
+            "description": "Returns a collection of compensation review events including merit, bonus, and equity review cycles."
+          },
+          "response": [
+            {
+              "id": "c7a60ae1-cdac-4d6a-85c1-0d6c8fbf0e21",
+              "name": "Successful response with compensation review events",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/compensationReviewEvents?limit=20&offset=0",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "compensationReviewEvents"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"descriptor\": \"<string>\",\n      \"reviewType\": \"<string>\",\n      \"effectiveDate\": \"<date>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"descriptor\": \"<string>\",\n      \"reviewType\": \"<string>\",\n      \"effectiveDate\": \"<date>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:32:33.000Z",
+              "updatedAt": "2026-07-28T03:32:33.000Z",
+              "uid": "35240-c7a60ae1-cdac-4d6a-85c1-0d6c8fbf0e21"
+            },
+            {
+              "id": "d1357e20-34f6-45a6-a692-294fcbd455c6",
+              "name": "Authentication required",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/compensationReviewEvents?limit=20&offset=0",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "compensationReviewEvents"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:32:33.000Z",
+              "updatedAt": "2026-07-28T03:32:33.000Z",
+              "uid": "35240-d1357e20-34f6-45a6-a692-294fcbd455c6"
+            },
+            {
+              "id": "ebb44fbf-35e9-4bac-83a4-cf4eee750f44",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/compensationReviewEvents?limit=20&offset=0",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "compensationReviewEvents"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:32:33.000Z",
+              "updatedAt": "2026-07-28T03:32:33.000Z",
+              "uid": "35240-ebb44fbf-35e9-4bac-83a4-cf4eee750f44"
+            }
+          ],
+          "createdAt": "2026-07-28T03:32:33.000Z",
+          "updatedAt": "2026-07-28T03:32:33.000Z",
+          "uid": "35240-0a4bd2b8-7cb2-4478-ad09-be9c7dcbd794"
+        }
+      ],
+      "id": "e3752af4-ea85-4d8a-a185-ffb13ba69e8f",
+      "createdAt": "2026-07-28T03:32:33.000Z",
+      "updatedAt": "2026-07-28T03:32:33.000Z",
+      "uid": "35240-e3752af4-ea85-4d8a-a185-ffb13ba69e8f"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "r:absenceManagement w:absenceManagement",
+        "type": "string"
+      },
+      {
+        "key": "redirect_uri",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://{baseUrl}/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "wd2-impl-services1.workday.com"
+    },
+    {
+      "key": "tenant",
+      "value": "tenant"
+    }
+  ]
+}

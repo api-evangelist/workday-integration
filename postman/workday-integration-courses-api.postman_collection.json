@@ -1,0 +1,517 @@
+{
+  "info": {
+    "_postman_id": "197a2951-f10d-4430-bd15-61ffc1b31115",
+    "name": "Workday Integration Workday Absence Management Absence Types Courses API",
+    "description": "API for managing employee leave requests, absence types, and time-off balances. Retrieves eligible absence types for employees and supports validation of leave category selections.\n\nContact Support:\n Name: Workday API Support\n Email: api-support@workday.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:32:37.000Z",
+    "updatedAt": "2026-07-28T03:32:37.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-197a2951-f10d-4430-bd15-61ffc1b31115"
+  },
+  "item": [
+    {
+      "name": "learningCourses",
+      "item": [
+        {
+          "name": "{ID}",
+          "item": [
+            {
+              "name": "Workday Integration Retrieve a specific learning course",
+              "id": "96e0382e-42ec-416d-9ead-cd57f19f9f5c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/learningCourses/:ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "learningCourses",
+                    ":ID"
+                  ],
+                  "variable": [
+                    {
+                      "id": "94d4dcac-2aa6-490d-9527-2d5dd9651388",
+                      "key": "ID",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Returns the specified learning course with its content and configuration."
+              },
+              "response": [
+                {
+                  "id": "7b8eabc4-b82f-4a45-ac04-e3f4ea5053b8",
+                  "name": "Successful response with the learning course",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/learningCourses/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "learningCourses",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"descriptor\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"courseType\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\",\n    \"href\": \"<uri>\"\n  },\n  \"duration\": \"<string>\",\n  \"isActive\": \"<boolean>\"\n}",
+                  "createdAt": "2026-07-28T03:32:38.000Z",
+                  "updatedAt": "2026-07-28T03:32:38.000Z",
+                  "uid": "35240-7b8eabc4-b82f-4a45-ac04-e3f4ea5053b8"
+                },
+                {
+                  "id": "ebca2810-7100-4ea6-be71-feb419dfa51d",
+                  "name": "Authentication required",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/learningCourses/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "learningCourses",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:32:38.000Z",
+                  "updatedAt": "2026-07-28T03:32:38.000Z",
+                  "uid": "35240-ebca2810-7100-4ea6-be71-feb419dfa51d"
+                },
+                {
+                  "id": "3e409d9f-4a7d-411a-8815-79ee83017027",
+                  "name": "Insufficient permissions",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/learningCourses/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "learningCourses",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:32:38.000Z",
+                  "updatedAt": "2026-07-28T03:32:38.000Z",
+                  "uid": "35240-3e409d9f-4a7d-411a-8815-79ee83017027"
+                },
+                {
+                  "id": "32733102-8f0a-4781-a273-9f541deebdcc",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/learningCourses/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "learningCourses",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:32:38.000Z",
+                  "updatedAt": "2026-07-28T03:32:38.000Z",
+                  "uid": "35240-32733102-8f0a-4781-a273-9f541deebdcc"
+                }
+              ],
+              "createdAt": "2026-07-28T03:32:38.000Z",
+              "updatedAt": "2026-07-28T03:32:38.000Z",
+              "uid": "35240-96e0382e-42ec-416d-9ead-cd57f19f9f5c"
+            }
+          ],
+          "id": "248bfbc1-aa5d-49fc-b471-f6c76318a882",
+          "createdAt": "2026-07-28T03:32:38.000Z",
+          "updatedAt": "2026-07-28T03:32:38.000Z",
+          "uid": "35240-248bfbc1-aa5d-49fc-b471-f6c76318a882"
+        },
+        {
+          "name": "Workday Integration Retrieve learning courses",
+          "id": "1ab634ab-a7f6-48ab-9fd6-88ee8350152f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/learningCourses?limit=20&offset=0&search=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "learningCourses"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "key": "search",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Returns a collection of learning courses available in the catalog."
+          },
+          "response": [
+            {
+              "id": "1d26899c-6c7e-4ce1-8eed-41b8a4a964ee",
+              "name": "Successful response with learning courses",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/learningCourses?limit=20&offset=0&search=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "learningCourses"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"descriptor\": \"<string>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"courseType\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      \"duration\": \"<string>\",\n      \"isActive\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"descriptor\": \"<string>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"courseType\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      \"duration\": \"<string>\",\n      \"isActive\": \"<boolean>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:32:38.000Z",
+              "updatedAt": "2026-07-28T03:32:38.000Z",
+              "uid": "35240-1d26899c-6c7e-4ce1-8eed-41b8a4a964ee"
+            },
+            {
+              "id": "85038734-edf5-498b-99d8-3d9efeaa04bc",
+              "name": "Authentication required",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/learningCourses?limit=20&offset=0&search=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "learningCourses"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:32:38.000Z",
+              "updatedAt": "2026-07-28T03:32:38.000Z",
+              "uid": "35240-85038734-edf5-498b-99d8-3d9efeaa04bc"
+            },
+            {
+              "id": "b4264ae3-8755-4212-8968-101a4b188573",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/learningCourses?limit=20&offset=0&search=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "learningCourses"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:32:38.000Z",
+              "updatedAt": "2026-07-28T03:32:38.000Z",
+              "uid": "35240-b4264ae3-8755-4212-8968-101a4b188573"
+            }
+          ],
+          "createdAt": "2026-07-28T03:32:38.000Z",
+          "updatedAt": "2026-07-28T03:32:38.000Z",
+          "uid": "35240-1ab634ab-a7f6-48ab-9fd6-88ee8350152f"
+        }
+      ],
+      "id": "729f1921-37c2-444a-8a24-52317b9438b2",
+      "createdAt": "2026-07-28T03:32:38.000Z",
+      "updatedAt": "2026-07-28T03:32:38.000Z",
+      "uid": "35240-729f1921-37c2-444a-8a24-52317b9438b2"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "r:absenceManagement w:absenceManagement",
+        "type": "string"
+      },
+      {
+        "key": "redirect_uri",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://{baseUrl}/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "wd2-impl-services1.workday.com"
+    },
+    {
+      "key": "tenant",
+      "value": "tenant"
+    }
+  ]
+}

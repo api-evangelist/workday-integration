@@ -1,0 +1,1373 @@
+{
+  "info": {
+    "_postman_id": "d4f8042e-2335-421e-a882-a5ddf2a3b074",
+    "name": "Workday Integration Workday Absence Management Absence Types Tables API",
+    "description": "API for managing employee leave requests, absence types, and time-off balances. Retrieves eligible absence types for employees and supports validation of leave category selections.\n\nContact Support:\n Name: Workday API Support\n Email: api-support@workday.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:34:30.000Z",
+    "updatedAt": "2026-07-28T03:34:30.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-d4f8042e-2335-421e-a882-a5ddf2a3b074"
+  },
+  "item": [
+    {
+      "name": "tables",
+      "item": [
+        {
+          "name": "{ID}",
+          "item": [
+            {
+              "name": "Workday Integration Retrieve a specific Prism Analytics table",
+              "id": "961b965d-2d17-481b-8c36-6a3faff3cd5b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/tables/:ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tables",
+                    ":ID"
+                  ],
+                  "variable": [
+                    {
+                      "id": "2282339a-dc10-47b4-b857-74885a95c38b",
+                      "key": "ID",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Returns the specified Prism Analytics table with its schema definition."
+              },
+              "response": [
+                {
+                  "id": "31028760-a4e8-4f48-a6b8-92c0cc50aa43",
+                  "name": "Successful response with the table",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/tables/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tables",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"descriptor\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"enableForAnalysis\": \"<boolean>\",\n  \"fields\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\",\n      \"type\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\"\n      },\n      \"parseFormat\": \"<string>\",\n      \"precision\": \"<integer>\",\n      \"scale\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\",\n      \"type\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\"\n      },\n      \"parseFormat\": \"<string>\",\n      \"precision\": \"<integer>\",\n      \"scale\": \"<integer>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:34:31.000Z",
+                  "updatedAt": "2026-07-28T03:34:31.000Z",
+                  "uid": "35240-31028760-a4e8-4f48-a6b8-92c0cc50aa43"
+                },
+                {
+                  "id": "16526a7a-0433-41c1-92a7-8bf7b6f7535a",
+                  "name": "Authentication required",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/tables/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tables",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:34:31.000Z",
+                  "updatedAt": "2026-07-28T03:34:31.000Z",
+                  "uid": "35240-16526a7a-0433-41c1-92a7-8bf7b6f7535a"
+                },
+                {
+                  "id": "8eda4fbe-4548-43aa-8abf-d0ac435dced3",
+                  "name": "Insufficient permissions",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/tables/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tables",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:34:31.000Z",
+                  "updatedAt": "2026-07-28T03:34:31.000Z",
+                  "uid": "35240-8eda4fbe-4548-43aa-8abf-d0ac435dced3"
+                },
+                {
+                  "id": "b786e755-456c-4e6c-97b9-b2c0bffd5427",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/tables/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tables",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:34:31.000Z",
+                  "updatedAt": "2026-07-28T03:34:31.000Z",
+                  "uid": "35240-b786e755-456c-4e6c-97b9-b2c0bffd5427"
+                }
+              ],
+              "createdAt": "2026-07-28T03:34:31.000Z",
+              "updatedAt": "2026-07-28T03:34:31.000Z",
+              "uid": "35240-961b965d-2d17-481b-8c36-6a3faff3cd5b"
+            },
+            {
+              "name": "Workday Integration Update a Prism Analytics table",
+              "id": "5d4b44e2-150e-4c2a-a8a4-2df37ef74408",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"<string>\",\n  \"fields\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\"\n    }\n  ],\n  \"enableForAnalysis\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/tables/:ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tables",
+                    ":ID"
+                  ],
+                  "variable": [
+                    {
+                      "id": "94bc48a1-bfa5-4593-a488-e54a635dbbb5",
+                      "key": "ID",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Updates the specified Prism Analytics table schema."
+              },
+              "response": [
+                {
+                  "id": "8178ee2d-7d4c-4faf-af78-dd20fa0e7a0a",
+                  "name": "Table updated successfully",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"displayName\": \"<string>\",\n  \"fields\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\"\n    }\n  ],\n  \"enableForAnalysis\": \"<boolean>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/tables/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tables",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"descriptor\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"enableForAnalysis\": \"<boolean>\",\n  \"fields\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\",\n      \"type\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\"\n      },\n      \"parseFormat\": \"<string>\",\n      \"precision\": \"<integer>\",\n      \"scale\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\",\n      \"type\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\"\n      },\n      \"parseFormat\": \"<string>\",\n      \"precision\": \"<integer>\",\n      \"scale\": \"<integer>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:34:31.000Z",
+                  "updatedAt": "2026-07-28T03:34:31.000Z",
+                  "uid": "35240-8178ee2d-7d4c-4faf-af78-dd20fa0e7a0a"
+                },
+                {
+                  "id": "611cc4d7-d8be-4a44-88bd-54cc74746442",
+                  "name": "Invalid request parameters",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"displayName\": \"<string>\",\n  \"fields\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\"\n    }\n  ],\n  \"enableForAnalysis\": \"<boolean>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/tables/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tables",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:34:31.000Z",
+                  "updatedAt": "2026-07-28T03:34:31.000Z",
+                  "uid": "35240-611cc4d7-d8be-4a44-88bd-54cc74746442"
+                },
+                {
+                  "id": "51512135-f916-4baa-9222-a209d173f0ae",
+                  "name": "Authentication required",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"displayName\": \"<string>\",\n  \"fields\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\"\n    }\n  ],\n  \"enableForAnalysis\": \"<boolean>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/tables/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tables",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:34:31.000Z",
+                  "updatedAt": "2026-07-28T03:34:31.000Z",
+                  "uid": "35240-51512135-f916-4baa-9222-a209d173f0ae"
+                },
+                {
+                  "id": "a056a0a8-665c-4085-b878-e5de01fe9926",
+                  "name": "Insufficient permissions",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"displayName\": \"<string>\",\n  \"fields\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\"\n    }\n  ],\n  \"enableForAnalysis\": \"<boolean>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/tables/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tables",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:34:31.000Z",
+                  "updatedAt": "2026-07-28T03:34:31.000Z",
+                  "uid": "35240-a056a0a8-665c-4085-b878-e5de01fe9926"
+                },
+                {
+                  "id": "aa6b1f70-069c-44ed-bacc-c410c0060418",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"displayName\": \"<string>\",\n  \"fields\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\"\n    }\n  ],\n  \"enableForAnalysis\": \"<boolean>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/tables/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tables",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:34:31.000Z",
+                  "updatedAt": "2026-07-28T03:34:31.000Z",
+                  "uid": "35240-aa6b1f70-069c-44ed-bacc-c410c0060418"
+                }
+              ],
+              "createdAt": "2026-07-28T03:34:31.000Z",
+              "updatedAt": "2026-07-28T03:34:31.000Z",
+              "uid": "35240-5d4b44e2-150e-4c2a-a8a4-2df37ef74408"
+            },
+            {
+              "name": "Workday Integration Delete a Prism Analytics table",
+              "id": "8ed8fbcf-1d77-4a56-a37b-91b210174f7c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/tables/:ID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tables",
+                    ":ID"
+                  ],
+                  "variable": [
+                    {
+                      "id": "97cb91c8-407c-4419-b46f-5cee04b27c85",
+                      "key": "ID",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Deletes the specified Prism Analytics table and its data."
+              },
+              "response": [
+                {
+                  "id": "9a8a8a27-fd11-41bc-870b-e86db545b310",
+                  "name": "Table deleted successfully",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/tables/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tables",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:34:31.000Z",
+                  "updatedAt": "2026-07-28T03:34:31.000Z",
+                  "uid": "35240-9a8a8a27-fd11-41bc-870b-e86db545b310"
+                },
+                {
+                  "id": "bd3e73c7-e6b1-45b6-8ef4-80b86c9e7196",
+                  "name": "Authentication required",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/tables/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tables",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:34:31.000Z",
+                  "updatedAt": "2026-07-28T03:34:31.000Z",
+                  "uid": "35240-bd3e73c7-e6b1-45b6-8ef4-80b86c9e7196"
+                },
+                {
+                  "id": "4c5b9ca7-372e-422f-9368-03d4a6e6ff67",
+                  "name": "Insufficient permissions",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/tables/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tables",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:34:31.000Z",
+                  "updatedAt": "2026-07-28T03:34:31.000Z",
+                  "uid": "35240-4c5b9ca7-372e-422f-9368-03d4a6e6ff67"
+                },
+                {
+                  "id": "4926cf97-c8b7-476c-877f-0cc1680bcc7a",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/tables/:ID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tables",
+                        ":ID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:34:31.000Z",
+                  "updatedAt": "2026-07-28T03:34:31.000Z",
+                  "uid": "35240-4926cf97-c8b7-476c-877f-0cc1680bcc7a"
+                }
+              ],
+              "createdAt": "2026-07-28T03:34:31.000Z",
+              "updatedAt": "2026-07-28T03:34:31.000Z",
+              "uid": "35240-8ed8fbcf-1d77-4a56-a37b-91b210174f7c"
+            }
+          ],
+          "id": "1f7521e2-b326-4be9-9183-2b1f18f41baa",
+          "createdAt": "2026-07-28T03:34:31.000Z",
+          "updatedAt": "2026-07-28T03:34:31.000Z",
+          "uid": "35240-1f7521e2-b326-4be9-9183-2b1f18f41baa"
+        },
+        {
+          "name": "Workday Integration Retrieve Prism Analytics tables",
+          "id": "2d36dbf6-aa54-4a6f-8004-3ae7f839ed2a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/tables?limit=20&offset=0&search=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "tables"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "key": "search",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Returns a collection of Prism Analytics tables in the tenant."
+          },
+          "response": [
+            {
+              "id": "5b252ad5-1a0d-464b-80c1-55cd151b95d5",
+              "name": "Successful response with tables",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/tables?limit=20&offset=0&search=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tables"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"total\": \"<integer>\",\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"descriptor\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"enableForAnalysis\": \"<boolean>\",\n      \"fields\": [\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"ordinal\": \"<integer>\",\n          \"type\": {\n            \"id\": \"<string>\",\n            \"descriptor\": \"<string>\"\n          },\n          \"parseFormat\": \"<string>\",\n          \"precision\": \"<integer>\",\n          \"scale\": \"<integer>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"ordinal\": \"<integer>\",\n          \"type\": {\n            \"id\": \"<string>\",\n            \"descriptor\": \"<string>\"\n          },\n          \"parseFormat\": \"<string>\",\n          \"precision\": \"<integer>\",\n          \"scale\": \"<integer>\"\n        }\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"descriptor\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"enableForAnalysis\": \"<boolean>\",\n      \"fields\": [\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"ordinal\": \"<integer>\",\n          \"type\": {\n            \"id\": \"<string>\",\n            \"descriptor\": \"<string>\"\n          },\n          \"parseFormat\": \"<string>\",\n          \"precision\": \"<integer>\",\n          \"scale\": \"<integer>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"ordinal\": \"<integer>\",\n          \"type\": {\n            \"id\": \"<string>\",\n            \"descriptor\": \"<string>\"\n          },\n          \"parseFormat\": \"<string>\",\n          \"precision\": \"<integer>\",\n          \"scale\": \"<integer>\"\n        }\n      ]\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:34:31.000Z",
+              "updatedAt": "2026-07-28T03:34:31.000Z",
+              "uid": "35240-5b252ad5-1a0d-464b-80c1-55cd151b95d5"
+            },
+            {
+              "id": "eb3e1db1-e2ba-4014-a55f-0c9b7efe969f",
+              "name": "Authentication required",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/tables?limit=20&offset=0&search=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tables"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:34:31.000Z",
+              "updatedAt": "2026-07-28T03:34:31.000Z",
+              "uid": "35240-eb3e1db1-e2ba-4014-a55f-0c9b7efe969f"
+            },
+            {
+              "id": "61d4038b-4368-4326-8833-09ff088b0bff",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/tables?limit=20&offset=0&search=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tables"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:34:31.000Z",
+              "updatedAt": "2026-07-28T03:34:31.000Z",
+              "uid": "35240-61d4038b-4368-4326-8833-09ff088b0bff"
+            }
+          ],
+          "createdAt": "2026-07-28T03:34:31.000Z",
+          "updatedAt": "2026-07-28T03:34:31.000Z",
+          "uid": "35240-2d36dbf6-aa54-4a6f-8004-3ae7f839ed2a"
+        },
+        {
+          "name": "Workday Integration Create a Prism Analytics table",
+          "id": "d9893c65-1d4c-4091-9a93-714bc6d74086",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"displayName\": \"<string>\",\n  \"fields\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\"\n    }\n  ],\n  \"enableForAnalysis\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/tables",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "tables"
+              ]
+            },
+            "description": "Creates a new Prism Analytics table with the specified schema."
+          },
+          "response": [
+            {
+              "id": "823fb501-dc0d-4f80-9316-4e85d3004d8f",
+              "name": "Table created successfully",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"<string>\",\n  \"fields\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\"\n    }\n  ],\n  \"enableForAnalysis\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/tables",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tables"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"descriptor\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"enableForAnalysis\": \"<boolean>\",\n  \"fields\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\",\n      \"type\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\"\n      },\n      \"parseFormat\": \"<string>\",\n      \"precision\": \"<integer>\",\n      \"scale\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\",\n      \"type\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\"\n      },\n      \"parseFormat\": \"<string>\",\n      \"precision\": \"<integer>\",\n      \"scale\": \"<integer>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:34:31.000Z",
+              "updatedAt": "2026-07-28T03:34:31.000Z",
+              "uid": "35240-823fb501-dc0d-4f80-9316-4e85d3004d8f"
+            },
+            {
+              "id": "ca70b40c-4dfc-4ec8-93ef-eda7f9d74106",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"<string>\",\n  \"fields\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\"\n    }\n  ],\n  \"enableForAnalysis\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/tables",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tables"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:34:31.000Z",
+              "updatedAt": "2026-07-28T03:34:31.000Z",
+              "uid": "35240-ca70b40c-4dfc-4ec8-93ef-eda7f9d74106"
+            },
+            {
+              "id": "6b2141ed-1d11-46b3-861f-d1f3b1fae411",
+              "name": "Authentication required",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"<string>\",\n  \"fields\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\"\n    }\n  ],\n  \"enableForAnalysis\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/tables",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tables"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:34:31.000Z",
+              "updatedAt": "2026-07-28T03:34:31.000Z",
+              "uid": "35240-6b2141ed-1d11-46b3-861f-d1f3b1fae411"
+            },
+            {
+              "id": "05aa59e6-d1c9-4593-b25e-0ba00b7f010b",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"<string>\",\n  \"fields\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\"\n    }\n  ],\n  \"enableForAnalysis\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/tables",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tables"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:34:31.000Z",
+              "updatedAt": "2026-07-28T03:34:31.000Z",
+              "uid": "35240-05aa59e6-d1c9-4593-b25e-0ba00b7f010b"
+            }
+          ],
+          "createdAt": "2026-07-28T03:34:31.000Z",
+          "updatedAt": "2026-07-28T03:34:31.000Z",
+          "uid": "35240-d9893c65-1d4c-4091-9a93-714bc6d74086"
+        }
+      ],
+      "id": "c44c583a-3c2b-4832-a3bd-33830acc181c",
+      "createdAt": "2026-07-28T03:34:31.000Z",
+      "updatedAt": "2026-07-28T03:34:31.000Z",
+      "uid": "35240-c44c583a-3c2b-4832-a3bd-33830acc181c"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "r:absenceManagement w:absenceManagement",
+        "type": "string"
+      },
+      {
+        "key": "redirect_uri",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://{baseUrl}/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "wd2-impl-services1.workday.com"
+    },
+    {
+      "key": "tenant",
+      "value": "tenant"
+    }
+  ]
+}

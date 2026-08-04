@@ -1,0 +1,368 @@
+{
+  "info": {
+    "_postman_id": "45309eb2-a82f-40a1-981e-b94892cfcc87",
+    "name": "Workday Integration Workday Absence Management Absence Types Goals API",
+    "description": "API for managing employee leave requests, absence types, and time-off balances. Retrieves eligible absence types for employees and supports validation of leave category selections.\n\nContact Support:\n Name: Workday API Support\n Email: api-support@workday.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:32:55.000Z",
+    "updatedAt": "2026-07-28T03:32:55.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-45309eb2-a82f-40a1-981e-b94892cfcc87"
+  },
+  "item": [
+    {
+      "name": "workers",
+      "item": [
+        {
+          "name": "{ID}",
+          "item": [
+            {
+              "name": "goals",
+              "item": [
+                {
+                  "name": "Workday Integration Retrieve goals for a worker",
+                  "id": "bd4c7d05-7d64-4338-9960-020b05b3de60",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/workers/:ID/goals?limit=20&offset=0",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "workers",
+                        ":ID",
+                        "goals"
+                      ],
+                      "query": [
+                        {
+                          "key": "limit",
+                          "value": "20"
+                        },
+                        {
+                          "key": "offset",
+                          "value": "0"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "df7a891b-0c4e-4b99-9ed4-4a1d66f7a222",
+                          "key": "ID",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Returns the performance goals for the specified worker."
+                  },
+                  "response": [
+                    {
+                      "id": "3ea9ee1a-6433-4117-8968-3010c31e35c7",
+                      "name": "Successful response with worker goals",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:ID/goals?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":ID",
+                            "goals"
+                          ],
+                          "query": [
+                            {
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"total\": \"<integer>\",\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"descriptor\": \"<string>\",\n      \"name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"dueDate\": \"<date>\",\n      \"completionPercentage\": \"<number>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"descriptor\": \"<string>\",\n      \"name\": \"<string>\",\n      \"status\": \"<string>\",\n      \"dueDate\": \"<date>\",\n      \"completionPercentage\": \"<number>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:32:55.000Z",
+                      "updatedAt": "2026-07-28T03:32:55.000Z",
+                      "uid": "35240-3ea9ee1a-6433-4117-8968-3010c31e35c7"
+                    },
+                    {
+                      "id": "74d1c19a-6057-49c8-8770-4768d0d3847b",
+                      "name": "Authentication required",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:ID/goals?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":ID",
+                            "goals"
+                          ],
+                          "query": [
+                            {
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:32:55.000Z",
+                      "updatedAt": "2026-07-28T03:32:55.000Z",
+                      "uid": "35240-74d1c19a-6057-49c8-8770-4768d0d3847b"
+                    },
+                    {
+                      "id": "13e2c6c7-c6dc-4174-921c-d28ce7db6672",
+                      "name": "Insufficient permissions",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:ID/goals?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":ID",
+                            "goals"
+                          ],
+                          "query": [
+                            {
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:32:55.000Z",
+                      "updatedAt": "2026-07-28T03:32:55.000Z",
+                      "uid": "35240-13e2c6c7-c6dc-4174-921c-d28ce7db6672"
+                    },
+                    {
+                      "id": "74cd62bf-39d4-4266-9523-42f31055cb42",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/workers/:ID/goals?limit=20&offset=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workers",
+                            ":ID",
+                            "goals"
+                          ],
+                          "query": [
+                            {
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "key": "offset",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:32:55.000Z",
+                      "updatedAt": "2026-07-28T03:32:55.000Z",
+                      "uid": "35240-74cd62bf-39d4-4266-9523-42f31055cb42"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:32:55.000Z",
+                  "updatedAt": "2026-07-28T03:32:55.000Z",
+                  "uid": "35240-bd4c7d05-7d64-4338-9960-020b05b3de60"
+                }
+              ],
+              "id": "b9c67c4e-496c-4ba1-a080-077d2b1853d5",
+              "createdAt": "2026-07-28T03:32:55.000Z",
+              "updatedAt": "2026-07-28T03:32:55.000Z",
+              "uid": "35240-b9c67c4e-496c-4ba1-a080-077d2b1853d5"
+            }
+          ],
+          "id": "35ef2dd6-82d3-4f7d-8db1-1fa24f4314a2",
+          "createdAt": "2026-07-28T03:32:55.000Z",
+          "updatedAt": "2026-07-28T03:32:55.000Z",
+          "uid": "35240-35ef2dd6-82d3-4f7d-8db1-1fa24f4314a2"
+        }
+      ],
+      "id": "f85b1d17-32c2-4bc9-a949-a5fab96ac110",
+      "createdAt": "2026-07-28T03:32:55.000Z",
+      "updatedAt": "2026-07-28T03:32:55.000Z",
+      "uid": "35240-f85b1d17-32c2-4bc9-a949-a5fab96ac110"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "r:absenceManagement w:absenceManagement",
+        "type": "string"
+      },
+      {
+        "key": "redirect_uri",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://{baseUrl}/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "wd2-impl-services1.workday.com"
+    },
+    {
+      "key": "tenant",
+      "value": "tenant"
+    }
+  ]
+}
