@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workday Integration Workday Absence Management Absence Types Data Change Tasks API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://{baseUrl}/authorize",
+      "accessTokenUrl": "https://{baseUrl}/oauth2/{tenant}/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Data Change Tasks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Integration Retrieve data change tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/absenceManagement/v1/{tenant}/dataChangeTasks",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a collection of data change tasks for Prism Analytics tables."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Create a data change task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{baseUrl}/ccx/api/absenceManagement/v1/{tenant}/dataChangeTasks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new data change task to load data into a Prism Analytics table."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Retrieve a specific data change task",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/absenceManagement/v1/{tenant}/dataChangeTasks/:ID",
+            "params": [
+              {
+                "name": "ID",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the specified data change task with its status and details."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

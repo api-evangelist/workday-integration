@@ -1,0 +1,1712 @@
+{
+  "item": [
+    {
+      "id": "8f771e5e-b13d-419e-98da-1c194297afc2",
+      "name": "Tables",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a6ffc46b-ca2a-4962-b5d1-c9a833de3a6c",
+          "name": "Workday Integration Retrieve Prism Analytics tables",
+          "request": {
+            "name": "Workday Integration Retrieve Prism Analytics tables",
+            "description": {
+              "content": "Returns a collection of Prism Analytics tables in the tenant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tables"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "The Workday data center hostname",
+                  "type": "any",
+                  "value": "{{baseUrl}}",
+                  "key": "baseUrl"
+                },
+                {
+                  "description": "The Workday tenant name",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e09e0e61-7001-4275-b35e-161e6b33b7c7",
+              "name": "Successful response with tables",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tables"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The Workday data center hostname",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    },
+                    {
+                      "description": "The Workday tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 3056,\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"descriptor\": \"string\",\n      \"displayName\": \"string\",\n      \"enableForAnalysis\": false,\n      \"fields\": [\n        {\n          \"name\": \"string\",\n          \"description\": \"string\",\n          \"ordinal\": 3734,\n          \"type\": {\n            \"id\": \"string\",\n            \"descriptor\": \"string\"\n          },\n          \"parseFormat\": \"string\",\n          \"precision\": 8798,\n          \"scale\": 4751\n        },\n        {\n          \"name\": \"string\",\n          \"description\": \"string\",\n          \"ordinal\": 4658,\n          \"type\": {\n            \"id\": \"string\",\n            \"descriptor\": \"string\"\n          },\n          \"parseFormat\": \"string\",\n          \"precision\": 3388,\n          \"scale\": 246\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"descriptor\": \"string\",\n      \"displayName\": \"string\",\n      \"enableForAnalysis\": true,\n      \"fields\": [\n        {\n          \"name\": \"string\",\n          \"description\": \"string\",\n          \"ordinal\": 271,\n          \"type\": {\n            \"id\": \"string\",\n            \"descriptor\": \"string\"\n          },\n          \"parseFormat\": \"string\",\n          \"precision\": 8715,\n          \"scale\": 5517\n        },\n        {\n          \"name\": \"string\",\n          \"description\": \"string\",\n          \"ordinal\": 9343,\n          \"type\": {\n            \"id\": \"string\",\n            \"descriptor\": \"string\"\n          },\n          \"parseFormat\": \"string\",\n          \"precision\": 4803,\n          \"scale\": 410\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fce9b06c-82d2-4208-a9f7-896ca8538a59",
+              "name": "Authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tables"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The Workday data center hostname",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    },
+                    {
+                      "description": "The Workday tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7e8da4e1-f870-4593-ad0c-6eb3fff36c31",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tables"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The Workday data center hostname",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    },
+                    {
+                      "description": "The Workday tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9843cc96-f8c6-4ecb-be9a-25781d775659",
+          "name": "Workday Integration Create a Prism Analytics table",
+          "request": {
+            "name": "Workday Integration Create a Prism Analytics table",
+            "description": {
+              "content": "Creates a new Prism Analytics table with the specified schema.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tables"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The Workday data center hostname",
+                  "type": "any",
+                  "value": "{{baseUrl}}",
+                  "key": "baseUrl"
+                },
+                {
+                  "description": "The Workday tenant name",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"displayName\": \"<string>\",\n  \"fields\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\"\n    }\n  ],\n  \"enableForAnalysis\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e253e747-fff1-4e10-83f8-6ae9ab5f4c30",
+              "name": "Table created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tables"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The Workday data center hostname",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    },
+                    {
+                      "description": "The Workday tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"<string>\",\n  \"fields\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\",\n        \"href\": \"http://ZbowyuxTdmgIUjhRGyERexCUwoHnunAei.mxuNl8f+FamRO+9KgFb3ZzvtckvBLzcCHBt2FBy2G,f\"\n      },\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\",\n        \"href\": \"https://bSkDrpBrSsUPWVrwbmcGgyFc.znttmViPxhsqBjltYq2oEBb7XKXO7SUHmrIXtjCGvuGNd3NwTZAweCrnI4SFhyFHunFO7L.\"\n      },\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\"\n    }\n  ],\n  \"enableForAnalysis\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"descriptor\": \"string\",\n  \"displayName\": \"string\",\n  \"enableForAnalysis\": false,\n  \"fields\": [\n    {\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"ordinal\": 5002,\n      \"type\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\"\n      },\n      \"parseFormat\": \"string\",\n      \"precision\": 9907,\n      \"scale\": 8274\n    },\n    {\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"ordinal\": 317,\n      \"type\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\"\n      },\n      \"parseFormat\": \"string\",\n      \"precision\": 8566,\n      \"scale\": 8048\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e785d805-d6fa-42e5-80f0-d5bbd4f9e97c",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tables"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The Workday data center hostname",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    },
+                    {
+                      "description": "The Workday tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"<string>\",\n  \"fields\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\",\n        \"href\": \"http://ZbowyuxTdmgIUjhRGyERexCUwoHnunAei.mxuNl8f+FamRO+9KgFb3ZzvtckvBLzcCHBt2FBy2G,f\"\n      },\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\",\n        \"href\": \"https://bSkDrpBrSsUPWVrwbmcGgyFc.znttmViPxhsqBjltYq2oEBb7XKXO7SUHmrIXtjCGvuGNd3NwTZAweCrnI4SFhyFHunFO7L.\"\n      },\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\"\n    }\n  ],\n  \"enableForAnalysis\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3fb1eab1-bc86-4188-9f8f-39081538e4f3",
+              "name": "Authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tables"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The Workday data center hostname",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    },
+                    {
+                      "description": "The Workday tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"<string>\",\n  \"fields\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\",\n        \"href\": \"http://ZbowyuxTdmgIUjhRGyERexCUwoHnunAei.mxuNl8f+FamRO+9KgFb3ZzvtckvBLzcCHBt2FBy2G,f\"\n      },\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\",\n        \"href\": \"https://bSkDrpBrSsUPWVrwbmcGgyFc.znttmViPxhsqBjltYq2oEBb7XKXO7SUHmrIXtjCGvuGNd3NwTZAweCrnI4SFhyFHunFO7L.\"\n      },\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\"\n    }\n  ],\n  \"enableForAnalysis\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cf10d051-da6f-4b8c-9937-e8165de17441",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tables"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The Workday data center hostname",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    },
+                    {
+                      "description": "The Workday tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"<string>\",\n  \"fields\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\",\n        \"href\": \"http://ZbowyuxTdmgIUjhRGyERexCUwoHnunAei.mxuNl8f+FamRO+9KgFb3ZzvtckvBLzcCHBt2FBy2G,f\"\n      },\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\",\n        \"href\": \"https://bSkDrpBrSsUPWVrwbmcGgyFc.znttmViPxhsqBjltYq2oEBb7XKXO7SUHmrIXtjCGvuGNd3NwTZAweCrnI4SFhyFHunFO7L.\"\n      },\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\"\n    }\n  ],\n  \"enableForAnalysis\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8f880eef-6bcb-483d-a212-bcc1af1049fb",
+          "name": "Workday Integration Retrieve a specific Prism Analytics table",
+          "request": {
+            "name": "Workday Integration Retrieve a specific Prism Analytics table",
+            "description": {
+              "content": "Returns the specified Prism Analytics table with its schema definition.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tables",
+                ":ID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ID",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "The Workday data center hostname",
+                  "type": "any",
+                  "value": "{{baseUrl}}",
+                  "key": "baseUrl"
+                },
+                {
+                  "description": "The Workday tenant name",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2e3de966-3657-4394-a2eb-c72161b57707",
+              "name": "Successful response with the table",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tables",
+                    ":ID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "The Workday data center hostname",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    },
+                    {
+                      "description": "The Workday tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"descriptor\": \"string\",\n  \"displayName\": \"string\",\n  \"enableForAnalysis\": false,\n  \"fields\": [\n    {\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"ordinal\": 5002,\n      \"type\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\"\n      },\n      \"parseFormat\": \"string\",\n      \"precision\": 9907,\n      \"scale\": 8274\n    },\n    {\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"ordinal\": 317,\n      \"type\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\"\n      },\n      \"parseFormat\": \"string\",\n      \"precision\": 8566,\n      \"scale\": 8048\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7bf13043-beb3-4fae-b7c2-9c8792fa1557",
+              "name": "Authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tables",
+                    ":ID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "The Workday data center hostname",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    },
+                    {
+                      "description": "The Workday tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c53016de-7ac1-43be-ad1e-b47a0d4a3728",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tables",
+                    ":ID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "The Workday data center hostname",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    },
+                    {
+                      "description": "The Workday tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ffe94c43-d8f8-4281-a36c-848f35fb3682",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tables",
+                    ":ID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "The Workday data center hostname",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    },
+                    {
+                      "description": "The Workday tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4e524d59-e0c3-4e67-8058-11fb613e8e0b",
+          "name": "Workday Integration Update a Prism Analytics table",
+          "request": {
+            "name": "Workday Integration Update a Prism Analytics table",
+            "description": {
+              "content": "Updates the specified Prism Analytics table schema.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tables",
+                ":ID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ID",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "The Workday data center hostname",
+                  "type": "any",
+                  "value": "{{baseUrl}}",
+                  "key": "baseUrl"
+                },
+                {
+                  "description": "The Workday tenant name",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"displayName\": \"<string>\",\n  \"fields\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\",\n        \"href\": \"<uri>\"\n      },\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\"\n    }\n  ],\n  \"enableForAnalysis\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fc2a2538-c041-4574-afd7-1831674385b6",
+              "name": "Table updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tables",
+                    ":ID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "The Workday data center hostname",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    },
+                    {
+                      "description": "The Workday tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"<string>\",\n  \"fields\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\",\n        \"href\": \"http://ZbowyuxTdmgIUjhRGyERexCUwoHnunAei.mxuNl8f+FamRO+9KgFb3ZzvtckvBLzcCHBt2FBy2G,f\"\n      },\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\",\n        \"href\": \"https://bSkDrpBrSsUPWVrwbmcGgyFc.znttmViPxhsqBjltYq2oEBb7XKXO7SUHmrIXtjCGvuGNd3NwTZAweCrnI4SFhyFHunFO7L.\"\n      },\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\"\n    }\n  ],\n  \"enableForAnalysis\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"descriptor\": \"string\",\n  \"displayName\": \"string\",\n  \"enableForAnalysis\": false,\n  \"fields\": [\n    {\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"ordinal\": 5002,\n      \"type\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\"\n      },\n      \"parseFormat\": \"string\",\n      \"precision\": 9907,\n      \"scale\": 8274\n    },\n    {\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"ordinal\": 317,\n      \"type\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\"\n      },\n      \"parseFormat\": \"string\",\n      \"precision\": 8566,\n      \"scale\": 8048\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "37f31ea8-786f-4313-82f9-96ae6739f1c7",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tables",
+                    ":ID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "The Workday data center hostname",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    },
+                    {
+                      "description": "The Workday tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"<string>\",\n  \"fields\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\",\n        \"href\": \"http://ZbowyuxTdmgIUjhRGyERexCUwoHnunAei.mxuNl8f+FamRO+9KgFb3ZzvtckvBLzcCHBt2FBy2G,f\"\n      },\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\",\n        \"href\": \"https://bSkDrpBrSsUPWVrwbmcGgyFc.znttmViPxhsqBjltYq2oEBb7XKXO7SUHmrIXtjCGvuGNd3NwTZAweCrnI4SFhyFHunFO7L.\"\n      },\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\"\n    }\n  ],\n  \"enableForAnalysis\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6cc5e5ee-7ef6-4006-acd8-0d62928a89e3",
+              "name": "Authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tables",
+                    ":ID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "The Workday data center hostname",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    },
+                    {
+                      "description": "The Workday tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"<string>\",\n  \"fields\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\",\n        \"href\": \"http://ZbowyuxTdmgIUjhRGyERexCUwoHnunAei.mxuNl8f+FamRO+9KgFb3ZzvtckvBLzcCHBt2FBy2G,f\"\n      },\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\",\n        \"href\": \"https://bSkDrpBrSsUPWVrwbmcGgyFc.znttmViPxhsqBjltYq2oEBb7XKXO7SUHmrIXtjCGvuGNd3NwTZAweCrnI4SFhyFHunFO7L.\"\n      },\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\"\n    }\n  ],\n  \"enableForAnalysis\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac470c4d-cdfc-406d-8c97-465815761c31",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tables",
+                    ":ID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "The Workday data center hostname",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    },
+                    {
+                      "description": "The Workday tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"<string>\",\n  \"fields\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\",\n        \"href\": \"http://ZbowyuxTdmgIUjhRGyERexCUwoHnunAei.mxuNl8f+FamRO+9KgFb3ZzvtckvBLzcCHBt2FBy2G,f\"\n      },\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\",\n        \"href\": \"https://bSkDrpBrSsUPWVrwbmcGgyFc.znttmViPxhsqBjltYq2oEBb7XKXO7SUHmrIXtjCGvuGNd3NwTZAweCrnI4SFhyFHunFO7L.\"\n      },\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\"\n    }\n  ],\n  \"enableForAnalysis\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "98c59b39-72c0-4e30-947a-17cded6f7f6a",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tables",
+                    ":ID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "The Workday data center hostname",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    },
+                    {
+                      "description": "The Workday tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"<string>\",\n  \"fields\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\",\n        \"href\": \"http://ZbowyuxTdmgIUjhRGyERexCUwoHnunAei.mxuNl8f+FamRO+9KgFb3ZzvtckvBLzcCHBt2FBy2G,f\"\n      },\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\",\n        \"href\": \"https://bSkDrpBrSsUPWVrwbmcGgyFc.znttmViPxhsqBjltYq2oEBb7XKXO7SUHmrIXtjCGvuGNd3NwTZAweCrnI4SFhyFHunFO7L.\"\n      },\n      \"description\": \"<string>\",\n      \"ordinal\": \"<integer>\"\n    }\n  ],\n  \"enableForAnalysis\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d57080b7-9dc8-4c87-84f0-559fa748dbd4",
+          "name": "Workday Integration Delete a Prism Analytics table",
+          "request": {
+            "name": "Workday Integration Delete a Prism Analytics table",
+            "description": {
+              "content": "Deletes the specified Prism Analytics table and its data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tables",
+                ":ID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ID",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "The Workday data center hostname",
+                  "type": "any",
+                  "value": "{{baseUrl}}",
+                  "key": "baseUrl"
+                },
+                {
+                  "description": "The Workday tenant name",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b11a2ffa-00f9-49c6-b606-e364c2ffd924",
+              "name": "Table deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tables",
+                    ":ID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "The Workday data center hostname",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    },
+                    {
+                      "description": "The Workday tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1d22ca83-74a1-4670-a396-2504c5f3d7f7",
+              "name": "Authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tables",
+                    ":ID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "The Workday data center hostname",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    },
+                    {
+                      "description": "The Workday tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e205abda-e9d1-4f72-83e9-a75c49804392",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tables",
+                    ":ID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "The Workday data center hostname",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    },
+                    {
+                      "description": "The Workday tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dae6bb1e-7e7b-445f-bea4-36ff6280cf61",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tables",
+                    ":ID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "The Workday data center hostname",
+                      "type": "any",
+                      "value": "{{baseUrl}}",
+                      "key": "baseUrl"
+                    },
+                    {
+                      "description": "The Workday tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The Workday data center hostname",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "wd2-impl-services1.workday.com",
+      "key": "baseUrl"
+    },
+    {
+      "description": {
+        "content": "The Workday tenant name",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "tenant",
+      "key": "tenant"
+    },
+    {
+      "type": "string",
+      "value": "https://{{baseUrl}}/ccx/api/absenceManagement/v1/{{tenant}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "r:absenceManagement w:absenceManagement"
+      },
+      {
+        "key": "redirect_uri",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://{baseUrl}/oauth2/{tenant}/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://{baseUrl}/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "95ee1475-3aeb-43e4-a2ff-89e1fda515d0",
+    "name": "Workday Integration Workday Absence Management Absence Types Tables API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for managing employee leave requests, absence types, and time-off balances. Retrieves eligible absence types for employees and supports validation of leave category selections.\n\nContact Support:\n Name: Workday API Support\n Email: api-support@workday.com",
+      "type": "text/plain"
+    }
+  }
+}

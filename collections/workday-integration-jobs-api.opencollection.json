@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workday Integration Workday Absence Management Absence Types Jobs API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://{baseUrl}/authorize",
+      "accessTokenUrl": "https://{baseUrl}/oauth2/{tenant}/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Integration Retrieve the pay group for a job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/absenceManagement/v1/{tenant}/jobs/:ID/payGroup",
+            "params": [
+              {
+                "name": "ID",
+                "value": "",
+                "type": "path",
+                "description": "The Workday ID of the resource"
+              }
+            ]
+          },
+          "docs": "Returns the pay group assignment for the specified job."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

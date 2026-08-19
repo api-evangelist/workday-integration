@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workday Integration Workday Absence Management Absence Types Balances API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://{baseUrl}/authorize",
+      "accessTokenUrl": "https://{baseUrl}/oauth2/{tenant}/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Balances",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Integration Retrieve an absence plan balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/absenceManagement/v1/{tenant}/balances/:ID",
+            "params": [
+              {
+                "name": "ID",
+                "value": "",
+                "type": "path",
+                "description": "The Workday ID of the resource"
+              }
+            ]
+          },
+          "docs": "Returns the specified balance of all absence plan and leave of absence types."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

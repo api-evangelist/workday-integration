@@ -1,0 +1,202 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workday Integration Workday Absence Management Absence Types Reference Data API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://{baseUrl}/authorize",
+      "accessTokenUrl": "https://{baseUrl}/oauth2/{tenant}/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reference Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Integration Retrieve leave status values",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/absenceManagement/v1/{tenant}/values/leave/status"
+          },
+          "docs": "Returns the available leave of absence status values."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Retrieve time off status values",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/absenceManagement/v1/{tenant}/values/timeOff/status"
+          },
+          "docs": "Returns the available time off request status values including Approved, Submitted, Not Submitted, and Sent Back."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Retrieve benefit plan types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/absenceManagement/v1/{tenant}/benefitPlanTypes",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of objects in a single response (default 20, maximum 100)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Zero-based index of the first object in a response collection"
+              }
+            ]
+          },
+          "docs": "Returns the available benefit plan types configured in the tenant."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Retrieve job change reasons",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/absenceManagement/v1/{tenant}/jobChangeReasons",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of objects in a single response (default 20, maximum 100)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The zero-based index of the first object in a response collection"
+              }
+            ]
+          },
+          "docs": "Returns the available job change reasons for staffing transactions."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Retrieve currencies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/absenceManagement/v1/{tenant}/currencies",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of objects in a single response (default 20, maximum 100)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The zero-based index of the first object in a response collection"
+              }
+            ]
+          },
+          "docs": "Returns the available currencies configured in the tenant."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Retrieve pay components",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/absenceManagement/v1/{tenant}/values/payrollInputsGroup/payComponents",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of objects in a single response (default 20, maximum 100)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The zero-based index of the first object in a response collection"
+              }
+            ]
+          },
+          "docs": "Returns the available pay components that can be used in payroll inputs."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Retrieve run categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/absenceManagement/v1/{tenant}/values/runCategories",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of objects in a single response (default 20, maximum 100)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The zero-based index of the first object in a response collection"
+              }
+            ]
+          },
+          "docs": "Returns the available payroll run categories."
+        },
+        {
+          "info": {
+            "name": "Workday Integration Retrieve available countries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{baseUrl}/ccx/api/absenceManagement/v1/{tenant}/values/common/countries",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of objects in a single response (default 20, maximum 100)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The zero-based index of the first object in a response collection"
+              }
+            ]
+          },
+          "docs": "Returns the list of countries available for recruiting processes."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

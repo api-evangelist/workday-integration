@@ -1,0 +1,53 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workday Integration Workday Absence Management Absence Types Payments API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://{baseUrl}/authorize",
+      "accessTokenUrl": "https://{baseUrl}/oauth2/{tenant}/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Integration Create a one-time payment request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{baseUrl}/ccx/api/absenceManagement/v1/{tenant}/workers/:ID/requestOneTimePayment",
+            "params": [
+              {
+                "name": "ID",
+                "value": "",
+                "type": "path",
+                "description": "The Workday ID of the resource"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a one-time payment request for the specified worker, such as a bonus or award, and initiates the approval business process."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
