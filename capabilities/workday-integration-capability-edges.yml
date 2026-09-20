@@ -1,0 +1,374 @@
+slug: workday-integration
+provider: Workday Integration
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 38
+edges:
+- tag: Job Postings
+  spec_file: workday-integration-job-postings-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.92
+  evidence: GET /jobPostings 'Retrieve a collection of job postings'; schema JobPosting
+  reason: Job postings are recruiting artefacts, squarely Talent Acquisition Management within HCM.
+- tag: Completions
+  spec_file: workday-integration-completions-api-openapi.yml
+  capability_id: BC-300.40
+  capability_id_l1: BC-300
+  capability_name: Learning & Development Management
+  confidence: 0.9
+  evidence: GET /workers/{ID}/learningCompletions — 'Retrieve learning completions for a worker'
+  reason: Learning completion records for workers are training/certification tracking, plainly Learning
+    & Development Management.
+- tag: Courses
+  spec_file: workday-integration-courses-api-openapi.yml
+  capability_id: BC-300.40
+  capability_id_l1: BC-300
+  capability_name: Learning & Development Management
+  confidence: 0.9
+  evidence: GET /learningCourses — 'Retrieve learning courses'; schema Course
+  reason: Learning course catalogue retrieval is training/capability building, i.e. Learning & Development
+    Management.
+- tag: Interviews
+  spec_file: workday-integration-interviews-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.9
+  evidence: GET /interviews 'Retrieve a collection of interviews'; GET /interviews/{ID}/feedback 'Retrieve
+    feedback for an interview'
+  reason: Interview scheduling and interview feedback are core recruiting activities in Workday's HCM
+    suite, mapping to Talent Acquisition Management.
+- tag: Performance Reviews
+  spec_file: workday-integration-performance-reviews-api-openapi.yml
+  capability_id: BC-300.20
+  capability_id_l1: BC-300
+  capability_name: Talent Management
+  confidence: 0.9
+  evidence: GET /workers/{ID}/performanceReviews  Retrieve performance reviews for a worker
+  reason: Worker performance reviews are squarely Talent Management (performance) within Human Capital
+    Management.
+- tag: Benefit Elections
+  spec_file: workday-integration-benefit-elections-api-openapi.yml
+  capability_id: BC-300.30
+  capability_id_l1: BC-300
+  capability_name: Compensation & Benefits Management
+  confidence: 0.88
+  evidence: GET /workers/{ID}/benefitElections — 'Retrieve benefit elections for a worker'; schema BenefitElectionsResponse
+  reason: Operation retrieves a worker's elected benefit plans — employee benefits administration within
+    the employee lifecycle, i.e. Compensation & Benefits Management. The openapi description about absence
+    types is boilerplate from the split spec and contradicted by the operation.
+- tag: Benefit Plans
+  spec_file: workday-integration-benefit-plans-api-openapi.yml
+  capability_id: BC-300.30
+  capability_id_l1: BC-300
+  capability_name: Compensation & Benefits Management
+  confidence: 0.88
+  evidence: GET /workers/{ID}/benefitPlans — 'Retrieve benefit plans for a worker'
+  reason: Worker-level benefit plan retrieval is benefits administration, mapping to Compensation & Benefits
+    Management. Title/description mismatch (absence types) is an artefact of the per-tag split.
+- tag: Prospects
+  spec_file: workday-integration-prospects-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.88
+  evidence: GET /prospects/{ID}/resumeAttachments  Retrieve resume attachments for a prospect
+  reason: Prospect education, experience, skills and resume attachments are recruiting candidate data
+    — Talent Acquisition.
+- tag: Cash Positions
+  spec_file: workday-integration-cash-positions-api-openapi.yml
+  capability_id: BC-210.10
+  capability_id_l1: BC-210
+  capability_name: Cash Management
+  confidence: 0.85
+  evidence: GET /cashPositions — 'Retrieve cash positions'
+  reason: Retrieving cash positions is treasury cash positioning, i.e. Cash Management. Boilerplate absence-management
+    description ignored in favour of the operation.
+- tag: Payroll
+  spec_file: workday-integration-payroll-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.85
+  evidence: GET /workers/{ID}/paySlips  Retrieve pay slips for a worker (PaySlipsResponse)
+  reason: Retrieval of employee pay slips is payroll administration, squarely HR Operations Management.
+- tag: Payroll Inputs
+  spec_file: workday-integration-payroll-inputs-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.85
+  evidence: POST /payrollInputs  createPayrollInput  Create a payroll input (PayrollInputRequest)
+  reason: Full CRUD over payroll input records feeding payroll calculation — payroll administration within
+    HR Operations Management.
+- tag: Assignments
+  spec_file: workday-integration-assignments-api-openapi.yml
+  capability_id: BC-300.40
+  capability_id_l1: BC-300
+  capability_name: Learning & Development Management
+  confidence: 0.82
+  evidence: GET /workers/{ID}/learningAssignments  getWorkerLearningAssignments  Retrieve learning assignments
+    for a worker
+  reason: Retrieving learning assignments for a worker is employee training administration, mapping to
+    Learning & Development Management under Human Capital Management.
+- tag: Leave of Absence
+  spec_file: workday-integration-leave-of-absence-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.82
+  evidence: GET /workers/{ID}/leavesOfAbsence 'Retrieve leaves of absence for a worker'; schema LeaveOfAbsence
+  reason: Worker leave-of-absence records are absence administration, part of HR operations/employee records
+    within Human Capital Management.
+- tag: Payroll Australia
+  spec_file: workday-integration-payroll-australia-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.82
+  evidence: GET /payrollRuns  Retrieve a collection of payrollRuns
+  reason: Country-specific payroll run retrieval is payroll processing/administration under HR Operations
+    Management.
+- tag: Payroll Canada
+  spec_file: workday-integration-payroll-canada-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.82
+  evidence: GET /payrollRuns/{ID}  Retrieve a specific PayrollRun
+  reason: Country-specific payroll run retrieval is payroll processing/administration under HR Operations
+    Management.
+- tag: Payroll France
+  spec_file: workday-integration-payroll-france-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.82
+  evidence: GET /payrollRuns  Retrieve a collection of payrollRuns
+  reason: Country-specific payroll run retrieval is payroll processing/administration under HR Operations
+    Management.
+- tag: Payroll UK
+  spec_file: workday-integration-payroll-uk-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.82
+  evidence: GET /payrollRuns/{ID}  Retrieve a specific PayrollRun
+  reason: Country-specific payroll run retrieval is payroll processing/administration under HR Operations
+    Management.
+- tag: Compensation Reviews
+  spec_file: workday-integration-compensation-reviews-api-openapi.yml
+  capability_id: BC-300.30
+  capability_id_l1: BC-300
+  capability_name: Compensation & Benefits Management
+  confidence: 0.8
+  evidence: GET /compensationReviewEvents; GET /compensationReviewEvents/{ID}/awards — 'Retrieve awards
+    for a compensation review'
+  reason: Compensation review events and awards are the merit/bonus review cycle, i.e. Compensation &
+    Benefits Management; some chance it is intended as talent/performance, hence 0.8.
+- tag: Jobs
+  spec_file: workday-integration-jobs-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.8
+  evidence: GET /jobs/{ID}/payGroup 'Retrieve the pay group for a job'; schema PayGroup
+  reason: The single operation returns the pay group associated with a job — payroll administration data,
+    i.e. HR Operations Management.
+- tag: Mentorships
+  spec_file: workday-integration-mentorships-api-openapi.yml
+  capability_id: BC-300.20
+  capability_id_l1: BC-300
+  capability_name: Talent Management
+  confidence: 0.8
+  evidence: POST /createMentorshipForWorker 'Create a mentorship for a worker'; POST /mentorships/{ID}/close
+    'Close a mentorship'
+  reason: Mentorship programme lifecycle for workers is career development, mapping to Talent Management
+    (development) within HCM; could arguably be Learning & Development, hence 0.8.
+- tag: Pay Groups
+  spec_file: workday-integration-pay-groups-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.8
+  evidence: GET /payGroups  Retrieve a collection of pay groups; GET /jobs/{ID}/payGroup  Retrieve the
+    pay group for a job
+  reason: Pay group master data (PayGroup, PayGroupDetail) is payroll administration configuration, part
+    of HR Operations Management.
+- tag: Workers
+  spec_file: workday-integration-workers-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.8
+  evidence: '"Retrieve a collection of workers", "Retrieve direct reports for a worker", "Create a job
+    change for a worker", "Retrieve pay slips for a worker" (schemas Worker, JobChange, PaySlipsResponse)'
+  reason: Operations read and maintain worker master records, organisational assignment, job/business-title
+    changes and pay slips — core employee record and payroll administration within Human Capital Management.
+    L2 HR Operations chosen for employee records/payroll administration; some overlap with Talent Management
+    for job changes hence 0.8.
+- tag: Absence Types
+  spec_file: workday-integration-absence-types-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.78
+  evidence: GET /workers/{ID}/eligibleAbsenceTypes  Retrieve eligible absence types for a worker; schema
+    AbsenceTypesResponse
+  reason: Worker-level absence/leave type eligibility is employee leave administration, part of HR operations
+    within Human Capital Management.
+- tag: Goals
+  spec_file: workday-integration-goals-api-openapi.yml
+  capability_id: BC-300.20
+  capability_id_l1: BC-300
+  capability_name: Talent Management
+  confidence: 0.78
+  evidence: GET /workers/{ID}/goals — 'Retrieve goals for a worker' (GoalsResponse)
+  reason: Worker goals are performance and development objectives in an HCM system, mapping to Talent
+    Management. Single read operation limits certainty on scope.
+- tag: Payments
+  spec_file: workday-integration-payments-api-openapi.yml
+  capability_id: BC-300.30
+  capability_id_l1: BC-300
+  capability_name: Compensation & Benefits Management
+  confidence: 0.78
+  evidence: POST /workers/{ID}/requestOneTimePayment  Create a one-time payment request (OneTimePaymentRequest)
+  reason: A one-time payment to a worker is a compensation transaction (bonus/one-off pay), not a treasury
+    or AP payment; maps to Compensation & Benefits Management.
+- tag: Talent Pools
+  spec_file: workday-integration-talent-pools-api-openapi.yml
+  capability_id: BC-300
+  capability_id_l1: BC-300
+  capability_name: Human Capital Management
+  confidence: 0.78
+  evidence: GET /talentPools  Retrieve talent pools; schema TalentPoolsResponse
+  reason: Talent pools are clearly an HCM construct; ambiguous between Talent Acquisition (candidate pools)
+    and Talent Management (succession pools), so only the L1 is asserted.
+- tag: Time Off
+  spec_file: workday-integration-time-off-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.78
+  evidence: POST /workers/{ID}/requestTimeOff  Create a time off request for a worker
+  reason: Absence/leave request administration for workers is core HR service delivery and employee records
+    handling under Human Capital Management.
+- tag: Balances
+  spec_file: workday-integration-balances-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.75
+  evidence: GET /balances/{ID}  getAbsenceBalance  Retrieve an absence plan balance; schema AbsenceBalance
+  reason: Despite the financial-sounding tag, the operation retrieves an absence plan balance (time-off
+    balance), i.e. leave administration within HR operations.
+- tag: Dependents
+  spec_file: workday-integration-dependents-api-openapi.yml
+  capability_id: BC-300
+  capability_id_l1: BC-300
+  capability_name: Human Capital Management
+  confidence: 0.75
+  evidence: GET /workers/{ID}/dependents — 'Retrieve dependents for a worker' (DependentsResponse)
+  reason: Worker dependent records are part of the employee master/benefits data in an HCM suite, so Human
+    Capital Management at L1. Ambiguous whether this serves benefits administration (BC-300.30) or employee
+    records (BC-300.70), so no L2 asserted.
+- tag: Job Profiles
+  spec_file: workday-integration-job-profiles-api-openapi.yml
+  capability_id: BC-300
+  capability_id_l1: BC-300
+  capability_name: Human Capital Management
+  confidence: 0.75
+  evidence: GET /jobProfiles 'Retrieve job profiles'; schema JobProfile
+  reason: Job profiles are HR job architecture/position definition data in Workday HCM. Clearly Human
+    Capital Management, but the sub-capability (workforce planning vs HR operations vs talent) is ambiguous,
+    so L1 only.
+- tag: Scorecards
+  spec_file: workday-integration-scorecards-api-openapi.yml
+  capability_id: BC-300.30
+  capability_id_l1: BC-300
+  capability_name: Compensation & Benefits Management
+  confidence: 0.75
+  evidence: GET /scorecards  getCompensationScorecards  Retrieve compensation scorecards
+  reason: Operations explicitly manage compensation scorecards and results, i.e. Compensation & Benefits
+    Management within HCM.
+- tag: Organizations
+  spec_file: workday-integration-organizations-api-openapi.yml
+  capability_id: BC-300
+  capability_id_l1: BC-300
+  capability_name: Human Capital Management
+  confidence: 0.72
+  evidence: GET /workers/{ID}/supervisoryOrganizations  Retrieve supervisory organizations managed by
+    a worker; GET /supervisoryOrganizations/{ID}/workers  Retrieve workers in a supervisory organization
+  reason: Operations expose the worker-to-supervisory-organization structure (WorkerSummary, SupervisoryOrganization
+    schemas), i.e. HR organisational structure within the employee lifecycle. L1 HCM is safe; no single
+    L2 clearly named.
+- tag: Payroll Interface
+  spec_file: workday-integration-payroll-interface-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.72
+  evidence: GET /payrollExports  Retrieve a collection of payrollExports
+  reason: Payroll export records for third-party payroll interfaces; payroll administration data delivery
+    under HR Operations Management, though schemas are generic.
+- tag: Suppliers
+  spec_file: workday-integration-suppliers-api-openapi.yml
+  capability_id: BC-510
+  capability_id_l1: BC-510
+  capability_name: Supplier Management
+  confidence: 0.72
+  evidence: 'GET /suppliers  Retrieve a collection of suppliers; schemas: SuppliersResponse, Supplier'
+  reason: Operations expose supplier records, which sits under Supplier Management; only read access is
+    shown so no specific sub-capability (onboarding, performance) can be pinned, and it could arguably
+    be supplier master data.
+- tag: ACA Compliance
+  spec_file: workday-integration-aca-compliance-api-openapi.yml
+  capability_id: BC-300
+  capability_id_l1: BC-300
+  capability_name: Human Capital Management
+  confidence: 0.7
+  evidence: GET /acaReports  getACAReports  Retrieve a collection of acaReports; GET /acaReports/{ID}
+    Retrieve a specific ACAReport
+  reason: ACA reports in a Workday HCM context are Affordable Care Act employee health-coverage reports,
+    an HR/benefits compliance artefact, so Human Capital Management is the honest L1. Evidence is too
+    thin to choose confidently between Compensation & Benefits Administration and HR Operations, so no
+    L2 is asserted.
+- tag: Benefits Partners
+  spec_file: workday-integration-benefits-partners-api-openapi.yml
+  capability_id: BC-300.30
+  capability_id_l1: BC-300
+  capability_name: Compensation & Benefits Management
+  confidence: 0.7
+  evidence: GET /carrierConnections — 'Retrieve a collection of carrierConnections'
+  reason: Tag 'Benefits Partners' with carrier connection resources indicates benefit carrier/provider
+    integration, an element of benefits administration. Schemas are generic (CollectionResponse/ResourceInstance)
+    so confidence is moderate.
+- tag: Positions
+  spec_file: workday-integration-positions-api-openapi.yml
+  capability_id: BC-300
+  capability_id_l1: BC-300
+  capability_name: Human Capital Management
+  confidence: 0.7
+  evidence: GET /positions  getPositions  Retrieve positions
+  reason: Positions in Workday HCM are org/job position records; HCM is clear but the L2 is ambiguous
+    between workforce planning and HR operations, so only L1 emitted.
+- tag: Time Blocks
+  spec_file: workday-integration-time-blocks-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.7
+  evidence: GET /workerTimeBlocks  Retrieve worker time blocks; schema TimeBlock
+  reason: Worker time blocks are time-tracking records for employees, an HR operations/payroll-input function;
+    no dedicated time & attendance capability exists in the list.
