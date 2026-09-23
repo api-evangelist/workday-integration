@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Workday Integration Workday Absence Management Absence Types Payroll Inputs API
-  description: API for managing employee leave requests, absence types, and time-off balances. Retrieves eligible absence types for employees and supports validation of leave category selections.
-  version: v1
+  title: Workday Integration Workday Payroll Payroll Inputs API
+  description: API for payroll processing, tax management, and compensation. Supports payroll calculations, pay component configurations, tax rate lookups, and payroll detail retrieval across multiple country-specific payroll modules.
+  version: v2
   contact:
     name: Workday API Support
     email: api-support@workday.com
@@ -11,8 +11,8 @@ info:
     name: Proprietary
     url: https://www.workday.com/en-us/legal/site-terms.html
 servers:
-- url: https://{baseUrl}/ccx/api/absenceManagement/v1/{tenant}
-  description: Workday Absence Management REST API server
+- url: https://{baseUrl}/ccx/api/payroll/v2/{tenant}
+  description: Workday Payroll REST API server
   variables:
     baseUrl:
       default: wd2-impl-services1.workday.com
@@ -22,8 +22,8 @@ servers:
       description: The Workday tenant name
 security:
 - OAuth2:
-  - r:absenceManagement
-  - w:absenceManagement
+  - r:payroll
+  - w:payroll
 tags:
 - name: Payroll Inputs
 paths:
@@ -142,7 +142,42 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  parameters:
+    ID:
+      name: ID
+      in: path
+      required: true
+      description: The Workday ID of the resource
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      description: The maximum number of objects in a single response (default 20, maximum 100)
+      schema:
+        type: integer
+        default: 20
+        maximum: 100
+    offset:
+      name: offset
+      in: query
+      description: The zero-based index of the first object in a response collection
+      schema:
+        type: integer
+        default: 0
   responses:
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
     Forbidden:
       description: Insufficient permissions
       content:
@@ -155,29 +190,23 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    ResourceReference:
+    ErrorResponse:
       type: object
       properties:
-        id:
+        error:
           type: string
-        descriptor:
-          type: string
-        href:
-          type: string
-          format: uri
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              error:
+                type: string
+              field:
+                type: string
+              message:
+                type: string
     PayrollInput:
       type: object
       properties:
@@ -185,6 +214,24 @@ components:
           type: string
         descriptor:
           type: string
+        worker:
+          $ref: '#/components/schemas/ResourceReference'
+        payComponent:
+          $ref: '#/components/schemas/ResourceReference'
+        amount:
+          type: number
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+    PayrollInputRequest:
+      type: object
+      required:
+      - worker
+      - payComponent
+      properties:
         worker:
           $ref: '#/components/schemas/ResourceReference'
         payComponent:
@@ -206,63 +253,16 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PayrollInput'
-    ErrorResponse:
+    ResourceReference:
       type: object
       properties:
-        error:
+        id:
           type: string
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              error:
-                type: string
-              field:
-                type: string
-              message:
-                type: string
-    PayrollInputRequest:
-      type: object
-      required:
-      - worker
-      - payComponent
-      properties:
-        worker:
-          $ref: '#/components/schemas/ResourceReference'
-        payComponent:
-          $ref: '#/components/schemas/ResourceReference'
-        amount:
-          type: number
-        startDate:
+        descriptor:
           type: string
-          format: date
-        endDate:
+        href:
           type: string
-          format: date
-  parameters:
-    offset:
-      name: offset
-      in: query
-      description: The zero-based index of the first object in a response collection
-      schema:
-        type: integer
-        default: 0
-    ID:
-      name: ID
-      in: path
-      required: true
-      description: The Workday ID of the resource
-      schema:
-        type: string
-    limit:
-      name: limit
-      in: query
-      description: The maximum number of objects in a single response (default 20, maximum 100)
-      schema:
-        type: integer
-        default: 20
-        maximum: 100
+          format: uri
   securitySchemes:
     OAuth2:
       type: oauth2
@@ -272,5 +272,5 @@ components:
           tokenUrl: https://{baseUrl}/oauth2/{tenant}/token
           refreshUrl: https://{baseUrl}/oauth2/{tenant}/token
           scopes:
-            r:absenceManagement: Read absence data
-            w:absenceManagement: Write absence data
+            r:payroll: Read payroll data
+            w:payroll: Write payroll data

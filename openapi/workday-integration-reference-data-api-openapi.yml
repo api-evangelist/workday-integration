@@ -1,8 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Workday Integration Workday Absence Management Absence Types Reference Data API
-  description: API for managing employee leave requests, absence types, and time-off balances. Retrieves eligible absence types for employees and supports validation of leave category selections.
-  version: v1
+  title: Workday Integration Reference Data API
   contact:
     name: Workday API Support
     email: api-support@workday.com
@@ -10,6 +8,8 @@ info:
   license:
     name: Proprietary
     url: https://www.workday.com/en-us/legal/site-terms.html
+  version: '1.0'
+  description: 'Operations tagged Reference Data across 5 of this provider''s published API definitions: workday-integration-absence-management-openapi.yml, workday-integration-benefits-administration-openapi.yml, workday-integration-human-capital-management-openapi.yml, workday-integration-payroll-openapi.yml, workday-integration-recruiting-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://{baseUrl}/ccx/api/absenceManagement/v1/{tenant}
   description: Workday Absence Management REST API server
@@ -20,10 +20,40 @@ servers:
     tenant:
       default: tenant
       description: The Workday tenant name
-security:
-- OAuth2:
-  - r:absenceManagement
-  - w:absenceManagement
+- url: https://{baseUrl}/ccx/api/benefits/v1/{tenant}
+  description: Workday Benefits Administration REST API server
+  variables:
+    baseUrl:
+      default: wd2-impl-services1.workday.com
+    tenant:
+      default: tenant
+- url: https://{baseUrl}/ccx/api/v1/{tenant}
+  description: Workday REST API server
+  variables:
+    baseUrl:
+      default: wd2-impl-services1.workday.com
+      description: The Workday data center hostname
+    tenant:
+      default: tenant
+      description: The Workday tenant name
+- url: https://{baseUrl}/ccx/api/payroll/v2/{tenant}
+  description: Workday Payroll REST API server
+  variables:
+    baseUrl:
+      default: wd2-impl-services1.workday.com
+      description: The Workday data center hostname
+    tenant:
+      default: tenant
+      description: The Workday tenant name
+- url: https://{baseUrl}/ccx/api/recruiting/v1/{tenant}
+  description: Workday Recruiting REST API server
+  variables:
+    baseUrl:
+      default: wd2-impl-services1.workday.com
+      description: The Workday data center hostname
+    tenant:
+      default: tenant
+      description: The Workday tenant name
 tags:
 - name: Reference Data
 paths:
@@ -45,6 +75,20 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
+      security:
+      - OAuth2:
+        - r:absenceManagement
+        - w:absenceManagement
+    servers:
+    - url: https://{baseUrl}/ccx/api/absenceManagement/v1/{tenant}
+      description: Workday Absence Management REST API server
+      variables:
+        baseUrl:
+          default: wd2-impl-services1.workday.com
+          description: The Workday data center hostname
+        tenant:
+          default: tenant
+          description: The Workday tenant name
   /values/timeOff/status:
     get:
       operationId: getTimeOffStatusValues
@@ -63,6 +107,20 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
+      security:
+      - OAuth2:
+        - r:absenceManagement
+        - w:absenceManagement
+    servers:
+    - url: https://{baseUrl}/ccx/api/absenceManagement/v1/{tenant}
+      description: Workday Absence Management REST API server
+      variables:
+        baseUrl:
+          default: wd2-impl-services1.workday.com
+          description: The Workday data center hostname
+        tenant:
+          default: tenant
+          description: The Workday tenant name
   /benefitPlanTypes:
     get:
       operationId: getBenefitPlanTypes
@@ -84,6 +142,18 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
+      security:
+      - OAuth2:
+        - r:benefits
+        - w:benefits
+    servers:
+    - url: https://{baseUrl}/ccx/api/benefits/v1/{tenant}
+      description: Workday Benefits Administration REST API server
+      variables:
+        baseUrl:
+          default: wd2-impl-services1.workday.com
+        tenant:
+          default: tenant
   /jobChangeReasons:
     get:
       operationId: getJobChangeReasons
@@ -105,6 +175,20 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
+      security:
+      - OAuth2:
+        - r:workers
+        - w:workers
+    servers:
+    - url: https://{baseUrl}/ccx/api/v1/{tenant}
+      description: Workday REST API server
+      variables:
+        baseUrl:
+          default: wd2-impl-services1.workday.com
+          description: The Workday data center hostname
+        tenant:
+          default: tenant
+          description: The Workday tenant name
   /currencies:
     get:
       operationId: getCurrencies
@@ -126,6 +210,20 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
+      security:
+      - OAuth2:
+        - r:workers
+        - w:workers
+    servers:
+    - url: https://{baseUrl}/ccx/api/v1/{tenant}
+      description: Workday REST API server
+      variables:
+        baseUrl:
+          default: wd2-impl-services1.workday.com
+          description: The Workday data center hostname
+        tenant:
+          default: tenant
+          description: The Workday tenant name
   /values/payrollInputsGroup/payComponents:
     get:
       operationId: getPayComponents
@@ -147,6 +245,20 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
+      security:
+      - OAuth2:
+        - r:payroll
+        - w:payroll
+    servers:
+    - url: https://{baseUrl}/ccx/api/payroll/v2/{tenant}
+      description: Workday Payroll REST API server
+      variables:
+        baseUrl:
+          default: wd2-impl-services1.workday.com
+          description: The Workday data center hostname
+        tenant:
+          default: tenant
+          description: The Workday tenant name
   /values/runCategories:
     get:
       operationId: getRunCategories
@@ -168,6 +280,20 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
+      security:
+      - OAuth2:
+        - r:payroll
+        - w:payroll
+    servers:
+    - url: https://{baseUrl}/ccx/api/payroll/v2/{tenant}
+      description: Workday Payroll REST API server
+      variables:
+        baseUrl:
+          default: wd2-impl-services1.workday.com
+          description: The Workday data center hostname
+        tenant:
+          default: tenant
+          description: The Workday tenant name
   /values/common/countries:
     get:
       operationId: getCountries
@@ -189,9 +315,52 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
+      security:
+      - OAuth2:
+        - r:recruiting
+        - w:recruiting
+    servers:
+    - url: https://{baseUrl}/ccx/api/recruiting/v1/{tenant}
+      description: Workday Recruiting REST API server
+      variables:
+        baseUrl:
+          default: wd2-impl-services1.workday.com
+          description: The Workday data center hostname
+        tenant:
+          default: tenant
+          description: The Workday tenant name
 components:
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    JobChangeReasonsResponse:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              error:
+                type: string
+              field:
+                type: string
+              message:
+                type: string
+    ReferenceValuesResponse:
       type: object
       properties:
         total:
@@ -199,20 +368,7 @@ components:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/ResourceReference_2'
-    ResourceReference_2:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The Workday ID
-        descriptor:
-          type: string
-          description: The display name
-        href:
-          type: string
-          format: uri
-          description: The API resource URL
+            $ref: '#/components/schemas/ResourceReference'
     ResourceReference:
       type: object
       properties:
@@ -223,11 +379,26 @@ components:
         href:
           type: string
           format: uri
-    ErrorResponse:
+    ErrorResponse_2:
       type: object
       properties:
         error:
           type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              error:
+                type: string
+              message:
+                type: string
+    ErrorResponse_3:
+      type: object
+      properties:
+        error:
+          type: string
+          description: The error code
         errors:
           type: array
           items:
@@ -255,7 +426,20 @@ components:
                 type: string
               currencyCode:
                 type: string
-    ReferenceValuesResponse:
+    ResourceReference_2:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The Workday ID
+        descriptor:
+          type: string
+          description: The display name
+        href:
+          type: string
+          format: uri
+          description: The API resource URL
+    JobChangeReasonsResponse:
       type: object
       properties:
         total:
@@ -263,12 +447,12 @@ components:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/ResourceReference'
+            $ref: '#/components/schemas/ResourceReference_2'
   parameters:
-    limit_3:
+    limit:
       name: limit
       in: query
-      description: The maximum number of objects in a single response (default 20, maximum 100)
+      description: Maximum number of objects in a single response (default 20, maximum 100)
       schema:
         type: integer
         default: 20
@@ -288,13 +472,21 @@ components:
         type: integer
         default: 20
         maximum: 100
-    offset_4:
+    offset_2:
       name: offset
       in: query
       description: The zero-based index of the first object in a response collection
       schema:
         type: integer
         default: 0
+    limit_3:
+      name: limit
+      in: query
+      description: The maximum number of objects in a single response (default 20, maximum 100)
+      schema:
+        type: integer
+        default: 20
+        maximum: 100
     offset_3:
       name: offset
       in: query
@@ -302,14 +494,6 @@ components:
       schema:
         type: integer
         default: 0
-    limit:
-      name: limit
-      in: query
-      description: Maximum number of objects in a single response (default 20, maximum 100)
-      schema:
-        type: integer
-        default: 20
-        maximum: 100
     limit_4:
       name: limit
       in: query
@@ -318,26 +502,13 @@ components:
         type: integer
         default: 20
         maximum: 100
-    offset_2:
+    offset_4:
       name: offset
       in: query
       description: The zero-based index of the first object in a response collection
       schema:
         type: integer
         default: 0
-  responses:
-    Forbidden:
-      description: Insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     OAuth2:
       type: oauth2
@@ -349,3 +520,9 @@ components:
           scopes:
             r:absenceManagement: Read absence data
             w:absenceManagement: Write absence data
+x-refined-from:
+- workday-integration-absence-management-openapi.yml
+- workday-integration-benefits-administration-openapi.yml
+- workday-integration-human-capital-management-openapi.yml
+- workday-integration-payroll-openapi.yml
+- workday-integration-recruiting-openapi.yml

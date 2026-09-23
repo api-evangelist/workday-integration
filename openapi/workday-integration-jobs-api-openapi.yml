@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Workday Integration Workday Absence Management Absence Types Jobs API
-  description: API for managing employee leave requests, absence types, and time-off balances. Retrieves eligible absence types for employees and supports validation of leave category selections.
-  version: v1
+  title: Workday Integration Workday Payroll Jobs API
+  description: API for payroll processing, tax management, and compensation. Supports payroll calculations, pay component configurations, tax rate lookups, and payroll detail retrieval across multiple country-specific payroll modules.
+  version: v2
   contact:
     name: Workday API Support
     email: api-support@workday.com
@@ -11,8 +11,8 @@ info:
     name: Proprietary
     url: https://www.workday.com/en-us/legal/site-terms.html
 servers:
-- url: https://{baseUrl}/ccx/api/absenceManagement/v1/{tenant}
-  description: Workday Absence Management REST API server
+- url: https://{baseUrl}/ccx/api/payroll/v2/{tenant}
+  description: Workday Payroll REST API server
   variables:
     baseUrl:
       default: wd2-impl-services1.workday.com
@@ -22,8 +22,8 @@ servers:
       description: The Workday tenant name
 security:
 - OAuth2:
-  - r:absenceManagement
-  - w:absenceManagement
+  - r:payroll
+  - w:payroll
 tags:
 - name: Jobs
 paths:
@@ -50,30 +50,34 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  parameters:
+    ID:
+      name: ID
+      in: path
+      required: true
+      description: The Workday ID of the resource
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    PayGroup:
-      type: object
-      properties:
-        id:
-          type: string
-        descriptor:
-          type: string
-        payGroupName:
-          type: string
-        frequency:
-          $ref: '#/components/schemas/ResourceReference'
-        country:
-          $ref: '#/components/schemas/ResourceReference'
-    ResourceReference:
-      type: object
-      properties:
-        id:
-          type: string
-        descriptor:
-          type: string
-        href:
-          type: string
-          format: uri
     ErrorResponse:
       type: object
       properties:
@@ -90,33 +94,29 @@ components:
                 type: string
               message:
                 type: string
-  responses:
-    Forbidden:
-      description: Insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    ID:
-      name: ID
-      in: path
-      required: true
-      description: The Workday ID of the resource
-      schema:
-        type: string
+    ResourceReference:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        href:
+          type: string
+          format: uri
+    PayGroup:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        payGroupName:
+          type: string
+        frequency:
+          $ref: '#/components/schemas/ResourceReference'
+        country:
+          $ref: '#/components/schemas/ResourceReference'
   securitySchemes:
     OAuth2:
       type: oauth2
@@ -126,5 +126,5 @@ components:
           tokenUrl: https://{baseUrl}/oauth2/{tenant}/token
           refreshUrl: https://{baseUrl}/oauth2/{tenant}/token
           scopes:
-            r:absenceManagement: Read absence data
-            w:absenceManagement: Write absence data
+            r:payroll: Read payroll data
+            w:payroll: Write payroll data

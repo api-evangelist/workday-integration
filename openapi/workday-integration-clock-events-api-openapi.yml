@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Workday Integration Workday Absence Management Absence Types Clock Events API
-  description: API for managing employee leave requests, absence types, and time-off balances. Retrieves eligible absence types for employees and supports validation of leave category selections.
+  title: Workday Integration Workday Time Tracking Clock Events API
+  description: API for time entry, attendance, absence management, and scheduling. Supports clock events, time block management, time review events, and validation of worker time records.
   version: v1
   contact:
     name: Workday API Support
@@ -11,8 +11,8 @@ info:
     name: Proprietary
     url: https://www.workday.com/en-us/legal/site-terms.html
 servers:
-- url: https://{baseUrl}/ccx/api/absenceManagement/v1/{tenant}
-  description: Workday Absence Management REST API server
+- url: https://{baseUrl}/ccx/api/timeTracking/v1/{tenant}
+  description: Workday Time Tracking REST API server
   variables:
     baseUrl:
       default: wd2-impl-services1.workday.com
@@ -22,8 +22,8 @@ servers:
       description: The Workday tenant name
 security:
 - OAuth2:
-  - r:absenceManagement
-  - w:absenceManagement
+  - r:timeTracking
+  - w:timeTracking
 tags:
 - name: Clock Events
 paths:
@@ -54,7 +54,42 @@ paths:
         '403':
           $ref: '#/components/responses/Forbidden'
 components:
+  responses:
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              error:
+                type: string
+              field:
+                type: string
+              message:
+                type: string
     TimeClockEvent:
       type: object
       properties:
@@ -103,41 +138,6 @@ components:
         href:
           type: string
           format: uri
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              error:
-                type: string
-              field:
-                type: string
-              message:
-                type: string
-  responses:
-    Forbidden:
-      description: Insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     OAuth2:
       type: oauth2
@@ -147,5 +147,5 @@ components:
           tokenUrl: https://{baseUrl}/oauth2/{tenant}/token
           refreshUrl: https://{baseUrl}/oauth2/{tenant}/token
           scopes:
-            r:absenceManagement: Read absence data
-            w:absenceManagement: Write absence data
+            r:timeTracking: Read time tracking data
+            w:timeTracking: Write time tracking data

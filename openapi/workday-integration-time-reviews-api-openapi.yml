@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Workday Integration Workday Absence Management Absence Types Time Reviews API
-  description: API for managing employee leave requests, absence types, and time-off balances. Retrieves eligible absence types for employees and supports validation of leave category selections.
+  title: Workday Integration Workday Time Tracking Time Reviews API
+  description: API for time entry, attendance, absence management, and scheduling. Supports clock events, time block management, time review events, and validation of worker time records.
   version: v1
   contact:
     name: Workday API Support
@@ -11,8 +11,8 @@ info:
     name: Proprietary
     url: https://www.workday.com/en-us/legal/site-terms.html
 servers:
-- url: https://{baseUrl}/ccx/api/absenceManagement/v1/{tenant}
-  description: Workday Absence Management REST API server
+- url: https://{baseUrl}/ccx/api/timeTracking/v1/{tenant}
+  description: Workday Time Tracking REST API server
   variables:
     baseUrl:
       default: wd2-impl-services1.workday.com
@@ -22,8 +22,8 @@ servers:
       description: The Workday tenant name
 security:
 - OAuth2:
-  - r:absenceManagement
-  - w:absenceManagement
+  - r:timeTracking
+  - w:timeTracking
 tags:
 - name: Time Reviews
 paths:
@@ -56,45 +56,15 @@ paths:
         '403':
           $ref: '#/components/responses/Forbidden'
 components:
+  parameters:
+    ID:
+      name: ID
+      in: path
+      required: true
+      description: The Workday ID of the resource
+      schema:
+        type: string
   schemas:
-    TimeReviewEventRequest:
-      type: object
-      required:
-      - reviewPeriodStartDate
-      - reviewPeriodEndDate
-      properties:
-        reviewPeriodStartDate:
-          type: string
-          format: date
-        reviewPeriodEndDate:
-          type: string
-          format: date
-    ResourceReference:
-      type: object
-      properties:
-        id:
-          type: string
-        descriptor:
-          type: string
-        href:
-          type: string
-          format: uri
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              error:
-                type: string
-              field:
-                type: string
-              message:
-                type: string
     TimeReviewEvent:
       type: object
       properties:
@@ -112,9 +82,47 @@ components:
           format: date
         status:
           type: string
+    ResourceReference:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        href:
+          type: string
+          format: uri
+    TimeReviewEventRequest:
+      type: object
+      required:
+      - reviewPeriodStartDate
+      - reviewPeriodEndDate
+      properties:
+        reviewPeriodStartDate:
+          type: string
+          format: date
+        reviewPeriodEndDate:
+          type: string
+          format: date
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              error:
+                type: string
+              field:
+                type: string
+              message:
+                type: string
   responses:
-    Forbidden:
-      description: Insufficient permissions
+    BadRequest:
+      description: Invalid request parameters
       content:
         application/json:
           schema:
@@ -125,20 +133,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Invalid request parameters
+    Forbidden:
+      description: Insufficient permissions
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    ID:
-      name: ID
-      in: path
-      required: true
-      description: The Workday ID of the resource
-      schema:
-        type: string
   securitySchemes:
     OAuth2:
       type: oauth2
@@ -148,5 +148,5 @@ components:
           tokenUrl: https://{baseUrl}/oauth2/{tenant}/token
           refreshUrl: https://{baseUrl}/oauth2/{tenant}/token
           scopes:
-            r:absenceManagement: Read absence data
-            w:absenceManagement: Write absence data
+            r:timeTracking: Read time tracking data
+            w:timeTracking: Write time tracking data

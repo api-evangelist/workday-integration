@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Workday Integration Workday Absence Management Absence Types Worktags API
-  description: API for managing employee leave requests, absence types, and time-off balances. Retrieves eligible absence types for employees and supports validation of leave category selections.
+  title: Workday Integration Workday Financial Management Worktags…
+  description: API for financial accounting, expense management, revenue management, and financial reporting. Enables programmatic access to general ledger, accounts payable, accounts receivable, and budgeting functions.
   version: v1
   contact:
     name: Workday API Support
@@ -11,8 +11,8 @@ info:
     name: Proprietary
     url: https://www.workday.com/en-us/legal/site-terms.html
 servers:
-- url: https://{baseUrl}/ccx/api/absenceManagement/v1/{tenant}
-  description: Workday Absence Management REST API server
+- url: https://{baseUrl}/ccx/api/v1/{tenant}
+  description: Workday REST API server
   variables:
     baseUrl:
       default: wd2-impl-services1.workday.com
@@ -22,8 +22,8 @@ servers:
       description: The Workday tenant name
 security:
 - OAuth2:
-  - r:absenceManagement
-  - w:absenceManagement
+  - r:financials
+  - w:financials
 tags:
 - name: Worktags
 paths:
@@ -54,50 +54,14 @@ paths:
         '403':
           $ref: '#/components/responses/Forbidden'
 components:
-  responses:
-    Forbidden:
-      description: Insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    ResourceReference:
+    WorktagValidationRequest:
       type: object
       properties:
-        id:
-          type: string
-        descriptor:
-          type: string
-        href:
-          type: string
-          format: uri
-    WorktagValidationResponse:
-      type: object
-      properties:
-        valid:
-          type: boolean
-        errors:
+        worktags:
           type: array
           items:
-            type: object
-            properties:
-              message:
-                type: string
-              worktag:
-                $ref: '#/components/schemas/ResourceReference'
+            $ref: '#/components/schemas/ResourceReference'
     ErrorResponse:
       type: object
       properties:
@@ -114,13 +78,49 @@ components:
                 type: string
               message:
                 type: string
-    WorktagValidationRequest:
+    WorktagValidationResponse:
       type: object
       properties:
-        worktags:
+        valid:
+          type: boolean
+        errors:
           type: array
           items:
-            $ref: '#/components/schemas/ResourceReference'
+            type: object
+            properties:
+              message:
+                type: string
+              worktag:
+                $ref: '#/components/schemas/ResourceReference'
+    ResourceReference:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        href:
+          type: string
+          format: uri
+  responses:
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     OAuth2:
       type: oauth2
@@ -130,5 +130,5 @@ components:
           tokenUrl: https://{baseUrl}/oauth2/{tenant}/token
           refreshUrl: https://{baseUrl}/oauth2/{tenant}/token
           scopes:
-            r:absenceManagement: Read absence data
-            w:absenceManagement: Write absence data
+            r:financials: Read financial data
+            w:financials: Write financial data

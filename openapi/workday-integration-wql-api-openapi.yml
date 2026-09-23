@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Workday Integration Workday Absence Management Absence Types WQL API
-  description: API for managing employee leave requests, absence types, and time-off balances. Retrieves eligible absence types for employees and supports validation of leave category selections.
-  version: v1
+  title: Workday Integration Workday Prism Analytics WQL API
+  description: REST API for working with Workday Prism Analytics tables, data change tasks, and datasets. Enables programmatic creation of Prism Analytics tables and datasets and modification of data within them.
+  version: v3
   contact:
     name: Workday API Support
     email: api-support@workday.com
@@ -11,19 +11,17 @@ info:
     name: Proprietary
     url: https://www.workday.com/en-us/legal/site-terms.html
 servers:
-- url: https://{baseUrl}/ccx/api/absenceManagement/v1/{tenant}
-  description: Workday Absence Management REST API server
+- url: https://{baseUrl}/ccx/api/prismAnalytics/v3/{tenant}
+  description: Workday Prism Analytics REST API server
   variables:
     baseUrl:
       default: wd2-impl-services1.workday.com
-      description: The Workday data center hostname
     tenant:
       default: tenant
-      description: The Workday tenant name
 security:
 - OAuth2:
-  - r:absenceManagement
-  - w:absenceManagement
+  - r:prismAnalytics
+  - w:prismAnalytics
 tags:
 - name: WQL
 paths:
@@ -55,14 +53,6 @@ paths:
           $ref: '#/components/responses/Forbidden'
 components:
   schemas:
-    WQLRequest:
-      type: object
-      required:
-      - query
-      properties:
-        query:
-          type: string
-          description: The WQL query string to execute
     WQLResponse:
       type: object
       properties:
@@ -78,9 +68,17 @@ components:
       properties:
         error:
           type: string
+    WQLRequest:
+      type: object
+      required:
+      - query
+      properties:
+        query:
+          type: string
+          description: The WQL query string to execute
   responses:
-    Forbidden:
-      description: Insufficient permissions
+    BadRequest:
+      description: Invalid request parameters
       content:
         application/json:
           schema:
@@ -91,8 +89,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Invalid request parameters
+    Forbidden:
+      description: Insufficient permissions
       content:
         application/json:
           schema:
@@ -104,7 +102,6 @@ components:
         authorizationCode:
           authorizationUrl: https://{baseUrl}/authorize
           tokenUrl: https://{baseUrl}/oauth2/{tenant}/token
-          refreshUrl: https://{baseUrl}/oauth2/{tenant}/token
           scopes:
-            r:absenceManagement: Read absence data
-            w:absenceManagement: Write absence data
+            r:prismAnalytics: Read Prism Analytics data
+            w:prismAnalytics: Write Prism Analytics data
