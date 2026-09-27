@@ -93,27 +93,13 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  parameters:
-    ID:
-      name: ID
-      in: path
-      required: true
-      schema:
-        type: string
-    limit:
-      name: limit
-      in: query
-      schema:
-        type: integer
-        default: 20
-        maximum: 100
-    offset:
-      name: offset
-      in: query
-      schema:
-        type: integer
-        default: 0
   responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Authentication required
       content:
@@ -126,12 +112,26 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 20
+        maximum: 100
+    ID:
+      name: ID
+      in: path
+      required: true
+      schema:
+        type: string
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
   schemas:
     ReviewEventsResponse:
       type: object
@@ -147,16 +147,6 @@ components:
       properties:
         error:
           type: string
-    ResourceReference:
-      type: object
-      properties:
-        id:
-          type: string
-        descriptor:
-          type: string
-        href:
-          type: string
-          format: uri
     ReviewEvent:
       type: object
       properties:
@@ -193,6 +183,16 @@ components:
                 $ref: '#/components/schemas/ResourceReference'
               percentage:
                 type: number
+    ResourceReference:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        href:
+          type: string
+          format: uri
   securitySchemes:
     OAuth2:
       type: oauth2

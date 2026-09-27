@@ -80,16 +80,6 @@ components:
       properties:
         error:
           type: string
-    ResourceReference:
-      type: object
-      properties:
-        id:
-          type: string
-        descriptor:
-          type: string
-        href:
-          type: string
-          format: uri
     TalentPoolsResponse:
       type: object
       properties:
@@ -108,6 +98,16 @@ components:
                 type: string
               owner:
                 $ref: '#/components/schemas/ResourceReference'
+    ResourceReference:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        href:
+          type: string
+          format: uri
   securitySchemes:
     OAuth2:
       type: oauth2

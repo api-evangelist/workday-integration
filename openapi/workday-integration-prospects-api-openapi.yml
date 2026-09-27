@@ -151,7 +151,105 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              error:
+                type: string
+              field:
+                type: string
+              message:
+                type: string
+    ExperienceRequest:
+      type: object
+      required:
+      - company
+      - title
+      - startDate
+      properties:
+        company:
+          type: string
+        title:
+          type: string
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+        description:
+          type: string
+    AttachmentsResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              descriptor:
+                type: string
+              fileName:
+                type: string
+              contentType:
+                type: string
+              uploadDate:
+                type: string
+                format: date-time
+    Experience:
+      type: object
+      properties:
+        id:
+          type: string
+        company:
+          type: string
+        title:
+          type: string
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+        description:
+          type: string
     SkillsResponse:
       type: object
       properties:
@@ -201,87 +299,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Experience'
-    ExperienceRequest:
-      type: object
-      required:
-      - company
-      - title
-      - startDate
-      properties:
-        company:
-          type: string
-        title:
-          type: string
-        startDate:
-          type: string
-          format: date
-        endDate:
-          type: string
-          format: date
-        description:
-          type: string
-    AttachmentsResponse:
-      type: object
-      properties:
-        total:
-          type: integer
-        data:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-              descriptor:
-                type: string
-              fileName:
-                type: string
-              contentType:
-                type: string
-              uploadDate:
-                type: string
-                format: date-time
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              error:
-                type: string
-              field:
-                type: string
-              message:
-                type: string
-    Experience:
-      type: object
-      properties:
-        id:
-          type: string
-        company:
-          type: string
-        title:
-          type: string
-        startDate:
-          type: string
-          format: date
-        endDate:
-          type: string
-          format: date
-        description:
-          type: string
   parameters:
-    ID:
-      name: ID
-      in: path
-      required: true
-      description: The Workday ID of the resource
-      schema:
-        type: string
     limit:
       name: limit
       in: query
@@ -290,6 +308,13 @@ components:
         type: integer
         default: 20
         maximum: 100
+    ID:
+      name: ID
+      in: path
+      required: true
+      description: The Workday ID of the resource
+      schema:
+        type: string
     offset:
       name: offset
       in: query
@@ -297,31 +322,6 @@ components:
       schema:
         type: integer
         default: 0
-  responses:
-    BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     OAuth2:
       type: oauth2

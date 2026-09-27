@@ -74,18 +74,36 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   parameters:
     search:
       name: search
       in: query
       description: Search string used to filter results
-      schema:
-        type: string
-    ID:
-      name: ID
-      in: path
-      required: true
-      description: The Workday ID of the resource
       schema:
         type: string
     limit:
@@ -96,6 +114,13 @@ components:
         type: integer
         default: 20
         maximum: 100
+    ID:
+      name: ID
+      in: path
+      required: true
+      description: The Workday ID of the resource
+      schema:
+        type: string
     offset:
       name: offset
       in: query
@@ -104,6 +129,22 @@ components:
         type: integer
         default: 0
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              error:
+                type: string
+              field:
+                type: string
+              message:
+                type: string
     Supplier:
       type: object
       properties:
@@ -121,22 +162,6 @@ components:
           $ref: '#/components/schemas/ResourceReference'
         currency:
           $ref: '#/components/schemas/ResourceReference'
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              error:
-                type: string
-              field:
-                type: string
-              message:
-                type: string
     SuppliersResponse:
       type: object
       properties:
@@ -156,31 +181,6 @@ components:
         href:
           type: string
           format: uri
-  responses:
-    BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     OAuth2:
       type: oauth2

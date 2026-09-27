@@ -49,13 +49,26 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   parameters:
-    ID:
-      name: ID
-      in: path
-      required: true
-      schema:
-        type: string
     limit:
       name: limit
       in: query
@@ -69,7 +82,28 @@ components:
       schema:
         type: integer
         default: 0
+    ID:
+      name: ID
+      in: path
+      required: true
+      schema:
+        type: string
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+    ResourceReference:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        href:
+          type: string
+          format: uri
     AssignmentsResponse:
       type: object
       properties:
@@ -92,40 +126,6 @@ components:
                 format: date
               status:
                 type: string
-    ResourceReference:
-      type: object
-      properties:
-        id:
-          type: string
-        descriptor:
-          type: string
-        href:
-          type: string
-          format: uri
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-  responses:
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     OAuth2:
       type: oauth2

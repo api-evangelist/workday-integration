@@ -94,7 +94,64 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    DataChangeTasksResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataChangeTask'
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+    DataChangeTaskRequest:
+      type: object
+      required:
+      - targetTable
+      - operation
+      properties:
+        targetTable:
+          $ref: '#/components/schemas/ResourceReference'
+        operation:
+          type: string
+          enum:
+          - TruncateAndInsert
+          - Insert
+          - Update
+          - Upsert
+          - Delete
+        fileContainer:
+          $ref: '#/components/schemas/ResourceReference'
     DataChangeTask:
       type: object
       properties:
@@ -131,45 +188,7 @@ components:
         href:
           type: string
           format: uri
-    DataChangeTaskRequest:
-      type: object
-      required:
-      - targetTable
-      - operation
-      properties:
-        targetTable:
-          $ref: '#/components/schemas/ResourceReference'
-        operation:
-          type: string
-          enum:
-          - TruncateAndInsert
-          - Insert
-          - Update
-          - Upsert
-          - Delete
-        fileContainer:
-          $ref: '#/components/schemas/ResourceReference'
-    DataChangeTasksResponse:
-      type: object
-      properties:
-        total:
-          type: integer
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataChangeTask'
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
   parameters:
-    ID:
-      name: ID
-      in: path
-      required: true
-      schema:
-        type: string
     limit:
       name: limit
       in: query
@@ -177,37 +196,18 @@ components:
         type: integer
         default: 20
         maximum: 100
+    ID:
+      name: ID
+      in: path
+      required: true
+      schema:
+        type: string
     offset:
       name: offset
       in: query
       schema:
         type: integer
         default: 0
-  responses:
-    BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     OAuth2:
       type: oauth2

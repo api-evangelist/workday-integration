@@ -96,6 +96,19 @@ components:
                 type: string
               message:
                 type: string
+    ResourceReference:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The Workday ID
+        descriptor:
+          type: string
+          description: The display name
+        href:
+          type: string
+          format: uri
+          description: The API resource URL
     AuditLogsResponse:
       type: object
       properties:
@@ -117,19 +130,6 @@ components:
                 type: string
               target:
                 $ref: '#/components/schemas/ResourceReference'
-    ResourceReference:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The Workday ID
-        descriptor:
-          type: string
-          description: The display name
-        href:
-          type: string
-          format: uri
-          description: The API resource URL
   securitySchemes:
     OAuth2:
       type: oauth2

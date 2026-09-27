@@ -68,13 +68,26 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   parameters:
-    ID:
-      name: ID
-      in: path
-      required: true
-      schema:
-        type: string
     limit:
       name: limit
       in: query
@@ -88,16 +101,18 @@ components:
       schema:
         type: integer
         default: 0
+    ID:
+      name: ID
+      in: path
+      required: true
+      schema:
+        type: string
   schemas:
-    FeedbackBadgesResponse:
+    ErrorResponse:
       type: object
       properties:
-        total:
-          type: integer
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/FeedbackBadge'
+        error:
+          type: string
     FeedbackBadge:
       type: object
       properties:
@@ -111,30 +126,15 @@ components:
           type: string
         isActive:
           type: boolean
-    ErrorResponse:
+    FeedbackBadgesResponse:
       type: object
       properties:
-        error:
-          type: string
-  responses:
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/FeedbackBadge'
   securitySchemes:
     OAuth2:
       type: oauth2

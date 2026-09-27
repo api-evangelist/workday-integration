@@ -99,36 +99,48 @@ paths:
         '403':
           $ref: '#/components/responses/Forbidden'
 components:
-  parameters:
-    search:
-      name: search
-      in: query
-      description: Search string used to filter results
-      schema:
-        type: string
-    ID:
-      name: ID
-      in: path
-      required: true
-      description: The Workday ID of the resource
-      schema:
-        type: string
-    limit:
-      name: limit
-      in: query
-      description: The maximum number of objects in a single response (default 20, maximum 100)
-      schema:
-        type: integer
-        default: 20
-        maximum: 100
-    offset:
-      name: offset
-      in: query
-      description: The zero-based index of the first object in a response collection
-      schema:
-        type: integer
-        default: 0
   schemas:
+    IntegrationSystem:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        integrationSystemName:
+          type: string
+        template:
+          $ref: '#/components/schemas/ResourceReference'
+        isActive:
+          type: boolean
+        lastRunDateTime:
+          type: string
+          format: date-time
+    IntegrationSystemsResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/IntegrationSystem'
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              error:
+                type: string
+              field:
+                type: string
+              message:
+                type: string
     IntegrationEvent:
       type: object
       properties:
@@ -155,57 +167,6 @@ components:
           type: integer
         recordsFailed:
           type: integer
-    IntegrationSystemsResponse:
-      type: object
-      properties:
-        total:
-          type: integer
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/IntegrationSystem'
-    ResourceReference:
-      type: object
-      properties:
-        id:
-          type: string
-        descriptor:
-          type: string
-        href:
-          type: string
-          format: uri
-    IntegrationSystem:
-      type: object
-      properties:
-        id:
-          type: string
-        descriptor:
-          type: string
-        integrationSystemName:
-          type: string
-        template:
-          $ref: '#/components/schemas/ResourceReference'
-        isActive:
-          type: boolean
-        lastRunDateTime:
-          type: string
-          format: date-time
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              error:
-                type: string
-              field:
-                type: string
-              message:
-                type: string
     IntegrationLaunchRequest:
       type: object
       properties:
@@ -218,15 +179,19 @@ components:
                 type: string
               value:
                 type: string
+    ResourceReference:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        href:
+          type: string
+          format: uri
   responses:
-    BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Insufficient permissions
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:
@@ -237,12 +202,47 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found
+    Forbidden:
+      description: Insufficient permissions
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    search:
+      name: search
+      in: query
+      description: Search string used to filter results
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      description: The maximum number of objects in a single response (default 20, maximum 100)
+      schema:
+        type: integer
+        default: 20
+        maximum: 100
+    ID:
+      name: ID
+      in: path
+      required: true
+      description: The Workday ID of the resource
+      schema:
+        type: string
+    offset:
+      name: offset
+      in: query
+      description: The zero-based index of the first object in a response collection
+      schema:
+        type: integer
+        default: 0
   securitySchemes:
     OAuth2:
       type: oauth2

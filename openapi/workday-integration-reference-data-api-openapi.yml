@@ -344,6 +344,15 @@ components:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    ReferenceValuesResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceReference'
     ErrorResponse:
       type: object
       properties:
@@ -360,15 +369,6 @@ components:
                 type: string
               message:
                 type: string
-    ReferenceValuesResponse:
-      type: object
-      properties:
-        total:
-          type: integer
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ResourceReference'
     ResourceReference:
       type: object
       properties:
@@ -410,6 +410,15 @@ components:
                 type: string
               message:
                 type: string
+    JobChangeReasonsResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceReference_2'
     CurrenciesResponse:
       type: object
       properties:
@@ -439,15 +448,6 @@ components:
           type: string
           format: uri
           description: The API resource URL
-    JobChangeReasonsResponse:
-      type: object
-      properties:
-        total:
-          type: integer
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ResourceReference_2'
   parameters:
     limit:
       name: limit

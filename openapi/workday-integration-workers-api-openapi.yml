@@ -445,68 +445,18 @@ paths:
           description: The Workday tenant name
 components:
   schemas:
-    SupervisoryOrganizationsResponse:
+    JobChangeRequest:
       type: object
+      required:
+      - effectiveDate
       properties:
-        total:
-          type: integer
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/SupervisoryOrganization'
-    HistoryResponse:
-      type: object
-      properties:
-        total:
-          type: integer
-        data:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-              descriptor:
-                type: string
-              effectiveDate:
-                type: string
-                format: date
-              eventType:
-                $ref: '#/components/schemas/ResourceReference'
-    PaySlipsResponse:
-      type: object
-      properties:
-        total:
-          type: integer
-        data:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-              descriptor:
-                type: string
-              payPeriodStartDate:
-                type: string
-                format: date
-              payPeriodEndDate:
-                type: string
-                format: date
-              grossPay:
-                type: number
-              netPay:
-                type: number
-    WorkersResponse:
-      type: object
-      properties:
-        total:
-          type: integer
-          description: Total number of results
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/WorkerSummary'
+        effectiveDate:
+          type: string
+          format: date
+        reason:
+          $ref: '#/components/schemas/ResourceReference'
+        proposedPosition:
+          $ref: '#/components/schemas/ResourceReference'
     ErrorResponse:
       type: object
       properties:
@@ -524,114 +474,6 @@ components:
                 type: string
               message:
                 type: string
-    WorkerSummary:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The Workday ID of the worker
-        descriptor:
-          type: string
-          description: The display name of the worker
-        href:
-          type: string
-          format: uri
-          description: The API resource URL
-    SupervisoryOrganization:
-      type: object
-      properties:
-        id:
-          type: string
-        descriptor:
-          type: string
-        name:
-          type: string
-        manager:
-          $ref: '#/components/schemas/ResourceReference'
-        superior:
-          $ref: '#/components/schemas/ResourceReference'
-        staffingModel:
-          type: string
-    BusinessTitleChangesResponse:
-      type: object
-      properties:
-        total:
-          type: integer
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/BusinessTitleChange'
-    BusinessTitleChangeRequest:
-      type: object
-      required:
-      - proposedBusinessTitle
-      - effectiveDate
-      properties:
-        proposedBusinessTitle:
-          type: string
-          description: The new business title
-        effectiveDate:
-          type: string
-          format: date
-          description: The effective date of the change
-    BusinessTitleChange:
-      type: object
-      properties:
-        id:
-          type: string
-        descriptor:
-          type: string
-        proposedBusinessTitle:
-          type: string
-        effectiveDate:
-          type: string
-          format: date
-    JobChangeRequest:
-      type: object
-      required:
-      - effectiveDate
-      properties:
-        effectiveDate:
-          type: string
-          format: date
-        reason:
-          $ref: '#/components/schemas/ResourceReference'
-        proposedPosition:
-          $ref: '#/components/schemas/ResourceReference'
-    ResourceReference:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The Workday ID
-        descriptor:
-          type: string
-          description: The display name
-        href:
-          type: string
-          format: uri
-          description: The API resource URL
-    JobChange:
-      type: object
-      properties:
-        id:
-          type: string
-        descriptor:
-          type: string
-        effectiveDate:
-          type: string
-          format: date
-    Organization:
-      type: object
-      properties:
-        id:
-          type: string
-        descriptor:
-          type: string
-        organizationType:
-          $ref: '#/components/schemas/ResourceReference'
-        isActive:
-          type: boolean
     Worker:
       type: object
       properties:
@@ -666,6 +508,164 @@ components:
           description: The date the worker was hired
         workerType:
           $ref: '#/components/schemas/ResourceReference'
+    HistoryResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              descriptor:
+                type: string
+              effectiveDate:
+                type: string
+                format: date
+              eventType:
+                $ref: '#/components/schemas/ResourceReference'
+    ResourceReference:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The Workday ID
+        descriptor:
+          type: string
+          description: The display name
+        href:
+          type: string
+          format: uri
+          description: The API resource URL
+    PaySlipsResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              descriptor:
+                type: string
+              payPeriodStartDate:
+                type: string
+                format: date
+              payPeriodEndDate:
+                type: string
+                format: date
+              grossPay:
+                type: number
+              netPay:
+                type: number
+    JobChange:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        effectiveDate:
+          type: string
+          format: date
+    Organization:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        organizationType:
+          $ref: '#/components/schemas/ResourceReference'
+        isActive:
+          type: boolean
+    WorkersResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of results
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkerSummary'
+    SupervisoryOrganizationsResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/SupervisoryOrganization'
+    BusinessTitleChange:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        proposedBusinessTitle:
+          type: string
+        effectiveDate:
+          type: string
+          format: date
+    WorkerSummary:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The Workday ID of the worker
+        descriptor:
+          type: string
+          description: The display name of the worker
+        href:
+          type: string
+          format: uri
+          description: The API resource URL
+    BusinessTitleChangeRequest:
+      type: object
+      required:
+      - proposedBusinessTitle
+      - effectiveDate
+      properties:
+        proposedBusinessTitle:
+          type: string
+          description: The new business title
+        effectiveDate:
+          type: string
+          format: date
+          description: The effective date of the change
+    SupervisoryOrganization:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        name:
+          type: string
+        manager:
+          $ref: '#/components/schemas/ResourceReference'
+        superior:
+          $ref: '#/components/schemas/ResourceReference'
+        staffingModel:
+          type: string
+    BusinessTitleChangesResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/BusinessTitleChange'
     OrganizationsResponse:
       type: object
       properties:
@@ -675,16 +675,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Organization'
-    ResourceReference_2:
+    ErrorResponse_2:
       type: object
       properties:
-        id:
+        error:
           type: string
-        descriptor:
-          type: string
-        href:
-          type: string
-          format: uri
     Worker_2:
       type: object
       properties:
@@ -717,64 +712,16 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Worker_2'
-    ErrorResponse_2:
+    ResourceReference_2:
       type: object
       properties:
-        error:
+        id:
           type: string
-  parameters:
-    ID:
-      name: ID
-      in: path
-      required: true
-      description: The Workday ID of the resource
-      schema:
-        type: string
-    search:
-      name: search
-      in: query
-      description: Search string used to filter results
-      schema:
-        type: string
-    offset:
-      name: offset
-      in: query
-      description: The zero-based index of the first object in a response collection
-      schema:
-        type: integer
-        default: 0
-    limit:
-      name: limit
-      in: query
-      description: The maximum number of objects in a single response (default 20, maximum 100)
-      schema:
-        type: integer
-        default: 20
-        maximum: 100
-    search_2:
-      name: search
-      in: query
-      schema:
-        type: string
-    ID_2:
-      name: ID
-      in: path
-      required: true
-      schema:
-        type: string
-    limit_2:
-      name: limit
-      in: query
-      schema:
-        type: integer
-        default: 20
-        maximum: 100
-    offset_2:
-      name: offset
-      in: query
-      schema:
-        type: integer
-        default: 0
+        descriptor:
+          type: string
+        href:
+          type: string
+          format: uri
   responses:
     Forbidden:
       description: Insufficient permissions
@@ -788,18 +735,71 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Authentication required
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    limit:
+      name: limit
+      in: query
+      description: The maximum number of objects in a single response (default 20, maximum 100)
+      schema:
+        type: integer
+        default: 20
+        maximum: 100
+    offset:
+      name: offset
+      in: query
+      description: The zero-based index of the first object in a response collection
+      schema:
+        type: integer
+        default: 0
+    search:
+      name: search
+      in: query
+      description: Search string used to filter results
+      schema:
+        type: string
+    ID:
+      name: ID
+      in: path
+      required: true
+      description: The Workday ID of the resource
+      schema:
+        type: string
+    search_2:
+      name: search
+      in: query
+      schema:
+        type: string
+    limit_2:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 20
+        maximum: 100
+    ID_2:
+      name: ID
+      in: path
+      required: true
+      schema:
+        type: string
+    offset_2:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
   securitySchemes:
     OAuth2:
       type: oauth2

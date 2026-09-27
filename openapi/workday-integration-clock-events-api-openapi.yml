@@ -55,12 +55,6 @@ paths:
           $ref: '#/components/responses/Forbidden'
 components:
   responses:
-    BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Authentication required
       content:
@@ -69,6 +63,12 @@ components:
             $ref: '#/components/schemas/ErrorResponse'
     Forbidden:
       description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid request parameters
       content:
         application/json:
           schema:
@@ -90,25 +90,6 @@ components:
                 type: string
               message:
                 type: string
-    TimeClockEvent:
-      type: object
-      properties:
-        id:
-          type: string
-        descriptor:
-          type: string
-        worker:
-          $ref: '#/components/schemas/ResourceReference'
-        eventType:
-          type: string
-          enum:
-          - Clock_In
-          - Clock_Out
-        eventDateTime:
-          type: string
-          format: date-time
-        timeZone:
-          type: string
     TimeClockEventRequest:
       type: object
       required:
@@ -138,6 +119,25 @@ components:
         href:
           type: string
           format: uri
+    TimeClockEvent:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        worker:
+          $ref: '#/components/schemas/ResourceReference'
+        eventType:
+          type: string
+          enum:
+          - Clock_In
+          - Clock_Out
+        eventDateTime:
+          type: string
+          format: date-time
+        timeZone:
+          type: string
   securitySchemes:
     OAuth2:
       type: oauth2

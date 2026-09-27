@@ -70,16 +70,29 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   parameters:
     search:
       name: search
       in: query
-      schema:
-        type: string
-    ID:
-      name: ID
-      in: path
-      required: true
       schema:
         type: string
     limit:
@@ -89,6 +102,12 @@ components:
         type: integer
         default: 20
         maximum: 100
+    ID:
+      name: ID
+      in: path
+      required: true
+      schema:
+        type: string
     offset:
       name: offset
       in: query
@@ -96,16 +115,20 @@ components:
         type: integer
         default: 0
   schemas:
-    ResourceReference:
+    ErrorResponse:
       type: object
       properties:
-        id:
+        error:
           type: string
-        descriptor:
-          type: string
-        href:
-          type: string
-          format: uri
+    JobProfilesResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobProfile'
     JobProfile:
       type: object
       properties:
@@ -121,39 +144,16 @@ components:
           $ref: '#/components/schemas/ResourceReference'
         isActive:
           type: boolean
-    JobProfilesResponse:
+    ResourceReference:
       type: object
       properties:
-        total:
-          type: integer
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/JobProfile'
-    ErrorResponse:
-      type: object
-      properties:
-        error:
+        id:
           type: string
-  responses:
-    Forbidden:
-      description: Insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+        descriptor:
+          type: string
+        href:
+          type: string
+          format: uri
   securitySchemes:
     OAuth2:
       type: oauth2

@@ -63,11 +63,6 @@ components:
           items:
             type: object
             additionalProperties: true
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
     WQLRequest:
       type: object
       required:
@@ -76,13 +71,12 @@ components:
         query:
           type: string
           description: The WQL query string to execute
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
   responses:
-    BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Authentication required
       content:
@@ -91,6 +85,12 @@ components:
             $ref: '#/components/schemas/ErrorResponse'
     Forbidden:
       description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid request parameters
       content:
         application/json:
           schema:
