@@ -51,14 +51,14 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   responses:
-    NotFound:
-      description: Resource not found
+    Unauthorized:
+      description: Authentication required
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication required
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:
@@ -69,29 +69,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    limit:
-      name: limit
-      in: query
-      description: Maximum number of objects in a single response (default 20, maximum 100)
-      schema:
-        type: integer
-        default: 20
-        maximum: 100
-    ID:
-      name: ID
-      in: path
-      required: true
-      description: The Workday ID of the resource
-      schema:
-        type: string
-    offset:
-      name: offset
-      in: query
-      description: Zero-based index of the first object in a response collection
-      schema:
-        type: integer
-        default: 0
   schemas:
     ErrorResponse:
       type: object
@@ -107,6 +84,16 @@ components:
                 type: string
               message:
                 type: string
+    ResourceReference:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        href:
+          type: string
+          format: uri
     BenefitElectionsResponse:
       type: object
       properties:
@@ -129,16 +116,29 @@ components:
                 type: number
               employerCost:
                 type: number
-    ResourceReference:
-      type: object
-      properties:
-        id:
-          type: string
-        descriptor:
-          type: string
-        href:
-          type: string
-          format: uri
+  parameters:
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of objects in a single response (default 20, maximum 100)
+      schema:
+        type: integer
+        default: 20
+        maximum: 100
+    offset:
+      name: offset
+      in: query
+      description: Zero-based index of the first object in a response collection
+      schema:
+        type: integer
+        default: 0
+    ID:
+      name: ID
+      in: path
+      required: true
+      description: The Workday ID of the resource
+      schema:
+        type: string
   securitySchemes:
     OAuth2:
       type: oauth2

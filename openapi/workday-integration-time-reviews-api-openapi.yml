@@ -63,19 +63,31 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     BadRequest:
       description: Invalid request parameters
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    TimeReviewEventRequest:
+      type: object
+      required:
+      - reviewPeriodStartDate
+      - reviewPeriodEndDate
+      properties:
+        reviewPeriodStartDate:
+          type: string
+          format: date
+        reviewPeriodEndDate:
+          type: string
+          format: date
     ErrorResponse:
       type: object
       properties:
@@ -92,6 +104,16 @@ components:
                 type: string
               message:
                 type: string
+    ResourceReference:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        href:
+          type: string
+          format: uri
     TimeReviewEvent:
       type: object
       properties:
@@ -109,28 +131,6 @@ components:
           format: date
         status:
           type: string
-    TimeReviewEventRequest:
-      type: object
-      required:
-      - reviewPeriodStartDate
-      - reviewPeriodEndDate
-      properties:
-        reviewPeriodStartDate:
-          type: string
-          format: date
-        reviewPeriodEndDate:
-          type: string
-          format: date
-    ResourceReference:
-      type: object
-      properties:
-        id:
-          type: string
-        descriptor:
-          type: string
-        href:
-          type: string
-          format: uri
   parameters:
     ID:
       name: ID

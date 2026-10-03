@@ -75,20 +75,14 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Authentication required
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Insufficient permissions
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:
@@ -99,12 +93,13 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
     FileContainer:
       type: object
       properties:
@@ -113,6 +108,11 @@ components:
         descriptor:
           type: string
         status:
+          type: string
+    ErrorResponse:
+      type: object
+      properties:
+        error:
           type: string
     FileContainerRequest:
       type: object

@@ -60,26 +60,22 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    limit:
-      name: limit
-      in: query
-      schema:
-        type: integer
-        default: 20
-        maximum: 100
-    offset:
-      name: offset
-      in: query
-      schema:
-        type: integer
-        default: 0
   schemas:
     ErrorResponse:
       type: object
       properties:
         error:
           type: string
+    ResourceReference:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        href:
+          type: string
+          format: uri
     TalentPoolsResponse:
       type: object
       properties:
@@ -98,16 +94,20 @@ components:
                 type: string
               owner:
                 $ref: '#/components/schemas/ResourceReference'
-    ResourceReference:
-      type: object
-      properties:
-        id:
-          type: string
-        descriptor:
-          type: string
-        href:
-          type: string
-          format: uri
+  parameters:
+    limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 20
+        maximum: 100
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
   securitySchemes:
     OAuth2:
       type: oauth2

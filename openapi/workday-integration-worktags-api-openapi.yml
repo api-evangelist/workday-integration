@@ -61,14 +61,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Insufficient permissions
+    BadRequest:
+      description: Invalid request parameters
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Invalid request parameters
+    Forbidden:
+      description: Insufficient permissions
       content:
         application/json:
           schema:
@@ -104,13 +104,6 @@ components:
                 type: string
               worktag:
                 $ref: '#/components/schemas/ResourceReference'
-    WorktagValidationRequest:
-      type: object
-      properties:
-        worktags:
-          type: array
-          items:
-            $ref: '#/components/schemas/ResourceReference'
     ResourceReference:
       type: object
       properties:
@@ -121,6 +114,13 @@ components:
         href:
           type: string
           format: uri
+    WorktagValidationRequest:
+      type: object
+      properties:
+        worktags:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceReference'
   securitySchemes:
     OAuth2:
       type: oauth2

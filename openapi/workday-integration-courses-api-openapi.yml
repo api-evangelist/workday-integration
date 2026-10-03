@@ -69,56 +69,7 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    search:
-      name: search
-      in: query
-      schema:
-        type: string
-    limit:
-      name: limit
-      in: query
-      schema:
-        type: integer
-        default: 20
-        maximum: 100
-    ID:
-      name: ID
-      in: path
-      required: true
-      schema:
-        type: string
-    offset:
-      name: offset
-      in: query
-      schema:
-        type: integer
-        default: 0
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
     CoursesResponse:
       type: object
       properties:
@@ -128,16 +79,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Course'
-    ResourceReference:
-      type: object
-      properties:
-        id:
-          type: string
-        descriptor:
-          type: string
-        href:
-          type: string
-          format: uri
     Course:
       type: object
       properties:
@@ -155,6 +96,65 @@ components:
           type: string
         isActive:
           type: boolean
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+    ResourceReference:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        href:
+          type: string
+          format: uri
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+    limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 20
+        maximum: 100
+    search:
+      name: search
+      in: query
+      schema:
+        type: string
+    ID:
+      name: ID
+      in: path
+      required: true
+      schema:
+        type: string
   securitySchemes:
     OAuth2:
       type: oauth2

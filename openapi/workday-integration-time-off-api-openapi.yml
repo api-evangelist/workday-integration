@@ -91,8 +91,8 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   responses:
-    NotFound:
-      description: Resource not found
+    BadRequest:
+      description: Invalid request parameters
       content:
         application/json:
           schema:
@@ -109,8 +109,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Invalid request parameters
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:
@@ -132,6 +132,36 @@ components:
                 type: string
               message:
                 type: string
+    ResourceReference:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        href:
+          type: string
+          format: uri
+    TimeOffEntry:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        worker:
+          $ref: '#/components/schemas/ResourceReference'
+        absenceType:
+          $ref: '#/components/schemas/ResourceReference'
+        date:
+          type: string
+          format: date
+        quantity:
+          type: number
+        unit:
+          type: string
+        status:
+          type: string
     ValidDatesResponse:
       type: object
       properties:
@@ -170,36 +200,6 @@ components:
                 type: number
               comment:
                 type: string
-    ResourceReference:
-      type: object
-      properties:
-        id:
-          type: string
-        descriptor:
-          type: string
-        href:
-          type: string
-          format: uri
-    TimeOffEntry:
-      type: object
-      properties:
-        id:
-          type: string
-        descriptor:
-          type: string
-        worker:
-          $ref: '#/components/schemas/ResourceReference'
-        absenceType:
-          $ref: '#/components/schemas/ResourceReference'
-        date:
-          type: string
-          format: date
-        quantity:
-          type: number
-        unit:
-          type: string
-        status:
-          type: string
   parameters:
     ID:
       name: ID

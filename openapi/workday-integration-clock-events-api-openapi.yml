@@ -61,14 +61,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Insufficient permissions
+    BadRequest:
+      description: Invalid request parameters
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Invalid request parameters
+    Forbidden:
+      description: Insufficient permissions
       content:
         application/json:
           schema:
@@ -90,13 +90,13 @@ components:
                 type: string
               message:
                 type: string
-    TimeClockEventRequest:
+    TimeClockEvent:
       type: object
-      required:
-      - worker
-      - eventType
-      - eventDateTime
       properties:
+        id:
+          type: string
+        descriptor:
+          type: string
         worker:
           $ref: '#/components/schemas/ResourceReference'
         eventType:
@@ -119,13 +119,13 @@ components:
         href:
           type: string
           format: uri
-    TimeClockEvent:
+    TimeClockEventRequest:
       type: object
+      required:
+      - worker
+      - eventType
+      - eventDateTime
       properties:
-        id:
-          type: string
-        descriptor:
-          type: string
         worker:
           $ref: '#/components/schemas/ResourceReference'
         eventType:

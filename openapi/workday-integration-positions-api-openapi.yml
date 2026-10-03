@@ -71,14 +71,14 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   responses:
-    NotFound:
-      description: Resource not found
+    Unauthorized:
+      description: Authentication required
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication required
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:
@@ -89,37 +89,7 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    search:
-      name: search
-      in: query
-      schema:
-        type: string
-    limit:
-      name: limit
-      in: query
-      schema:
-        type: integer
-        default: 20
-        maximum: 100
-    ID:
-      name: ID
-      in: path
-      required: true
-      schema:
-        type: string
-    offset:
-      name: offset
-      in: query
-      schema:
-        type: integer
-        default: 0
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
     Position:
       type: object
       properties:
@@ -137,15 +107,11 @@ components:
           type: boolean
         worker:
           $ref: '#/components/schemas/ResourceReference'
-    PositionsResponse:
+    ErrorResponse:
       type: object
       properties:
-        total:
-          type: integer
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Position'
+        error:
+          type: string
     ResourceReference:
       type: object
       properties:
@@ -156,6 +122,40 @@ components:
         href:
           type: string
           format: uri
+    PositionsResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Position'
+  parameters:
+    limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 20
+        maximum: 100
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+    search:
+      name: search
+      in: query
+      schema:
+        type: string
+    ID:
+      name: ID
+      in: path
+      required: true
+      schema:
+        type: string
   securitySchemes:
     OAuth2:
       type: oauth2

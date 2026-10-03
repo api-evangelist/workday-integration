@@ -74,14 +74,14 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   responses:
-    NotFound:
-      description: Resource not found
+    Unauthorized:
+      description: Authentication required
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication required
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:
@@ -93,6 +93,52 @@ components:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              error:
+                type: string
+              field:
+                type: string
+              message:
+                type: string
+    ResourceReference:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        href:
+          type: string
+          format: uri
+    FeedbackResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              descriptor:
+                type: string
+              interviewer:
+                $ref: '#/components/schemas/ResourceReference'
+              rating:
+                type: string
+              comments:
+                type: string
     InterviewsResponse:
       type: object
       properties:
@@ -116,52 +162,6 @@ components:
                 $ref: '#/components/schemas/ResourceReference'
               status:
                 type: string
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              error:
-                type: string
-              field:
-                type: string
-              message:
-                type: string
-    FeedbackResponse:
-      type: object
-      properties:
-        total:
-          type: integer
-        data:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-              descriptor:
-                type: string
-              interviewer:
-                $ref: '#/components/schemas/ResourceReference'
-              rating:
-                type: string
-              comments:
-                type: string
-    ResourceReference:
-      type: object
-      properties:
-        id:
-          type: string
-        descriptor:
-          type: string
-        href:
-          type: string
-          format: uri
   parameters:
     limit:
       name: limit
@@ -171,13 +171,6 @@ components:
         type: integer
         default: 20
         maximum: 100
-    ID:
-      name: ID
-      in: path
-      required: true
-      description: The Workday ID of the resource
-      schema:
-        type: string
     offset:
       name: offset
       in: query
@@ -185,6 +178,13 @@ components:
       schema:
         type: integer
         default: 0
+    ID:
+      name: ID
+      in: path
+      required: true
+      description: The Workday ID of the resource
+      schema:
+        type: string
   securitySchemes:
     OAuth2:
       type: oauth2

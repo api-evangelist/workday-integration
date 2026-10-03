@@ -232,26 +232,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    ScorecardRequest:
-      type: object
-      required:
-      - name
-      - effectiveDate
-      properties:
-        name:
-          type: string
-        effectiveDate:
-          type: string
-          format: date
-    ScorecardsResponse:
-      type: object
-      properties:
-        total:
-          type: integer
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Scorecard'
     ScorecardResultsResponse:
       type: object
       properties:
@@ -261,6 +241,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ScorecardResult'
+    ScorecardsResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Scorecard'
     Scorecard:
       type: object
       properties:
@@ -289,18 +278,6 @@ components:
                 type: string
               message:
                 type: string
-    ScorecardResultRequest:
-      type: object
-      required:
-      - scorecard
-      - worker
-      properties:
-        scorecard:
-          $ref: '#/components/schemas/ResourceReference'
-        worker:
-          $ref: '#/components/schemas/ResourceReference'
-        overallScore:
-          type: number
     ScorecardResult:
       type: object
       properties:
@@ -314,6 +291,29 @@ components:
           $ref: '#/components/schemas/ResourceReference'
         overallScore:
           type: number
+        effectiveDate:
+          type: string
+          format: date
+    ScorecardResultRequest:
+      type: object
+      required:
+      - scorecard
+      - worker
+      properties:
+        scorecard:
+          $ref: '#/components/schemas/ResourceReference'
+        worker:
+          $ref: '#/components/schemas/ResourceReference'
+        overallScore:
+          type: number
+    ScorecardRequest:
+      type: object
+      required:
+      - name
+      - effectiveDate
+      properties:
+        name:
+          type: string
         effectiveDate:
           type: string
           format: date
@@ -334,8 +334,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Insufficient permissions
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:
@@ -346,13 +346,20 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found
+    Forbidden:
+      description: Insufficient permissions
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
   parameters:
+    ID:
+      name: ID
+      in: path
+      required: true
+      description: The Workday ID of the resource
+      schema:
+        type: string
     limit:
       name: limit
       in: query
@@ -361,13 +368,6 @@ components:
         type: integer
         default: 20
         maximum: 100
-    ID:
-      name: ID
-      in: path
-      required: true
-      description: The Workday ID of the resource
-      schema:
-        type: string
     offset:
       name: offset
       in: query

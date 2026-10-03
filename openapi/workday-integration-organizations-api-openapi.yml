@@ -221,6 +221,30 @@ components:
           $ref: '#/components/schemas/ResourceReference'
         isActive:
           type: boolean
+    OrganizationsResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Organization'
+    SupervisoryOrganization:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        name:
+          type: string
+        manager:
+          $ref: '#/components/schemas/ResourceReference'
+        superior:
+          $ref: '#/components/schemas/ResourceReference'
+        staffingModel:
+          type: string
     ErrorResponse:
       type: object
       properties:
@@ -238,38 +262,6 @@ components:
                 type: string
               message:
                 type: string
-    WorkersResponse:
-      type: object
-      properties:
-        total:
-          type: integer
-          description: Total number of results
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/WorkerSummary'
-    WorkerSummary:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The Workday ID of the worker
-        descriptor:
-          type: string
-          description: The display name of the worker
-        href:
-          type: string
-          format: uri
-          description: The API resource URL
-    OrganizationTypesResponse:
-      type: object
-      properties:
-        total:
-          type: integer
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ResourceReference'
     SupervisoryOrganizationsResponse:
       type: object
       properties:
@@ -279,21 +271,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SupervisoryOrganization'
-    SupervisoryOrganization:
-      type: object
-      properties:
-        id:
-          type: string
-        descriptor:
-          type: string
-        name:
-          type: string
-        manager:
-          $ref: '#/components/schemas/ResourceReference'
-        superior:
-          $ref: '#/components/schemas/ResourceReference'
-        staffingModel:
-          type: string
     ResourceReference:
       type: object
       properties:
@@ -307,7 +284,17 @@ components:
           type: string
           format: uri
           description: The API resource URL
-    OrganizationsResponse:
+    WorkersResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of results
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkerSummary'
+    OrganizationTypesResponse:
       type: object
       properties:
         total:
@@ -315,16 +302,29 @@ components:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/Organization'
+            $ref: '#/components/schemas/ResourceReference'
+    WorkerSummary:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The Workday ID of the worker
+        descriptor:
+          type: string
+          description: The display name of the worker
+        href:
+          type: string
+          format: uri
+          description: The API resource URL
   responses:
-    NotFound:
-      description: Resource not found
+    Unauthorized:
+      description: Authentication required
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication required
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:
@@ -350,13 +350,6 @@ components:
         type: integer
         default: 20
         maximum: 100
-    ID:
-      name: ID
-      in: path
-      required: true
-      description: The Workday ID of the resource
-      schema:
-        type: string
     offset:
       name: offset
       in: query
@@ -364,6 +357,13 @@ components:
       schema:
         type: integer
         default: 0
+    ID:
+      name: ID
+      in: path
+      required: true
+      description: The Workday ID of the resource
+      schema:
+        type: string
   securitySchemes:
     OAuth2:
       type: oauth2
