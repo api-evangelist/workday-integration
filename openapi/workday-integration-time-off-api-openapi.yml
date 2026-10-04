@@ -90,31 +90,6 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
     ErrorResponse:
       type: object
@@ -142,26 +117,6 @@ components:
         href:
           type: string
           format: uri
-    TimeOffEntry:
-      type: object
-      properties:
-        id:
-          type: string
-        descriptor:
-          type: string
-        worker:
-          $ref: '#/components/schemas/ResourceReference'
-        absenceType:
-          $ref: '#/components/schemas/ResourceReference'
-        date:
-          type: string
-          format: date
-        quantity:
-          type: number
-        unit:
-          type: string
-        status:
-          type: string
     ValidDatesResponse:
       type: object
       properties:
@@ -200,6 +155,26 @@ components:
                 type: number
               comment:
                 type: string
+    TimeOffEntry:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        worker:
+          $ref: '#/components/schemas/ResourceReference'
+        absenceType:
+          $ref: '#/components/schemas/ResourceReference'
+        date:
+          type: string
+          format: date
+        quantity:
+          type: number
+        unit:
+          type: string
+        status:
+          type: string
   parameters:
     ID:
       name: ID
@@ -208,6 +183,31 @@ components:
       description: The Workday ID of the resource
       schema:
         type: string
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     OAuth2:
       type: oauth2

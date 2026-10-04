@@ -71,33 +71,39 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  parameters:
+    offset:
+      name: offset
+      in: query
+      description: The zero-based index of the first object in a response collection
+      schema:
+        type: integer
+        default: 0
+    ID:
+      name: ID
+      in: path
+      required: true
+      description: The Workday ID of the resource
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      description: The maximum number of objects in a single response (default 20, maximum 100)
+      schema:
+        type: integer
+        default: 20
+        maximum: 100
   schemas:
-    IntegrationEvent:
+    IntegrationEventsResponse:
       type: object
       properties:
-        id:
-          type: string
-        descriptor:
-          type: string
-        integrationSystem:
-          $ref: '#/components/schemas/ResourceReference'
-        status:
-          type: string
-          enum:
-          - Completed
-          - Failed
-          - In_Progress
-          - Cancelled
-        startDateTime:
-          type: string
-          format: date-time
-        endDateTime:
-          type: string
-          format: date-time
-        recordsProcessed:
+        total:
           type: integer
-        recordsFailed:
-          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/IntegrationEvent'
     ErrorResponse:
       type: object
       properties:
@@ -124,22 +130,33 @@ components:
         href:
           type: string
           format: uri
-    IntegrationEventsResponse:
+    IntegrationEvent:
       type: object
       properties:
-        total:
+        id:
+          type: string
+        descriptor:
+          type: string
+        integrationSystem:
+          $ref: '#/components/schemas/ResourceReference'
+        status:
+          type: string
+          enum:
+          - Completed
+          - Failed
+          - In_Progress
+          - Cancelled
+        startDateTime:
+          type: string
+          format: date-time
+        endDateTime:
+          type: string
+          format: date-time
+        recordsProcessed:
           type: integer
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/IntegrationEvent'
+        recordsFailed:
+          type: integer
   responses:
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     NotFound:
       description: Resource not found
       content:
@@ -152,29 +169,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    limit:
-      name: limit
-      in: query
-      description: The maximum number of objects in a single response (default 20, maximum 100)
-      schema:
-        type: integer
-        default: 20
-        maximum: 100
-    offset:
-      name: offset
-      in: query
-      description: The zero-based index of the first object in a response collection
-      schema:
-        type: integer
-        default: 0
-    ID:
-      name: ID
-      in: path
-      required: true
-      description: The Workday ID of the resource
-      schema:
-        type: string
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     OAuth2:
       type: oauth2

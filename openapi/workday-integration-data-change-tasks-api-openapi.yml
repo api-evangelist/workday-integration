@@ -94,55 +94,41 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+    ID:
+      name: ID
+      in: path
+      required: true
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 20
+        maximum: 100
   schemas:
     ErrorResponse:
       type: object
       properties:
         error:
           type: string
-    DataChangeTaskRequest:
+    DataChangeTasksResponse:
       type: object
-      required:
-      - targetTable
-      - operation
       properties:
-        targetTable:
-          $ref: '#/components/schemas/ResourceReference'
-        operation:
-          type: string
-          enum:
-          - TruncateAndInsert
-          - Insert
-          - Update
-          - Upsert
-          - Delete
-        fileContainer:
-          $ref: '#/components/schemas/ResourceReference'
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataChangeTask'
     ResourceReference:
       type: object
       properties:
@@ -179,35 +165,49 @@ components:
         createdDateTime:
           type: string
           format: date-time
-    DataChangeTasksResponse:
+    DataChangeTaskRequest:
       type: object
+      required:
+      - targetTable
+      - operation
       properties:
-        total:
-          type: integer
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataChangeTask'
-  parameters:
-    ID:
-      name: ID
-      in: path
-      required: true
-      schema:
-        type: string
-    limit:
-      name: limit
-      in: query
-      schema:
-        type: integer
-        default: 20
-        maximum: 100
-    offset:
-      name: offset
-      in: query
-      schema:
-        type: integer
-        default: 0
+        targetTable:
+          $ref: '#/components/schemas/ResourceReference'
+        operation:
+          type: string
+          enum:
+          - TruncateAndInsert
+          - Insert
+          - Update
+          - Upsert
+          - Delete
+        fileContainer:
+          $ref: '#/components/schemas/ResourceReference'
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     OAuth2:
       type: oauth2
