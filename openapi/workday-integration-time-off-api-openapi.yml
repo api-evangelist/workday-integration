@@ -91,6 +91,21 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    ValidDatesResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+                format: date
+              isValid:
+                type: boolean
     ErrorResponse:
       type: object
       properties:
@@ -107,31 +122,6 @@ components:
                 type: string
               message:
                 type: string
-    ResourceReference:
-      type: object
-      properties:
-        id:
-          type: string
-        descriptor:
-          type: string
-        href:
-          type: string
-          format: uri
-    ValidDatesResponse:
-      type: object
-      properties:
-        total:
-          type: integer
-        data:
-          type: array
-          items:
-            type: object
-            properties:
-              date:
-                type: string
-                format: date
-              isValid:
-                type: boolean
     TimeOffRequest:
       type: object
       required:
@@ -175,15 +165,23 @@ components:
           type: string
         status:
           type: string
-  parameters:
-    ID:
-      name: ID
-      in: path
-      required: true
-      description: The Workday ID of the resource
-      schema:
-        type: string
+    ResourceReference:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        href:
+          type: string
+          format: uri
   responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
     NotFound:
       description: Resource not found
       content:
@@ -202,12 +200,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    ID:
+      name: ID
+      in: path
+      required: true
+      description: The Workday ID of the resource
+      schema:
+        type: string
   securitySchemes:
     OAuth2:
       type: oauth2

@@ -151,21 +151,32 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   parameters:
-    offset:
-      name: offset
-      in: query
-      description: The zero-based index of the first object in a response collection
-      schema:
-        type: integer
-        default: 0
-    ID:
-      name: ID
-      in: path
-      required: true
-      description: The Workday ID of the resource
-      schema:
-        type: string
     limit:
       name: limit
       in: query
@@ -174,26 +185,21 @@ components:
         type: integer
         default: 20
         maximum: 100
+    ID:
+      name: ID
+      in: path
+      required: true
+      description: The Workday ID of the resource
+      schema:
+        type: string
+    offset:
+      name: offset
+      in: query
+      description: The zero-based index of the first object in a response collection
+      schema:
+        type: integer
+        default: 0
   schemas:
-    ExperienceRequest:
-      type: object
-      required:
-      - company
-      - title
-      - startDate
-      properties:
-        company:
-          type: string
-        title:
-          type: string
-        startDate:
-          type: string
-          format: date
-        endDate:
-          type: string
-          format: date
-        description:
-          type: string
     ErrorResponse:
       type: object
       properties:
@@ -210,6 +216,23 @@ components:
                 type: string
               message:
                 type: string
+    Experience:
+      type: object
+      properties:
+        id:
+          type: string
+        company:
+          type: string
+        title:
+          type: string
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+        description:
+          type: string
     AttachmentsResponse:
       type: object
       properties:
@@ -231,23 +254,22 @@ components:
               uploadDate:
                 type: string
                 format: date-time
-    Experience:
+    SkillsResponse:
       type: object
       properties:
-        id:
-          type: string
-        company:
-          type: string
-        title:
-          type: string
-        startDate:
-          type: string
-          format: date
-        endDate:
-          type: string
-          format: date
-        description:
-          type: string
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              descriptor:
+                type: string
+              proficiencyLevel:
+                type: string
     EducationsResponse:
       type: object
       properties:
@@ -272,6 +294,25 @@ components:
               endDate:
                 type: string
                 format: date
+    ExperienceRequest:
+      type: object
+      required:
+      - company
+      - title
+      - startDate
+      properties:
+        company:
+          type: string
+        title:
+          type: string
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+        description:
+          type: string
     ExperiencesResponse:
       type: object
       properties:
@@ -281,47 +322,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Experience'
-    SkillsResponse:
-      type: object
-      properties:
-        total:
-          type: integer
-        data:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-              descriptor:
-                type: string
-              proficiencyLevel:
-                type: string
-  responses:
-    BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     OAuth2:
       type: oauth2

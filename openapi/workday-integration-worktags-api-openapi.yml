@@ -55,6 +55,20 @@ paths:
           $ref: '#/components/responses/Forbidden'
 components:
   schemas:
+    WorktagValidationResponse:
+      type: object
+      properties:
+        valid:
+          type: boolean
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+              worktag:
+                $ref: '#/components/schemas/ResourceReference'
     ErrorResponse:
       type: object
       properties:
@@ -71,6 +85,13 @@ components:
                 type: string
               message:
                 type: string
+    WorktagValidationRequest:
+      type: object
+      properties:
+        worktags:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceReference'
     ResourceReference:
       type: object
       properties:
@@ -81,28 +102,13 @@ components:
         href:
           type: string
           format: uri
-    WorktagValidationRequest:
-      type: object
-      properties:
-        worktags:
-          type: array
-          items:
-            $ref: '#/components/schemas/ResourceReference'
-    WorktagValidationResponse:
-      type: object
-      properties:
-        valid:
-          type: boolean
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              message:
-                type: string
-              worktag:
-                $ref: '#/components/schemas/ResourceReference'
   responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
     BadRequest:
       description: Invalid request parameters
       content:
@@ -111,12 +117,6 @@ components:
             $ref: '#/components/schemas/ErrorResponse'
     Forbidden:
       description: Insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication required
       content:
         application/json:
           schema:

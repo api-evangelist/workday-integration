@@ -55,20 +55,6 @@ paths:
           $ref: '#/components/responses/Forbidden'
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              error:
-                type: string
-              message:
-                type: string
     OneTimePaymentRequest:
       type: object
       required:
@@ -87,16 +73,20 @@ components:
           format: date
         reason:
           type: string
-    ResourceReference:
+    ErrorResponse:
       type: object
       properties:
-        id:
+        error:
           type: string
-        descriptor:
-          type: string
-        href:
-          type: string
-          format: uri
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              error:
+                type: string
+              message:
+                type: string
     OneTimePayment:
       type: object
       properties:
@@ -115,15 +105,23 @@ components:
         effectiveDate:
           type: string
           format: date
-  parameters:
-    ID:
-      name: ID
-      in: path
-      required: true
-      description: The Workday ID of the resource
-      schema:
-        type: string
+    ResourceReference:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        href:
+          type: string
+          format: uri
   responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
     BadRequest:
       description: Invalid request parameters
       content:
@@ -136,12 +134,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    ID:
+      name: ID
+      in: path
+      required: true
+      description: The Workday ID of the resource
+      schema:
+        type: string
   securitySchemes:
     OAuth2:
       type: oauth2

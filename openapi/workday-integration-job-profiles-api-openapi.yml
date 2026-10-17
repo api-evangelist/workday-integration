@@ -71,18 +71,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   parameters:
-    offset:
-      name: offset
-      in: query
-      schema:
-        type: integer
-        default: 0
-    ID:
-      name: ID
-      in: path
-      required: true
-      schema:
-        type: string
     limit:
       name: limit
       in: query
@@ -95,7 +83,33 @@ components:
       in: query
       schema:
         type: string
+    ID:
+      name: ID
+      in: path
+      required: true
+      schema:
+        type: string
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
   schemas:
+    JobProfilesResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobProfile'
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
     JobProfile:
       type: object
       properties:
@@ -111,20 +125,6 @@ components:
           $ref: '#/components/schemas/ResourceReference'
         isActive:
           type: boolean
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-    JobProfilesResponse:
-      type: object
-      properties:
-        total:
-          type: integer
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/JobProfile'
     ResourceReference:
       type: object
       properties:
@@ -136,6 +136,12 @@ components:
           type: string
           format: uri
   responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
     NotFound:
       description: Resource not found
       content:
@@ -144,12 +150,6 @@ components:
             $ref: '#/components/schemas/ErrorResponse'
     Forbidden:
       description: Insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication required
       content:
         application/json:
           schema:

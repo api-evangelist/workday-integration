@@ -142,18 +142,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   parameters:
-    offset:
-      name: offset
-      in: query
-      schema:
-        type: integer
-        default: 0
-    ID:
-      name: ID
-      in: path
-      required: true
-      schema:
-        type: string
     limit:
       name: limit
       in: query
@@ -166,12 +154,84 @@ components:
       in: query
       schema:
         type: string
+    ID:
+      name: ID
+      in: path
+      required: true
+      schema:
+        type: string
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
     ErrorResponse:
       type: object
       properties:
         error:
           type: string
+    Table:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        displayName:
+          type: string
+        enableForAnalysis:
+          type: boolean
+        fields:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              description:
+                type: string
+              ordinal:
+                type: integer
+              type:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  descriptor:
+                    type: string
+              parseFormat:
+                type: string
+              precision:
+                type: integer
+              scale:
+                type: integer
     TableRequest:
       type: object
       required:
@@ -208,41 +268,6 @@ components:
         href:
           type: string
           format: uri
-    Table:
-      type: object
-      properties:
-        id:
-          type: string
-        descriptor:
-          type: string
-        displayName:
-          type: string
-        enableForAnalysis:
-          type: boolean
-        fields:
-          type: array
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-              description:
-                type: string
-              ordinal:
-                type: integer
-              type:
-                type: object
-                properties:
-                  id:
-                    type: string
-                  descriptor:
-                    type: string
-              parseFormat:
-                type: string
-              precision:
-                type: integer
-              scale:
-                type: integer
     TablesResponse:
       type: object
       properties:
@@ -252,31 +277,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Table'
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     OAuth2:
       type: oauth2

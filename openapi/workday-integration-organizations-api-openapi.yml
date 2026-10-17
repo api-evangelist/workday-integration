@@ -209,46 +209,20 @@ paths:
         '403':
           $ref: '#/components/responses/Forbidden'
 components:
-  parameters:
-    offset:
-      name: offset
-      in: query
-      description: The zero-based index of the first object in a response collection
-      schema:
-        type: integer
-        default: 0
-    ID:
-      name: ID
-      in: path
-      required: true
-      description: The Workday ID of the resource
-      schema:
-        type: string
-    limit:
-      name: limit
-      in: query
-      description: The maximum number of objects in a single response (default 20, maximum 100)
-      schema:
-        type: integer
-        default: 20
-        maximum: 100
-    search:
-      name: search
-      in: query
-      description: Search string used to filter results
-      schema:
-        type: string
   schemas:
-    WorkersResponse:
+    WorkerSummary:
       type: object
       properties:
-        total:
-          type: integer
-          description: Total number of results
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/WorkerSummary'
+        id:
+          type: string
+          description: The Workday ID of the worker
+        descriptor:
+          type: string
+          description: The display name of the worker
+        href:
+          type: string
+          format: uri
+          description: The API resource URL
     ErrorResponse:
       type: object
       properties:
@@ -266,6 +240,32 @@ components:
                 type: string
               message:
                 type: string
+    SupervisoryOrganization:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        name:
+          type: string
+        manager:
+          $ref: '#/components/schemas/ResourceReference'
+        superior:
+          $ref: '#/components/schemas/ResourceReference'
+        staffingModel:
+          type: string
+    Organization:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        organizationType:
+          $ref: '#/components/schemas/ResourceReference'
+        isActive:
+          type: boolean
     SupervisoryOrganizationsResponse:
       type: object
       properties:
@@ -293,19 +293,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ResourceReference'
-    WorkerSummary:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The Workday ID of the worker
-        descriptor:
-          type: string
-          description: The display name of the worker
-        href:
-          type: string
-          format: uri
-          description: The API resource URL
     ResourceReference:
       type: object
       properties:
@@ -319,33 +306,52 @@ components:
           type: string
           format: uri
           description: The API resource URL
-    Organization:
+    WorkersResponse:
       type: object
       properties:
-        id:
-          type: string
-        descriptor:
-          type: string
-        organizationType:
-          $ref: '#/components/schemas/ResourceReference'
-        isActive:
-          type: boolean
-    SupervisoryOrganization:
-      type: object
-      properties:
-        id:
-          type: string
-        descriptor:
-          type: string
-        name:
-          type: string
-        manager:
-          $ref: '#/components/schemas/ResourceReference'
-        superior:
-          $ref: '#/components/schemas/ResourceReference'
-        staffingModel:
-          type: string
+        total:
+          type: integer
+          description: Total number of results
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkerSummary'
+  parameters:
+    limit:
+      name: limit
+      in: query
+      description: The maximum number of objects in a single response (default 20, maximum 100)
+      schema:
+        type: integer
+        default: 20
+        maximum: 100
+    search:
+      name: search
+      in: query
+      description: Search string used to filter results
+      schema:
+        type: string
+    ID:
+      name: ID
+      in: path
+      required: true
+      description: The Workday ID of the resource
+      schema:
+        type: string
+    offset:
+      name: offset
+      in: query
+      description: The zero-based index of the first object in a response collection
+      schema:
+        type: integer
+        default: 0
   responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
     NotFound:
       description: Resource not found
       content:
@@ -354,12 +360,6 @@ components:
             $ref: '#/components/schemas/ErrorResponse'
     Forbidden:
       description: Insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication required
       content:
         application/json:
           schema:

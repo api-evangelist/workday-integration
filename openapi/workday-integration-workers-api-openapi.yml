@@ -445,55 +445,6 @@ paths:
           description: The Workday tenant name
 components:
   schemas:
-    WorkersResponse:
-      type: object
-      properties:
-        total:
-          type: integer
-          description: Total number of results
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/WorkerSummary'
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-          description: The error code
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              error:
-                type: string
-              field:
-                type: string
-              message:
-                type: string
-    SupervisoryOrganizationsResponse:
-      type: object
-      properties:
-        total:
-          type: integer
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/SupervisoryOrganization'
-    WorkerSummary:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The Workday ID of the worker
-        descriptor:
-          type: string
-          description: The display name of the worker
-        href:
-          type: string
-          format: uri
-          description: The API resource URL
     BusinessTitleChangeRequest:
       type: object
       required:
@@ -507,18 +458,6 @@ components:
           type: string
           format: date
           description: The effective date of the change
-    BusinessTitleChange:
-      type: object
-      properties:
-        id:
-          type: string
-        descriptor:
-          type: string
-        proposedBusinessTitle:
-          type: string
-        effectiveDate:
-          type: string
-          format: date
     OrganizationsResponse:
       type: object
       properties:
@@ -528,6 +467,54 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Organization'
+    SupervisoryOrganization:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        name:
+          type: string
+        manager:
+          $ref: '#/components/schemas/ResourceReference'
+        superior:
+          $ref: '#/components/schemas/ResourceReference'
+        staffingModel:
+          type: string
+    Organization:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        organizationType:
+          $ref: '#/components/schemas/ResourceReference'
+        isActive:
+          type: boolean
+    JobChangeRequest:
+      type: object
+      required:
+      - effectiveDate
+      properties:
+        effectiveDate:
+          type: string
+          format: date
+        reason:
+          $ref: '#/components/schemas/ResourceReference'
+        proposedPosition:
+          $ref: '#/components/schemas/ResourceReference'
+    JobChange:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        effectiveDate:
+          type: string
+          format: date
     ResourceReference:
       type: object
       properties:
@@ -575,44 +562,6 @@ components:
           description: The date the worker was hired
         workerType:
           $ref: '#/components/schemas/ResourceReference'
-    Organization:
-      type: object
-      properties:
-        id:
-          type: string
-        descriptor:
-          type: string
-        organizationType:
-          $ref: '#/components/schemas/ResourceReference'
-        isActive:
-          type: boolean
-    SupervisoryOrganization:
-      type: object
-      properties:
-        id:
-          type: string
-        descriptor:
-          type: string
-        name:
-          type: string
-        manager:
-          $ref: '#/components/schemas/ResourceReference'
-        superior:
-          $ref: '#/components/schemas/ResourceReference'
-        staffingModel:
-          type: string
-    JobChangeRequest:
-      type: object
-      required:
-      - effectiveDate
-      properties:
-        effectiveDate:
-          type: string
-          format: date
-        reason:
-          $ref: '#/components/schemas/ResourceReference'
-        proposedPosition:
-          $ref: '#/components/schemas/ResourceReference'
     PaySlipsResponse:
       type: object
       properties:
@@ -637,25 +586,28 @@ components:
                 type: number
               netPay:
                 type: number
-    JobChange:
+    BusinessTitleChange:
       type: object
       properties:
         id:
           type: string
         descriptor:
           type: string
+        proposedBusinessTitle:
+          type: string
         effectiveDate:
           type: string
           format: date
-    BusinessTitleChangesResponse:
+    WorkersResponse:
       type: object
       properties:
         total:
           type: integer
+          description: Total number of results
         data:
           type: array
           items:
-            $ref: '#/components/schemas/BusinessTitleChange'
+            $ref: '#/components/schemas/WorkerSummary'
     HistoryResponse:
       type: object
       properties:
@@ -675,7 +627,37 @@ components:
                 format: date
               eventType:
                 $ref: '#/components/schemas/ResourceReference'
-    WorkersResponse_2:
+    WorkerSummary:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The Workday ID of the worker
+        descriptor:
+          type: string
+          description: The display name of the worker
+        href:
+          type: string
+          format: uri
+          description: The API resource URL
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: The error code
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              error:
+                type: string
+              field:
+                type: string
+              message:
+                type: string
+    SupervisoryOrganizationsResponse:
       type: object
       properties:
         total:
@@ -683,7 +665,16 @@ components:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/Worker_2'
+            $ref: '#/components/schemas/SupervisoryOrganization'
+    BusinessTitleChangesResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/BusinessTitleChange'
     ErrorResponse_2:
       type: object
       properties:
@@ -699,6 +690,15 @@ components:
         href:
           type: string
           format: uri
+    WorkersResponse_2:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Worker_2'
     Worker_2:
       type: object
       properties:
@@ -748,6 +748,19 @@ components:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
   parameters:
+    search:
+      name: search
+      in: query
+      description: Search string used to filter results
+      schema:
+        type: string
+    ID:
+      name: ID
+      in: path
+      required: true
+      description: The Workday ID of the resource
+      schema:
+        type: string
     limit:
       name: limit
       in: query
@@ -756,12 +769,6 @@ components:
         type: integer
         default: 20
         maximum: 100
-    search:
-      name: search
-      in: query
-      description: Search string used to filter results
-      schema:
-        type: string
     offset:
       name: offset
       in: query
@@ -769,25 +776,6 @@ components:
       schema:
         type: integer
         default: 0
-    ID:
-      name: ID
-      in: path
-      required: true
-      description: The Workday ID of the resource
-      schema:
-        type: string
-    offset_2:
-      name: offset
-      in: query
-      schema:
-        type: integer
-        default: 0
-    ID_2:
-      name: ID
-      in: path
-      required: true
-      schema:
-        type: string
     limit_2:
       name: limit
       in: query
@@ -800,6 +788,18 @@ components:
       in: query
       schema:
         type: string
+    ID_2:
+      name: ID
+      in: path
+      required: true
+      schema:
+        type: string
+    offset_2:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
   securitySchemes:
     OAuth2:
       type: oauth2

@@ -331,6 +331,15 @@ paths:
           description: The Workday tenant name
 components:
   schemas:
+    ReferenceValuesResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceReference'
     ErrorResponse:
       type: object
       properties:
@@ -347,15 +356,6 @@ components:
                 type: string
               message:
                 type: string
-    ReferenceValuesResponse:
-      type: object
-      properties:
-        total:
-          type: integer
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ResourceReference'
     ResourceReference:
       type: object
       properties:
@@ -397,19 +397,6 @@ components:
                 type: string
               message:
                 type: string
-    ResourceReference_2:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The Workday ID
-        descriptor:
-          type: string
-          description: The display name
-        href:
-          type: string
-          format: uri
-          description: The API resource URL
     JobChangeReasonsResponse:
       type: object
       properties:
@@ -435,27 +422,33 @@ components:
                 type: string
               currencyCode:
                 type: string
+    ResourceReference_2:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The Workday ID
+        descriptor:
+          type: string
+          description: The display name
+        href:
+          type: string
+          format: uri
+          description: The API resource URL
   responses:
-    Forbidden:
-      description: Insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Authentication required
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   parameters:
-    offset:
-      name: offset
-      in: query
-      description: Zero-based index of the first object in a response collection
-      schema:
-        type: integer
-        default: 0
     limit:
       name: limit
       in: query
@@ -464,10 +457,10 @@ components:
         type: integer
         default: 20
         maximum: 100
-    offset_2:
+    offset:
       name: offset
       in: query
-      description: The zero-based index of the first object in a response collection
+      description: Zero-based index of the first object in a response collection
       schema:
         type: integer
         default: 0
@@ -479,7 +472,7 @@ components:
         type: integer
         default: 20
         maximum: 100
-    offset_3:
+    offset_2:
       name: offset
       in: query
       description: The zero-based index of the first object in a response collection
@@ -494,7 +487,7 @@ components:
         type: integer
         default: 20
         maximum: 100
-    offset_4:
+    offset_3:
       name: offset
       in: query
       description: The zero-based index of the first object in a response collection
@@ -509,6 +502,13 @@ components:
         type: integer
         default: 20
         maximum: 100
+    offset_4:
+      name: offset
+      in: query
+      description: The zero-based index of the first object in a response collection
+      schema:
+        type: integer
+        default: 0
   securitySchemes:
     OAuth2:
       type: oauth2

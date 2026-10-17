@@ -231,30 +231,19 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  parameters:
-    offset:
-      name: offset
-      in: query
-      description: Zero-based index of the first object in a response collection
-      schema:
-        type: integer
-        default: 0
-    ID:
-      name: ID
-      in: path
-      required: true
-      description: The Workday ID of the resource
-      schema:
-        type: string
-    limit:
-      name: limit
-      in: query
-      description: Maximum number of objects in a single response (default 20, maximum 100)
-      schema:
-        type: integer
-        default: 20
-        maximum: 100
   schemas:
+    ScorecardResultRequest:
+      type: object
+      required:
+      - scorecard
+      - worker
+      properties:
+        scorecard:
+          $ref: '#/components/schemas/ResourceReference'
+        worker:
+          $ref: '#/components/schemas/ResourceReference'
+        overallScore:
+          type: number
     ErrorResponse:
       type: object
       properties:
@@ -269,6 +258,45 @@ components:
                 type: string
               message:
                 type: string
+    Scorecard:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        name:
+          type: string
+        effectiveDate:
+          type: string
+          format: date
+        isActive:
+          type: boolean
+    ScorecardResult:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        scorecard:
+          $ref: '#/components/schemas/ResourceReference'
+        worker:
+          $ref: '#/components/schemas/ResourceReference'
+        overallScore:
+          type: number
+        effectiveDate:
+          type: string
+          format: date
+    ScorecardResultsResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScorecardResult'
     ScorecardRequest:
       type: object
       required:
@@ -289,20 +317,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Scorecard'
-    Scorecard:
-      type: object
-      properties:
-        id:
-          type: string
-        descriptor:
-          type: string
-        name:
-          type: string
-        effectiveDate:
-          type: string
-          format: date
-        isActive:
-          type: boolean
     ResourceReference:
       type: object
       properties:
@@ -313,44 +327,36 @@ components:
         href:
           type: string
           format: uri
-    ScorecardResultRequest:
-      type: object
-      required:
-      - scorecard
-      - worker
-      properties:
-        scorecard:
-          $ref: '#/components/schemas/ResourceReference'
-        worker:
-          $ref: '#/components/schemas/ResourceReference'
-        overallScore:
-          type: number
-    ScorecardResultsResponse:
-      type: object
-      properties:
-        total:
-          type: integer
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ScorecardResult'
-    ScorecardResult:
-      type: object
-      properties:
-        id:
-          type: string
-        descriptor:
-          type: string
-        scorecard:
-          $ref: '#/components/schemas/ResourceReference'
-        worker:
-          $ref: '#/components/schemas/ResourceReference'
-        overallScore:
-          type: number
-        effectiveDate:
-          type: string
-          format: date
+  parameters:
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of objects in a single response (default 20, maximum 100)
+      schema:
+        type: integer
+        default: 20
+        maximum: 100
+    ID:
+      name: ID
+      in: path
+      required: true
+      description: The Workday ID of the resource
+      schema:
+        type: string
+    offset:
+      name: offset
+      in: query
+      description: Zero-based index of the first object in a response collection
+      schema:
+        type: integer
+        default: 0
   responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
     NotFound:
       description: Resource not found
       content:
@@ -365,12 +371,6 @@ components:
             $ref: '#/components/schemas/ErrorResponse'
     Forbidden:
       description: Insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication required
       content:
         application/json:
           schema:

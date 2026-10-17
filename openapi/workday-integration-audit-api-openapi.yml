@@ -50,13 +50,6 @@ paths:
           $ref: '#/components/responses/Forbidden'
 components:
   parameters:
-    offset:
-      name: offset
-      in: query
-      description: The zero-based index of the first object in a response collection
-      schema:
-        type: integer
-        default: 0
     limit:
       name: limit
       in: query
@@ -65,6 +58,26 @@ components:
         type: integer
         default: 20
         maximum: 100
+    offset:
+      name: offset
+      in: query
+      description: The zero-based index of the first object in a response collection
+      schema:
+        type: integer
+        default: 0
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
     ErrorResponse:
       type: object
@@ -83,19 +96,6 @@ components:
                 type: string
               message:
                 type: string
-    ResourceReference:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The Workday ID
-        descriptor:
-          type: string
-          description: The display name
-        href:
-          type: string
-          format: uri
-          description: The API resource URL
     AuditLogsResponse:
       type: object
       properties:
@@ -117,19 +117,19 @@ components:
                 type: string
               target:
                 $ref: '#/components/schemas/ResourceReference'
-  responses:
-    Forbidden:
-      description: Insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+    ResourceReference:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The Workday ID
+        descriptor:
+          type: string
+          description: The display name
+        href:
+          type: string
+          format: uri
+          description: The API resource URL
   securitySchemes:
     OAuth2:
       type: oauth2

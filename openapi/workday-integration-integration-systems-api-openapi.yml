@@ -100,20 +100,6 @@ paths:
           $ref: '#/components/responses/Forbidden'
 components:
   parameters:
-    offset:
-      name: offset
-      in: query
-      description: The zero-based index of the first object in a response collection
-      schema:
-        type: integer
-        default: 0
-    ID:
-      name: ID
-      in: path
-      required: true
-      description: The Workday ID of the resource
-      schema:
-        type: string
     limit:
       name: limit
       in: query
@@ -128,7 +114,58 @@ components:
       description: Search string used to filter results
       schema:
         type: string
+    ID:
+      name: ID
+      in: path
+      required: true
+      description: The Workday ID of the resource
+      schema:
+        type: string
+    offset:
+      name: offset
+      in: query
+      description: The zero-based index of the first object in a response collection
+      schema:
+        type: integer
+        default: 0
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    IntegrationLaunchRequest:
+      type: object
+      properties:
+        launchParameters:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              value:
+                type: string
     ErrorResponse:
       type: object
       properties:
@@ -145,44 +182,15 @@ components:
                 type: string
               message:
                 type: string
-    IntegrationLaunchRequest:
+    IntegrationSystemsResponse:
       type: object
       properties:
-        launchParameters:
+        total:
+          type: integer
+        data:
           type: array
           items:
-            type: object
-            properties:
-              name:
-                type: string
-              value:
-                type: string
-    ResourceReference:
-      type: object
-      properties:
-        id:
-          type: string
-        descriptor:
-          type: string
-        href:
-          type: string
-          format: uri
-    IntegrationSystem:
-      type: object
-      properties:
-        id:
-          type: string
-        descriptor:
-          type: string
-        integrationSystemName:
-          type: string
-        template:
-          $ref: '#/components/schemas/ResourceReference'
-        isActive:
-          type: boolean
-        lastRunDateTime:
-          type: string
-          format: date-time
+            $ref: '#/components/schemas/IntegrationSystem'
     IntegrationEvent:
       type: object
       properties:
@@ -209,40 +217,32 @@ components:
           type: integer
         recordsFailed:
           type: integer
-    IntegrationSystemsResponse:
+    IntegrationSystem:
       type: object
       properties:
-        total:
-          type: integer
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/IntegrationSystem'
-  responses:
-    BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+        id:
+          type: string
+        descriptor:
+          type: string
+        integrationSystemName:
+          type: string
+        template:
+          $ref: '#/components/schemas/ResourceReference'
+        isActive:
+          type: boolean
+        lastRunDateTime:
+          type: string
+          format: date-time
+    ResourceReference:
+      type: object
+      properties:
+        id:
+          type: string
+        descriptor:
+          type: string
+        href:
+          type: string
+          format: uri
   securitySchemes:
     OAuth2:
       type: oauth2
